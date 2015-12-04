@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F38C4113-CC96-4167-B76F-D5786E6BA772}</ProjectGuid>
+    <RootNamespace>AgentClient</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\Yumas\433\ProcessManager\git\lib\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Yumas\433\ProcessManager\git\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\iocpLib\Acceptor.h" />
+    <ClInclude Include="..\..\iocpLib\Act.h" />
+    <ClInclude Include="..\..\iocpLib\Actor.h" />
+    <ClInclude Include="..\..\iocpLib\Connector.h" />
+    <ClInclude Include="..\..\iocpLib\Disconnector.h" />
+    <ClInclude Include="..\..\iocpLib\iocpHeaders.h" />
+    <ClInclude Include="..\..\iocpLib\MemPooler.h" />
+    <ClInclude Include="..\..\iocpLib\Proactor.h" />
+    <ClInclude Include="..\..\iocpLib\Receiver.h" />
+    <ClInclude Include="..\..\iocpLib\Sender.h" />
+    <ClInclude Include="..\..\iocpLib\targetver.h" />
+    <ClInclude Include="..\..\iocpLib\TcpAct.h" />
+    <ClInclude Include="..\..\iocpLib\TcpListenSocket.h" />
+    <ClInclude Include="..\..\iocpLib\TcpSocket.h" />
+    <ClInclude Include="..\..\iocpLib\WinSockBase.h" />
+    <ClInclude Include="..\..\lib\AgentProtocol.pb.h" />
+    <ClInclude Include="AgentClientApp.h" />
+    <ClInclude Include="AgentClientSocket.h" />
+    <ClInclude Include="CPacket.h" />
+    <ClInclude Include="Helper.h" />
+    <ClInclude Include="LogicHandle.h" />
+    <ClInclude Include="Informations.h" />
+    <ClInclude Include="Query.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TcpAgentClient.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\iocpLib\Acceptor.cpp" />
+    <ClCompile Include="..\..\iocpLib\Connector.cpp" />
+    <ClCompile Include="..\..\iocpLib\Disconnector.cpp" />
+    <ClCompile Include="..\..\iocpLib\Proactor.cpp" />
+    <ClCompile Include="..\..\iocpLib\Receiver.cpp" />
+    <ClCompile Include="..\..\iocpLib\Sender.cpp" />
+    <ClCompile Include="..\..\iocpLib\TcpListenSocket.cpp" />
+    <ClCompile Include="..\..\iocpLib\TcpSocket.cpp" />
+    <ClCompile Include="..\..\lib\AgentProtocol.pb.cc" />
+    <ClCompile Include="AgentClientApp.cpp" />
+    <ClCompile Include="AgentClientSocket.cpp" />
+    <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="LogicHandle.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Query.cpp" />
+    <ClCompile Include="TcpAgentClient.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

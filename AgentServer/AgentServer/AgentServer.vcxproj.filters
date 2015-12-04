@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Agent">
+      <UniqueIdentifier>{c7cc559a-a8d8-4572-860f-44d63ccc09ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Agent\소스 파일">
+      <UniqueIdentifier>{f54c1776-0b0a-4a7f-ab14-2052436f484e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Agent\헤더 파일">
+      <UniqueIdentifier>{987ff5b8-d179-4afe-a8de-c36f58da97a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="iocp">
+      <UniqueIdentifier>{499bb9ad-aaca-41b9-8363-d798b43ac0bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="AgentSocket.h">
+      <Filter>Agent\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CPacket.h">
+      <Filter>Agent\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpAgentServer.h">
+      <Filter>Agent\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicHandle.h">
+      <Filter>Agent\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\Acceptor.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\Act.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\Actor.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\Connector.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\Disconnector.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\iocpHeaders.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\MemPooler.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\Proactor.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\Receiver.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\Sender.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\targetver.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\TcpAct.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\TcpListenSocket.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\TcpSocket.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\iocpLib\WinSockBase.h">
+      <Filter>iocp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\AgentProtocol.pb.h">
+      <Filter>Agent\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentApp.h">
+      <Filter>Agent</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="TcpAgentServer.cpp">
+      <Filter>Agent\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentSocket.cpp">
+      <Filter>Agent\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentApp.cpp">
+      <Filter>Agent\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicHandle.cpp">
+      <Filter>Agent\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\iocpLib\Acceptor.cpp">
+      <Filter>iocp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\iocpLib\Connector.cpp">
+      <Filter>iocp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\iocpLib\Disconnector.cpp">
+      <Filter>iocp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\iocpLib\Proactor.cpp">
+      <Filter>iocp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\iocpLib\Receiver.cpp">
+      <Filter>iocp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\iocpLib\Sender.cpp">
+      <Filter>iocp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\iocpLib\TcpListenSocket.cpp">
+      <Filter>iocp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\iocpLib\TcpSocket.cpp">
+      <Filter>iocp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\AgentProtocol.pb.cc">
+      <Filter>Agent</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

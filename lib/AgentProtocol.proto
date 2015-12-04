@@ -1,0 +1,211 @@
+package agent;
+
+
+enum agentType
+{
+	AgentIDRequest = 0;
+	AgentIDResponse = 1;
+	ProcessListRequest = 2;
+	ProcessListResponse = 3;
+	ProcessStateSend = 4;
+	TotalProcessesStateSend = 5;
+	HealthCheck = 6;
+	HealthAck = 7;
+	ProcessCommandRequest = 8;
+	ProcessCommandResponse = 9;
+	MachineInfoRequest = 10;
+	MachineInfoRequest_ALL = 11;
+	ProcessInfoRequest = 12;
+	ProcessInfoRequest_ALL = 13;
+	ProcessInfoResponse = 14;
+	ProcessInfoResponse_ALL = 15;
+	ProcessRestrictionRequest = 16;
+	PRocessRestrictionResponse = 17;
+}
+
+message csAgentIDRequest
+{
+	required int32 hostIP = 1;
+}
+
+message scAgentIDResponse
+{
+	required int32 agentID = 1;
+}
+
+message csProcessListRequest
+{
+}
+
+
+message scProcessListResponse
+{
+	repeated string processName = 1;
+}
+
+message csProcessStateSend
+{
+	required string processName = 1;
+	required int32 processID = 2;
+	required bool isOn = 3;
+}
+
+message csTotalProcessesStateSend
+{
+	repeated csProcessStateSend stateList = 1;
+}
+
+message scHealthCheck
+{
+}
+
+message csHealthAck
+{
+}
+
+enum CommandType
+{
+	START = 0;
+	RESTART = 1;
+	STOP = 2;
+	ADDLIST = 3;
+	DELETELIST = 4;
+}
+
+message scProcessCommandRequest
+{
+	required CommandType type = 1;
+	required int32 processID = 2;
+	optional string processName = 3;
+}
+
+message csProcessCommandResponse
+{
+	required CommandType type = 1;
+	required int32 processID = 2;
+
+	enum Result
+	{
+		SUCCESS = 0;
+		FAILURE = 1;
+	}
+
+	required Result result = 3;
+	optional string failReason = 4;
+}
+
+enum MachineCounter
+{
+	//Disk
+	DISK_TIME = 0;
+	DISK_QUEUE_LENGTH = 1;
+	FREE_SPACE_PERCENT = 2;
+	FREE_SPACE_BYTES = 3;
+
+	//Memory
+	AVAILABLE_KBYTES = 4;
+	PAGE_FAULT_SEC = 5;
+	POOL_NONPAGED_BYTES = 6;
+
+	//System
+	PROCESSOR_QUEUE_LENGTH = 7;
+	SYSTEM_CALLS_SEC = 8;
+	CONTEXT_SWITCHES_SEC = 9;
+
+	//NETWORK
+	CARD_BYTES_TOTAL_SEC = 10;
+	SERVER_BYTES_TOTAL_SEC = 11;
+	SERVER_SESSIONS = 12;
+
+	//Processor
+	TOTAL_CPU_TIME_M = 13;
+	KERNEL_TIME_M = 14;
+	USER_TIME_M = 15;
+	THREAD_COUNT_M = 16;
+}
+
+message scMachineInfoRequest
+{
+	required MachineCounter type = 1;
+}
+
+message scMachineInfoRequest_ALL
+{
+	repeated scMachineInfoRequest type = 1;
+}
+
+message csMachineInfoResponse
+{
+	required MachineCounter type = 1;
+	repeated double result = 2;
+}
+
+message csMachineInfoResponse_ALL
+{
+	repeated csMachineInfoResponse result = 1;
+}
+
+enum ProcessCounter
+{
+	TOTAL_CPU_TIME = 0;
+	KERNEL_TIME = 1;
+	USER_TIME = 2;
+	IO_DATA_BYTES_SEC = 3;
+	THREAD_COUNT = 4;
+	WORKING_SET_PRIVATE = 5;
+	VIRTUAL_BYTES = 6;
+}
+
+message scProcessInfoRequest
+{
+	required int32 processID = 1;
+}
+
+message scProcessInfoRequest_ALL
+{
+	repeated scProcessInfoRequest req = 1;
+}
+
+message csProcessInfoResponse
+{
+	required int32 processID = 1;
+	repeated ProcessCounter type = 2;
+	repeated double result = 3;
+}
+
+message csProcessInfoResponse_ALL
+{
+	repeated csProcessInfoResponse result = 1;
+}
+
+// @TODO : restriction protocol 
+
+enum Restriction
+{
+	USER_TIME_LIMIT = 0;
+	MAX_WORKING_SET_SIZE = 1;
+	MIN_WORKING_SET_SIZE = 2;
+}
+
+message scProcessRestrictionRequest
+{
+	required int32 processID = 1;
+	required Restriction type = 2;
+	required int32 value1 = 3;
+	optional int32 value2 = 4; // if LARGE_INTEGER
+}
+
+message csPRocessRestrictionResponse
+{
+	required int32 processID = 1;
+	required Restriction type = 2;
+
+	enum Result
+	{
+		SUCCESS = 0;
+		FAILURE = 1;
+	}
+	required Result result = 3;
+	optional string failReason = 4;
+}
+
