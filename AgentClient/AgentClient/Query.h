@@ -3,18 +3,18 @@
 class Query
 {
 private:
-	const int maxLogCnt;
 	HANDLE event_;
 	Helper helper;
 	MemPooler<ProcessCounterEntry> *entryPoolManager;
 
+	PDH_HQUERY query;
 
 public:
-	std::vector<ProcessInfo_Agent> checkProcessList;
+	std::list<ProcessInfo_Agent> checkProcessList;
 	std::list<agent::ProcessCounter> counterList;
 	std::vector<ProcessCounterEntry*> processLogList;
 
-	Query(const int& maxLogCnt);
+	Query();
 	~Query();
 
 	void Init();
@@ -25,5 +25,7 @@ public:
 
 	void AddCounter(agent::ProcessCounter counter);
 	void DeleteCounter(agent::ProcessCounter counter);
+
+	char* GetCurTime();
 };
 

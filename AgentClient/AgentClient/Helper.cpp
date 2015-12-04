@@ -51,7 +51,7 @@ void Helper::UpdateProcessList()
 				continue;
 			}
 			std::string processName(ProcessEntry32.szExeFile);
-			int cnt = CheckDuplicateProcessName(processName);
+			int cnt = CheckDuplicateProcessName(processName.substr(0, processName.length() - 4));
 
 			PRINT("%s#%d [%d]\n", processName.substr(0, processName.length() - 4).c_str(), cnt, ProcessEntry32.th32ProcessID);
 

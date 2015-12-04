@@ -9,8 +9,21 @@ int _tmain(int argc, _TCHAR* argv[])
 		return 0;
 	}
 
-	Helper h;
-	h.UpdateProcessList();
+	Query q;
+	q.Init();
+
+	ProcessInfo_Agent p;
+	p.isOn = true;
+	p.name = "chrome";
+	q.checkProcessList.push_back(p);
+
+	p.isOn = true;
+	p.name = "devenv";
+	q.checkProcessList.push_back(p);
+
+	q.counterList.push_back(agent::ProcessCounter::WORKING_SET_PRIVATE);
+	q.counterList.push_back(agent::ProcessCounter::TOTAL_CPU_TIME);
+	q.Record(50, 1);
 
 	agentClientApp = new AgentClientApp(inet_addr(argv[1]), atoi(argv[2]));
 	agentClientApp->Init();

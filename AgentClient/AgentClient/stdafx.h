@@ -16,7 +16,6 @@
 
 #include "../../iocpLib/iocpHeaders.h"
 
-#define PERFORMANCE_COUNTER_H
 #include <Pdh.h>
 #pragma comment(lib, "pdh.lib")
 

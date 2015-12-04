@@ -3,6 +3,7 @@ class Log
 {
 public:
 	DWORD time;
+	std::string timestamp;
 	double value;
 };
 
