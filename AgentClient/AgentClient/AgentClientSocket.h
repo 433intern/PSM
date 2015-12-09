@@ -22,6 +22,8 @@ public:
 public:
 	void SendHealthAck();
 	void SendAgentIDRequest();
+	void SendProcessListRequest();
+	void SendCounterListRequest();
 
 private:
 	struct mswsock_s
@@ -35,4 +37,5 @@ private:
 	MemPooler<CPacket> *packetPoolManager;
 	int position;
 	int remainBytes;
+	Query processQuery;
 };

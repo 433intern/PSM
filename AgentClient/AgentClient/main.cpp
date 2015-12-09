@@ -11,7 +11,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	/*Query q;
 	q.Init();
-
+	
 	ProcessInfo_Agent p;
 	p.isOn = true;
 	p.name = "chrome";
@@ -21,8 +21,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	p.name = "devenv";
 	q.checkProcessList.push_back(p);
 
-	q.counterList.push_back(agent::ProcessCounter::WORKING_SET_PRIVATE);
-	q.counterList.push_back(agent::ProcessCounter::TOTAL_CPU_TIME);
+	q.counterList.push_back("% Processor Time");
+	q.counterList.push_back("Working Set - Private");
 	q.Record(50, 1);*/
 
 	agentClientApp = new AgentClientApp(inet_addr(argv[1]), atoi(argv[2]));

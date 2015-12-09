@@ -23,6 +23,8 @@ public:
 public:
 	void SendHealthCheck();
 	void SendAgentIDResponse(int agentID);
+	void SendProcessListResponse();
+	void SendCounterListResponse();
 
 	int FindAgentID(int hostip);
 

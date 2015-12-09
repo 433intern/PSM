@@ -40,12 +40,27 @@ class csAgentIDRequest;
 class scAgentIDResponse;
 class csProcessListRequest;
 class scProcessListResponse;
+class csCounterListRequest;
+class scCounterListResponse;
+class csAgentReady;
 class csProcessStateSend;
 class csTotalProcessesStateSend;
 class scHealthCheck;
 class csHealthAck;
 class scProcessCommandRequest;
 class csProcessCommandResponse;
+class scCounterCommandRequest;
+class csCounterCommandResponse;
+class scProcessStartRecord;
+class scProcessStopRecord;
+class Log;
+class ProcessInfo;
+class ProcessInfos;
+class csTotalProcessInfoSend;
+class scMachineStartRecord;
+class scMachineStopRecord;
+class MachineInfos;
+class csTotalMachineInfoSend;
 class scProcessRestrictionRequest;
 class csProcessRestrictionResponse;
 
@@ -67,6 +82,25 @@ inline bool csProcessCommandResponse_Result_Parse(
     const ::std::string& name, csProcessCommandResponse_Result* value) {
   return ::google::protobuf::internal::ParseNamedEnum<csProcessCommandResponse_Result>(
     csProcessCommandResponse_Result_descriptor(), name, value);
+}
+enum csCounterCommandResponse_Result {
+  csCounterCommandResponse_Result_SUCCESS = 0,
+  csCounterCommandResponse_Result_FAILURE = 1
+};
+bool csCounterCommandResponse_Result_IsValid(int value);
+const csCounterCommandResponse_Result csCounterCommandResponse_Result_Result_MIN = csCounterCommandResponse_Result_SUCCESS;
+const csCounterCommandResponse_Result csCounterCommandResponse_Result_Result_MAX = csCounterCommandResponse_Result_FAILURE;
+const int csCounterCommandResponse_Result_Result_ARRAYSIZE = csCounterCommandResponse_Result_Result_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* csCounterCommandResponse_Result_descriptor();
+inline const ::std::string& csCounterCommandResponse_Result_Name(csCounterCommandResponse_Result value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    csCounterCommandResponse_Result_descriptor(), value);
+}
+inline bool csCounterCommandResponse_Result_Parse(
+    const ::std::string& name, csCounterCommandResponse_Result* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<csCounterCommandResponse_Result>(
+    csCounterCommandResponse_Result_descriptor(), name, value);
 }
 enum csProcessRestrictionResponse_Result {
   csProcessRestrictionResponse_Result_SUCCESS = 0,
@@ -92,18 +126,29 @@ enum agentType {
   AgentIDResponse = 1,
   ProcessListRequest = 2,
   ProcessListResponse = 3,
-  ProcessStateSend = 4,
-  TotalProcessesStateSend = 5,
-  HealthCheck = 6,
-  HealthAck = 7,
-  ProcessCommandRequest = 8,
-  ProcessCommandResponse = 9,
-  ProcessRestrictionRequest = 16,
-  ProcessRestrictionResponse = 17
+  CounterListRequest = 4,
+  CounterListResponse = 5,
+  ProcessStateSend = 6,
+  TotalProcessesStateSend = 7,
+  HealthCheck = 8,
+  HealthAck = 9,
+  ProcessCommandRequest = 10,
+  ProcessCommandResponse = 11,
+  CounterCommandRequest = 12,
+  CounterCommandResponse = 13,
+  ProcessRestrictionRequest = 14,
+  ProcessRestrictionResponse = 15,
+  ProcessStartRecord = 16,
+  ProcessStopRecord = 17,
+  ProcessInfoSend = 18,
+  MachineStartRecord = 19,
+  MachineStopRecord = 20,
+  MachineInfoSend = 21,
+  AgentReady = 22
 };
 bool agentType_IsValid(int value);
 const agentType agentType_MIN = AgentIDRequest;
-const agentType agentType_MAX = ProcessRestrictionResponse;
+const agentType agentType_MAX = AgentReady;
 const int agentType_ARRAYSIZE = agentType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* agentType_descriptor();
@@ -116,85 +161,47 @@ inline bool agentType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<agentType>(
     agentType_descriptor(), name, value);
 }
-enum CommandType {
+enum ProcessCommandType {
   START = 0,
   RESTART = 1,
   STOP = 2,
   ADDLIST = 3,
-  DELETELIST = 4
+  DELETELIST = 4,
+  ALLSTOP = 5
 };
-bool CommandType_IsValid(int value);
-const CommandType CommandType_MIN = START;
-const CommandType CommandType_MAX = DELETELIST;
-const int CommandType_ARRAYSIZE = CommandType_MAX + 1;
+bool ProcessCommandType_IsValid(int value);
+const ProcessCommandType ProcessCommandType_MIN = START;
+const ProcessCommandType ProcessCommandType_MAX = ALLSTOP;
+const int ProcessCommandType_ARRAYSIZE = ProcessCommandType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* CommandType_descriptor();
-inline const ::std::string& CommandType_Name(CommandType value) {
+const ::google::protobuf::EnumDescriptor* ProcessCommandType_descriptor();
+inline const ::std::string& ProcessCommandType_Name(ProcessCommandType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    CommandType_descriptor(), value);
+    ProcessCommandType_descriptor(), value);
 }
-inline bool CommandType_Parse(
-    const ::std::string& name, CommandType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<CommandType>(
-    CommandType_descriptor(), name, value);
+inline bool ProcessCommandType_Parse(
+    const ::std::string& name, ProcessCommandType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ProcessCommandType>(
+    ProcessCommandType_descriptor(), name, value);
 }
-enum MachineCounter {
-  DISK_TIME = 0,
-  DISK_QUEUE_LENGTH = 1,
-  FREE_SPACE_PERCENT = 2,
-  FREE_SPACE_BYTES = 3,
-  AVAILABLE_KBYTES = 4,
-  PAGE_FAULT_SEC = 5,
-  POOL_NONPAGED_BYTES = 6,
-  PROCESSOR_QUEUE_LENGTH = 7,
-  SYSTEM_CALLS_SEC = 8,
-  CONTEXT_SWITCHES_SEC = 9,
-  CARD_BYTES_TOTAL_SEC = 10,
-  SERVER_BYTES_TOTAL_SEC = 11,
-  SERVER_SESSIONS = 12,
-  TOTAL_CPU_TIME_M = 13,
-  KERNEL_TIME_M = 14,
-  USER_TIME_M = 15,
-  THREAD_COUNT_M = 16
+enum CounterCommandType {
+  CADDLIST = 1,
+  CDELETELIST = 2
 };
-bool MachineCounter_IsValid(int value);
-const MachineCounter MachineCounter_MIN = DISK_TIME;
-const MachineCounter MachineCounter_MAX = THREAD_COUNT_M;
-const int MachineCounter_ARRAYSIZE = MachineCounter_MAX + 1;
+bool CounterCommandType_IsValid(int value);
+const CounterCommandType CounterCommandType_MIN = CADDLIST;
+const CounterCommandType CounterCommandType_MAX = CDELETELIST;
+const int CounterCommandType_ARRAYSIZE = CounterCommandType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* MachineCounter_descriptor();
-inline const ::std::string& MachineCounter_Name(MachineCounter value) {
+const ::google::protobuf::EnumDescriptor* CounterCommandType_descriptor();
+inline const ::std::string& CounterCommandType_Name(CounterCommandType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    MachineCounter_descriptor(), value);
+    CounterCommandType_descriptor(), value);
 }
-inline bool MachineCounter_Parse(
-    const ::std::string& name, MachineCounter* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<MachineCounter>(
-    MachineCounter_descriptor(), name, value);
-}
-enum ProcessCounter {
-  TOTAL_CPU_TIME = 0,
-  KERNEL_TIME = 1,
-  USER_TIME = 2,
-  IO_DATA_BYTES_SEC = 3,
-  THREAD_COUNT = 4,
-  WORKING_SET_PRIVATE = 5,
-  VIRTUAL_BYTES = 6
-};
-bool ProcessCounter_IsValid(int value);
-const ProcessCounter ProcessCounter_MIN = TOTAL_CPU_TIME;
-const ProcessCounter ProcessCounter_MAX = VIRTUAL_BYTES;
-const int ProcessCounter_ARRAYSIZE = ProcessCounter_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* ProcessCounter_descriptor();
-inline const ::std::string& ProcessCounter_Name(ProcessCounter value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ProcessCounter_descriptor(), value);
-}
-inline bool ProcessCounter_Parse(
-    const ::std::string& name, ProcessCounter* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ProcessCounter>(
-    ProcessCounter_descriptor(), name, value);
+inline bool CounterCommandType_Parse(
+    const ::std::string& name, CounterCommandType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<CounterCommandType>(
+    CounterCommandType_descriptor(), name, value);
 }
 enum Restriction {
   USER_TIME_LIMIT = 0,
@@ -528,6 +535,230 @@ class scProcessListResponse : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static scProcessListResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class csCounterListRequest : public ::google::protobuf::Message {
+ public:
+  csCounterListRequest();
+  virtual ~csCounterListRequest();
+
+  csCounterListRequest(const csCounterListRequest& from);
+
+  inline csCounterListRequest& operator=(const csCounterListRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const csCounterListRequest& default_instance();
+
+  void Swap(csCounterListRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  csCounterListRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const csCounterListRequest& from);
+  void MergeFrom(const csCounterListRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:agent.csCounterListRequest)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static csCounterListRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class scCounterListResponse : public ::google::protobuf::Message {
+ public:
+  scCounterListResponse();
+  virtual ~scCounterListResponse();
+
+  scCounterListResponse(const scCounterListResponse& from);
+
+  inline scCounterListResponse& operator=(const scCounterListResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const scCounterListResponse& default_instance();
+
+  void Swap(scCounterListResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  scCounterListResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const scCounterListResponse& from);
+  void MergeFrom(const scCounterListResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated string counterName = 1;
+  inline int countername_size() const;
+  inline void clear_countername();
+  static const int kCounterNameFieldNumber = 1;
+  inline const ::std::string& countername(int index) const;
+  inline ::std::string* mutable_countername(int index);
+  inline void set_countername(int index, const ::std::string& value);
+  inline void set_countername(int index, const char* value);
+  inline void set_countername(int index, const char* value, size_t size);
+  inline ::std::string* add_countername();
+  inline void add_countername(const ::std::string& value);
+  inline void add_countername(const char* value);
+  inline void add_countername(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& countername() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_countername();
+
+  // @@protoc_insertion_point(class_scope:agent.scCounterListResponse)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> countername_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static scCounterListResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class csAgentReady : public ::google::protobuf::Message {
+ public:
+  csAgentReady();
+  virtual ~csAgentReady();
+
+  csAgentReady(const csAgentReady& from);
+
+  inline csAgentReady& operator=(const csAgentReady& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const csAgentReady& default_instance();
+
+  void Swap(csAgentReady* other);
+
+  // implements Message ----------------------------------------------
+
+  csAgentReady* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const csAgentReady& from);
+  void MergeFrom(const csAgentReady& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:agent.csAgentReady)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static csAgentReady* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -908,24 +1139,17 @@ class scProcessCommandRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .agent.CommandType type = 1;
+  // required .agent.ProcessCommandType type = 1;
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
-  inline ::agent::CommandType type() const;
-  inline void set_type(::agent::CommandType value);
+  inline ::agent::ProcessCommandType type() const;
+  inline void set_type(::agent::ProcessCommandType value);
 
-  // required int32 processID = 2;
-  inline bool has_processid() const;
-  inline void clear_processid();
-  static const int kProcessIDFieldNumber = 2;
-  inline ::google::protobuf::int32 processid() const;
-  inline void set_processid(::google::protobuf::int32 value);
-
-  // optional string processName = 3;
+  // required string processName = 2;
   inline bool has_processname() const;
   inline void clear_processname();
-  static const int kProcessNameFieldNumber = 3;
+  static const int kProcessNameFieldNumber = 2;
   inline const ::std::string& processname() const;
   inline void set_processname(const ::std::string& value);
   inline void set_processname(const char* value);
@@ -938,8 +1162,6 @@ class scProcessCommandRequest : public ::google::protobuf::Message {
  private:
   inline void set_has_type();
   inline void clear_has_type();
-  inline void set_has_processid();
-  inline void clear_has_processid();
   inline void set_has_processname();
   inline void clear_has_processname();
 
@@ -947,9 +1169,8 @@ class scProcessCommandRequest : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  int type_;
-  ::google::protobuf::int32 processid_;
   ::std::string* processname_;
+  int type_;
   friend void  protobuf_AddDesc_AgentProtocol_2eproto();
   friend void protobuf_AssignDesc_AgentProtocol_2eproto();
   friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
@@ -1036,19 +1257,24 @@ class csProcessCommandResponse : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .agent.CommandType type = 1;
+  // required .agent.ProcessCommandType type = 1;
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
-  inline ::agent::CommandType type() const;
-  inline void set_type(::agent::CommandType value);
+  inline ::agent::ProcessCommandType type() const;
+  inline void set_type(::agent::ProcessCommandType value);
 
-  // required int32 processID = 2;
-  inline bool has_processid() const;
+  // repeated int32 processID = 2;
+  inline int processid_size() const;
   inline void clear_processid();
   static const int kProcessIDFieldNumber = 2;
-  inline ::google::protobuf::int32 processid() const;
-  inline void set_processid(::google::protobuf::int32 value);
+  inline ::google::protobuf::int32 processid(int index) const;
+  inline void set_processid(int index, ::google::protobuf::int32 value);
+  inline void add_processid(::google::protobuf::int32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      processid() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_processid();
 
   // required .agent.csProcessCommandResponse.Result result = 3;
   inline bool has_result() const;
@@ -1073,8 +1299,229 @@ class csProcessCommandResponse : public ::google::protobuf::Message {
  private:
   inline void set_has_type();
   inline void clear_has_type();
-  inline void set_has_processid();
-  inline void clear_has_processid();
+  inline void set_has_result();
+  inline void clear_has_result();
+  inline void set_has_failreason();
+  inline void clear_has_failreason();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > processid_;
+  int type_;
+  int result_;
+  ::std::string* failreason_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static csProcessCommandResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class scCounterCommandRequest : public ::google::protobuf::Message {
+ public:
+  scCounterCommandRequest();
+  virtual ~scCounterCommandRequest();
+
+  scCounterCommandRequest(const scCounterCommandRequest& from);
+
+  inline scCounterCommandRequest& operator=(const scCounterCommandRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const scCounterCommandRequest& default_instance();
+
+  void Swap(scCounterCommandRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  scCounterCommandRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const scCounterCommandRequest& from);
+  void MergeFrom(const scCounterCommandRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .agent.CounterCommandType type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::agent::CounterCommandType type() const;
+  inline void set_type(::agent::CounterCommandType value);
+
+  // required string CounterName = 2;
+  inline bool has_countername() const;
+  inline void clear_countername();
+  static const int kCounterNameFieldNumber = 2;
+  inline const ::std::string& countername() const;
+  inline void set_countername(const ::std::string& value);
+  inline void set_countername(const char* value);
+  inline void set_countername(const char* value, size_t size);
+  inline ::std::string* mutable_countername();
+  inline ::std::string* release_countername();
+  inline void set_allocated_countername(::std::string* countername);
+
+  // @@protoc_insertion_point(class_scope:agent.scCounterCommandRequest)
+ private:
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_countername();
+  inline void clear_has_countername();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* countername_;
+  int type_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static scCounterCommandRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class csCounterCommandResponse : public ::google::protobuf::Message {
+ public:
+  csCounterCommandResponse();
+  virtual ~csCounterCommandResponse();
+
+  csCounterCommandResponse(const csCounterCommandResponse& from);
+
+  inline csCounterCommandResponse& operator=(const csCounterCommandResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const csCounterCommandResponse& default_instance();
+
+  void Swap(csCounterCommandResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  csCounterCommandResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const csCounterCommandResponse& from);
+  void MergeFrom(const csCounterCommandResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef csCounterCommandResponse_Result Result;
+  static const Result SUCCESS = csCounterCommandResponse_Result_SUCCESS;
+  static const Result FAILURE = csCounterCommandResponse_Result_FAILURE;
+  static inline bool Result_IsValid(int value) {
+    return csCounterCommandResponse_Result_IsValid(value);
+  }
+  static const Result Result_MIN =
+    csCounterCommandResponse_Result_Result_MIN;
+  static const Result Result_MAX =
+    csCounterCommandResponse_Result_Result_MAX;
+  static const int Result_ARRAYSIZE =
+    csCounterCommandResponse_Result_Result_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Result_descriptor() {
+    return csCounterCommandResponse_Result_descriptor();
+  }
+  static inline const ::std::string& Result_Name(Result value) {
+    return csCounterCommandResponse_Result_Name(value);
+  }
+  static inline bool Result_Parse(const ::std::string& name,
+      Result* value) {
+    return csCounterCommandResponse_Result_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .agent.CounterCommandType type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::agent::CounterCommandType type() const;
+  inline void set_type(::agent::CounterCommandType value);
+
+  // required .agent.csCounterCommandResponse.Result result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::agent::csCounterCommandResponse_Result result() const;
+  inline void set_result(::agent::csCounterCommandResponse_Result value);
+
+  // optional string failReason = 4;
+  inline bool has_failreason() const;
+  inline void clear_failreason();
+  static const int kFailReasonFieldNumber = 4;
+  inline const ::std::string& failreason() const;
+  inline void set_failreason(const ::std::string& value);
+  inline void set_failreason(const char* value);
+  inline void set_failreason(const char* value, size_t size);
+  inline ::std::string* mutable_failreason();
+  inline ::std::string* release_failreason();
+  inline void set_allocated_failreason(::std::string* failreason);
+
+  // @@protoc_insertion_point(class_scope:agent.csCounterCommandResponse)
+ private:
+  inline void set_has_type();
+  inline void clear_has_type();
   inline void set_has_result();
   inline void clear_has_result();
   inline void set_has_failreason();
@@ -1085,15 +1532,924 @@ class csProcessCommandResponse : public ::google::protobuf::Message {
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   int type_;
-  ::google::protobuf::int32 processid_;
-  ::std::string* failreason_;
   int result_;
+  ::std::string* failreason_;
   friend void  protobuf_AddDesc_AgentProtocol_2eproto();
   friend void protobuf_AssignDesc_AgentProtocol_2eproto();
   friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
 
   void InitAsDefaultInstance();
-  static csProcessCommandResponse* default_instance_;
+  static csCounterCommandResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class scProcessStartRecord : public ::google::protobuf::Message {
+ public:
+  scProcessStartRecord();
+  virtual ~scProcessStartRecord();
+
+  scProcessStartRecord(const scProcessStartRecord& from);
+
+  inline scProcessStartRecord& operator=(const scProcessStartRecord& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const scProcessStartRecord& default_instance();
+
+  void Swap(scProcessStartRecord* other);
+
+  // implements Message ----------------------------------------------
+
+  scProcessStartRecord* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const scProcessStartRecord& from);
+  void MergeFrom(const scProcessStartRecord& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 totalRecordTime = 1;
+  inline bool has_totalrecordtime() const;
+  inline void clear_totalrecordtime();
+  static const int kTotalRecordTimeFieldNumber = 1;
+  inline ::google::protobuf::int32 totalrecordtime() const;
+  inline void set_totalrecordtime(::google::protobuf::int32 value);
+
+  // required int32 interval = 2;
+  inline bool has_interval() const;
+  inline void clear_interval();
+  static const int kIntervalFieldNumber = 2;
+  inline ::google::protobuf::int32 interval() const;
+  inline void set_interval(::google::protobuf::int32 value);
+
+  // required int32 responseTime = 3;
+  inline bool has_responsetime() const;
+  inline void clear_responsetime();
+  static const int kResponseTimeFieldNumber = 3;
+  inline ::google::protobuf::int32 responsetime() const;
+  inline void set_responsetime(::google::protobuf::int32 value);
+
+  // optional int64 delay = 4;
+  inline bool has_delay() const;
+  inline void clear_delay();
+  static const int kDelayFieldNumber = 4;
+  inline ::google::protobuf::int64 delay() const;
+  inline void set_delay(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:agent.scProcessStartRecord)
+ private:
+  inline void set_has_totalrecordtime();
+  inline void clear_has_totalrecordtime();
+  inline void set_has_interval();
+  inline void clear_has_interval();
+  inline void set_has_responsetime();
+  inline void clear_has_responsetime();
+  inline void set_has_delay();
+  inline void clear_has_delay();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 totalrecordtime_;
+  ::google::protobuf::int32 interval_;
+  ::google::protobuf::int64 delay_;
+  ::google::protobuf::int32 responsetime_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static scProcessStartRecord* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class scProcessStopRecord : public ::google::protobuf::Message {
+ public:
+  scProcessStopRecord();
+  virtual ~scProcessStopRecord();
+
+  scProcessStopRecord(const scProcessStopRecord& from);
+
+  inline scProcessStopRecord& operator=(const scProcessStopRecord& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const scProcessStopRecord& default_instance();
+
+  void Swap(scProcessStopRecord* other);
+
+  // implements Message ----------------------------------------------
+
+  scProcessStopRecord* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const scProcessStopRecord& from);
+  void MergeFrom(const scProcessStopRecord& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:agent.scProcessStopRecord)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static scProcessStopRecord* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class Log : public ::google::protobuf::Message {
+ public:
+  Log();
+  virtual ~Log();
+
+  Log(const Log& from);
+
+  inline Log& operator=(const Log& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Log& default_instance();
+
+  void Swap(Log* other);
+
+  // implements Message ----------------------------------------------
+
+  Log* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Log& from);
+  void MergeFrom(const Log& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int64 timeStamp = 1;
+  inline bool has_timestamp() const;
+  inline void clear_timestamp();
+  static const int kTimeStampFieldNumber = 1;
+  inline ::google::protobuf::int64 timestamp() const;
+  inline void set_timestamp(::google::protobuf::int64 value);
+
+  // required double value = 2;
+  inline bool has_value() const;
+  inline void clear_value();
+  static const int kValueFieldNumber = 2;
+  inline double value() const;
+  inline void set_value(double value);
+
+  // @@protoc_insertion_point(class_scope:agent.Log)
+ private:
+  inline void set_has_timestamp();
+  inline void clear_has_timestamp();
+  inline void set_has_value();
+  inline void clear_has_value();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int64 timestamp_;
+  double value_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static Log* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ProcessInfo : public ::google::protobuf::Message {
+ public:
+  ProcessInfo();
+  virtual ~ProcessInfo();
+
+  ProcessInfo(const ProcessInfo& from);
+
+  inline ProcessInfo& operator=(const ProcessInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ProcessInfo& default_instance();
+
+  void Swap(ProcessInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  ProcessInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ProcessInfo& from);
+  void MergeFrom(const ProcessInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string processName = 1;
+  inline bool has_processname() const;
+  inline void clear_processname();
+  static const int kProcessNameFieldNumber = 1;
+  inline const ::std::string& processname() const;
+  inline void set_processname(const ::std::string& value);
+  inline void set_processname(const char* value);
+  inline void set_processname(const char* value, size_t size);
+  inline ::std::string* mutable_processname();
+  inline ::std::string* release_processname();
+  inline void set_allocated_processname(::std::string* processname);
+
+  // required int32 processID = 2;
+  inline bool has_processid() const;
+  inline void clear_processid();
+  static const int kProcessIDFieldNumber = 2;
+  inline ::google::protobuf::int32 processid() const;
+  inline void set_processid(::google::protobuf::int32 value);
+
+  // repeated .agent.Log logs = 3;
+  inline int logs_size() const;
+  inline void clear_logs();
+  static const int kLogsFieldNumber = 3;
+  inline const ::agent::Log& logs(int index) const;
+  inline ::agent::Log* mutable_logs(int index);
+  inline ::agent::Log* add_logs();
+  inline const ::google::protobuf::RepeatedPtrField< ::agent::Log >&
+      logs() const;
+  inline ::google::protobuf::RepeatedPtrField< ::agent::Log >*
+      mutable_logs();
+
+  // @@protoc_insertion_point(class_scope:agent.ProcessInfo)
+ private:
+  inline void set_has_processname();
+  inline void clear_has_processname();
+  inline void set_has_processid();
+  inline void clear_has_processid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* processname_;
+  ::google::protobuf::RepeatedPtrField< ::agent::Log > logs_;
+  ::google::protobuf::int32 processid_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static ProcessInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ProcessInfos : public ::google::protobuf::Message {
+ public:
+  ProcessInfos();
+  virtual ~ProcessInfos();
+
+  ProcessInfos(const ProcessInfos& from);
+
+  inline ProcessInfos& operator=(const ProcessInfos& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ProcessInfos& default_instance();
+
+  void Swap(ProcessInfos* other);
+
+  // implements Message ----------------------------------------------
+
+  ProcessInfos* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ProcessInfos& from);
+  void MergeFrom(const ProcessInfos& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string counterName = 1;
+  inline bool has_countername() const;
+  inline void clear_countername();
+  static const int kCounterNameFieldNumber = 1;
+  inline const ::std::string& countername() const;
+  inline void set_countername(const ::std::string& value);
+  inline void set_countername(const char* value);
+  inline void set_countername(const char* value, size_t size);
+  inline ::std::string* mutable_countername();
+  inline ::std::string* release_countername();
+  inline void set_allocated_countername(::std::string* countername);
+
+  // repeated .agent.ProcessInfo msg = 2;
+  inline int msg_size() const;
+  inline void clear_msg();
+  static const int kMsgFieldNumber = 2;
+  inline const ::agent::ProcessInfo& msg(int index) const;
+  inline ::agent::ProcessInfo* mutable_msg(int index);
+  inline ::agent::ProcessInfo* add_msg();
+  inline const ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfo >&
+      msg() const;
+  inline ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfo >*
+      mutable_msg();
+
+  // @@protoc_insertion_point(class_scope:agent.ProcessInfos)
+ private:
+  inline void set_has_countername();
+  inline void clear_has_countername();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* countername_;
+  ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfo > msg_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static ProcessInfos* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class csTotalProcessInfoSend : public ::google::protobuf::Message {
+ public:
+  csTotalProcessInfoSend();
+  virtual ~csTotalProcessInfoSend();
+
+  csTotalProcessInfoSend(const csTotalProcessInfoSend& from);
+
+  inline csTotalProcessInfoSend& operator=(const csTotalProcessInfoSend& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const csTotalProcessInfoSend& default_instance();
+
+  void Swap(csTotalProcessInfoSend* other);
+
+  // implements Message ----------------------------------------------
+
+  csTotalProcessInfoSend* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const csTotalProcessInfoSend& from);
+  void MergeFrom(const csTotalProcessInfoSend& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .agent.ProcessInfos info = 1;
+  inline int info_size() const;
+  inline void clear_info();
+  static const int kInfoFieldNumber = 1;
+  inline const ::agent::ProcessInfos& info(int index) const;
+  inline ::agent::ProcessInfos* mutable_info(int index);
+  inline ::agent::ProcessInfos* add_info();
+  inline const ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfos >&
+      info() const;
+  inline ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfos >*
+      mutable_info();
+
+  // @@protoc_insertion_point(class_scope:agent.csTotalProcessInfoSend)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfos > info_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static csTotalProcessInfoSend* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class scMachineStartRecord : public ::google::protobuf::Message {
+ public:
+  scMachineStartRecord();
+  virtual ~scMachineStartRecord();
+
+  scMachineStartRecord(const scMachineStartRecord& from);
+
+  inline scMachineStartRecord& operator=(const scMachineStartRecord& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const scMachineStartRecord& default_instance();
+
+  void Swap(scMachineStartRecord* other);
+
+  // implements Message ----------------------------------------------
+
+  scMachineStartRecord* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const scMachineStartRecord& from);
+  void MergeFrom(const scMachineStartRecord& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 totalRecordTime = 1;
+  inline bool has_totalrecordtime() const;
+  inline void clear_totalrecordtime();
+  static const int kTotalRecordTimeFieldNumber = 1;
+  inline ::google::protobuf::int32 totalrecordtime() const;
+  inline void set_totalrecordtime(::google::protobuf::int32 value);
+
+  // required int32 interval = 2;
+  inline bool has_interval() const;
+  inline void clear_interval();
+  static const int kIntervalFieldNumber = 2;
+  inline ::google::protobuf::int32 interval() const;
+  inline void set_interval(::google::protobuf::int32 value);
+
+  // required int32 responseTime = 3;
+  inline bool has_responsetime() const;
+  inline void clear_responsetime();
+  static const int kResponseTimeFieldNumber = 3;
+  inline ::google::protobuf::int32 responsetime() const;
+  inline void set_responsetime(::google::protobuf::int32 value);
+
+  // optional int64 delay = 4;
+  inline bool has_delay() const;
+  inline void clear_delay();
+  static const int kDelayFieldNumber = 4;
+  inline ::google::protobuf::int64 delay() const;
+  inline void set_delay(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:agent.scMachineStartRecord)
+ private:
+  inline void set_has_totalrecordtime();
+  inline void clear_has_totalrecordtime();
+  inline void set_has_interval();
+  inline void clear_has_interval();
+  inline void set_has_responsetime();
+  inline void clear_has_responsetime();
+  inline void set_has_delay();
+  inline void clear_has_delay();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 totalrecordtime_;
+  ::google::protobuf::int32 interval_;
+  ::google::protobuf::int64 delay_;
+  ::google::protobuf::int32 responsetime_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static scMachineStartRecord* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class scMachineStopRecord : public ::google::protobuf::Message {
+ public:
+  scMachineStopRecord();
+  virtual ~scMachineStopRecord();
+
+  scMachineStopRecord(const scMachineStopRecord& from);
+
+  inline scMachineStopRecord& operator=(const scMachineStopRecord& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const scMachineStopRecord& default_instance();
+
+  void Swap(scMachineStopRecord* other);
+
+  // implements Message ----------------------------------------------
+
+  scMachineStopRecord* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const scMachineStopRecord& from);
+  void MergeFrom(const scMachineStopRecord& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:agent.scMachineStopRecord)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static scMachineStopRecord* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MachineInfos : public ::google::protobuf::Message {
+ public:
+  MachineInfos();
+  virtual ~MachineInfos();
+
+  MachineInfos(const MachineInfos& from);
+
+  inline MachineInfos& operator=(const MachineInfos& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MachineInfos& default_instance();
+
+  void Swap(MachineInfos* other);
+
+  // implements Message ----------------------------------------------
+
+  MachineInfos* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MachineInfos& from);
+  void MergeFrom(const MachineInfos& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string counterName = 1;
+  inline bool has_countername() const;
+  inline void clear_countername();
+  static const int kCounterNameFieldNumber = 1;
+  inline const ::std::string& countername() const;
+  inline void set_countername(const ::std::string& value);
+  inline void set_countername(const char* value);
+  inline void set_countername(const char* value, size_t size);
+  inline ::std::string* mutable_countername();
+  inline ::std::string* release_countername();
+  inline void set_allocated_countername(::std::string* countername);
+
+  // repeated .agent.Log logs = 2;
+  inline int logs_size() const;
+  inline void clear_logs();
+  static const int kLogsFieldNumber = 2;
+  inline const ::agent::Log& logs(int index) const;
+  inline ::agent::Log* mutable_logs(int index);
+  inline ::agent::Log* add_logs();
+  inline const ::google::protobuf::RepeatedPtrField< ::agent::Log >&
+      logs() const;
+  inline ::google::protobuf::RepeatedPtrField< ::agent::Log >*
+      mutable_logs();
+
+  // @@protoc_insertion_point(class_scope:agent.MachineInfos)
+ private:
+  inline void set_has_countername();
+  inline void clear_has_countername();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* countername_;
+  ::google::protobuf::RepeatedPtrField< ::agent::Log > logs_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static MachineInfos* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class csTotalMachineInfoSend : public ::google::protobuf::Message {
+ public:
+  csTotalMachineInfoSend();
+  virtual ~csTotalMachineInfoSend();
+
+  csTotalMachineInfoSend(const csTotalMachineInfoSend& from);
+
+  inline csTotalMachineInfoSend& operator=(const csTotalMachineInfoSend& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const csTotalMachineInfoSend& default_instance();
+
+  void Swap(csTotalMachineInfoSend* other);
+
+  // implements Message ----------------------------------------------
+
+  csTotalMachineInfoSend* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const csTotalMachineInfoSend& from);
+  void MergeFrom(const csTotalMachineInfoSend& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .agent.MachineInfos info = 1;
+  inline int info_size() const;
+  inline void clear_info();
+  static const int kInfoFieldNumber = 1;
+  inline const ::agent::MachineInfos& info(int index) const;
+  inline ::agent::MachineInfos* mutable_info(int index);
+  inline ::agent::MachineInfos* add_info();
+  inline const ::google::protobuf::RepeatedPtrField< ::agent::MachineInfos >&
+      info() const;
+  inline ::google::protobuf::RepeatedPtrField< ::agent::MachineInfos >*
+      mutable_info();
+
+  // @@protoc_insertion_point(class_scope:agent.csTotalMachineInfoSend)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::agent::MachineInfos > info_;
+  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
+  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
+  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static csTotalMachineInfoSend* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1465,6 +2821,72 @@ scProcessListResponse::mutable_processname() {
 
 // -------------------------------------------------------------------
 
+// csCounterListRequest
+
+// -------------------------------------------------------------------
+
+// scCounterListResponse
+
+// repeated string counterName = 1;
+inline int scCounterListResponse::countername_size() const {
+  return countername_.size();
+}
+inline void scCounterListResponse::clear_countername() {
+  countername_.Clear();
+}
+inline const ::std::string& scCounterListResponse::countername(int index) const {
+  // @@protoc_insertion_point(field_get:agent.scCounterListResponse.counterName)
+  return countername_.Get(index);
+}
+inline ::std::string* scCounterListResponse::mutable_countername(int index) {
+  // @@protoc_insertion_point(field_mutable:agent.scCounterListResponse.counterName)
+  return countername_.Mutable(index);
+}
+inline void scCounterListResponse::set_countername(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:agent.scCounterListResponse.counterName)
+  countername_.Mutable(index)->assign(value);
+}
+inline void scCounterListResponse::set_countername(int index, const char* value) {
+  countername_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:agent.scCounterListResponse.counterName)
+}
+inline void scCounterListResponse::set_countername(int index, const char* value, size_t size) {
+  countername_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:agent.scCounterListResponse.counterName)
+}
+inline ::std::string* scCounterListResponse::add_countername() {
+  return countername_.Add();
+}
+inline void scCounterListResponse::add_countername(const ::std::string& value) {
+  countername_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:agent.scCounterListResponse.counterName)
+}
+inline void scCounterListResponse::add_countername(const char* value) {
+  countername_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:agent.scCounterListResponse.counterName)
+}
+inline void scCounterListResponse::add_countername(const char* value, size_t size) {
+  countername_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:agent.scCounterListResponse.counterName)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+scCounterListResponse::countername() const {
+  // @@protoc_insertion_point(field_list:agent.scCounterListResponse.counterName)
+  return countername_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+scCounterListResponse::mutable_countername() {
+  // @@protoc_insertion_point(field_mutable_list:agent.scCounterListResponse.counterName)
+  return &countername_;
+}
+
+// -------------------------------------------------------------------
+
+// csAgentReady
+
+// -------------------------------------------------------------------
+
 // csProcessStateSend
 
 // required string processName = 1;
@@ -1637,7 +3059,7 @@ csTotalProcessesStateSend::mutable_statelist() {
 
 // scProcessCommandRequest
 
-// required .agent.CommandType type = 1;
+// required .agent.ProcessCommandType type = 1;
 inline bool scProcessCommandRequest::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1651,50 +3073,26 @@ inline void scProcessCommandRequest::clear_type() {
   type_ = 0;
   clear_has_type();
 }
-inline ::agent::CommandType scProcessCommandRequest::type() const {
+inline ::agent::ProcessCommandType scProcessCommandRequest::type() const {
   // @@protoc_insertion_point(field_get:agent.scProcessCommandRequest.type)
-  return static_cast< ::agent::CommandType >(type_);
+  return static_cast< ::agent::ProcessCommandType >(type_);
 }
-inline void scProcessCommandRequest::set_type(::agent::CommandType value) {
-  assert(::agent::CommandType_IsValid(value));
+inline void scProcessCommandRequest::set_type(::agent::ProcessCommandType value) {
+  assert(::agent::ProcessCommandType_IsValid(value));
   set_has_type();
   type_ = value;
   // @@protoc_insertion_point(field_set:agent.scProcessCommandRequest.type)
 }
 
-// required int32 processID = 2;
-inline bool scProcessCommandRequest::has_processid() const {
+// required string processName = 2;
+inline bool scProcessCommandRequest::has_processname() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void scProcessCommandRequest::set_has_processid() {
+inline void scProcessCommandRequest::set_has_processname() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void scProcessCommandRequest::clear_has_processid() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void scProcessCommandRequest::clear_processid() {
-  processid_ = 0;
-  clear_has_processid();
-}
-inline ::google::protobuf::int32 scProcessCommandRequest::processid() const {
-  // @@protoc_insertion_point(field_get:agent.scProcessCommandRequest.processID)
-  return processid_;
-}
-inline void scProcessCommandRequest::set_processid(::google::protobuf::int32 value) {
-  set_has_processid();
-  processid_ = value;
-  // @@protoc_insertion_point(field_set:agent.scProcessCommandRequest.processID)
-}
-
-// optional string processName = 3;
-inline bool scProcessCommandRequest::has_processname() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void scProcessCommandRequest::set_has_processname() {
-  _has_bits_[0] |= 0x00000004u;
-}
 inline void scProcessCommandRequest::clear_has_processname() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void scProcessCommandRequest::clear_processname() {
   if (processname_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -1766,7 +3164,7 @@ inline void scProcessCommandRequest::set_allocated_processname(::std::string* pr
 
 // csProcessCommandResponse
 
-// required .agent.CommandType type = 1;
+// required .agent.ProcessCommandType type = 1;
 inline bool csProcessCommandResponse::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1780,39 +3178,45 @@ inline void csProcessCommandResponse::clear_type() {
   type_ = 0;
   clear_has_type();
 }
-inline ::agent::CommandType csProcessCommandResponse::type() const {
+inline ::agent::ProcessCommandType csProcessCommandResponse::type() const {
   // @@protoc_insertion_point(field_get:agent.csProcessCommandResponse.type)
-  return static_cast< ::agent::CommandType >(type_);
+  return static_cast< ::agent::ProcessCommandType >(type_);
 }
-inline void csProcessCommandResponse::set_type(::agent::CommandType value) {
-  assert(::agent::CommandType_IsValid(value));
+inline void csProcessCommandResponse::set_type(::agent::ProcessCommandType value) {
+  assert(::agent::ProcessCommandType_IsValid(value));
   set_has_type();
   type_ = value;
   // @@protoc_insertion_point(field_set:agent.csProcessCommandResponse.type)
 }
 
-// required int32 processID = 2;
-inline bool csProcessCommandResponse::has_processid() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void csProcessCommandResponse::set_has_processid() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void csProcessCommandResponse::clear_has_processid() {
-  _has_bits_[0] &= ~0x00000002u;
+// repeated int32 processID = 2;
+inline int csProcessCommandResponse::processid_size() const {
+  return processid_.size();
 }
 inline void csProcessCommandResponse::clear_processid() {
-  processid_ = 0;
-  clear_has_processid();
+  processid_.Clear();
 }
-inline ::google::protobuf::int32 csProcessCommandResponse::processid() const {
+inline ::google::protobuf::int32 csProcessCommandResponse::processid(int index) const {
   // @@protoc_insertion_point(field_get:agent.csProcessCommandResponse.processID)
+  return processid_.Get(index);
+}
+inline void csProcessCommandResponse::set_processid(int index, ::google::protobuf::int32 value) {
+  processid_.Set(index, value);
+  // @@protoc_insertion_point(field_set:agent.csProcessCommandResponse.processID)
+}
+inline void csProcessCommandResponse::add_processid(::google::protobuf::int32 value) {
+  processid_.Add(value);
+  // @@protoc_insertion_point(field_add:agent.csProcessCommandResponse.processID)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+csProcessCommandResponse::processid() const {
+  // @@protoc_insertion_point(field_list:agent.csProcessCommandResponse.processID)
   return processid_;
 }
-inline void csProcessCommandResponse::set_processid(::google::protobuf::int32 value) {
-  set_has_processid();
-  processid_ = value;
-  // @@protoc_insertion_point(field_set:agent.csProcessCommandResponse.processID)
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+csProcessCommandResponse::mutable_processid() {
+  // @@protoc_insertion_point(field_mutable_list:agent.csProcessCommandResponse.processID)
+  return &processid_;
 }
 
 // required .agent.csProcessCommandResponse.Result result = 3;
@@ -1914,6 +3318,923 @@ inline void csProcessCommandResponse::set_allocated_failreason(::std::string* fa
     failreason_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
   // @@protoc_insertion_point(field_set_allocated:agent.csProcessCommandResponse.failReason)
+}
+
+// -------------------------------------------------------------------
+
+// scCounterCommandRequest
+
+// required .agent.CounterCommandType type = 1;
+inline bool scCounterCommandRequest::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void scCounterCommandRequest::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void scCounterCommandRequest::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void scCounterCommandRequest::clear_type() {
+  type_ = 1;
+  clear_has_type();
+}
+inline ::agent::CounterCommandType scCounterCommandRequest::type() const {
+  // @@protoc_insertion_point(field_get:agent.scCounterCommandRequest.type)
+  return static_cast< ::agent::CounterCommandType >(type_);
+}
+inline void scCounterCommandRequest::set_type(::agent::CounterCommandType value) {
+  assert(::agent::CounterCommandType_IsValid(value));
+  set_has_type();
+  type_ = value;
+  // @@protoc_insertion_point(field_set:agent.scCounterCommandRequest.type)
+}
+
+// required string CounterName = 2;
+inline bool scCounterCommandRequest::has_countername() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void scCounterCommandRequest::set_has_countername() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void scCounterCommandRequest::clear_has_countername() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void scCounterCommandRequest::clear_countername() {
+  if (countername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_->clear();
+  }
+  clear_has_countername();
+}
+inline const ::std::string& scCounterCommandRequest::countername() const {
+  // @@protoc_insertion_point(field_get:agent.scCounterCommandRequest.CounterName)
+  return *countername_;
+}
+inline void scCounterCommandRequest::set_countername(const ::std::string& value) {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  countername_->assign(value);
+  // @@protoc_insertion_point(field_set:agent.scCounterCommandRequest.CounterName)
+}
+inline void scCounterCommandRequest::set_countername(const char* value) {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  countername_->assign(value);
+  // @@protoc_insertion_point(field_set_char:agent.scCounterCommandRequest.CounterName)
+}
+inline void scCounterCommandRequest::set_countername(const char* value, size_t size) {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  countername_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:agent.scCounterCommandRequest.CounterName)
+}
+inline ::std::string* scCounterCommandRequest::mutable_countername() {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:agent.scCounterCommandRequest.CounterName)
+  return countername_;
+}
+inline ::std::string* scCounterCommandRequest::release_countername() {
+  clear_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = countername_;
+    countername_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void scCounterCommandRequest::set_allocated_countername(::std::string* countername) {
+  if (countername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete countername_;
+  }
+  if (countername) {
+    set_has_countername();
+    countername_ = countername;
+  } else {
+    clear_has_countername();
+    countername_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:agent.scCounterCommandRequest.CounterName)
+}
+
+// -------------------------------------------------------------------
+
+// csCounterCommandResponse
+
+// required .agent.CounterCommandType type = 1;
+inline bool csCounterCommandResponse::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void csCounterCommandResponse::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void csCounterCommandResponse::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void csCounterCommandResponse::clear_type() {
+  type_ = 1;
+  clear_has_type();
+}
+inline ::agent::CounterCommandType csCounterCommandResponse::type() const {
+  // @@protoc_insertion_point(field_get:agent.csCounterCommandResponse.type)
+  return static_cast< ::agent::CounterCommandType >(type_);
+}
+inline void csCounterCommandResponse::set_type(::agent::CounterCommandType value) {
+  assert(::agent::CounterCommandType_IsValid(value));
+  set_has_type();
+  type_ = value;
+  // @@protoc_insertion_point(field_set:agent.csCounterCommandResponse.type)
+}
+
+// required .agent.csCounterCommandResponse.Result result = 3;
+inline bool csCounterCommandResponse::has_result() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void csCounterCommandResponse::set_has_result() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void csCounterCommandResponse::clear_has_result() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void csCounterCommandResponse::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::agent::csCounterCommandResponse_Result csCounterCommandResponse::result() const {
+  // @@protoc_insertion_point(field_get:agent.csCounterCommandResponse.result)
+  return static_cast< ::agent::csCounterCommandResponse_Result >(result_);
+}
+inline void csCounterCommandResponse::set_result(::agent::csCounterCommandResponse_Result value) {
+  assert(::agent::csCounterCommandResponse_Result_IsValid(value));
+  set_has_result();
+  result_ = value;
+  // @@protoc_insertion_point(field_set:agent.csCounterCommandResponse.result)
+}
+
+// optional string failReason = 4;
+inline bool csCounterCommandResponse::has_failreason() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void csCounterCommandResponse::set_has_failreason() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void csCounterCommandResponse::clear_has_failreason() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void csCounterCommandResponse::clear_failreason() {
+  if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    failreason_->clear();
+  }
+  clear_has_failreason();
+}
+inline const ::std::string& csCounterCommandResponse::failreason() const {
+  // @@protoc_insertion_point(field_get:agent.csCounterCommandResponse.failReason)
+  return *failreason_;
+}
+inline void csCounterCommandResponse::set_failreason(const ::std::string& value) {
+  set_has_failreason();
+  if (failreason_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    failreason_ = new ::std::string;
+  }
+  failreason_->assign(value);
+  // @@protoc_insertion_point(field_set:agent.csCounterCommandResponse.failReason)
+}
+inline void csCounterCommandResponse::set_failreason(const char* value) {
+  set_has_failreason();
+  if (failreason_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    failreason_ = new ::std::string;
+  }
+  failreason_->assign(value);
+  // @@protoc_insertion_point(field_set_char:agent.csCounterCommandResponse.failReason)
+}
+inline void csCounterCommandResponse::set_failreason(const char* value, size_t size) {
+  set_has_failreason();
+  if (failreason_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    failreason_ = new ::std::string;
+  }
+  failreason_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:agent.csCounterCommandResponse.failReason)
+}
+inline ::std::string* csCounterCommandResponse::mutable_failreason() {
+  set_has_failreason();
+  if (failreason_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    failreason_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:agent.csCounterCommandResponse.failReason)
+  return failreason_;
+}
+inline ::std::string* csCounterCommandResponse::release_failreason() {
+  clear_has_failreason();
+  if (failreason_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = failreason_;
+    failreason_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void csCounterCommandResponse::set_allocated_failreason(::std::string* failreason) {
+  if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete failreason_;
+  }
+  if (failreason) {
+    set_has_failreason();
+    failreason_ = failreason;
+  } else {
+    clear_has_failreason();
+    failreason_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:agent.csCounterCommandResponse.failReason)
+}
+
+// -------------------------------------------------------------------
+
+// scProcessStartRecord
+
+// required int32 totalRecordTime = 1;
+inline bool scProcessStartRecord::has_totalrecordtime() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void scProcessStartRecord::set_has_totalrecordtime() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void scProcessStartRecord::clear_has_totalrecordtime() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void scProcessStartRecord::clear_totalrecordtime() {
+  totalrecordtime_ = 0;
+  clear_has_totalrecordtime();
+}
+inline ::google::protobuf::int32 scProcessStartRecord::totalrecordtime() const {
+  // @@protoc_insertion_point(field_get:agent.scProcessStartRecord.totalRecordTime)
+  return totalrecordtime_;
+}
+inline void scProcessStartRecord::set_totalrecordtime(::google::protobuf::int32 value) {
+  set_has_totalrecordtime();
+  totalrecordtime_ = value;
+  // @@protoc_insertion_point(field_set:agent.scProcessStartRecord.totalRecordTime)
+}
+
+// required int32 interval = 2;
+inline bool scProcessStartRecord::has_interval() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void scProcessStartRecord::set_has_interval() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void scProcessStartRecord::clear_has_interval() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void scProcessStartRecord::clear_interval() {
+  interval_ = 0;
+  clear_has_interval();
+}
+inline ::google::protobuf::int32 scProcessStartRecord::interval() const {
+  // @@protoc_insertion_point(field_get:agent.scProcessStartRecord.interval)
+  return interval_;
+}
+inline void scProcessStartRecord::set_interval(::google::protobuf::int32 value) {
+  set_has_interval();
+  interval_ = value;
+  // @@protoc_insertion_point(field_set:agent.scProcessStartRecord.interval)
+}
+
+// required int32 responseTime = 3;
+inline bool scProcessStartRecord::has_responsetime() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void scProcessStartRecord::set_has_responsetime() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void scProcessStartRecord::clear_has_responsetime() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void scProcessStartRecord::clear_responsetime() {
+  responsetime_ = 0;
+  clear_has_responsetime();
+}
+inline ::google::protobuf::int32 scProcessStartRecord::responsetime() const {
+  // @@protoc_insertion_point(field_get:agent.scProcessStartRecord.responseTime)
+  return responsetime_;
+}
+inline void scProcessStartRecord::set_responsetime(::google::protobuf::int32 value) {
+  set_has_responsetime();
+  responsetime_ = value;
+  // @@protoc_insertion_point(field_set:agent.scProcessStartRecord.responseTime)
+}
+
+// optional int64 delay = 4;
+inline bool scProcessStartRecord::has_delay() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void scProcessStartRecord::set_has_delay() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void scProcessStartRecord::clear_has_delay() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void scProcessStartRecord::clear_delay() {
+  delay_ = GOOGLE_LONGLONG(0);
+  clear_has_delay();
+}
+inline ::google::protobuf::int64 scProcessStartRecord::delay() const {
+  // @@protoc_insertion_point(field_get:agent.scProcessStartRecord.delay)
+  return delay_;
+}
+inline void scProcessStartRecord::set_delay(::google::protobuf::int64 value) {
+  set_has_delay();
+  delay_ = value;
+  // @@protoc_insertion_point(field_set:agent.scProcessStartRecord.delay)
+}
+
+// -------------------------------------------------------------------
+
+// scProcessStopRecord
+
+// -------------------------------------------------------------------
+
+// Log
+
+// required int64 timeStamp = 1;
+inline bool Log::has_timestamp() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Log::set_has_timestamp() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Log::clear_has_timestamp() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Log::clear_timestamp() {
+  timestamp_ = GOOGLE_LONGLONG(0);
+  clear_has_timestamp();
+}
+inline ::google::protobuf::int64 Log::timestamp() const {
+  // @@protoc_insertion_point(field_get:agent.Log.timeStamp)
+  return timestamp_;
+}
+inline void Log::set_timestamp(::google::protobuf::int64 value) {
+  set_has_timestamp();
+  timestamp_ = value;
+  // @@protoc_insertion_point(field_set:agent.Log.timeStamp)
+}
+
+// required double value = 2;
+inline bool Log::has_value() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Log::set_has_value() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Log::clear_has_value() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Log::clear_value() {
+  value_ = 0;
+  clear_has_value();
+}
+inline double Log::value() const {
+  // @@protoc_insertion_point(field_get:agent.Log.value)
+  return value_;
+}
+inline void Log::set_value(double value) {
+  set_has_value();
+  value_ = value;
+  // @@protoc_insertion_point(field_set:agent.Log.value)
+}
+
+// -------------------------------------------------------------------
+
+// ProcessInfo
+
+// required string processName = 1;
+inline bool ProcessInfo::has_processname() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ProcessInfo::set_has_processname() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ProcessInfo::clear_has_processname() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ProcessInfo::clear_processname() {
+  if (processname_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    processname_->clear();
+  }
+  clear_has_processname();
+}
+inline const ::std::string& ProcessInfo::processname() const {
+  // @@protoc_insertion_point(field_get:agent.ProcessInfo.processName)
+  return *processname_;
+}
+inline void ProcessInfo::set_processname(const ::std::string& value) {
+  set_has_processname();
+  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    processname_ = new ::std::string;
+  }
+  processname_->assign(value);
+  // @@protoc_insertion_point(field_set:agent.ProcessInfo.processName)
+}
+inline void ProcessInfo::set_processname(const char* value) {
+  set_has_processname();
+  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    processname_ = new ::std::string;
+  }
+  processname_->assign(value);
+  // @@protoc_insertion_point(field_set_char:agent.ProcessInfo.processName)
+}
+inline void ProcessInfo::set_processname(const char* value, size_t size) {
+  set_has_processname();
+  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    processname_ = new ::std::string;
+  }
+  processname_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:agent.ProcessInfo.processName)
+}
+inline ::std::string* ProcessInfo::mutable_processname() {
+  set_has_processname();
+  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    processname_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:agent.ProcessInfo.processName)
+  return processname_;
+}
+inline ::std::string* ProcessInfo::release_processname() {
+  clear_has_processname();
+  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = processname_;
+    processname_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void ProcessInfo::set_allocated_processname(::std::string* processname) {
+  if (processname_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete processname_;
+  }
+  if (processname) {
+    set_has_processname();
+    processname_ = processname;
+  } else {
+    clear_has_processname();
+    processname_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:agent.ProcessInfo.processName)
+}
+
+// required int32 processID = 2;
+inline bool ProcessInfo::has_processid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ProcessInfo::set_has_processid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ProcessInfo::clear_has_processid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ProcessInfo::clear_processid() {
+  processid_ = 0;
+  clear_has_processid();
+}
+inline ::google::protobuf::int32 ProcessInfo::processid() const {
+  // @@protoc_insertion_point(field_get:agent.ProcessInfo.processID)
+  return processid_;
+}
+inline void ProcessInfo::set_processid(::google::protobuf::int32 value) {
+  set_has_processid();
+  processid_ = value;
+  // @@protoc_insertion_point(field_set:agent.ProcessInfo.processID)
+}
+
+// repeated .agent.Log logs = 3;
+inline int ProcessInfo::logs_size() const {
+  return logs_.size();
+}
+inline void ProcessInfo::clear_logs() {
+  logs_.Clear();
+}
+inline const ::agent::Log& ProcessInfo::logs(int index) const {
+  // @@protoc_insertion_point(field_get:agent.ProcessInfo.logs)
+  return logs_.Get(index);
+}
+inline ::agent::Log* ProcessInfo::mutable_logs(int index) {
+  // @@protoc_insertion_point(field_mutable:agent.ProcessInfo.logs)
+  return logs_.Mutable(index);
+}
+inline ::agent::Log* ProcessInfo::add_logs() {
+  // @@protoc_insertion_point(field_add:agent.ProcessInfo.logs)
+  return logs_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::agent::Log >&
+ProcessInfo::logs() const {
+  // @@protoc_insertion_point(field_list:agent.ProcessInfo.logs)
+  return logs_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::agent::Log >*
+ProcessInfo::mutable_logs() {
+  // @@protoc_insertion_point(field_mutable_list:agent.ProcessInfo.logs)
+  return &logs_;
+}
+
+// -------------------------------------------------------------------
+
+// ProcessInfos
+
+// required string counterName = 1;
+inline bool ProcessInfos::has_countername() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ProcessInfos::set_has_countername() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ProcessInfos::clear_has_countername() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ProcessInfos::clear_countername() {
+  if (countername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_->clear();
+  }
+  clear_has_countername();
+}
+inline const ::std::string& ProcessInfos::countername() const {
+  // @@protoc_insertion_point(field_get:agent.ProcessInfos.counterName)
+  return *countername_;
+}
+inline void ProcessInfos::set_countername(const ::std::string& value) {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  countername_->assign(value);
+  // @@protoc_insertion_point(field_set:agent.ProcessInfos.counterName)
+}
+inline void ProcessInfos::set_countername(const char* value) {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  countername_->assign(value);
+  // @@protoc_insertion_point(field_set_char:agent.ProcessInfos.counterName)
+}
+inline void ProcessInfos::set_countername(const char* value, size_t size) {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  countername_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:agent.ProcessInfos.counterName)
+}
+inline ::std::string* ProcessInfos::mutable_countername() {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:agent.ProcessInfos.counterName)
+  return countername_;
+}
+inline ::std::string* ProcessInfos::release_countername() {
+  clear_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = countername_;
+    countername_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void ProcessInfos::set_allocated_countername(::std::string* countername) {
+  if (countername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete countername_;
+  }
+  if (countername) {
+    set_has_countername();
+    countername_ = countername;
+  } else {
+    clear_has_countername();
+    countername_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:agent.ProcessInfos.counterName)
+}
+
+// repeated .agent.ProcessInfo msg = 2;
+inline int ProcessInfos::msg_size() const {
+  return msg_.size();
+}
+inline void ProcessInfos::clear_msg() {
+  msg_.Clear();
+}
+inline const ::agent::ProcessInfo& ProcessInfos::msg(int index) const {
+  // @@protoc_insertion_point(field_get:agent.ProcessInfos.msg)
+  return msg_.Get(index);
+}
+inline ::agent::ProcessInfo* ProcessInfos::mutable_msg(int index) {
+  // @@protoc_insertion_point(field_mutable:agent.ProcessInfos.msg)
+  return msg_.Mutable(index);
+}
+inline ::agent::ProcessInfo* ProcessInfos::add_msg() {
+  // @@protoc_insertion_point(field_add:agent.ProcessInfos.msg)
+  return msg_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfo >&
+ProcessInfos::msg() const {
+  // @@protoc_insertion_point(field_list:agent.ProcessInfos.msg)
+  return msg_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfo >*
+ProcessInfos::mutable_msg() {
+  // @@protoc_insertion_point(field_mutable_list:agent.ProcessInfos.msg)
+  return &msg_;
+}
+
+// -------------------------------------------------------------------
+
+// csTotalProcessInfoSend
+
+// repeated .agent.ProcessInfos info = 1;
+inline int csTotalProcessInfoSend::info_size() const {
+  return info_.size();
+}
+inline void csTotalProcessInfoSend::clear_info() {
+  info_.Clear();
+}
+inline const ::agent::ProcessInfos& csTotalProcessInfoSend::info(int index) const {
+  // @@protoc_insertion_point(field_get:agent.csTotalProcessInfoSend.info)
+  return info_.Get(index);
+}
+inline ::agent::ProcessInfos* csTotalProcessInfoSend::mutable_info(int index) {
+  // @@protoc_insertion_point(field_mutable:agent.csTotalProcessInfoSend.info)
+  return info_.Mutable(index);
+}
+inline ::agent::ProcessInfos* csTotalProcessInfoSend::add_info() {
+  // @@protoc_insertion_point(field_add:agent.csTotalProcessInfoSend.info)
+  return info_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfos >&
+csTotalProcessInfoSend::info() const {
+  // @@protoc_insertion_point(field_list:agent.csTotalProcessInfoSend.info)
+  return info_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfos >*
+csTotalProcessInfoSend::mutable_info() {
+  // @@protoc_insertion_point(field_mutable_list:agent.csTotalProcessInfoSend.info)
+  return &info_;
+}
+
+// -------------------------------------------------------------------
+
+// scMachineStartRecord
+
+// required int32 totalRecordTime = 1;
+inline bool scMachineStartRecord::has_totalrecordtime() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void scMachineStartRecord::set_has_totalrecordtime() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void scMachineStartRecord::clear_has_totalrecordtime() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void scMachineStartRecord::clear_totalrecordtime() {
+  totalrecordtime_ = 0;
+  clear_has_totalrecordtime();
+}
+inline ::google::protobuf::int32 scMachineStartRecord::totalrecordtime() const {
+  // @@protoc_insertion_point(field_get:agent.scMachineStartRecord.totalRecordTime)
+  return totalrecordtime_;
+}
+inline void scMachineStartRecord::set_totalrecordtime(::google::protobuf::int32 value) {
+  set_has_totalrecordtime();
+  totalrecordtime_ = value;
+  // @@protoc_insertion_point(field_set:agent.scMachineStartRecord.totalRecordTime)
+}
+
+// required int32 interval = 2;
+inline bool scMachineStartRecord::has_interval() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void scMachineStartRecord::set_has_interval() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void scMachineStartRecord::clear_has_interval() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void scMachineStartRecord::clear_interval() {
+  interval_ = 0;
+  clear_has_interval();
+}
+inline ::google::protobuf::int32 scMachineStartRecord::interval() const {
+  // @@protoc_insertion_point(field_get:agent.scMachineStartRecord.interval)
+  return interval_;
+}
+inline void scMachineStartRecord::set_interval(::google::protobuf::int32 value) {
+  set_has_interval();
+  interval_ = value;
+  // @@protoc_insertion_point(field_set:agent.scMachineStartRecord.interval)
+}
+
+// required int32 responseTime = 3;
+inline bool scMachineStartRecord::has_responsetime() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void scMachineStartRecord::set_has_responsetime() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void scMachineStartRecord::clear_has_responsetime() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void scMachineStartRecord::clear_responsetime() {
+  responsetime_ = 0;
+  clear_has_responsetime();
+}
+inline ::google::protobuf::int32 scMachineStartRecord::responsetime() const {
+  // @@protoc_insertion_point(field_get:agent.scMachineStartRecord.responseTime)
+  return responsetime_;
+}
+inline void scMachineStartRecord::set_responsetime(::google::protobuf::int32 value) {
+  set_has_responsetime();
+  responsetime_ = value;
+  // @@protoc_insertion_point(field_set:agent.scMachineStartRecord.responseTime)
+}
+
+// optional int64 delay = 4;
+inline bool scMachineStartRecord::has_delay() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void scMachineStartRecord::set_has_delay() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void scMachineStartRecord::clear_has_delay() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void scMachineStartRecord::clear_delay() {
+  delay_ = GOOGLE_LONGLONG(0);
+  clear_has_delay();
+}
+inline ::google::protobuf::int64 scMachineStartRecord::delay() const {
+  // @@protoc_insertion_point(field_get:agent.scMachineStartRecord.delay)
+  return delay_;
+}
+inline void scMachineStartRecord::set_delay(::google::protobuf::int64 value) {
+  set_has_delay();
+  delay_ = value;
+  // @@protoc_insertion_point(field_set:agent.scMachineStartRecord.delay)
+}
+
+// -------------------------------------------------------------------
+
+// scMachineStopRecord
+
+// -------------------------------------------------------------------
+
+// MachineInfos
+
+// required string counterName = 1;
+inline bool MachineInfos::has_countername() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MachineInfos::set_has_countername() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MachineInfos::clear_has_countername() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MachineInfos::clear_countername() {
+  if (countername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_->clear();
+  }
+  clear_has_countername();
+}
+inline const ::std::string& MachineInfos::countername() const {
+  // @@protoc_insertion_point(field_get:agent.MachineInfos.counterName)
+  return *countername_;
+}
+inline void MachineInfos::set_countername(const ::std::string& value) {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  countername_->assign(value);
+  // @@protoc_insertion_point(field_set:agent.MachineInfos.counterName)
+}
+inline void MachineInfos::set_countername(const char* value) {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  countername_->assign(value);
+  // @@protoc_insertion_point(field_set_char:agent.MachineInfos.counterName)
+}
+inline void MachineInfos::set_countername(const char* value, size_t size) {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  countername_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:agent.MachineInfos.counterName)
+}
+inline ::std::string* MachineInfos::mutable_countername() {
+  set_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    countername_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:agent.MachineInfos.counterName)
+  return countername_;
+}
+inline ::std::string* MachineInfos::release_countername() {
+  clear_has_countername();
+  if (countername_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = countername_;
+    countername_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void MachineInfos::set_allocated_countername(::std::string* countername) {
+  if (countername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete countername_;
+  }
+  if (countername) {
+    set_has_countername();
+    countername_ = countername;
+  } else {
+    clear_has_countername();
+    countername_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:agent.MachineInfos.counterName)
+}
+
+// repeated .agent.Log logs = 2;
+inline int MachineInfos::logs_size() const {
+  return logs_.size();
+}
+inline void MachineInfos::clear_logs() {
+  logs_.Clear();
+}
+inline const ::agent::Log& MachineInfos::logs(int index) const {
+  // @@protoc_insertion_point(field_get:agent.MachineInfos.logs)
+  return logs_.Get(index);
+}
+inline ::agent::Log* MachineInfos::mutable_logs(int index) {
+  // @@protoc_insertion_point(field_mutable:agent.MachineInfos.logs)
+  return logs_.Mutable(index);
+}
+inline ::agent::Log* MachineInfos::add_logs() {
+  // @@protoc_insertion_point(field_add:agent.MachineInfos.logs)
+  return logs_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::agent::Log >&
+MachineInfos::logs() const {
+  // @@protoc_insertion_point(field_list:agent.MachineInfos.logs)
+  return logs_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::agent::Log >*
+MachineInfos::mutable_logs() {
+  // @@protoc_insertion_point(field_mutable_list:agent.MachineInfos.logs)
+  return &logs_;
+}
+
+// -------------------------------------------------------------------
+
+// csTotalMachineInfoSend
+
+// repeated .agent.MachineInfos info = 1;
+inline int csTotalMachineInfoSend::info_size() const {
+  return info_.size();
+}
+inline void csTotalMachineInfoSend::clear_info() {
+  info_.Clear();
+}
+inline const ::agent::MachineInfos& csTotalMachineInfoSend::info(int index) const {
+  // @@protoc_insertion_point(field_get:agent.csTotalMachineInfoSend.info)
+  return info_.Get(index);
+}
+inline ::agent::MachineInfos* csTotalMachineInfoSend::mutable_info(int index) {
+  // @@protoc_insertion_point(field_mutable:agent.csTotalMachineInfoSend.info)
+  return info_.Mutable(index);
+}
+inline ::agent::MachineInfos* csTotalMachineInfoSend::add_info() {
+  // @@protoc_insertion_point(field_add:agent.csTotalMachineInfoSend.info)
+  return info_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::agent::MachineInfos >&
+csTotalMachineInfoSend::info() const {
+  // @@protoc_insertion_point(field_list:agent.csTotalMachineInfoSend.info)
+  return info_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::agent::MachineInfos >*
+csTotalMachineInfoSend::mutable_info() {
+  // @@protoc_insertion_point(field_mutable_list:agent.csTotalMachineInfoSend.info)
+  return &info_;
 }
 
 // -------------------------------------------------------------------
@@ -2185,6 +4506,11 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::agent::csProcessCommandResponse_Result>() {
   return ::agent::csProcessCommandResponse_Result_descriptor();
 }
+template <> struct is_proto_enum< ::agent::csCounterCommandResponse_Result> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::agent::csCounterCommandResponse_Result>() {
+  return ::agent::csCounterCommandResponse_Result_descriptor();
+}
 template <> struct is_proto_enum< ::agent::csProcessRestrictionResponse_Result> : ::google::protobuf::internal::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::agent::csProcessRestrictionResponse_Result>() {
@@ -2195,20 +4521,15 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::agent::agentType>() {
   return ::agent::agentType_descriptor();
 }
-template <> struct is_proto_enum< ::agent::CommandType> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::agent::ProcessCommandType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::agent::CommandType>() {
-  return ::agent::CommandType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::agent::ProcessCommandType>() {
+  return ::agent::ProcessCommandType_descriptor();
 }
-template <> struct is_proto_enum< ::agent::MachineCounter> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::agent::CounterCommandType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::agent::MachineCounter>() {
-  return ::agent::MachineCounter_descriptor();
-}
-template <> struct is_proto_enum< ::agent::ProcessCounter> : ::google::protobuf::internal::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::agent::ProcessCounter>() {
-  return ::agent::ProcessCounter_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::agent::CounterCommandType>() {
+  return ::agent::CounterCommandType_descriptor();
 }
 template <> struct is_proto_enum< ::agent::Restriction> : ::google::protobuf::internal::true_type {};
 template <>

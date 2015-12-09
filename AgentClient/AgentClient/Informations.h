@@ -28,5 +28,4 @@ class ProcessInfo_Agent
 {
 public:
 	std::string name;
-	bool isOn;
 };

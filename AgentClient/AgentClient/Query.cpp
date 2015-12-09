@@ -34,9 +34,9 @@ void Query::Init()
 	helper.Init();
 }
 
-bool Query::AddCounter(agent::ProcessCounter counter)
+bool Query::AddCounter(std::string counter)
 {
-	for (agent::ProcessCounter pc : counterList)
+	for (std::string pc : counterList)
 	{
 		if (pc == counter) return false;
 	}
@@ -44,7 +44,7 @@ bool Query::AddCounter(agent::ProcessCounter counter)
 	return true;
 }
 
-bool Query::DeleteCounter(agent::ProcessCounter counter)
+bool Query::DeleteCounter(std::string counter)
 {
 	counterList.remove(counter);
 	return true;
@@ -63,7 +63,6 @@ bool Query::AddProcess(std::string processName)
 
 	ProcessInfo_Agent p;
 	p.name = processName;
-	p.isOn = false;
 	checkProcessList.push_back(p);
 
 	return true;
@@ -89,7 +88,6 @@ bool Query::IsCheckProcess(std::string processName)
 	{
 		if (processName == checkProcess.name)
 		{
-			checkProcess.isOn = true;
 			return true;
 		}
 	}
@@ -122,35 +120,8 @@ bool Query::InitCounterInfo(PDH_HQUERY& query)
 	{
 		if (!IsCheckProcess(p.name)) continue;
 
-		for (agent::ProcessCounter counter : counterList)
+		for (std::string counterName : counterList)
 		{
-			std::string counterName = "";
-
-			switch (counter)
-			{
-			case agent::ProcessCounter::IO_DATA_BYTES_SEC:
-				counterName = "IO Data Bytes/sec";
-				break;
-			case agent::ProcessCounter::KERNEL_TIME:
-				counterName = "% Privileged Time";
-				break;
-			case agent::ProcessCounter::THREAD_COUNT:
-				counterName = "Thread Count";
-				break;
-			case agent::ProcessCounter::TOTAL_CPU_TIME:
-				counterName = "% Processor Time";
-				break;
-			case agent::ProcessCounter::USER_TIME:
-				counterName = "% User Time";
-				break;
-			case agent::ProcessCounter::VIRTUAL_BYTES:
-				counterName = "Virtual Bytes";
-				break;
-			case agent::ProcessCounter::WORKING_SET_PRIVATE:
-				counterName = "Working Set - Private";
-				break;
-			}
-
 			ProcessCounterEntry* pce = entryPoolManager->Alloc();
 			assert(pce);
 

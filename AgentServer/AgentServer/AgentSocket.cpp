@@ -88,7 +88,6 @@ void AgentSocket::AcceptProcess(bool isError, Act* act, DWORD bytes_transferred)
 		ERROR_PRINT("[AgentSocket] AcceptProcess : Error : %d\n", WSAGetLastError());
 		return;
 	}
-
 	PRINT("[AgentSocket] connect success, %d\n", this->socket_);
 	agentApp->agentServer->AddAgent(this);
 
@@ -147,10 +146,22 @@ void AgentSocket::PacketHandling(CPacket *packet)
 			agent::csAgentIDRequest msg;
 			if (msg.ParseFromArray(packet->msg, packet->length))
 			{
-				PRINT("[AgentSocket] hostID : %d\n", msg.hostip());
 				this->agentID = FindAgentID(msg.hostip());
+				PRINT("[AgentSocket] hostID : %d\n", msg.hostip());
 				SendAgentIDResponse(agentID);
 			}
+			break;
+		}
+		case agent::ProcessListRequest:
+		{
+			PRINT("[AgentSocket] ProcessListRequest received\n");
+			SendProcessListResponse();
+			break;
+		}
+		case agent::CounterListRequest:
+		{
+			PRINT("[AgentSocket] CounterListRequest received\n");
+			SendCounterListResponse();
 			break;
 		}
 		case agent::HealthAck:
@@ -194,3 +205,60 @@ void AgentSocket::SendAgentIDResponse(int agentID)
 	Send((char *)&packet, packet.length + HEADER_SIZE);
 }
 
+void AgentSocket::SendProcessListResponse()
+{
+	PRINT("[AgentSocket] SendProcessListResponse\n");
+	CPacket packet;
+	agent::scProcessListResponse msg;
+
+	std::vector<std::string> processList;
+
+	if (agentApp->redisManager.GetProcessList(agentID, processList))
+	{
+		for (std::string process : processList)
+		{
+			std::string* p = msg.add_processname();
+			*p = process;
+		}
+
+		packet.length = (short)msg.ByteSize();
+		packet.type = (short)agent::ProcessListResponse;
+		memset(packet.msg, 0, BUFSIZE);
+		msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+		Send((char *)&packet, packet.length + HEADER_SIZE);
+	}
+	else
+	{
+		ERROR_PRINT("[AgentSocket] SendProcessListResponse ERROR\n");
+	}
+}
+
+void AgentSocket::SendCounterListResponse()
+{
+	PRINT("[AgentSocket] SendCounterListResponse\n");
+	CPacket packet;
+	agent::scCounterListResponse msg;
+
+	std::vector<std::string> counterList;
+
+	if (agentApp->redisManager.GetCounterList(agentID, counterList))
+	{
+		for (std::string counter : counterList)
+		{
+			std::string* p = msg.add_countername();
+			*p = counter;
+		}
+
+		packet.length = (short)msg.ByteSize();
+		packet.type = (short)agent::CounterListResponse;
+		memset(packet.msg, 0, BUFSIZE);
+		msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+		Send((char *)&packet, packet.length + HEADER_SIZE);
+	}
+	else
+	{
+		ERROR_PRINT("[AgentSocket] SendCounterListResponse ERROR\n");
+	}
+}

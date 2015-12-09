@@ -10,10 +10,16 @@ public:
 
 	void Init();
 	int GetAgentID(int hostIP);
+	bool GetProcessList(int agentID, std::vector<std::string>& result);
+	bool GetCounterList(int agentID, std::vector<std::string>& result);
 
 private:
 	std::string redisIP;
 	const unsigned short port;
 	boost::asio::io_service ioService;
 	RedisSyncClient redis;
+
+
+	std::vector<std::string> defaultProcessList;
+	std::vector<std::string> defaultCounterList;
 };

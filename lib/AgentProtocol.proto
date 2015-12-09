@@ -8,14 +8,35 @@ enum agentType
 	ProcessListRequest = 2;
 	ProcessListResponse = 3;
 
-	ProcessStateSend = 4;
-	TotalProcessesStateSend = 5;
-	HealthCheck = 6;
-	HealthAck = 7;
-	ProcessCommandRequest = 8;
-	ProcessCommandResponse = 9;
-	ProcessRestrictionRequest = 16;
-	ProcessRestrictionResponse = 17;
+	CounterListRequest = 4;
+	CounterListResponse = 5;
+
+	
+
+	ProcessStateSend = 6;
+	TotalProcessesStateSend = 7;
+	HealthCheck = 8;
+	HealthAck = 9;
+	ProcessCommandRequest = 10;
+	ProcessCommandResponse = 11;
+	CounterCommandRequest = 12;
+	CounterCommandResponse = 13;
+	ProcessRestrictionRequest = 14;
+	ProcessRestrictionResponse = 15;
+
+	ProcessStartRecord = 16;
+	ProcessStopRecord = 17;
+
+	ProcessInfoSend = 18;
+
+	MachineStartRecord = 19;
+	MachineStopRecord = 20;
+
+	MachineInfoSend = 21;
+
+	AgentReady = 22;
+
+
 }
 
 message csAgentIDRequest
@@ -32,10 +53,22 @@ message csProcessListRequest
 {
 }
 
-
 message scProcessListResponse
 {
 	repeated string processName = 1;
+}
+
+message csCounterListRequest
+{
+}
+
+message scCounterListResponse
+{
+	repeated string counterName = 1;
+}
+
+message csAgentReady
+{
 }
 
 message csProcessStateSend
@@ -58,26 +91,26 @@ message csHealthAck
 {
 }
 
-enum CommandType
+enum ProcessCommandType
 {
 	START = 0;
 	RESTART = 1;
 	STOP = 2;
 	ADDLIST = 3;
 	DELETELIST = 4;
+	ALLSTOP = 5;
 }
 
 message scProcessCommandRequest
 {
-	required CommandType type = 1;
-	required int32 processID = 2;
-	optional string processName = 3;
+	required ProcessCommandType type = 1;
+	required string processName = 2;
 }
 
 message csProcessCommandResponse
 {
-	required CommandType type = 1;
-	required int32 processID = 2;
+	required ProcessCommandType type = 1;
+	repeated int32 processID = 2;
 
 	enum Result
 	{
@@ -89,46 +122,93 @@ message csProcessCommandResponse
 	optional string failReason = 4;
 }
 
-enum MachineCounter
+enum CounterCommandType
 {
-	//Disk
-	DISK_TIME = 0;
-	DISK_QUEUE_LENGTH = 1;
-	FREE_SPACE_PERCENT = 2;
-	FREE_SPACE_BYTES = 3;
+	CADDLIST = 1;
+	CDELETELIST = 2;
+}
 
-	//Memory
-	AVAILABLE_KBYTES = 4;
-	PAGE_FAULT_SEC = 5;
-	POOL_NONPAGED_BYTES = 6;
+message scCounterCommandRequest
+{
+	required CounterCommandType type = 1;
+	required string CounterName = 2;
+}
 
-	//System
-	PROCESSOR_QUEUE_LENGTH = 7;
-	SYSTEM_CALLS_SEC = 8;
-	CONTEXT_SWITCHES_SEC = 9;
+message csCounterCommandResponse
+{
+	required CounterCommandType type = 1;
 
-	//NETWORK
-	CARD_BYTES_TOTAL_SEC = 10;
-	SERVER_BYTES_TOTAL_SEC = 11;
-	SERVER_SESSIONS = 12;
+	enum Result
+	{
+		SUCCESS = 0;
+		FAILURE = 1;
+	}
 
-	//Processor
-	TOTAL_CPU_TIME_M = 13;
-	KERNEL_TIME_M = 14;
-	USER_TIME_M = 15;
-	THREAD_COUNT_M = 16;
+	required Result result = 3;
+	optional string failReason = 4;
+}
+
+message scProcessStartRecord
+{
+	required int32 totalRecordTime = 1;
+	required int32 interval = 2;
+	required int32 responseTime = 3;
+	optional int64 delay = 4;
+}
+
+message scProcessStopRecord
+{
+
+}
+
+message Log
+{
+	required int64 timeStamp = 1;
+	required double value = 2;
+}
+
+message ProcessInfo
+{
+	required string processName = 1;
+	required int32 processID = 2;
+	repeated Log logs = 3;
+}
+
+message ProcessInfos
+{
+	required string counterName = 1;
+	repeated ProcessInfo msg = 2;
+}
+
+message csTotalProcessInfoSend
+{
+	repeated ProcessInfos info = 1;
 }
 
 
-enum ProcessCounter
+
+message scMachineStartRecord
 {
-	TOTAL_CPU_TIME = 0;
-	KERNEL_TIME = 1;
-	USER_TIME = 2;
-	IO_DATA_BYTES_SEC = 3;
-	THREAD_COUNT = 4;
-	WORKING_SET_PRIVATE = 5;
-	VIRTUAL_BYTES = 6;
+	required int32 totalRecordTime = 1;
+	required int32 interval = 2;
+	required int32 responseTime = 3;
+	optional int64 delay = 4;
+}
+
+message scMachineStopRecord
+{
+
+}
+
+message MachineInfos
+{
+	required string counterName = 1;
+	repeated Log logs = 2;
+}
+
+message csTotalMachineInfoSend
+{
+	repeated MachineInfos info = 1;
 }
 
 // @TODO : restriction protocol 

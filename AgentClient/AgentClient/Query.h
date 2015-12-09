@@ -11,7 +11,7 @@ private:
 
 public:
 	std::list<ProcessInfo_Agent> checkProcessList;
-	std::list<agent::ProcessCounter> counterList;
+	std::list<std::string> counterList;
 	std::vector<ProcessCounterEntry*> processLogList;
 
 	Query();
@@ -23,8 +23,8 @@ public:
 	bool IsCheckProcess(std::string processName);
 	void ClearLogList();
 
-	bool AddCounter(agent::ProcessCounter counter);
-	bool DeleteCounter(agent::ProcessCounter counter);
+	bool AddCounter(std::string counter);
+	bool DeleteCounter(std::string counter);
 
 	bool AddProcess(std::string processName);
 	bool DeleteProcess(std::string processName);

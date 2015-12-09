@@ -18,6 +18,8 @@ AgentClientSocket::AgentClientSocket()
 		ERROR_PRINT("[AgentClientSocket] Error loading mswsock functions: %d\n", WSAGetLastError());
 		return;
 	}
+
+	processQuery.Init();
 }
 
 BOOL AgentClientSocket::LoadMswsock(void){
@@ -215,8 +217,42 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 			{
 				PRINT("[AgentClientSocket] AgentID : %d\n", msg.agentid());
 				agentClientApp->agentID = msg.agentid();
+
+				SendProcessListRequest();
 			}
 			
+			break;
+		}
+		case agent::ProcessListResponse:
+		{
+			PRINT("[AgentClientSocket] ProcessListResponse received\n");
+			agent::scProcessListResponse msg;
+			if (msg.ParseFromArray(packet->msg, packet->length))
+			{
+				PRINT("[AgentClientSocket] ProcessList : %d\n", msg.processname_size());
+				for (int i = 0; i < msg.processname_size(); i++)
+				{
+					PRINT("%s\n", msg.processname(i).c_str());
+					processQuery.AddProcess(msg.processname(i));
+				}
+			}
+
+			SendCounterListRequest();
+			break;
+		}
+		case agent::CounterListResponse:
+		{
+			PRINT("[AgentClientSocket] CounterListResponse received\n");
+			agent::scCounterListResponse msg;
+			if (msg.ParseFromArray(packet->msg, packet->length))
+			{
+				PRINT("[AgentClientSocket] CounterList : %d\n", msg.countername_size());
+				for (int i = 0; i < msg.countername_size(); i++)
+				{
+					PRINT("%s\n", msg.countername(i).c_str());
+					processQuery.AddCounter(msg.countername(i));
+				}
+			}
 			break;
 		}
 		case agent::HealthCheck:
@@ -271,4 +307,30 @@ void AgentClientSocket::SendAgentIDRequest()
 		ERROR_PRINT("[AgentClientSocket] Can't Send AgentIDRequest packet\n");
 	}
 	
+}
+
+void AgentClientSocket::SendProcessListRequest()
+{
+	PRINT("[AgentSocket] SendProcessListRequest\n");
+	CPacket packet;
+	agent::csProcessListRequest msg;
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::ProcessListRequest;
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+void AgentClientSocket::SendCounterListRequest()
+{
+	PRINT("[AgentSocket] SendProcessListRequest\n");
+	CPacket packet;
+	agent::csCounterListRequest msg;
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::CounterListRequest;
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
 }
