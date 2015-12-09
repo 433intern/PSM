@@ -9,7 +9,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		return 0;
 	}
 
-	Query q;
+	/*Query q;
 	q.Init();
 
 	ProcessInfo_Agent p;
@@ -23,7 +23,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	q.counterList.push_back(agent::ProcessCounter::WORKING_SET_PRIVATE);
 	q.counterList.push_back(agent::ProcessCounter::TOTAL_CPU_TIME);
-	q.Record(50, 1);
+	q.Record(50, 1);*/
 
 	agentClientApp = new AgentClientApp(inet_addr(argv[1]), atoi(argv[2]));
 	agentClientApp->Init();

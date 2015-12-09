@@ -17,6 +17,9 @@
     <Filter Include="iocp">
       <UniqueIdentifier>{499bb9ad-aaca-41b9-8363-d798b43ac0bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="redis">
+      <UniqueIdentifier>{ff30cb24-871d-4919-a912-50b14610887b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -80,8 +83,38 @@
     <ClInclude Include="..\..\lib\AgentProtocol.pb.h">
       <Filter>Agent\헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\redisLib\lib\redisvalue.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\redisLib\lib\version.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\redisLib\lib\config.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\redisLib\lib\redisasyncclient.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\redisLib\lib\redisbuffer.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\redisLib\lib\redisclient.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\redisLib\lib\redisclientimpl.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\redisLib\lib\redisparser.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\redisLib\lib\redissyncclient.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="RedisManager.h">
+      <Filter>Agent\헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="AgentApp.h">
-      <Filter>Agent</Filter>
+      <Filter>Agent\헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -123,7 +156,25 @@
       <Filter>iocp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lib\AgentProtocol.pb.cc">
-      <Filter>Agent</Filter>
+      <Filter>Agent\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\redisLib\lib\redisvalue.cpp">
+      <Filter>redis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\redisLib\lib\redisasyncclient.cpp">
+      <Filter>redis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\redisLib\lib\redisclientimpl.cpp">
+      <Filter>redis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\redisLib\lib\redisparser.cpp">
+      <Filter>redis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\redisLib\lib\redissyncclient.cpp">
+      <Filter>redis</Filter>
+    </ClCompile>
+    <ClCompile Include="RedisManager.cpp">
+      <Filter>Agent\소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

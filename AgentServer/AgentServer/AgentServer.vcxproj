@@ -39,18 +39,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Yumas\433\ProcessManager\git\lib\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Yumas\433\ProcessManager\git\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Yumas\433\ProcessManager\git\PSM\lib\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Yumas\433\ProcessManager\git\PSM\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\Yumas\433\ProcessManager\redis\boost_1_59_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Yumas\433\ProcessManager\redis\boost_1_59_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,10 +86,20 @@
     <ClInclude Include="..\..\iocpLib\TcpSocket.h" />
     <ClInclude Include="..\..\iocpLib\WinSockBase.h" />
     <ClInclude Include="..\..\lib\AgentProtocol.pb.h" />
+    <ClInclude Include="..\..\redisLib\lib\config.h" />
+    <ClInclude Include="..\..\redisLib\lib\redisasyncclient.h" />
+    <ClInclude Include="..\..\redisLib\lib\redisbuffer.h" />
+    <ClInclude Include="..\..\redisLib\lib\redisclient.h" />
+    <ClInclude Include="..\..\redisLib\lib\redisclientimpl.h" />
+    <ClInclude Include="..\..\redisLib\lib\redisparser.h" />
+    <ClInclude Include="..\..\redisLib\lib\redissyncclient.h" />
+    <ClInclude Include="..\..\redisLib\lib\redisvalue.h" />
+    <ClInclude Include="..\..\redisLib\lib\version.h" />
     <ClInclude Include="AgentApp.h" />
     <ClInclude Include="AgentSocket.h" />
     <ClInclude Include="CPacket.h" />
     <ClInclude Include="LogicHandle.h" />
+    <ClInclude Include="RedisManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TcpAgentServer.h" />
   </ItemGroup>
@@ -101,10 +113,16 @@
     <ClCompile Include="..\..\iocpLib\TcpListenSocket.cpp" />
     <ClCompile Include="..\..\iocpLib\TcpSocket.cpp" />
     <ClCompile Include="..\..\lib\AgentProtocol.pb.cc" />
+    <ClCompile Include="..\..\redisLib\lib\redisasyncclient.cpp" />
+    <ClCompile Include="..\..\redisLib\lib\redisclientimpl.cpp" />
+    <ClCompile Include="..\..\redisLib\lib\redisparser.cpp" />
+    <ClCompile Include="..\..\redisLib\lib\redissyncclient.cpp" />
+    <ClCompile Include="..\..\redisLib\lib\redisvalue.cpp" />
     <ClCompile Include="AgentApp.cpp" />
     <ClCompile Include="AgentSocket.cpp" />
     <ClCompile Include="LogicHandle.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RedisManager.cpp" />
     <ClCompile Include="TcpAgentServer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

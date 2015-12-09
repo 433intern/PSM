@@ -21,6 +21,7 @@ public:
 
 public:
 	void SendHealthAck();
+	void SendAgentIDRequest();
 
 private:
 	struct mswsock_s

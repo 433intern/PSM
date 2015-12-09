@@ -5,6 +5,7 @@ class AgentApp
 public:
 	WORD listenPort;
 
+	RedisManager redisManager;
 	LogicHandle logicHandle;
 	TcpAgentServer* agentServer;
 

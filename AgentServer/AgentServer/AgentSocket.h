@@ -3,7 +3,7 @@
 class AgentSocket : public TcpSocket
 {
 public:
-	AgentSocket(int agentID);
+	AgentSocket();
 	~AgentSocket();
 
 public:
@@ -22,6 +22,9 @@ public:
 
 public:
 	void SendHealthCheck();
+	void SendAgentIDResponse(int agentID);
+
+	int FindAgentID(int hostip);
 
 
 private:

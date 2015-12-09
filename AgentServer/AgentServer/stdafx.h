@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <wchar.h>
 #include <cstdio>
 #include <tchar.h>
@@ -14,9 +15,11 @@
 #include <queue>
 #include <stdio.h>
 
+
 #include "../../iocpLib/iocpHeaders.h"
 
 class AgentApp;
+class RedisManager;
 struct CPacket;
 class AgentSocket;
 class TcpAgentServer;
@@ -26,6 +29,7 @@ class LogicHandle;
 #define ERROR_PRINT printf
 #define PRINT printf
 
+#include "RedisManager.h"
 #include "LogicHandle.h"
 #include "AgentApp.h"
 

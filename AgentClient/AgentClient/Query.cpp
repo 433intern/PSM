@@ -9,7 +9,8 @@ Query::Query()
 
 Query::~Query()
 {
-
+	for (ProcessCounterEntry* p : processLogList) entryPoolManager->Free(p);
+	delete entryPoolManager;
 }
 
 void Query::Init()
@@ -33,14 +34,53 @@ void Query::Init()
 	helper.Init();
 }
 
-void Query::AddCounter(agent::ProcessCounter counter)
+bool Query::AddCounter(agent::ProcessCounter counter)
 {
+	for (agent::ProcessCounter pc : counterList)
+	{
+		if (pc == counter) return false;
+	}
 	counterList.push_back(counter);
+	return true;
 }
 
-void Query::DeleteCounter(agent::ProcessCounter counter)
+bool Query::DeleteCounter(agent::ProcessCounter counter)
 {
 	counterList.remove(counter);
+	return true;
+}
+
+
+bool Query::AddProcess(std::string processName)
+{
+	for (ProcessInfo_Agent checkProcess : checkProcessList)
+	{
+		if (processName == checkProcess.name)
+		{
+			return false;
+		}
+	}
+
+	ProcessInfo_Agent p;
+	p.name = processName;
+	p.isOn = false;
+	checkProcessList.push_back(p);
+
+	return true;
+}
+
+bool Query::DeleteProcess(std::string processName)
+{
+	std::list<ProcessInfo_Agent>::iterator iter;
+	for (iter = checkProcessList.begin(); iter != checkProcessList.end(); iter++)
+	{
+		if (processName == (*iter).name)
+		{
+			checkProcessList.erase(iter);
+			return true;
+		}
+	}
+	return false;
 }
 
 bool Query::IsCheckProcess(std::string processName)

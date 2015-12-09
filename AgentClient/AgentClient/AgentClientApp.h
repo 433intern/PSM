@@ -3,6 +3,8 @@
 class AgentClientApp
 {
 public:
+	int agentID;
+
 	unsigned int ip;
 	WORD connectPort;
 

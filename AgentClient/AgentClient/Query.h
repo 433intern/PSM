@@ -23,8 +23,12 @@ public:
 	bool IsCheckProcess(std::string processName);
 	void ClearLogList();
 
-	void AddCounter(agent::ProcessCounter counter);
-	void DeleteCounter(agent::ProcessCounter counter);
+	bool AddCounter(agent::ProcessCounter counter);
+	bool DeleteCounter(agent::ProcessCounter counter);
+
+	bool AddProcess(std::string processName);
+	bool DeleteProcess(std::string processName);
+
 
 	char* GetCurTime();
 };

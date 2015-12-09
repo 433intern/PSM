@@ -2,7 +2,7 @@
 
 
 AgentClientApp::AgentClientApp(unsigned int ip, WORD connectPort)
-:isEnd(false), connectPort(connectPort), ip(ip)
+:isEnd(false), connectPort(connectPort), ip(ip), agentID(-1)
 {
 }
 

@@ -7,20 +7,15 @@ enum agentType
 	AgentIDResponse = 1;
 	ProcessListRequest = 2;
 	ProcessListResponse = 3;
+
 	ProcessStateSend = 4;
 	TotalProcessesStateSend = 5;
 	HealthCheck = 6;
 	HealthAck = 7;
 	ProcessCommandRequest = 8;
 	ProcessCommandResponse = 9;
-	MachineInfoRequest = 10;
-	MachineInfoRequest_ALL = 11;
-	ProcessInfoRequest = 12;
-	ProcessInfoRequest_ALL = 13;
-	ProcessInfoResponse = 14;
-	ProcessInfoResponse_ALL = 15;
 	ProcessRestrictionRequest = 16;
-	PRocessRestrictionResponse = 17;
+	ProcessRestrictionResponse = 17;
 }
 
 message csAgentIDRequest
@@ -124,26 +119,6 @@ enum MachineCounter
 	THREAD_COUNT_M = 16;
 }
 
-message scMachineInfoRequest
-{
-	required MachineCounter type = 1;
-}
-
-message scMachineInfoRequest_ALL
-{
-	repeated scMachineInfoRequest type = 1;
-}
-
-message csMachineInfoResponse
-{
-	required MachineCounter type = 1;
-	repeated double result = 2;
-}
-
-message csMachineInfoResponse_ALL
-{
-	repeated csMachineInfoResponse result = 1;
-}
 
 enum ProcessCounter
 {
@@ -154,28 +129,6 @@ enum ProcessCounter
 	THREAD_COUNT = 4;
 	WORKING_SET_PRIVATE = 5;
 	VIRTUAL_BYTES = 6;
-}
-
-message scProcessInfoRequest
-{
-	required int32 processID = 1;
-}
-
-message scProcessInfoRequest_ALL
-{
-	repeated scProcessInfoRequest req = 1;
-}
-
-message csProcessInfoResponse
-{
-	required int32 processID = 1;
-	repeated ProcessCounter type = 2;
-	repeated double result = 3;
-}
-
-message csProcessInfoResponse_ALL
-{
-	repeated csProcessInfoResponse result = 1;
 }
 
 // @TODO : restriction protocol 
@@ -195,7 +148,7 @@ message scProcessRestrictionRequest
 	optional int32 value2 = 4; // if LARGE_INTEGER
 }
 
-message csPRocessRestrictionResponse
+message csProcessRestrictionResponse
 {
 	required int32 processID = 1;
 	required Restriction type = 2;

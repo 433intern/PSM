@@ -54,7 +54,7 @@ void TcpAgentServer::Start()
 	// Create Socket pool 
 	for (int i = 0; i < socketPoolSize_; i++)
 	{
-		AgentSocket* socket = new AgentSocket(i);
+		AgentSocket* socket = new AgentSocket();
 		socket->Init();
 		socket->InitAct(proactor_, acceptor_, disconnector_, NULL, sender_, receiver_);
 

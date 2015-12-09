@@ -2,7 +2,7 @@
 
 
 AgentApp::AgentApp(WORD port)
-:isEnd(false), heartbeatTime(10), listenPort(port)
+:isEnd(false), heartbeatTime(10), listenPort(port), redisManager("127.0.0.1", 6379)
 {
 }
 
@@ -17,11 +17,16 @@ void AgentApp::Init()
 	GetSystemInfo(&si);
 	int nCPUs = (int)si.dwNumberOfProcessors;
 
+	redisManager.Init();
 	agentServer = new TcpAgentServer(listenPort, nCPUs * 2, 100);
 }
 
 void AgentApp::Start()
 {
+
+	redisManager.GetAgentID(123123);
+
+
 	std::thread logicThread(&LogicHandle::Process, &logicHandle);
 	agentServer->Start();
 

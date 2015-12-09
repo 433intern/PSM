@@ -2,8 +2,8 @@
 
 extern AgentApp* agentApp;
 
-AgentSocket::AgentSocket(int agentID)
-: agentID(agentID), position(0), remainBytes(HEADER_SIZE), healthCheck(true)
+AgentSocket::AgentSocket()
+: agentID(-1), position(0), remainBytes(HEADER_SIZE), healthCheck(true)
 {
 	packetPoolManager = new MemPooler<CPacket>(10);
 	if (!packetPoolManager)
@@ -126,6 +126,10 @@ bool AgentSocket::ValidPacket(CPacket *packet)
 	return true;
 }
 
+int AgentSocket::FindAgentID(int hostip)
+{
+	return agentApp->redisManager.GetAgentID(hostip);
+}
 
 void AgentSocket::PacketHandling(CPacket *packet)
 {
@@ -137,6 +141,18 @@ void AgentSocket::PacketHandling(CPacket *packet)
 
 	switch (packet->type)
 	{
+		case agent::AgentIDRequest:
+		{
+			PRINT("[AgentSocket] AgentIDRequest received\n");
+			agent::csAgentIDRequest msg;
+			if (msg.ParseFromArray(packet->msg, packet->length))
+			{
+				PRINT("[AgentSocket] hostID : %d\n", msg.hostip());
+				this->agentID = FindAgentID(msg.hostip());
+				SendAgentIDResponse(agentID);
+			}
+			break;
+		}
 		case agent::HealthAck:
 #ifdef HEARTBEAT
 			PRINT("[AgentSocket] HealthAck received\n");
@@ -161,3 +177,20 @@ void AgentSocket::SendHealthCheck()
 
 	Send((char *)&packet, packet.length + HEADER_SIZE);
 }
+
+void AgentSocket::SendAgentIDResponse(int agentID)
+{
+	PRINT("[AgentSocket] SendAgentIDResponse\n");
+	CPacket packet;
+	agent::scAgentIDResponse msg;
+
+	msg.set_agentid(agentID);
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::AgentIDResponse;
+	memset(packet.msg, 0, BUFSIZE);
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+

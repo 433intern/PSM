@@ -51,37 +51,13 @@ const ::google::protobuf::Descriptor* csProcessCommandResponse_descriptor_ = NUL
 const ::google::protobuf::internal::GeneratedMessageReflection*
   csProcessCommandResponse_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* csProcessCommandResponse_Result_descriptor_ = NULL;
-const ::google::protobuf::Descriptor* scMachineInfoRequest_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  scMachineInfoRequest_reflection_ = NULL;
-const ::google::protobuf::Descriptor* scMachineInfoRequest_ALL_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  scMachineInfoRequest_ALL_reflection_ = NULL;
-const ::google::protobuf::Descriptor* csMachineInfoResponse_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  csMachineInfoResponse_reflection_ = NULL;
-const ::google::protobuf::Descriptor* csMachineInfoResponse_ALL_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  csMachineInfoResponse_ALL_reflection_ = NULL;
-const ::google::protobuf::Descriptor* scProcessInfoRequest_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  scProcessInfoRequest_reflection_ = NULL;
-const ::google::protobuf::Descriptor* scProcessInfoRequest_ALL_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  scProcessInfoRequest_ALL_reflection_ = NULL;
-const ::google::protobuf::Descriptor* csProcessInfoResponse_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  csProcessInfoResponse_reflection_ = NULL;
-const ::google::protobuf::Descriptor* csProcessInfoResponse_ALL_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  csProcessInfoResponse_ALL_reflection_ = NULL;
 const ::google::protobuf::Descriptor* scProcessRestrictionRequest_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   scProcessRestrictionRequest_reflection_ = NULL;
-const ::google::protobuf::Descriptor* csPRocessRestrictionResponse_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* csProcessRestrictionResponse_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  csPRocessRestrictionResponse_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* csPRocessRestrictionResponse_Result_descriptor_ = NULL;
+  csProcessRestrictionResponse_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* csProcessRestrictionResponse_Result_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* agentType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* CommandType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* MachineCounter_descriptor_ = NULL;
@@ -252,131 +228,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csProcessCommandResponse));
   csProcessCommandResponse_Result_descriptor_ = csProcessCommandResponse_descriptor_->enum_type(0);
-  scMachineInfoRequest_descriptor_ = file->message_type(10);
-  static const int scMachineInfoRequest_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineInfoRequest, type_),
-  };
-  scMachineInfoRequest_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      scMachineInfoRequest_descriptor_,
-      scMachineInfoRequest::default_instance_,
-      scMachineInfoRequest_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineInfoRequest, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineInfoRequest, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(scMachineInfoRequest));
-  scMachineInfoRequest_ALL_descriptor_ = file->message_type(11);
-  static const int scMachineInfoRequest_ALL_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineInfoRequest_ALL, type_),
-  };
-  scMachineInfoRequest_ALL_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      scMachineInfoRequest_ALL_descriptor_,
-      scMachineInfoRequest_ALL::default_instance_,
-      scMachineInfoRequest_ALL_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineInfoRequest_ALL, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineInfoRequest_ALL, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(scMachineInfoRequest_ALL));
-  csMachineInfoResponse_descriptor_ = file->message_type(12);
-  static const int csMachineInfoResponse_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csMachineInfoResponse, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csMachineInfoResponse, result_),
-  };
-  csMachineInfoResponse_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      csMachineInfoResponse_descriptor_,
-      csMachineInfoResponse::default_instance_,
-      csMachineInfoResponse_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csMachineInfoResponse, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csMachineInfoResponse, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(csMachineInfoResponse));
-  csMachineInfoResponse_ALL_descriptor_ = file->message_type(13);
-  static const int csMachineInfoResponse_ALL_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csMachineInfoResponse_ALL, result_),
-  };
-  csMachineInfoResponse_ALL_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      csMachineInfoResponse_ALL_descriptor_,
-      csMachineInfoResponse_ALL::default_instance_,
-      csMachineInfoResponse_ALL_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csMachineInfoResponse_ALL, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csMachineInfoResponse_ALL, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(csMachineInfoResponse_ALL));
-  scProcessInfoRequest_descriptor_ = file->message_type(14);
-  static const int scProcessInfoRequest_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessInfoRequest, processid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessInfoRequest, type_),
-  };
-  scProcessInfoRequest_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      scProcessInfoRequest_descriptor_,
-      scProcessInfoRequest::default_instance_,
-      scProcessInfoRequest_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessInfoRequest, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessInfoRequest, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(scProcessInfoRequest));
-  scProcessInfoRequest_ALL_descriptor_ = file->message_type(15);
-  static const int scProcessInfoRequest_ALL_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessInfoRequest_ALL, type_),
-  };
-  scProcessInfoRequest_ALL_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      scProcessInfoRequest_ALL_descriptor_,
-      scProcessInfoRequest_ALL::default_instance_,
-      scProcessInfoRequest_ALL_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessInfoRequest_ALL, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessInfoRequest_ALL, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(scProcessInfoRequest_ALL));
-  csProcessInfoResponse_descriptor_ = file->message_type(16);
-  static const int csProcessInfoResponse_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessInfoResponse, processid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessInfoResponse, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessInfoResponse, result_),
-  };
-  csProcessInfoResponse_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      csProcessInfoResponse_descriptor_,
-      csProcessInfoResponse::default_instance_,
-      csProcessInfoResponse_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessInfoResponse, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessInfoResponse, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(csProcessInfoResponse));
-  csProcessInfoResponse_ALL_descriptor_ = file->message_type(17);
-  static const int csProcessInfoResponse_ALL_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessInfoResponse_ALL, result_),
-  };
-  csProcessInfoResponse_ALL_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      csProcessInfoResponse_ALL_descriptor_,
-      csProcessInfoResponse_ALL::default_instance_,
-      csProcessInfoResponse_ALL_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessInfoResponse_ALL, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessInfoResponse_ALL, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(csProcessInfoResponse_ALL));
-  scProcessRestrictionRequest_descriptor_ = file->message_type(18);
+  scProcessRestrictionRequest_descriptor_ = file->message_type(10);
   static const int scProcessRestrictionRequest_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessRestrictionRequest, processid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessRestrictionRequest, type_),
@@ -394,25 +246,25 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(scProcessRestrictionRequest));
-  csPRocessRestrictionResponse_descriptor_ = file->message_type(19);
-  static const int csPRocessRestrictionResponse_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csPRocessRestrictionResponse, processid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csPRocessRestrictionResponse, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csPRocessRestrictionResponse, result_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csPRocessRestrictionResponse, failreason_),
+  csProcessRestrictionResponse_descriptor_ = file->message_type(11);
+  static const int csProcessRestrictionResponse_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, processid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, result_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, failreason_),
   };
-  csPRocessRestrictionResponse_reflection_ =
+  csProcessRestrictionResponse_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      csPRocessRestrictionResponse_descriptor_,
-      csPRocessRestrictionResponse::default_instance_,
-      csPRocessRestrictionResponse_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csPRocessRestrictionResponse, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csPRocessRestrictionResponse, _unknown_fields_),
+      csProcessRestrictionResponse_descriptor_,
+      csProcessRestrictionResponse::default_instance_,
+      csProcessRestrictionResponse_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(csPRocessRestrictionResponse));
-  csPRocessRestrictionResponse_Result_descriptor_ = csPRocessRestrictionResponse_descriptor_->enum_type(0);
+      sizeof(csProcessRestrictionResponse));
+  csProcessRestrictionResponse_Result_descriptor_ = csProcessRestrictionResponse_descriptor_->enum_type(0);
   agentType_descriptor_ = file->enum_type(0);
   CommandType_descriptor_ = file->enum_type(1);
   MachineCounter_descriptor_ = file->enum_type(2);
@@ -451,25 +303,9 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     csProcessCommandResponse_descriptor_, &csProcessCommandResponse::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    scMachineInfoRequest_descriptor_, &scMachineInfoRequest::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    scMachineInfoRequest_ALL_descriptor_, &scMachineInfoRequest_ALL::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    csMachineInfoResponse_descriptor_, &csMachineInfoResponse::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    csMachineInfoResponse_ALL_descriptor_, &csMachineInfoResponse_ALL::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    scProcessInfoRequest_descriptor_, &scProcessInfoRequest::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    scProcessInfoRequest_ALL_descriptor_, &scProcessInfoRequest_ALL::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    csProcessInfoResponse_descriptor_, &csProcessInfoResponse::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    csProcessInfoResponse_ALL_descriptor_, &csProcessInfoResponse_ALL::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     scProcessRestrictionRequest_descriptor_, &scProcessRestrictionRequest::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    csPRocessRestrictionResponse_descriptor_, &csPRocessRestrictionResponse::default_instance());
+    csProcessRestrictionResponse_descriptor_, &csProcessRestrictionResponse::default_instance());
 }
 
 }  // namespace
@@ -495,26 +331,10 @@ void protobuf_ShutdownFile_AgentProtocol_2eproto() {
   delete scProcessCommandRequest_reflection_;
   delete csProcessCommandResponse::default_instance_;
   delete csProcessCommandResponse_reflection_;
-  delete scMachineInfoRequest::default_instance_;
-  delete scMachineInfoRequest_reflection_;
-  delete scMachineInfoRequest_ALL::default_instance_;
-  delete scMachineInfoRequest_ALL_reflection_;
-  delete csMachineInfoResponse::default_instance_;
-  delete csMachineInfoResponse_reflection_;
-  delete csMachineInfoResponse_ALL::default_instance_;
-  delete csMachineInfoResponse_ALL_reflection_;
-  delete scProcessInfoRequest::default_instance_;
-  delete scProcessInfoRequest_reflection_;
-  delete scProcessInfoRequest_ALL::default_instance_;
-  delete scProcessInfoRequest_ALL_reflection_;
-  delete csProcessInfoResponse::default_instance_;
-  delete csProcessInfoResponse_reflection_;
-  delete csProcessInfoResponse_ALL::default_instance_;
-  delete csProcessInfoResponse_ALL_reflection_;
   delete scProcessRestrictionRequest::default_instance_;
   delete scProcessRestrictionRequest_reflection_;
-  delete csPRocessRestrictionResponse::default_instance_;
-  delete csPRocessRestrictionResponse_reflection_;
+  delete csProcessRestrictionResponse::default_instance_;
+  delete csProcessRestrictionResponse_reflection_;
 }
 
 void protobuf_AddDesc_AgentProtocol_2eproto() {
@@ -540,59 +360,40 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
     "\021\n\tprocessID\030\002 \002(\005\0226\n\006result\030\003 \002(\0162&.age"
     "nt.csProcessCommandResponse.Result\022\022\n\nfa"
     "ilReason\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n"
-    "\007FAILURE\020\001\";\n\024scMachineInfoRequest\022#\n\004ty"
-    "pe\030\001 \002(\0162\025.agent.MachineCounter\"E\n\030scMac"
-    "hineInfoRequest_ALL\022)\n\004type\030\001 \003(\0132\033.agen"
-    "t.scMachineInfoRequest\"L\n\025csMachineInfoR"
-    "esponse\022#\n\004type\030\001 \002(\0162\025.agent.MachineCou"
-    "nter\022\016\n\006result\030\002 \003(\001\"I\n\031csMachineInfoRes"
-    "ponse_ALL\022,\n\006result\030\001 \003(\0132\034.agent.csMach"
-    "ineInfoResponse\"N\n\024scProcessInfoRequest\022"
-    "\021\n\tprocessID\030\001 \002(\005\022#\n\004type\030\002 \002(\0162\025.agent"
-    ".MachineCounter\"E\n\030scProcessInfoRequest_"
-    "ALL\022)\n\004type\030\001 \003(\0132\033.agent.scProcessInfoR"
-    "equest\"_\n\025csProcessInfoResponse\022\021\n\tproce"
-    "ssID\030\001 \002(\005\022#\n\004type\030\002 \002(\0162\025.agent.Machine"
-    "Counter\022\016\n\006result\030\003 \003(\001\"I\n\031csProcessInfo"
-    "Response_ALL\022,\n\006result\030\001 \003(\0132\034.agent.csP"
-    "rocessInfoResponse\"r\n\033scProcessRestricti"
-    "onRequest\022\021\n\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002"
-    "(\0162\022.agent.Restriction\022\016\n\006value1\030\003 \002(\005\022\016"
-    "\n\006value2\030\004 \001(\005\"\307\001\n\034csPRocessRestrictionR"
-    "esponse\022\021\n\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\016"
-    "2\022.agent.Restriction\022:\n\006result\030\003 \002(\0162*.a"
-    "gent.csPRocessRestrictionResponse.Result"
-    "\022\022\n\nfailReason\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCES"
-    "S\020\000\022\013\n\007FAILURE\020\001*\314\003\n\tagentType\022\022\n\016AgentI"
-    "DRequest\020\000\022\023\n\017AgentIDResponse\020\001\022\026\n\022Proce"
-    "ssListRequest\020\002\022\027\n\023ProcessListResponse\020\003"
-    "\022\024\n\020ProcessStateSend\020\004\022\033\n\027TotalProcesses"
-    "StateSend\020\005\022\017\n\013HealthCheck\020\006\022\r\n\tHealthAc"
-    "k\020\007\022\031\n\025ProcessCommandRequest\020\010\022\032\n\026Proces"
-    "sCommandResponse\020\t\022\026\n\022MachineInfoRequest"
-    "\020\n\022\032\n\026MachineInfoRequest_ALL\020\013\022\026\n\022Proces"
-    "sInfoRequest\020\014\022\032\n\026ProcessInfoRequest_ALL"
-    "\020\r\022\027\n\023ProcessInfoResponse\020\016\022\033\n\027ProcessIn"
-    "foResponse_ALL\020\017\022\035\n\031ProcessRestrictionRe"
-    "quest\020\020\022\036\n\032PRocessRestrictionResponse\020\021*"
-    "L\n\013CommandType\022\t\n\005START\020\000\022\013\n\007RESTART\020\001\022\010"
-    "\n\004STOP\020\002\022\013\n\007ADDLIST\020\003\022\016\n\nDELETELIST\020\004*\214\003"
-    "\n\016MachineCounter\022\r\n\tDISK_TIME\020\000\022\025\n\021DISK_"
-    "QUEUE_LENGTH\020\001\022\026\n\022FREE_SPACE_PERCENT\020\002\022\024"
-    "\n\020FREE_SPACE_BYTES\020\003\022\024\n\020AVAILABLE_KBYTES"
-    "\020\004\022\022\n\016PAGE_FAULT_SEC\020\005\022\027\n\023POOL_NONPAGED_"
-    "BYTES\020\006\022\032\n\026PROCESSOR_QUEUE_LENGTH\020\007\022\024\n\020S"
-    "YSTEM_CALLS_SEC\020\010\022\030\n\024CONTEXT_SWITCHES_SE"
-    "C\020\t\022\030\n\024CARD_BYTES_TOTAL_SEC\020\n\022\032\n\026SERVER_"
-    "BYTES_TOTAL_SEC\020\013\022\023\n\017SERVER_SESSIONS\020\014\022\024"
-    "\n\020TOTAL_CPU_TIME_M\020\r\022\021\n\rKERNEL_TIME_M\020\016\022"
-    "\017\n\013USER_TIME_M\020\017\022\022\n\016THREAD_COUNT_M\020\020*\231\001\n"
-    "\016ProcessCounter\022\022\n\016TOTAL_CPU_TIME\020\000\022\017\n\013K"
-    "ERNEL_TIME\020\001\022\r\n\tUSER_TIME\020\002\022\025\n\021IO_DATA_B"
-    "YTES_SEC\020\003\022\020\n\014THREAD_COUNT\020\004\022\027\n\023WORKING_"
-    "SET_PRIVATE\020\005\022\021\n\rVIRTUAL_BYTES\020\006*V\n\013Rest"
-    "riction\022\023\n\017USER_TIME_LIMIT\020\000\022\030\n\024MAX_WORK"
-    "ING_SET_SIZE\020\001\022\030\n\024MIN_WORKING_SET_SIZE\020\002", 2760);
+    "\007FAILURE\020\001\"r\n\033scProcessRestrictionReques"
+    "t\022\021\n\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.age"
+    "nt.Restriction\022\016\n\006value1\030\003 \002(\005\022\016\n\006value2"
+    "\030\004 \001(\005\"\307\001\n\034csProcessRestrictionResponse\022"
+    "\021\n\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.agent"
+    ".Restriction\022:\n\006result\030\003 \002(\0162*.agent.csP"
+    "rocessRestrictionResponse.Result\022\022\n\nfail"
+    "Reason\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007F"
+    "AILURE\020\001*\256\002\n\tagentType\022\022\n\016AgentIDRequest"
+    "\020\000\022\023\n\017AgentIDResponse\020\001\022\026\n\022ProcessListRe"
+    "quest\020\002\022\027\n\023ProcessListResponse\020\003\022\024\n\020Proc"
+    "essStateSend\020\004\022\033\n\027TotalProcessesStateSen"
+    "d\020\005\022\017\n\013HealthCheck\020\006\022\r\n\tHealthAck\020\007\022\031\n\025P"
+    "rocessCommandRequest\020\010\022\032\n\026ProcessCommand"
+    "Response\020\t\022\035\n\031ProcessRestrictionRequest\020"
+    "\020\022\036\n\032ProcessRestrictionResponse\020\021*L\n\013Com"
+    "mandType\022\t\n\005START\020\000\022\013\n\007RESTART\020\001\022\010\n\004STOP"
+    "\020\002\022\013\n\007ADDLIST\020\003\022\016\n\nDELETELIST\020\004*\214\003\n\016Mach"
+    "ineCounter\022\r\n\tDISK_TIME\020\000\022\025\n\021DISK_QUEUE_"
+    "LENGTH\020\001\022\026\n\022FREE_SPACE_PERCENT\020\002\022\024\n\020FREE"
+    "_SPACE_BYTES\020\003\022\024\n\020AVAILABLE_KBYTES\020\004\022\022\n\016"
+    "PAGE_FAULT_SEC\020\005\022\027\n\023POOL_NONPAGED_BYTES\020"
+    "\006\022\032\n\026PROCESSOR_QUEUE_LENGTH\020\007\022\024\n\020SYSTEM_"
+    "CALLS_SEC\020\010\022\030\n\024CONTEXT_SWITCHES_SEC\020\t\022\030\n"
+    "\024CARD_BYTES_TOTAL_SEC\020\n\022\032\n\026SERVER_BYTES_"
+    "TOTAL_SEC\020\013\022\023\n\017SERVER_SESSIONS\020\014\022\024\n\020TOTA"
+    "L_CPU_TIME_M\020\r\022\021\n\rKERNEL_TIME_M\020\016\022\017\n\013USE"
+    "R_TIME_M\020\017\022\022\n\016THREAD_COUNT_M\020\020*\231\001\n\016Proce"
+    "ssCounter\022\022\n\016TOTAL_CPU_TIME\020\000\022\017\n\013KERNEL_"
+    "TIME\020\001\022\r\n\tUSER_TIME\020\002\022\025\n\021IO_DATA_BYTES_S"
+    "EC\020\003\022\020\n\014THREAD_COUNT\020\004\022\027\n\023WORKING_SET_PR"
+    "IVATE\020\005\022\021\n\rVIRTUAL_BYTES\020\006*V\n\013Restrictio"
+    "n\022\023\n\017USER_TIME_LIMIT\020\000\022\030\n\024MAX_WORKING_SE"
+    "T_SIZE\020\001\022\030\n\024MIN_WORKING_SET_SIZE\020\002", 1994);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "AgentProtocol.proto", &protobuf_RegisterTypes);
   csAgentIDRequest::default_instance_ = new csAgentIDRequest();
@@ -605,16 +406,8 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
   csHealthAck::default_instance_ = new csHealthAck();
   scProcessCommandRequest::default_instance_ = new scProcessCommandRequest();
   csProcessCommandResponse::default_instance_ = new csProcessCommandResponse();
-  scMachineInfoRequest::default_instance_ = new scMachineInfoRequest();
-  scMachineInfoRequest_ALL::default_instance_ = new scMachineInfoRequest_ALL();
-  csMachineInfoResponse::default_instance_ = new csMachineInfoResponse();
-  csMachineInfoResponse_ALL::default_instance_ = new csMachineInfoResponse_ALL();
-  scProcessInfoRequest::default_instance_ = new scProcessInfoRequest();
-  scProcessInfoRequest_ALL::default_instance_ = new scProcessInfoRequest_ALL();
-  csProcessInfoResponse::default_instance_ = new csProcessInfoResponse();
-  csProcessInfoResponse_ALL::default_instance_ = new csProcessInfoResponse_ALL();
   scProcessRestrictionRequest::default_instance_ = new scProcessRestrictionRequest();
-  csPRocessRestrictionResponse::default_instance_ = new csPRocessRestrictionResponse();
+  csProcessRestrictionResponse::default_instance_ = new csProcessRestrictionResponse();
   csAgentIDRequest::default_instance_->InitAsDefaultInstance();
   scAgentIDResponse::default_instance_->InitAsDefaultInstance();
   csProcessListRequest::default_instance_->InitAsDefaultInstance();
@@ -625,16 +418,8 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
   csHealthAck::default_instance_->InitAsDefaultInstance();
   scProcessCommandRequest::default_instance_->InitAsDefaultInstance();
   csProcessCommandResponse::default_instance_->InitAsDefaultInstance();
-  scMachineInfoRequest::default_instance_->InitAsDefaultInstance();
-  scMachineInfoRequest_ALL::default_instance_->InitAsDefaultInstance();
-  csMachineInfoResponse::default_instance_->InitAsDefaultInstance();
-  csMachineInfoResponse_ALL::default_instance_->InitAsDefaultInstance();
-  scProcessInfoRequest::default_instance_->InitAsDefaultInstance();
-  scProcessInfoRequest_ALL::default_instance_->InitAsDefaultInstance();
-  csProcessInfoResponse::default_instance_->InitAsDefaultInstance();
-  csProcessInfoResponse_ALL::default_instance_->InitAsDefaultInstance();
   scProcessRestrictionRequest::default_instance_->InitAsDefaultInstance();
-  csPRocessRestrictionResponse::default_instance_->InitAsDefaultInstance();
+  csProcessRestrictionResponse::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_AgentProtocol_2eproto);
 }
 
@@ -660,12 +445,6 @@ bool agentType_IsValid(int value) {
     case 7:
     case 8:
     case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
     case 16:
     case 17:
       return true;
@@ -3264,1990 +3043,6 @@ void csProcessCommandResponse::Swap(csProcessCommandResponse* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int scMachineInfoRequest::kTypeFieldNumber;
-#endif  // !_MSC_VER
-
-scMachineInfoRequest::scMachineInfoRequest()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.scMachineInfoRequest)
-}
-
-void scMachineInfoRequest::InitAsDefaultInstance() {
-}
-
-scMachineInfoRequest::scMachineInfoRequest(const scMachineInfoRequest& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.scMachineInfoRequest)
-}
-
-void scMachineInfoRequest::SharedCtor() {
-  _cached_size_ = 0;
-  type_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-scMachineInfoRequest::~scMachineInfoRequest() {
-  // @@protoc_insertion_point(destructor:agent.scMachineInfoRequest)
-  SharedDtor();
-}
-
-void scMachineInfoRequest::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void scMachineInfoRequest::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* scMachineInfoRequest::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return scMachineInfoRequest_descriptor_;
-}
-
-const scMachineInfoRequest& scMachineInfoRequest::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-scMachineInfoRequest* scMachineInfoRequest::default_instance_ = NULL;
-
-scMachineInfoRequest* scMachineInfoRequest::New() const {
-  return new scMachineInfoRequest;
-}
-
-void scMachineInfoRequest::Clear() {
-  type_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool scMachineInfoRequest::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.scMachineInfoRequest)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .agent.MachineCounter type = 1;
-      case 1: {
-        if (tag == 8) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::agent::MachineCounter_IsValid(value)) {
-            set_type(static_cast< ::agent::MachineCounter >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.scMachineInfoRequest)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.scMachineInfoRequest)
-  return false;
-#undef DO_
-}
-
-void scMachineInfoRequest::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.scMachineInfoRequest)
-  // required .agent.MachineCounter type = 1;
-  if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->type(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.scMachineInfoRequest)
-}
-
-::google::protobuf::uint8* scMachineInfoRequest::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.scMachineInfoRequest)
-  // required .agent.MachineCounter type = 1;
-  if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->type(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.scMachineInfoRequest)
-  return target;
-}
-
-int scMachineInfoRequest::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .agent.MachineCounter type = 1;
-    if (has_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void scMachineInfoRequest::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const scMachineInfoRequest* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const scMachineInfoRequest*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void scMachineInfoRequest::MergeFrom(const scMachineInfoRequest& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_type()) {
-      set_type(from.type());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void scMachineInfoRequest::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void scMachineInfoRequest::CopyFrom(const scMachineInfoRequest& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool scMachineInfoRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
-
-  return true;
-}
-
-void scMachineInfoRequest::Swap(scMachineInfoRequest* other) {
-  if (other != this) {
-    std::swap(type_, other->type_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata scMachineInfoRequest::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = scMachineInfoRequest_descriptor_;
-  metadata.reflection = scMachineInfoRequest_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int scMachineInfoRequest_ALL::kTypeFieldNumber;
-#endif  // !_MSC_VER
-
-scMachineInfoRequest_ALL::scMachineInfoRequest_ALL()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.scMachineInfoRequest_ALL)
-}
-
-void scMachineInfoRequest_ALL::InitAsDefaultInstance() {
-}
-
-scMachineInfoRequest_ALL::scMachineInfoRequest_ALL(const scMachineInfoRequest_ALL& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.scMachineInfoRequest_ALL)
-}
-
-void scMachineInfoRequest_ALL::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-scMachineInfoRequest_ALL::~scMachineInfoRequest_ALL() {
-  // @@protoc_insertion_point(destructor:agent.scMachineInfoRequest_ALL)
-  SharedDtor();
-}
-
-void scMachineInfoRequest_ALL::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void scMachineInfoRequest_ALL::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* scMachineInfoRequest_ALL::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return scMachineInfoRequest_ALL_descriptor_;
-}
-
-const scMachineInfoRequest_ALL& scMachineInfoRequest_ALL::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-scMachineInfoRequest_ALL* scMachineInfoRequest_ALL::default_instance_ = NULL;
-
-scMachineInfoRequest_ALL* scMachineInfoRequest_ALL::New() const {
-  return new scMachineInfoRequest_ALL;
-}
-
-void scMachineInfoRequest_ALL::Clear() {
-  type_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool scMachineInfoRequest_ALL::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.scMachineInfoRequest_ALL)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .agent.scMachineInfoRequest type = 1;
-      case 1: {
-        if (tag == 10) {
-         parse_type:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_type()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(10)) goto parse_type;
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.scMachineInfoRequest_ALL)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.scMachineInfoRequest_ALL)
-  return false;
-#undef DO_
-}
-
-void scMachineInfoRequest_ALL::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.scMachineInfoRequest_ALL)
-  // repeated .agent.scMachineInfoRequest type = 1;
-  for (int i = 0; i < this->type_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->type(i), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.scMachineInfoRequest_ALL)
-}
-
-::google::protobuf::uint8* scMachineInfoRequest_ALL::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.scMachineInfoRequest_ALL)
-  // repeated .agent.scMachineInfoRequest type = 1;
-  for (int i = 0; i < this->type_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        1, this->type(i), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.scMachineInfoRequest_ALL)
-  return target;
-}
-
-int scMachineInfoRequest_ALL::ByteSize() const {
-  int total_size = 0;
-
-  // repeated .agent.scMachineInfoRequest type = 1;
-  total_size += 1 * this->type_size();
-  for (int i = 0; i < this->type_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->type(i));
-  }
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void scMachineInfoRequest_ALL::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const scMachineInfoRequest_ALL* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const scMachineInfoRequest_ALL*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void scMachineInfoRequest_ALL::MergeFrom(const scMachineInfoRequest_ALL& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  type_.MergeFrom(from.type_);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void scMachineInfoRequest_ALL::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void scMachineInfoRequest_ALL::CopyFrom(const scMachineInfoRequest_ALL& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool scMachineInfoRequest_ALL::IsInitialized() const {
-
-  if (!::google::protobuf::internal::AllAreInitialized(this->type())) return false;
-  return true;
-}
-
-void scMachineInfoRequest_ALL::Swap(scMachineInfoRequest_ALL* other) {
-  if (other != this) {
-    type_.Swap(&other->type_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata scMachineInfoRequest_ALL::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = scMachineInfoRequest_ALL_descriptor_;
-  metadata.reflection = scMachineInfoRequest_ALL_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int csMachineInfoResponse::kTypeFieldNumber;
-const int csMachineInfoResponse::kResultFieldNumber;
-#endif  // !_MSC_VER
-
-csMachineInfoResponse::csMachineInfoResponse()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.csMachineInfoResponse)
-}
-
-void csMachineInfoResponse::InitAsDefaultInstance() {
-}
-
-csMachineInfoResponse::csMachineInfoResponse(const csMachineInfoResponse& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.csMachineInfoResponse)
-}
-
-void csMachineInfoResponse::SharedCtor() {
-  _cached_size_ = 0;
-  type_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-csMachineInfoResponse::~csMachineInfoResponse() {
-  // @@protoc_insertion_point(destructor:agent.csMachineInfoResponse)
-  SharedDtor();
-}
-
-void csMachineInfoResponse::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void csMachineInfoResponse::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* csMachineInfoResponse::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return csMachineInfoResponse_descriptor_;
-}
-
-const csMachineInfoResponse& csMachineInfoResponse::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-csMachineInfoResponse* csMachineInfoResponse::default_instance_ = NULL;
-
-csMachineInfoResponse* csMachineInfoResponse::New() const {
-  return new csMachineInfoResponse;
-}
-
-void csMachineInfoResponse::Clear() {
-  type_ = 0;
-  result_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool csMachineInfoResponse::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.csMachineInfoResponse)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .agent.MachineCounter type = 1;
-      case 1: {
-        if (tag == 8) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::agent::MachineCounter_IsValid(value)) {
-            set_type(static_cast< ::agent::MachineCounter >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(17)) goto parse_result;
-        break;
-      }
-
-      // repeated double result = 2;
-      case 2: {
-        if (tag == 17) {
-         parse_result:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 1, 17, input, this->mutable_result())));
-        } else if (tag == 18) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, this->mutable_result())));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(17)) goto parse_result;
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.csMachineInfoResponse)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.csMachineInfoResponse)
-  return false;
-#undef DO_
-}
-
-void csMachineInfoResponse::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.csMachineInfoResponse)
-  // required .agent.MachineCounter type = 1;
-  if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->type(), output);
-  }
-
-  // repeated double result = 2;
-  for (int i = 0; i < this->result_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(
-      2, this->result(i), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.csMachineInfoResponse)
-}
-
-::google::protobuf::uint8* csMachineInfoResponse::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.csMachineInfoResponse)
-  // required .agent.MachineCounter type = 1;
-  if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->type(), target);
-  }
-
-  // repeated double result = 2;
-  for (int i = 0; i < this->result_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteDoubleToArray(2, this->result(i), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.csMachineInfoResponse)
-  return target;
-}
-
-int csMachineInfoResponse::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .agent.MachineCounter type = 1;
-    if (has_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
-    }
-
-  }
-  // repeated double result = 2;
-  {
-    int data_size = 0;
-    data_size = 8 * this->result_size();
-    total_size += 1 * this->result_size() + data_size;
-  }
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void csMachineInfoResponse::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const csMachineInfoResponse* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const csMachineInfoResponse*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void csMachineInfoResponse::MergeFrom(const csMachineInfoResponse& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  result_.MergeFrom(from.result_);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_type()) {
-      set_type(from.type());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void csMachineInfoResponse::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void csMachineInfoResponse::CopyFrom(const csMachineInfoResponse& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool csMachineInfoResponse::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
-
-  return true;
-}
-
-void csMachineInfoResponse::Swap(csMachineInfoResponse* other) {
-  if (other != this) {
-    std::swap(type_, other->type_);
-    result_.Swap(&other->result_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata csMachineInfoResponse::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = csMachineInfoResponse_descriptor_;
-  metadata.reflection = csMachineInfoResponse_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int csMachineInfoResponse_ALL::kResultFieldNumber;
-#endif  // !_MSC_VER
-
-csMachineInfoResponse_ALL::csMachineInfoResponse_ALL()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.csMachineInfoResponse_ALL)
-}
-
-void csMachineInfoResponse_ALL::InitAsDefaultInstance() {
-}
-
-csMachineInfoResponse_ALL::csMachineInfoResponse_ALL(const csMachineInfoResponse_ALL& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.csMachineInfoResponse_ALL)
-}
-
-void csMachineInfoResponse_ALL::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-csMachineInfoResponse_ALL::~csMachineInfoResponse_ALL() {
-  // @@protoc_insertion_point(destructor:agent.csMachineInfoResponse_ALL)
-  SharedDtor();
-}
-
-void csMachineInfoResponse_ALL::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void csMachineInfoResponse_ALL::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* csMachineInfoResponse_ALL::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return csMachineInfoResponse_ALL_descriptor_;
-}
-
-const csMachineInfoResponse_ALL& csMachineInfoResponse_ALL::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-csMachineInfoResponse_ALL* csMachineInfoResponse_ALL::default_instance_ = NULL;
-
-csMachineInfoResponse_ALL* csMachineInfoResponse_ALL::New() const {
-  return new csMachineInfoResponse_ALL;
-}
-
-void csMachineInfoResponse_ALL::Clear() {
-  result_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool csMachineInfoResponse_ALL::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.csMachineInfoResponse_ALL)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .agent.csMachineInfoResponse result = 1;
-      case 1: {
-        if (tag == 10) {
-         parse_result:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_result()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(10)) goto parse_result;
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.csMachineInfoResponse_ALL)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.csMachineInfoResponse_ALL)
-  return false;
-#undef DO_
-}
-
-void csMachineInfoResponse_ALL::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.csMachineInfoResponse_ALL)
-  // repeated .agent.csMachineInfoResponse result = 1;
-  for (int i = 0; i < this->result_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->result(i), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.csMachineInfoResponse_ALL)
-}
-
-::google::protobuf::uint8* csMachineInfoResponse_ALL::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.csMachineInfoResponse_ALL)
-  // repeated .agent.csMachineInfoResponse result = 1;
-  for (int i = 0; i < this->result_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        1, this->result(i), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.csMachineInfoResponse_ALL)
-  return target;
-}
-
-int csMachineInfoResponse_ALL::ByteSize() const {
-  int total_size = 0;
-
-  // repeated .agent.csMachineInfoResponse result = 1;
-  total_size += 1 * this->result_size();
-  for (int i = 0; i < this->result_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->result(i));
-  }
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void csMachineInfoResponse_ALL::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const csMachineInfoResponse_ALL* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const csMachineInfoResponse_ALL*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void csMachineInfoResponse_ALL::MergeFrom(const csMachineInfoResponse_ALL& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  result_.MergeFrom(from.result_);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void csMachineInfoResponse_ALL::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void csMachineInfoResponse_ALL::CopyFrom(const csMachineInfoResponse_ALL& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool csMachineInfoResponse_ALL::IsInitialized() const {
-
-  if (!::google::protobuf::internal::AllAreInitialized(this->result())) return false;
-  return true;
-}
-
-void csMachineInfoResponse_ALL::Swap(csMachineInfoResponse_ALL* other) {
-  if (other != this) {
-    result_.Swap(&other->result_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata csMachineInfoResponse_ALL::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = csMachineInfoResponse_ALL_descriptor_;
-  metadata.reflection = csMachineInfoResponse_ALL_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int scProcessInfoRequest::kProcessIDFieldNumber;
-const int scProcessInfoRequest::kTypeFieldNumber;
-#endif  // !_MSC_VER
-
-scProcessInfoRequest::scProcessInfoRequest()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.scProcessInfoRequest)
-}
-
-void scProcessInfoRequest::InitAsDefaultInstance() {
-}
-
-scProcessInfoRequest::scProcessInfoRequest(const scProcessInfoRequest& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.scProcessInfoRequest)
-}
-
-void scProcessInfoRequest::SharedCtor() {
-  _cached_size_ = 0;
-  processid_ = 0;
-  type_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-scProcessInfoRequest::~scProcessInfoRequest() {
-  // @@protoc_insertion_point(destructor:agent.scProcessInfoRequest)
-  SharedDtor();
-}
-
-void scProcessInfoRequest::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void scProcessInfoRequest::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* scProcessInfoRequest::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return scProcessInfoRequest_descriptor_;
-}
-
-const scProcessInfoRequest& scProcessInfoRequest::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-scProcessInfoRequest* scProcessInfoRequest::default_instance_ = NULL;
-
-scProcessInfoRequest* scProcessInfoRequest::New() const {
-  return new scProcessInfoRequest;
-}
-
-void scProcessInfoRequest::Clear() {
-#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<scProcessInfoRequest*>(16)->f) - \
-   reinterpret_cast<char*>(16))
-
-#define ZR_(first, last) do {                              \
-    size_t f = OFFSET_OF_FIELD_(first);                    \
-    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
-    ::memset(&first, 0, n);                                \
-  } while (0)
-
-  ZR_(processid_, type_);
-
-#undef OFFSET_OF_FIELD_
-#undef ZR_
-
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool scProcessInfoRequest::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.scProcessInfoRequest)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 processID = 1;
-      case 1: {
-        if (tag == 8) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &processid_)));
-          set_has_processid();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(16)) goto parse_type;
-        break;
-      }
-
-      // required .agent.MachineCounter type = 2;
-      case 2: {
-        if (tag == 16) {
-         parse_type:
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::agent::MachineCounter_IsValid(value)) {
-            set_type(static_cast< ::agent::MachineCounter >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(2, value);
-          }
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.scProcessInfoRequest)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.scProcessInfoRequest)
-  return false;
-#undef DO_
-}
-
-void scProcessInfoRequest::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.scProcessInfoRequest)
-  // required int32 processID = 1;
-  if (has_processid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->processid(), output);
-  }
-
-  // required .agent.MachineCounter type = 2;
-  if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      2, this->type(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.scProcessInfoRequest)
-}
-
-::google::protobuf::uint8* scProcessInfoRequest::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.scProcessInfoRequest)
-  // required int32 processID = 1;
-  if (has_processid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->processid(), target);
-  }
-
-  // required .agent.MachineCounter type = 2;
-  if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      2, this->type(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.scProcessInfoRequest)
-  return target;
-}
-
-int scProcessInfoRequest::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 processID = 1;
-    if (has_processid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->processid());
-    }
-
-    // required .agent.MachineCounter type = 2;
-    if (has_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void scProcessInfoRequest::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const scProcessInfoRequest* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const scProcessInfoRequest*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void scProcessInfoRequest::MergeFrom(const scProcessInfoRequest& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_processid()) {
-      set_processid(from.processid());
-    }
-    if (from.has_type()) {
-      set_type(from.type());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void scProcessInfoRequest::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void scProcessInfoRequest::CopyFrom(const scProcessInfoRequest& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool scProcessInfoRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
-
-  return true;
-}
-
-void scProcessInfoRequest::Swap(scProcessInfoRequest* other) {
-  if (other != this) {
-    std::swap(processid_, other->processid_);
-    std::swap(type_, other->type_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata scProcessInfoRequest::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = scProcessInfoRequest_descriptor_;
-  metadata.reflection = scProcessInfoRequest_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int scProcessInfoRequest_ALL::kTypeFieldNumber;
-#endif  // !_MSC_VER
-
-scProcessInfoRequest_ALL::scProcessInfoRequest_ALL()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.scProcessInfoRequest_ALL)
-}
-
-void scProcessInfoRequest_ALL::InitAsDefaultInstance() {
-}
-
-scProcessInfoRequest_ALL::scProcessInfoRequest_ALL(const scProcessInfoRequest_ALL& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.scProcessInfoRequest_ALL)
-}
-
-void scProcessInfoRequest_ALL::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-scProcessInfoRequest_ALL::~scProcessInfoRequest_ALL() {
-  // @@protoc_insertion_point(destructor:agent.scProcessInfoRequest_ALL)
-  SharedDtor();
-}
-
-void scProcessInfoRequest_ALL::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void scProcessInfoRequest_ALL::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* scProcessInfoRequest_ALL::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return scProcessInfoRequest_ALL_descriptor_;
-}
-
-const scProcessInfoRequest_ALL& scProcessInfoRequest_ALL::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-scProcessInfoRequest_ALL* scProcessInfoRequest_ALL::default_instance_ = NULL;
-
-scProcessInfoRequest_ALL* scProcessInfoRequest_ALL::New() const {
-  return new scProcessInfoRequest_ALL;
-}
-
-void scProcessInfoRequest_ALL::Clear() {
-  type_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool scProcessInfoRequest_ALL::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.scProcessInfoRequest_ALL)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .agent.scProcessInfoRequest type = 1;
-      case 1: {
-        if (tag == 10) {
-         parse_type:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_type()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(10)) goto parse_type;
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.scProcessInfoRequest_ALL)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.scProcessInfoRequest_ALL)
-  return false;
-#undef DO_
-}
-
-void scProcessInfoRequest_ALL::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.scProcessInfoRequest_ALL)
-  // repeated .agent.scProcessInfoRequest type = 1;
-  for (int i = 0; i < this->type_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->type(i), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.scProcessInfoRequest_ALL)
-}
-
-::google::protobuf::uint8* scProcessInfoRequest_ALL::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.scProcessInfoRequest_ALL)
-  // repeated .agent.scProcessInfoRequest type = 1;
-  for (int i = 0; i < this->type_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        1, this->type(i), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.scProcessInfoRequest_ALL)
-  return target;
-}
-
-int scProcessInfoRequest_ALL::ByteSize() const {
-  int total_size = 0;
-
-  // repeated .agent.scProcessInfoRequest type = 1;
-  total_size += 1 * this->type_size();
-  for (int i = 0; i < this->type_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->type(i));
-  }
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void scProcessInfoRequest_ALL::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const scProcessInfoRequest_ALL* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const scProcessInfoRequest_ALL*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void scProcessInfoRequest_ALL::MergeFrom(const scProcessInfoRequest_ALL& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  type_.MergeFrom(from.type_);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void scProcessInfoRequest_ALL::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void scProcessInfoRequest_ALL::CopyFrom(const scProcessInfoRequest_ALL& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool scProcessInfoRequest_ALL::IsInitialized() const {
-
-  if (!::google::protobuf::internal::AllAreInitialized(this->type())) return false;
-  return true;
-}
-
-void scProcessInfoRequest_ALL::Swap(scProcessInfoRequest_ALL* other) {
-  if (other != this) {
-    type_.Swap(&other->type_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata scProcessInfoRequest_ALL::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = scProcessInfoRequest_ALL_descriptor_;
-  metadata.reflection = scProcessInfoRequest_ALL_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int csProcessInfoResponse::kProcessIDFieldNumber;
-const int csProcessInfoResponse::kTypeFieldNumber;
-const int csProcessInfoResponse::kResultFieldNumber;
-#endif  // !_MSC_VER
-
-csProcessInfoResponse::csProcessInfoResponse()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.csProcessInfoResponse)
-}
-
-void csProcessInfoResponse::InitAsDefaultInstance() {
-}
-
-csProcessInfoResponse::csProcessInfoResponse(const csProcessInfoResponse& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.csProcessInfoResponse)
-}
-
-void csProcessInfoResponse::SharedCtor() {
-  _cached_size_ = 0;
-  processid_ = 0;
-  type_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-csProcessInfoResponse::~csProcessInfoResponse() {
-  // @@protoc_insertion_point(destructor:agent.csProcessInfoResponse)
-  SharedDtor();
-}
-
-void csProcessInfoResponse::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void csProcessInfoResponse::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* csProcessInfoResponse::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return csProcessInfoResponse_descriptor_;
-}
-
-const csProcessInfoResponse& csProcessInfoResponse::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-csProcessInfoResponse* csProcessInfoResponse::default_instance_ = NULL;
-
-csProcessInfoResponse* csProcessInfoResponse::New() const {
-  return new csProcessInfoResponse;
-}
-
-void csProcessInfoResponse::Clear() {
-#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<csProcessInfoResponse*>(16)->f) - \
-   reinterpret_cast<char*>(16))
-
-#define ZR_(first, last) do {                              \
-    size_t f = OFFSET_OF_FIELD_(first);                    \
-    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
-    ::memset(&first, 0, n);                                \
-  } while (0)
-
-  ZR_(processid_, type_);
-
-#undef OFFSET_OF_FIELD_
-#undef ZR_
-
-  result_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool csProcessInfoResponse::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.csProcessInfoResponse)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 processID = 1;
-      case 1: {
-        if (tag == 8) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &processid_)));
-          set_has_processid();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(16)) goto parse_type;
-        break;
-      }
-
-      // required .agent.MachineCounter type = 2;
-      case 2: {
-        if (tag == 16) {
-         parse_type:
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::agent::MachineCounter_IsValid(value)) {
-            set_type(static_cast< ::agent::MachineCounter >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(2, value);
-          }
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(25)) goto parse_result;
-        break;
-      }
-
-      // repeated double result = 3;
-      case 3: {
-        if (tag == 25) {
-         parse_result:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 1, 25, input, this->mutable_result())));
-        } else if (tag == 26) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, this->mutable_result())));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(25)) goto parse_result;
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.csProcessInfoResponse)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.csProcessInfoResponse)
-  return false;
-#undef DO_
-}
-
-void csProcessInfoResponse::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.csProcessInfoResponse)
-  // required int32 processID = 1;
-  if (has_processid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->processid(), output);
-  }
-
-  // required .agent.MachineCounter type = 2;
-  if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      2, this->type(), output);
-  }
-
-  // repeated double result = 3;
-  for (int i = 0; i < this->result_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(
-      3, this->result(i), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.csProcessInfoResponse)
-}
-
-::google::protobuf::uint8* csProcessInfoResponse::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.csProcessInfoResponse)
-  // required int32 processID = 1;
-  if (has_processid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->processid(), target);
-  }
-
-  // required .agent.MachineCounter type = 2;
-  if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      2, this->type(), target);
-  }
-
-  // repeated double result = 3;
-  for (int i = 0; i < this->result_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteDoubleToArray(3, this->result(i), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.csProcessInfoResponse)
-  return target;
-}
-
-int csProcessInfoResponse::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 processID = 1;
-    if (has_processid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->processid());
-    }
-
-    // required .agent.MachineCounter type = 2;
-    if (has_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
-    }
-
-  }
-  // repeated double result = 3;
-  {
-    int data_size = 0;
-    data_size = 8 * this->result_size();
-    total_size += 1 * this->result_size() + data_size;
-  }
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void csProcessInfoResponse::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const csProcessInfoResponse* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const csProcessInfoResponse*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void csProcessInfoResponse::MergeFrom(const csProcessInfoResponse& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  result_.MergeFrom(from.result_);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_processid()) {
-      set_processid(from.processid());
-    }
-    if (from.has_type()) {
-      set_type(from.type());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void csProcessInfoResponse::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void csProcessInfoResponse::CopyFrom(const csProcessInfoResponse& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool csProcessInfoResponse::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
-
-  return true;
-}
-
-void csProcessInfoResponse::Swap(csProcessInfoResponse* other) {
-  if (other != this) {
-    std::swap(processid_, other->processid_);
-    std::swap(type_, other->type_);
-    result_.Swap(&other->result_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata csProcessInfoResponse::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = csProcessInfoResponse_descriptor_;
-  metadata.reflection = csProcessInfoResponse_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int csProcessInfoResponse_ALL::kResultFieldNumber;
-#endif  // !_MSC_VER
-
-csProcessInfoResponse_ALL::csProcessInfoResponse_ALL()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.csProcessInfoResponse_ALL)
-}
-
-void csProcessInfoResponse_ALL::InitAsDefaultInstance() {
-}
-
-csProcessInfoResponse_ALL::csProcessInfoResponse_ALL(const csProcessInfoResponse_ALL& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.csProcessInfoResponse_ALL)
-}
-
-void csProcessInfoResponse_ALL::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-csProcessInfoResponse_ALL::~csProcessInfoResponse_ALL() {
-  // @@protoc_insertion_point(destructor:agent.csProcessInfoResponse_ALL)
-  SharedDtor();
-}
-
-void csProcessInfoResponse_ALL::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void csProcessInfoResponse_ALL::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* csProcessInfoResponse_ALL::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return csProcessInfoResponse_ALL_descriptor_;
-}
-
-const csProcessInfoResponse_ALL& csProcessInfoResponse_ALL::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-csProcessInfoResponse_ALL* csProcessInfoResponse_ALL::default_instance_ = NULL;
-
-csProcessInfoResponse_ALL* csProcessInfoResponse_ALL::New() const {
-  return new csProcessInfoResponse_ALL;
-}
-
-void csProcessInfoResponse_ALL::Clear() {
-  result_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool csProcessInfoResponse_ALL::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.csProcessInfoResponse_ALL)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .agent.csProcessInfoResponse result = 1;
-      case 1: {
-        if (tag == 10) {
-         parse_result:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_result()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(10)) goto parse_result;
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.csProcessInfoResponse_ALL)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.csProcessInfoResponse_ALL)
-  return false;
-#undef DO_
-}
-
-void csProcessInfoResponse_ALL::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.csProcessInfoResponse_ALL)
-  // repeated .agent.csProcessInfoResponse result = 1;
-  for (int i = 0; i < this->result_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->result(i), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.csProcessInfoResponse_ALL)
-}
-
-::google::protobuf::uint8* csProcessInfoResponse_ALL::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.csProcessInfoResponse_ALL)
-  // repeated .agent.csProcessInfoResponse result = 1;
-  for (int i = 0; i < this->result_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        1, this->result(i), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.csProcessInfoResponse_ALL)
-  return target;
-}
-
-int csProcessInfoResponse_ALL::ByteSize() const {
-  int total_size = 0;
-
-  // repeated .agent.csProcessInfoResponse result = 1;
-  total_size += 1 * this->result_size();
-  for (int i = 0; i < this->result_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->result(i));
-  }
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void csProcessInfoResponse_ALL::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const csProcessInfoResponse_ALL* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const csProcessInfoResponse_ALL*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void csProcessInfoResponse_ALL::MergeFrom(const csProcessInfoResponse_ALL& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  result_.MergeFrom(from.result_);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void csProcessInfoResponse_ALL::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void csProcessInfoResponse_ALL::CopyFrom(const csProcessInfoResponse_ALL& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool csProcessInfoResponse_ALL::IsInitialized() const {
-
-  if (!::google::protobuf::internal::AllAreInitialized(this->result())) return false;
-  return true;
-}
-
-void csProcessInfoResponse_ALL::Swap(csProcessInfoResponse_ALL* other) {
-  if (other != this) {
-    result_.Swap(&other->result_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata csProcessInfoResponse_ALL::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = csProcessInfoResponse_ALL_descriptor_;
-  metadata.reflection = csProcessInfoResponse_ALL_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
 const int scProcessRestrictionRequest::kProcessIDFieldNumber;
 const int scProcessRestrictionRequest::kTypeFieldNumber;
 const int scProcessRestrictionRequest::kValue1FieldNumber;
@@ -5604,11 +3399,11 @@ void scProcessRestrictionRequest::Swap(scProcessRestrictionRequest* other) {
 
 // ===================================================================
 
-const ::google::protobuf::EnumDescriptor* csPRocessRestrictionResponse_Result_descriptor() {
+const ::google::protobuf::EnumDescriptor* csProcessRestrictionResponse_Result_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return csPRocessRestrictionResponse_Result_descriptor_;
+  return csProcessRestrictionResponse_Result_descriptor_;
 }
-bool csPRocessRestrictionResponse_Result_IsValid(int value) {
+bool csProcessRestrictionResponse_Result_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -5619,36 +3414,36 @@ bool csPRocessRestrictionResponse_Result_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const csPRocessRestrictionResponse_Result csPRocessRestrictionResponse::SUCCESS;
-const csPRocessRestrictionResponse_Result csPRocessRestrictionResponse::FAILURE;
-const csPRocessRestrictionResponse_Result csPRocessRestrictionResponse::Result_MIN;
-const csPRocessRestrictionResponse_Result csPRocessRestrictionResponse::Result_MAX;
-const int csPRocessRestrictionResponse::Result_ARRAYSIZE;
+const csProcessRestrictionResponse_Result csProcessRestrictionResponse::SUCCESS;
+const csProcessRestrictionResponse_Result csProcessRestrictionResponse::FAILURE;
+const csProcessRestrictionResponse_Result csProcessRestrictionResponse::Result_MIN;
+const csProcessRestrictionResponse_Result csProcessRestrictionResponse::Result_MAX;
+const int csProcessRestrictionResponse::Result_ARRAYSIZE;
 #endif  // _MSC_VER
 #ifndef _MSC_VER
-const int csPRocessRestrictionResponse::kProcessIDFieldNumber;
-const int csPRocessRestrictionResponse::kTypeFieldNumber;
-const int csPRocessRestrictionResponse::kResultFieldNumber;
-const int csPRocessRestrictionResponse::kFailReasonFieldNumber;
+const int csProcessRestrictionResponse::kProcessIDFieldNumber;
+const int csProcessRestrictionResponse::kTypeFieldNumber;
+const int csProcessRestrictionResponse::kResultFieldNumber;
+const int csProcessRestrictionResponse::kFailReasonFieldNumber;
 #endif  // !_MSC_VER
 
-csPRocessRestrictionResponse::csPRocessRestrictionResponse()
+csProcessRestrictionResponse::csProcessRestrictionResponse()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.csPRocessRestrictionResponse)
+  // @@protoc_insertion_point(constructor:agent.csProcessRestrictionResponse)
 }
 
-void csPRocessRestrictionResponse::InitAsDefaultInstance() {
+void csProcessRestrictionResponse::InitAsDefaultInstance() {
 }
 
-csPRocessRestrictionResponse::csPRocessRestrictionResponse(const csPRocessRestrictionResponse& from)
+csProcessRestrictionResponse::csProcessRestrictionResponse(const csProcessRestrictionResponse& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.csPRocessRestrictionResponse)
+  // @@protoc_insertion_point(copy_constructor:agent.csProcessRestrictionResponse)
 }
 
-void csPRocessRestrictionResponse::SharedCtor() {
+void csProcessRestrictionResponse::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   processid_ = 0;
@@ -5658,12 +3453,12 @@ void csPRocessRestrictionResponse::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-csPRocessRestrictionResponse::~csPRocessRestrictionResponse() {
-  // @@protoc_insertion_point(destructor:agent.csPRocessRestrictionResponse)
+csProcessRestrictionResponse::~csProcessRestrictionResponse() {
+  // @@protoc_insertion_point(destructor:agent.csProcessRestrictionResponse)
   SharedDtor();
 }
 
-void csPRocessRestrictionResponse::SharedDtor() {
+void csProcessRestrictionResponse::SharedDtor() {
   if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete failreason_;
   }
@@ -5671,30 +3466,30 @@ void csPRocessRestrictionResponse::SharedDtor() {
   }
 }
 
-void csPRocessRestrictionResponse::SetCachedSize(int size) const {
+void csProcessRestrictionResponse::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* csPRocessRestrictionResponse::descriptor() {
+const ::google::protobuf::Descriptor* csProcessRestrictionResponse::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return csPRocessRestrictionResponse_descriptor_;
+  return csProcessRestrictionResponse_descriptor_;
 }
 
-const csPRocessRestrictionResponse& csPRocessRestrictionResponse::default_instance() {
+const csProcessRestrictionResponse& csProcessRestrictionResponse::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
   return *default_instance_;
 }
 
-csPRocessRestrictionResponse* csPRocessRestrictionResponse::default_instance_ = NULL;
+csProcessRestrictionResponse* csProcessRestrictionResponse::default_instance_ = NULL;
 
-csPRocessRestrictionResponse* csPRocessRestrictionResponse::New() const {
-  return new csPRocessRestrictionResponse;
+csProcessRestrictionResponse* csProcessRestrictionResponse::New() const {
+  return new csProcessRestrictionResponse;
 }
 
-void csPRocessRestrictionResponse::Clear() {
+void csProcessRestrictionResponse::Clear() {
 #define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<csPRocessRestrictionResponse*>(16)->f) - \
+  &reinterpret_cast<csProcessRestrictionResponse*>(16)->f) - \
    reinterpret_cast<char*>(16))
 
 #define ZR_(first, last) do {                              \
@@ -5720,11 +3515,11 @@ void csPRocessRestrictionResponse::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool csPRocessRestrictionResponse::MergePartialFromCodedStream(
+bool csProcessRestrictionResponse::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.csPRocessRestrictionResponse)
+  // @@protoc_insertion_point(parse_start:agent.csProcessRestrictionResponse)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -5764,7 +3559,7 @@ bool csPRocessRestrictionResponse::MergePartialFromCodedStream(
         break;
       }
 
-      // required .agent.csPRocessRestrictionResponse.Result result = 3;
+      // required .agent.csProcessRestrictionResponse.Result result = 3;
       case 3: {
         if (tag == 24) {
          parse_result:
@@ -5772,8 +3567,8 @@ bool csPRocessRestrictionResponse::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::agent::csPRocessRestrictionResponse_Result_IsValid(value)) {
-            set_result(static_cast< ::agent::csPRocessRestrictionResponse_Result >(value));
+          if (::agent::csProcessRestrictionResponse_Result_IsValid(value)) {
+            set_result(static_cast< ::agent::csProcessRestrictionResponse_Result >(value));
           } else {
             mutable_unknown_fields()->AddVarint(3, value);
           }
@@ -5815,17 +3610,17 @@ bool csPRocessRestrictionResponse::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:agent.csPRocessRestrictionResponse)
+  // @@protoc_insertion_point(parse_success:agent.csProcessRestrictionResponse)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:agent.csPRocessRestrictionResponse)
+  // @@protoc_insertion_point(parse_failure:agent.csProcessRestrictionResponse)
   return false;
 #undef DO_
 }
 
-void csPRocessRestrictionResponse::SerializeWithCachedSizes(
+void csProcessRestrictionResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.csPRocessRestrictionResponse)
+  // @@protoc_insertion_point(serialize_start:agent.csProcessRestrictionResponse)
   // required int32 processID = 1;
   if (has_processid()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->processid(), output);
@@ -5837,7 +3632,7 @@ void csPRocessRestrictionResponse::SerializeWithCachedSizes(
       2, this->type(), output);
   }
 
-  // required .agent.csPRocessRestrictionResponse.Result result = 3;
+  // required .agent.csProcessRestrictionResponse.Result result = 3;
   if (has_result()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       3, this->result(), output);
@@ -5857,12 +3652,12 @@ void csPRocessRestrictionResponse::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:agent.csPRocessRestrictionResponse)
+  // @@protoc_insertion_point(serialize_end:agent.csProcessRestrictionResponse)
 }
 
-::google::protobuf::uint8* csPRocessRestrictionResponse::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* csProcessRestrictionResponse::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.csPRocessRestrictionResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:agent.csProcessRestrictionResponse)
   // required int32 processID = 1;
   if (has_processid()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->processid(), target);
@@ -5874,7 +3669,7 @@ void csPRocessRestrictionResponse::SerializeWithCachedSizes(
       2, this->type(), target);
   }
 
-  // required .agent.csPRocessRestrictionResponse.Result result = 3;
+  // required .agent.csProcessRestrictionResponse.Result result = 3;
   if (has_result()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       3, this->result(), target);
@@ -5895,11 +3690,11 @@ void csPRocessRestrictionResponse::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.csPRocessRestrictionResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:agent.csProcessRestrictionResponse)
   return target;
 }
 
-int csPRocessRestrictionResponse::ByteSize() const {
+int csProcessRestrictionResponse::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -5916,7 +3711,7 @@ int csPRocessRestrictionResponse::ByteSize() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
     }
 
-    // required .agent.csPRocessRestrictionResponse.Result result = 3;
+    // required .agent.csProcessRestrictionResponse.Result result = 3;
     if (has_result()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->result());
@@ -5941,10 +3736,10 @@ int csPRocessRestrictionResponse::ByteSize() const {
   return total_size;
 }
 
-void csPRocessRestrictionResponse::MergeFrom(const ::google::protobuf::Message& from) {
+void csProcessRestrictionResponse::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const csPRocessRestrictionResponse* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const csPRocessRestrictionResponse*>(
+  const csProcessRestrictionResponse* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const csProcessRestrictionResponse*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -5953,7 +3748,7 @@ void csPRocessRestrictionResponse::MergeFrom(const ::google::protobuf::Message& 
   }
 }
 
-void csPRocessRestrictionResponse::MergeFrom(const csPRocessRestrictionResponse& from) {
+void csProcessRestrictionResponse::MergeFrom(const csProcessRestrictionResponse& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_processid()) {
@@ -5972,25 +3767,25 @@ void csPRocessRestrictionResponse::MergeFrom(const csPRocessRestrictionResponse&
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void csPRocessRestrictionResponse::CopyFrom(const ::google::protobuf::Message& from) {
+void csProcessRestrictionResponse::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void csPRocessRestrictionResponse::CopyFrom(const csPRocessRestrictionResponse& from) {
+void csProcessRestrictionResponse::CopyFrom(const csProcessRestrictionResponse& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool csPRocessRestrictionResponse::IsInitialized() const {
+bool csProcessRestrictionResponse::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
 
-void csPRocessRestrictionResponse::Swap(csPRocessRestrictionResponse* other) {
+void csProcessRestrictionResponse::Swap(csProcessRestrictionResponse* other) {
   if (other != this) {
     std::swap(processid_, other->processid_);
     std::swap(type_, other->type_);
@@ -6002,11 +3797,11 @@ void csPRocessRestrictionResponse::Swap(csPRocessRestrictionResponse* other) {
   }
 }
 
-::google::protobuf::Metadata csPRocessRestrictionResponse::GetMetadata() const {
+::google::protobuf::Metadata csProcessRestrictionResponse::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = csPRocessRestrictionResponse_descriptor_;
-  metadata.reflection = csPRocessRestrictionResponse_reflection_;
+  metadata.descriptor = csProcessRestrictionResponse_descriptor_;
+  metadata.reflection = csProcessRestrictionResponse_reflection_;
   return metadata;
 }
 

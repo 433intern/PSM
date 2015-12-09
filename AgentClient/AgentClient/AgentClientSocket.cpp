@@ -186,6 +186,7 @@ void AgentClientSocket::ConnProcess(bool isError, Act* act, DWORD bytes_transfer
 
 	PRINT("Connect Success\n");
 
+	SendAgentIDRequest();
 	Recv(this->recvBuf_, HEADER_SIZE);
 }
 
@@ -206,7 +207,19 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 
 	switch (packet->type)
 	{
-	case agent::HealthCheck:
+		case agent::AgentIDResponse:
+		{
+			PRINT("[AgentClientSocket] AgentIDResponse received\n");
+			agent::scAgentIDResponse msg;
+			if (msg.ParseFromArray(packet->msg, packet->length))
+			{
+				PRINT("[AgentClientSocket] AgentID : %d\n", msg.agentid());
+				agentClientApp->agentID = msg.agentid();
+			}
+			
+			break;
+		}
+		case agent::HealthCheck:
 			PRINT("[AgentClientSocket] HealthCheck received\n");
 			SendHealthAck();
 			break;
@@ -225,4 +238,37 @@ void AgentClientSocket::SendHealthAck()
 	msg.SerializeToArray((void *)&packet.msg, packet.length);
 
 	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+void AgentClientSocket::SendAgentIDRequest()
+{
+	PRINT("[AgentSocket] SendAgentIDRequest\n");
+	CPacket packet;
+	agent::csAgentIDRequest msg;
+
+	PHOSTENT hostinfo;
+	char hostname[50];
+	int tempAddr;
+	memset(hostname, 0, sizeof(hostname));
+
+	int nError = gethostname(hostname, sizeof(hostname));
+	if (nError == 0)
+	{
+		hostinfo = gethostbyname(hostname);
+		struct in_addr* temp = (struct in_addr*)hostinfo->h_addr_list[0];
+		tempAddr = temp->S_un.S_addr;
+
+		msg.set_hostip(tempAddr);
+
+		packet.length = (short)msg.ByteSize();
+		packet.type = (short)agent::AgentIDRequest;
+		msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+		Send((char *)&packet, packet.length + HEADER_SIZE);
+	}
+	else
+	{
+		ERROR_PRINT("[AgentClientSocket] Can't Send AgentIDRequest packet\n");
+	}
+	
 }
