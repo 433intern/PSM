@@ -179,6 +179,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       sizeof(scProcessListResponse));
   csCounterListRequest_descriptor_ = file->message_type(4);
   static const int csCounterListRequest_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csCounterListRequest, ismachine_),
   };
   csCounterListRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -192,7 +193,8 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csCounterListRequest));
   scCounterListResponse_descriptor_ = file->message_type(5);
-  static const int scCounterListResponse_offsets_[1] = {
+  static const int scCounterListResponse_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scCounterListResponse, ismachine_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scCounterListResponse, countername_),
   };
   scCounterListResponse_reflection_ =
@@ -316,9 +318,10 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       sizeof(csProcessCommandResponse));
   csProcessCommandResponse_Result_descriptor_ = csProcessCommandResponse_descriptor_->enum_type(0);
   scCounterCommandRequest_descriptor_ = file->message_type(13);
-  static const int scCounterCommandRequest_offsets_[2] = {
+  static const int scCounterCommandRequest_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scCounterCommandRequest, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scCounterCommandRequest, countername_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scCounterCommandRequest, ismachine_),
   };
   scCounterCommandRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -687,71 +690,73 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
     "DRequest\022\016\n\006hostIP\030\001 \002(\005\"$\n\021scAgentIDRes"
     "ponse\022\017\n\007agentID\030\001 \002(\005\"\026\n\024csProcessListR"
     "equest\",\n\025scProcessListResponse\022\023\n\013proce"
-    "ssName\030\001 \003(\t\"\026\n\024csCounterListRequest\",\n\025"
-    "scCounterListResponse\022\023\n\013counterName\030\001 \003"
-    "(\t\"\016\n\014csAgentReady\"J\n\022csProcessStateSend"
-    "\022\023\n\013processName\030\001 \002(\t\022\021\n\tprocessID\030\002 \002(\005"
-    "\022\014\n\004isOn\030\003 \002(\010\"I\n\031csTotalProcessesStateS"
-    "end\022,\n\tstateList\030\001 \003(\0132\031.agent.csProcess"
-    "StateSend\"\017\n\rscHealthCheck\"\r\n\013csHealthAc"
-    "k\"W\n\027scProcessCommandRequest\022\'\n\004type\030\001 \002"
-    "(\0162\031.agent.ProcessCommandType\022\023\n\013process"
-    "Name\030\002 \002(\t\"\306\001\n\030csProcessCommandResponse\022"
-    "\'\n\004type\030\001 \002(\0162\031.agent.ProcessCommandType"
-    "\022\021\n\tprocessID\030\002 \003(\005\0226\n\006result\030\003 \002(\0162&.ag"
-    "ent.csProcessCommandResponse.Result\022\022\n\nf"
-    "ailReason\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013"
-    "\n\007FAILURE\020\001\"W\n\027scCounterCommandRequest\022\'"
-    "\n\004type\030\001 \002(\0162\031.agent.CounterCommandType\022"
-    "\023\n\013CounterName\030\002 \002(\t\"\263\001\n\030csCounterComman"
-    "dResponse\022\'\n\004type\030\001 \002(\0162\031.agent.CounterC"
-    "ommandType\0226\n\006result\030\003 \002(\0162&.agent.csCou"
-    "nterCommandResponse.Result\022\022\n\nfailReason"
-    "\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE"
-    "\020\001\"f\n\024scProcessStartRecord\022\027\n\017totalRecor"
-    "dTime\030\001 \002(\005\022\020\n\010interval\030\002 \002(\005\022\024\n\014respons"
-    "eTime\030\003 \002(\005\022\r\n\005delay\030\004 \001(\003\"\025\n\023scProcessS"
-    "topRecord\"\'\n\003Log\022\021\n\ttimeStamp\030\001 \002(\003\022\r\n\005v"
-    "alue\030\002 \002(\001\"O\n\013ProcessInfo\022\023\n\013processName"
-    "\030\001 \002(\t\022\021\n\tprocessID\030\002 \002(\005\022\030\n\004logs\030\003 \003(\0132"
-    "\n.agent.Log\"D\n\014ProcessInfos\022\023\n\013counterNa"
-    "me\030\001 \002(\t\022\037\n\003msg\030\002 \003(\0132\022.agent.ProcessInf"
-    "o\";\n\026csTotalProcessInfoSend\022!\n\004info\030\001 \003("
-    "\0132\023.agent.ProcessInfos\"f\n\024scMachineStart"
-    "Record\022\027\n\017totalRecordTime\030\001 \002(\005\022\020\n\010inter"
-    "val\030\002 \002(\005\022\024\n\014responseTime\030\003 \002(\005\022\r\n\005delay"
-    "\030\004 \001(\003\"\025\n\023scMachineStopRecord\"=\n\014Machine"
-    "Infos\022\023\n\013counterName\030\001 \002(\t\022\030\n\004logs\030\002 \003(\013"
-    "2\n.agent.Log\";\n\026csTotalMachineInfoSend\022!"
-    "\n\004info\030\001 \003(\0132\023.agent.MachineInfos\"r\n\033scP"
-    "rocessRestrictionRequest\022\021\n\tprocessID\030\001 "
-    "\002(\005\022 \n\004type\030\002 \002(\0162\022.agent.Restriction\022\016\n"
-    "\006value1\030\003 \002(\005\022\016\n\006value2\030\004 \001(\005\"\307\001\n\034csProc"
-    "essRestrictionResponse\022\021\n\tprocessID\030\001 \002("
-    "\005\022 \n\004type\030\002 \002(\0162\022.agent.Restriction\022:\n\006r"
-    "esult\030\003 \002(\0162*.agent.csProcessRestriction"
-    "Response.Result\022\022\n\nfailReason\030\004 \001(\t\"\"\n\006R"
-    "esult\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE\020\001*\256\004\n\tagen"
-    "tType\022\022\n\016AgentIDRequest\020\000\022\023\n\017AgentIDResp"
-    "onse\020\001\022\026\n\022ProcessListRequest\020\002\022\027\n\023Proces"
-    "sListResponse\020\003\022\026\n\022CounterListRequest\020\004\022"
-    "\027\n\023CounterListResponse\020\005\022\024\n\020ProcessState"
-    "Send\020\006\022\033\n\027TotalProcessesStateSend\020\007\022\017\n\013H"
-    "ealthCheck\020\010\022\r\n\tHealthAck\020\t\022\031\n\025ProcessCo"
-    "mmandRequest\020\n\022\032\n\026ProcessCommandResponse"
-    "\020\013\022\031\n\025CounterCommandRequest\020\014\022\032\n\026Counter"
-    "CommandResponse\020\r\022\035\n\031ProcessRestrictionR"
-    "equest\020\016\022\036\n\032ProcessRestrictionResponse\020\017"
-    "\022\026\n\022ProcessStartRecord\020\020\022\025\n\021ProcessStopR"
-    "ecord\020\021\022\023\n\017ProcessInfoSend\020\022\022\026\n\022MachineS"
-    "tartRecord\020\023\022\025\n\021MachineStopRecord\020\024\022\023\n\017M"
-    "achineInfoSend\020\025\022\016\n\nAgentReady\020\026*`\n\022Proc"
-    "essCommandType\022\t\n\005START\020\000\022\013\n\007RESTART\020\001\022\010"
-    "\n\004STOP\020\002\022\013\n\007ADDLIST\020\003\022\016\n\nDELETELIST\020\004\022\013\n"
-    "\007ALLSTOP\020\005*3\n\022CounterCommandType\022\014\n\010CADD"
-    "LIST\020\001\022\017\n\013CDELETELIST\020\002*V\n\013Restriction\022\023"
-    "\n\017USER_TIME_LIMIT\020\000\022\030\n\024MAX_WORKING_SET_S"
-    "IZE\020\001\022\030\n\024MIN_WORKING_SET_SIZE\020\002", 2751);
+    "ssName\030\001 \003(\t\")\n\024csCounterListRequest\022\021\n\t"
+    "isMachine\030\001 \002(\010\"\?\n\025scCounterListResponse"
+    "\022\021\n\tisMachine\030\001 \002(\010\022\023\n\013counterName\030\002 \003(\t"
+    "\"\016\n\014csAgentReady\"J\n\022csProcessStateSend\022\023"
+    "\n\013processName\030\001 \002(\t\022\021\n\tprocessID\030\002 \002(\005\022\014"
+    "\n\004isOn\030\003 \002(\010\"I\n\031csTotalProcessesStateSen"
+    "d\022,\n\tstateList\030\001 \003(\0132\031.agent.csProcessSt"
+    "ateSend\"\017\n\rscHealthCheck\"\r\n\013csHealthAck\""
+    "W\n\027scProcessCommandRequest\022\'\n\004type\030\001 \002(\016"
+    "2\031.agent.ProcessCommandType\022\023\n\013processNa"
+    "me\030\002 \002(\t\"\306\001\n\030csProcessCommandResponse\022\'\n"
+    "\004type\030\001 \002(\0162\031.agent.ProcessCommandType\022\021"
+    "\n\tprocessID\030\002 \003(\005\0226\n\006result\030\003 \002(\0162&.agen"
+    "t.csProcessCommandResponse.Result\022\022\n\nfai"
+    "lReason\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007"
+    "FAILURE\020\001\"j\n\027scCounterCommandRequest\022\'\n\004"
+    "type\030\001 \002(\0162\031.agent.CounterCommandType\022\023\n"
+    "\013CounterName\030\002 \002(\t\022\021\n\tisMachine\030\003 \002(\010\"\263\001"
+    "\n\030csCounterCommandResponse\022\'\n\004type\030\001 \002(\016"
+    "2\031.agent.CounterCommandType\0226\n\006result\030\003 "
+    "\002(\0162&.agent.csCounterCommandResponse.Res"
+    "ult\022\022\n\nfailReason\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUC"
+    "CESS\020\000\022\013\n\007FAILURE\020\001\"f\n\024scProcessStartRec"
+    "ord\022\027\n\017totalRecordTime\030\001 \002(\005\022\020\n\010interval"
+    "\030\002 \002(\005\022\024\n\014responseTime\030\003 \002(\005\022\r\n\005delay\030\004 "
+    "\001(\003\"\025\n\023scProcessStopRecord\"\'\n\003Log\022\021\n\ttim"
+    "eStamp\030\001 \002(\003\022\r\n\005value\030\002 \002(\001\"O\n\013ProcessIn"
+    "fo\022\023\n\013processName\030\001 \002(\t\022\021\n\tprocessID\030\002 \002"
+    "(\005\022\030\n\004logs\030\003 \003(\0132\n.agent.Log\"D\n\014ProcessI"
+    "nfos\022\023\n\013counterName\030\001 \002(\t\022\037\n\003msg\030\002 \003(\0132\022"
+    ".agent.ProcessInfo\";\n\026csTotalProcessInfo"
+    "Send\022!\n\004info\030\001 \003(\0132\023.agent.ProcessInfos\""
+    "f\n\024scMachineStartRecord\022\027\n\017totalRecordTi"
+    "me\030\001 \002(\005\022\020\n\010interval\030\002 \002(\005\022\024\n\014responseTi"
+    "me\030\003 \002(\005\022\r\n\005delay\030\004 \001(\003\"\025\n\023scMachineStop"
+    "Record\"=\n\014MachineInfos\022\023\n\013counterName\030\001 "
+    "\002(\t\022\030\n\004logs\030\002 \003(\0132\n.agent.Log\";\n\026csTotal"
+    "MachineInfoSend\022!\n\004info\030\001 \003(\0132\023.agent.Ma"
+    "chineInfos\"r\n\033scProcessRestrictionReques"
+    "t\022\021\n\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.age"
+    "nt.Restriction\022\016\n\006value1\030\003 \002(\005\022\016\n\006value2"
+    "\030\004 \001(\005\"\307\001\n\034csProcessRestrictionResponse\022"
+    "\021\n\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.agent"
+    ".Restriction\022:\n\006result\030\003 \002(\0162*.agent.csP"
+    "rocessRestrictionResponse.Result\022\022\n\nfail"
+    "Reason\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007F"
+    "AILURE\020\001*\256\004\n\tagentType\022\022\n\016AgentIDRequest"
+    "\020\000\022\023\n\017AgentIDResponse\020\001\022\026\n\022ProcessListRe"
+    "quest\020\002\022\027\n\023ProcessListResponse\020\003\022\026\n\022Coun"
+    "terListRequest\020\004\022\027\n\023CounterListResponse\020"
+    "\005\022\024\n\020ProcessStateSend\020\006\022\033\n\027TotalProcesse"
+    "sStateSend\020\007\022\017\n\013HealthCheck\020\010\022\r\n\tHealthA"
+    "ck\020\t\022\031\n\025ProcessCommandRequest\020\n\022\032\n\026Proce"
+    "ssCommandResponse\020\013\022\031\n\025CounterCommandReq"
+    "uest\020\014\022\032\n\026CounterCommandResponse\020\r\022\035\n\031Pr"
+    "ocessRestrictionRequest\020\016\022\036\n\032ProcessRest"
+    "rictionResponse\020\017\022\026\n\022ProcessStartRecord\020"
+    "\020\022\025\n\021ProcessStopRecord\020\021\022\023\n\017ProcessInfoS"
+    "end\020\022\022\026\n\022MachineStartRecord\020\023\022\025\n\021Machine"
+    "StopRecord\020\024\022\023\n\017MachineInfoSend\020\025\022\016\n\nAge"
+    "ntReady\020\026*`\n\022ProcessCommandType\022\t\n\005START"
+    "\020\000\022\013\n\007RESTART\020\001\022\010\n\004STOP\020\002\022\013\n\007ADDLIST\020\003\022\016"
+    "\n\nDELETELIST\020\004\022\013\n\007ALLSTOP\020\005*3\n\022CounterCo"
+    "mmandType\022\014\n\010CADDLIST\020\001\022\017\n\013CDELETELIST\020\002"
+    "*V\n\013Restriction\022\023\n\017USER_TIME_LIMIT\020\000\022\030\n\024"
+    "MAX_WORKING_SET_SIZE\020\001\022\030\n\024MIN_WORKING_SE"
+    "T_SIZE\020\002", 2808);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "AgentProtocol.proto", &protobuf_RegisterTypes);
   csAgentIDRequest::default_instance_ = new csAgentIDRequest();
@@ -1754,6 +1759,7 @@ void scProcessListResponse::Swap(scProcessListResponse* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int csCounterListRequest::kIsMachineFieldNumber;
 #endif  // !_MSC_VER
 
 csCounterListRequest::csCounterListRequest()
@@ -1774,6 +1780,7 @@ csCounterListRequest::csCounterListRequest(const csCounterListRequest& from)
 
 void csCounterListRequest::SharedCtor() {
   _cached_size_ = 0;
+  ismachine_ = false;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1809,6 +1816,7 @@ csCounterListRequest* csCounterListRequest::New() const {
 }
 
 void csCounterListRequest::Clear() {
+  ismachine_ = false;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -1822,14 +1830,33 @@ bool csCounterListRequest::MergePartialFromCodedStream(
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0 ||
-        ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      goto success;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bool isMachine = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &ismachine_)));
+          set_has_ismachine();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
     }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
   }
 success:
   // @@protoc_insertion_point(parse_success:agent.csCounterListRequest)
@@ -1843,6 +1870,11 @@ failure:
 void csCounterListRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:agent.csCounterListRequest)
+  // required bool isMachine = 1;
+  if (has_ismachine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->ismachine(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -1853,6 +1885,11 @@ void csCounterListRequest::SerializeWithCachedSizes(
 ::google::protobuf::uint8* csCounterListRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:agent.csCounterListRequest)
+  // required bool isMachine = 1;
+  if (has_ismachine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->ismachine(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -1864,6 +1901,13 @@ void csCounterListRequest::SerializeWithCachedSizes(
 int csCounterListRequest::ByteSize() const {
   int total_size = 0;
 
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bool isMachine = 1;
+    if (has_ismachine()) {
+      total_size += 1 + 1;
+    }
+
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -1889,6 +1933,11 @@ void csCounterListRequest::MergeFrom(const ::google::protobuf::Message& from) {
 
 void csCounterListRequest::MergeFrom(const csCounterListRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_ismachine()) {
+      set_ismachine(from.ismachine());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -1905,12 +1954,15 @@ void csCounterListRequest::CopyFrom(const csCounterListRequest& from) {
 }
 
 bool csCounterListRequest::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
 void csCounterListRequest::Swap(csCounterListRequest* other) {
   if (other != this) {
+    std::swap(ismachine_, other->ismachine_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
@@ -1928,6 +1980,7 @@ void csCounterListRequest::Swap(csCounterListRequest* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int scCounterListResponse::kIsMachineFieldNumber;
 const int scCounterListResponse::kCounterNameFieldNumber;
 #endif  // !_MSC_VER
 
@@ -1950,6 +2003,7 @@ scCounterListResponse::scCounterListResponse(const scCounterListResponse& from)
 void scCounterListResponse::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
+  ismachine_ = false;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1985,6 +2039,7 @@ scCounterListResponse* scCounterListResponse::New() const {
 }
 
 void scCounterListResponse::Clear() {
+  ismachine_ = false;
   countername_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -2000,9 +2055,23 @@ bool scCounterListResponse::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated string counterName = 1;
+      // required bool isMachine = 1;
       case 1: {
-        if (tag == 10) {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &ismachine_)));
+          set_has_ismachine();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_counterName;
+        break;
+      }
+
+      // repeated string counterName = 2;
+      case 2: {
+        if (tag == 18) {
          parse_counterName:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->add_countername()));
@@ -2014,7 +2083,7 @@ bool scCounterListResponse::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(10)) goto parse_counterName;
+        if (input->ExpectTag(18)) goto parse_counterName;
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -2044,14 +2113,19 @@ failure:
 void scCounterListResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:agent.scCounterListResponse)
-  // repeated string counterName = 1;
+  // required bool isMachine = 1;
+  if (has_ismachine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->ismachine(), output);
+  }
+
+  // repeated string counterName = 2;
   for (int i = 0; i < this->countername_size(); i++) {
   ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
     this->countername(i).data(), this->countername(i).length(),
     ::google::protobuf::internal::WireFormat::SERIALIZE,
     "countername");
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->countername(i), output);
+      2, this->countername(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -2064,14 +2138,19 @@ void scCounterListResponse::SerializeWithCachedSizes(
 ::google::protobuf::uint8* scCounterListResponse::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:agent.scCounterListResponse)
-  // repeated string counterName = 1;
+  // required bool isMachine = 1;
+  if (has_ismachine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->ismachine(), target);
+  }
+
+  // repeated string counterName = 2;
   for (int i = 0; i < this->countername_size(); i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->countername(i).data(), this->countername(i).length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "countername");
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(1, this->countername(i), target);
+      WriteStringToArray(2, this->countername(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2085,7 +2164,14 @@ void scCounterListResponse::SerializeWithCachedSizes(
 int scCounterListResponse::ByteSize() const {
   int total_size = 0;
 
-  // repeated string counterName = 1;
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bool isMachine = 1;
+    if (has_ismachine()) {
+      total_size += 1 + 1;
+    }
+
+  }
+  // repeated string counterName = 2;
   total_size += 1 * this->countername_size();
   for (int i = 0; i < this->countername_size(); i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -2118,6 +2204,11 @@ void scCounterListResponse::MergeFrom(const ::google::protobuf::Message& from) {
 void scCounterListResponse::MergeFrom(const scCounterListResponse& from) {
   GOOGLE_CHECK_NE(&from, this);
   countername_.MergeFrom(from.countername_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_ismachine()) {
+      set_ismachine(from.ismachine());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -2134,12 +2225,14 @@ void scCounterListResponse::CopyFrom(const scCounterListResponse& from) {
 }
 
 bool scCounterListResponse::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
 void scCounterListResponse::Swap(scCounterListResponse* other) {
   if (other != this) {
+    std::swap(ismachine_, other->ismachine_);
     countername_.Swap(&other->countername_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -3944,6 +4037,7 @@ void csProcessCommandResponse::Swap(csProcessCommandResponse* other) {
 #ifndef _MSC_VER
 const int scCounterCommandRequest::kTypeFieldNumber;
 const int scCounterCommandRequest::kCounterNameFieldNumber;
+const int scCounterCommandRequest::kIsMachineFieldNumber;
 #endif  // !_MSC_VER
 
 scCounterCommandRequest::scCounterCommandRequest()
@@ -3967,6 +4061,7 @@ void scCounterCommandRequest::SharedCtor() {
   _cached_size_ = 0;
   type_ = 1;
   countername_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ismachine_ = false;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -4005,13 +4100,14 @@ scCounterCommandRequest* scCounterCommandRequest::New() const {
 }
 
 void scCounterCommandRequest::Clear() {
-  if (_has_bits_[0 / 32] & 3) {
+  if (_has_bits_[0 / 32] & 7) {
     type_ = 1;
     if (has_countername()) {
       if (countername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         countername_->clear();
       }
     }
+    ismachine_ = false;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -4056,6 +4152,21 @@ bool scCounterCommandRequest::MergePartialFromCodedStream(
             this->countername().data(), this->countername().length(),
             ::google::protobuf::internal::WireFormat::PARSE,
             "countername");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_isMachine;
+        break;
+      }
+
+      // required bool isMachine = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_isMachine:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &ismachine_)));
+          set_has_ismachine();
         } else {
           goto handle_unusual;
         }
@@ -4104,6 +4215,11 @@ void scCounterCommandRequest::SerializeWithCachedSizes(
       2, this->countername(), output);
   }
 
+  // required bool isMachine = 3;
+  if (has_ismachine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->ismachine(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -4131,6 +4247,11 @@ void scCounterCommandRequest::SerializeWithCachedSizes(
         2, this->countername(), target);
   }
 
+  // required bool isMachine = 3;
+  if (has_ismachine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->ismachine(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -4154,6 +4275,11 @@ int scCounterCommandRequest::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->countername());
+    }
+
+    // required bool isMachine = 3;
+    if (has_ismachine()) {
+      total_size += 1 + 1;
     }
 
   }
@@ -4189,6 +4315,9 @@ void scCounterCommandRequest::MergeFrom(const scCounterCommandRequest& from) {
     if (from.has_countername()) {
       set_countername(from.countername());
     }
+    if (from.has_ismachine()) {
+      set_ismachine(from.ismachine());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -4206,7 +4335,7 @@ void scCounterCommandRequest::CopyFrom(const scCounterCommandRequest& from) {
 }
 
 bool scCounterCommandRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -4215,6 +4344,7 @@ void scCounterCommandRequest::Swap(scCounterCommandRequest* other) {
   if (other != this) {
     std::swap(type_, other->type_);
     std::swap(countername_, other->countername_);
+    std::swap(ismachine_, other->ismachine_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

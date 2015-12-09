@@ -24,7 +24,7 @@ public:
 	void SendHealthCheck();
 	void SendAgentIDResponse(int agentID);
 	void SendProcessListResponse();
-	void SendCounterListResponse();
+	void SendCounterListResponse(bool isMachine);
 
 	int FindAgentID(int hostip);
 

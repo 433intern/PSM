@@ -160,8 +160,12 @@ void AgentSocket::PacketHandling(CPacket *packet)
 		}
 		case agent::CounterListRequest:
 		{
+			agent::csCounterListRequest msg;
 			PRINT("[AgentSocket] CounterListRequest received\n");
-			SendCounterListResponse();
+			if (msg.ParseFromArray(packet->msg, packet->length))
+			{
+				SendCounterListResponse(msg.ismachine());
+			}
 			break;
 		}
 		case agent::HealthAck:
@@ -234,11 +238,13 @@ void AgentSocket::SendProcessListResponse()
 	}
 }
 
-void AgentSocket::SendCounterListResponse()
+void AgentSocket::SendCounterListResponse(bool isMachine)
 {
 	PRINT("[AgentSocket] SendCounterListResponse\n");
 	CPacket packet;
 	agent::scCounterListResponse msg;
+
+	msg.set_ismachine(isMachine);
 
 	std::vector<std::string> counterList;
 

@@ -237,7 +237,7 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 				}
 			}
 
-			SendCounterListRequest();
+			SendCounterListRequest(false);
 			break;
 		}
 		case agent::CounterListResponse:
@@ -246,11 +246,14 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 			agent::scCounterListResponse msg;
 			if (msg.ParseFromArray(packet->msg, packet->length))
 			{
-				PRINT("[AgentClientSocket] CounterList : %d\n", msg.countername_size());
-				for (int i = 0; i < msg.countername_size(); i++)
+				if (!msg.ismachine())
 				{
-					PRINT("%s\n", msg.countername(i).c_str());
-					processQuery.AddCounter(msg.countername(i));
+					PRINT("[AgentClientSocket] ProcessCounterList : %d\n", msg.countername_size());
+					for (int i = 0; i < msg.countername_size(); i++)
+					{
+						PRINT("%s\n", msg.countername(i).c_str());
+						processQuery.AddCounter(msg.countername(i));
+					}
 				}
 			}
 			break;
@@ -322,11 +325,13 @@ void AgentClientSocket::SendProcessListRequest()
 	Send((char *)&packet, packet.length + HEADER_SIZE);
 }
 
-void AgentClientSocket::SendCounterListRequest()
+void AgentClientSocket::SendCounterListRequest(bool isMachine)
 {
 	PRINT("[AgentSocket] SendProcessListRequest\n");
 	CPacket packet;
 	agent::csCounterListRequest msg;
+
+	msg.set_ismachine(isMachine);
 
 	packet.length = (short)msg.ByteSize();
 	packet.type = (short)agent::CounterListRequest;

@@ -23,7 +23,7 @@ public:
 	void SendHealthAck();
 	void SendAgentIDRequest();
 	void SendProcessListRequest();
-	void SendCounterListRequest();
+	void SendCounterListRequest(bool isMachine);
 
 private:
 	struct mswsock_s

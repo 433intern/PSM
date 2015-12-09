@@ -60,11 +60,13 @@ message scProcessListResponse
 
 message csCounterListRequest
 {
+	required bool isMachine = 1;
 }
 
 message scCounterListResponse
 {
-	repeated string counterName = 1;
+	required bool isMachine = 1;
+	repeated string counterName = 2;
 }
 
 message csAgentReady
@@ -132,6 +134,7 @@ message scCounterCommandRequest
 {
 	required CounterCommandType type = 1;
 	required string CounterName = 2;
+	required bool isMachine = 3;
 }
 
 message csCounterCommandResponse
