@@ -11,7 +11,7 @@ public:
 	void Init();
 	int GetAgentID(int hostIP);
 	bool GetProcessList(int agentID, std::vector<std::string>& result);
-	bool GetCounterList(int agentID, std::vector<std::string>& result);
+	bool GetCounterList(int agentID, std::vector<std::string>& result, bool isMachine);
 
 private:
 	std::string redisIP;
@@ -22,4 +22,5 @@ private:
 
 	std::vector<std::string> defaultProcessList;
 	std::vector<std::string> defaultCounterList;
+	std::vector<std::string> defaultMachineCounterList;
 };

@@ -168,6 +168,28 @@ void AgentSocket::PacketHandling(CPacket *packet)
 			}
 			break;
 		}
+		case agent::CurrentProcessListSend:
+		{
+		    agent::csCurrentProcessListSend msg;
+			PRINT("[AgentSocket] CurrentProcessListSend received\n");
+			if (msg.ParseFromArray(packet->msg, packet->length))
+			{
+				PRINT("[AgentSocket] Current Process List Agent %d\n", agentID);
+				for (int i = 0; i < msg.processinfo_size(); i++)
+				{
+					agent::CurrentProcess pi = msg.processinfo(i);
+					
+					PRINT("%s\n", pi.processname().c_str());
+					for (int j = 0; j < pi.processid_size(); j++)
+					{
+						int pid = pi.processid(j);
+						PRINT("%d ", pid);
+					}
+					PRINT("\n");
+				}
+			}
+			break;
+		}
 		case agent::HealthAck:
 #ifdef HEARTBEAT
 			PRINT("[AgentSocket] HealthAck received\n");
@@ -248,7 +270,7 @@ void AgentSocket::SendCounterListResponse(bool isMachine)
 
 	std::vector<std::string> counterList;
 
-	if (agentApp->redisManager.GetCounterList(agentID, counterList))
+	if (agentApp->redisManager.GetCounterList(agentID, counterList, isMachine))
 	{
 		for (std::string counter : counterList)
 		{

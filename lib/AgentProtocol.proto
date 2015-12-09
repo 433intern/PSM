@@ -13,7 +13,7 @@ enum agentType
 
 	
 
-	ProcessStateSend = 6;
+	CurrentProcessListSend = 6;
 	TotalProcessesStateSend = 7;
 	HealthCheck = 8;
 	HealthAck = 9;
@@ -73,16 +73,15 @@ message csAgentReady
 {
 }
 
-message csProcessStateSend
+message CurrentProcess
 {
 	required string processName = 1;
-	required int32 processID = 2;
-	required bool isOn = 3;
+	repeated int32 processID = 2;
 }
 
-message csTotalProcessesStateSend
+message csCurrentProcessListSend
 {
-	repeated csProcessStateSend stateList = 1;
+	repeated CurrentProcess processInfo = 1;
 }
 
 message scHealthCheck

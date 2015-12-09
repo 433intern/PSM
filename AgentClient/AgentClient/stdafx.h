@@ -1,6 +1,7 @@
 #pragma once
 
 #include <wchar.h>
+#include <algorithm>
 #include <cstdio>
 #include <tchar.h>
 #include <list>

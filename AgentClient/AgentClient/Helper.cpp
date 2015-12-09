@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+
+extern AgentClientApp* agentClientApp;
 Helper::Helper()
 {
 
@@ -66,6 +68,9 @@ void Helper::UpdateProcessList()
 		}
 		CloseHandle(hSnapshot);
 	}
+	
+	
+	agentClientApp->agentClient->socket->SendCurrentProcessList(processList);
 	PRINT("[Helper] UpdateProcessList Done\n");
 }
 

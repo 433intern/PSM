@@ -117,11 +117,13 @@ bool RedisManager::GetProcessList(int agentID, std::vector<std::string>& resultL
 	return true;
 }
 
-bool RedisManager::GetCounterList(int agentID, std::vector<std::string>& resultList)
+bool RedisManager::GetCounterList(int agentID, std::vector<std::string>& resultList, bool isMachine)
 {
 	resultList.clear();
 
-	std::string key = std::to_string(agentID) + ":CounterList";
+	std::string key;
+	if (!isMachine) key = std::to_string(agentID) + ":CounterList";
+	else key = std::to_string(agentID) + ":MachineCounterList";
 
 	RedisValue result;
 	result = redis.command("smembers", key);
@@ -131,7 +133,7 @@ bool RedisManager::GetCounterList(int agentID, std::vector<std::string>& resultL
 		if (!result.isNull() && result.toArray().size() != 0)
 		{
 			std::vector<RedisValue> v = result.toArray();
-			PRINT("[RedisManager] Agent %d's CounterList\n", agentID);
+			PRINT("[RedisManager] Agent %s\n", key.c_str());
 			for (RedisValue value : v)
 			{
 				PRINT("%s\n", value.toString().c_str());
@@ -141,17 +143,36 @@ bool RedisManager::GetCounterList(int agentID, std::vector<std::string>& resultL
 		}
 		else
 		{
-			for (std::string s : defaultCounterList)
+			if (!isMachine)
 			{
-				result = redis.command("sadd", key, s);
-				if (!result.isOk())
+				for (std::string s : defaultCounterList)
 				{
-					ERROR_PRINT("[RedisManager] redis command sadd ERROR\n");
-					return false;
+					result = redis.command("sadd", key, s);
+					if (!result.isOk())
+					{
+						ERROR_PRINT("[RedisManager] redis command sadd ERROR\n");
+						return false;
+					}
+					else
+					{
+						resultList.push_back(s);
+					}
 				}
-				else
+			}
+			else
+			{
+				for (std::string s : defaultMachineCounterList)
 				{
-					resultList.push_back(s);
+					result = redis.command("sadd", key, s);
+					if (!result.isOk())
+					{
+						ERROR_PRINT("[RedisManager] redis command sadd ERROR\n");
+						return false;
+					}
+					else
+					{
+						resultList.push_back(s);
+					}
 				}
 			}
 		}

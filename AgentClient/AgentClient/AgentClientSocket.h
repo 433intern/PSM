@@ -24,6 +24,7 @@ public:
 	void SendAgentIDRequest();
 	void SendProcessListRequest();
 	void SendCounterListRequest(bool isMachine);
+	void SendCurrentProcessList(std::vector<ProcessInfo>& processList);
 
 private:
 	struct mswsock_s
@@ -35,7 +36,8 @@ private:
 
 private:
 	MemPooler<CPacket> *packetPoolManager;
+	bool isConnect;
 	int position;
 	int remainBytes;
-	Query processQuery;
+	Query query;
 };

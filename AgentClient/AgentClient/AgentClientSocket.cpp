@@ -3,7 +3,7 @@
 extern AgentClientApp* agentClientApp;
 
 AgentClientSocket::AgentClientSocket()
-: position(0), remainBytes(HEADER_SIZE)
+: position(0), remainBytes(HEADER_SIZE), isConnect(false)
 {
 	packetPoolManager = new MemPooler<CPacket>(10);
 	if (!packetPoolManager)
@@ -19,7 +19,7 @@ AgentClientSocket::AgentClientSocket()
 		return;
 	}
 
-	processQuery.Init();
+	query.Init();
 }
 
 BOOL AgentClientSocket::LoadMswsock(void){
@@ -188,6 +188,7 @@ void AgentClientSocket::ConnProcess(bool isError, Act* act, DWORD bytes_transfer
 
 	PRINT("Connect Success\n");
 
+	isConnect = true;
 	SendAgentIDRequest();
 	Recv(this->recvBuf_, HEADER_SIZE);
 }
@@ -233,7 +234,7 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 				for (int i = 0; i < msg.processname_size(); i++)
 				{
 					PRINT("%s\n", msg.processname(i).c_str());
-					processQuery.AddProcess(msg.processname(i));
+					query.AddProcess(msg.processname(i));
 				}
 			}
 
@@ -252,9 +253,11 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 					for (int i = 0; i < msg.countername_size(); i++)
 					{
 						PRINT("%s\n", msg.countername(i).c_str());
-						processQuery.AddCounter(msg.countername(i));
+						query.AddCounter(msg.countername(i));
 					}
 				}
+
+				query.Record(1, 1);
 			}
 			break;
 		}
@@ -264,11 +267,13 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 			break;
 	}
 
-	if (!packetPoolManager->Free(packet)) ERROR_PRINT("[AgentSocket] free error!\n");
+	if (!packetPoolManager->Free(packet)) ERROR_PRINT("[AgentClientSocket] free error!\n");
 }
 
 void AgentClientSocket::SendHealthAck()
 {
+	if (!isConnect) return;
+
 	CPacket packet;
 	agent::csHealthAck msg;
 	
@@ -281,7 +286,9 @@ void AgentClientSocket::SendHealthAck()
 
 void AgentClientSocket::SendAgentIDRequest()
 {
-	PRINT("[AgentSocket] SendAgentIDRequest\n");
+	if (!isConnect) return;
+
+	PRINT("[AgentClientSocket] SendAgentIDRequest\n");
 	CPacket packet;
 	agent::csAgentIDRequest msg;
 
@@ -314,7 +321,9 @@ void AgentClientSocket::SendAgentIDRequest()
 
 void AgentClientSocket::SendProcessListRequest()
 {
-	PRINT("[AgentSocket] SendProcessListRequest\n");
+	if (!isConnect) return;
+
+	PRINT("[AgentClientSocket] SendProcessListRequest\n");
 	CPacket packet;
 	agent::csProcessListRequest msg;
 
@@ -327,7 +336,9 @@ void AgentClientSocket::SendProcessListRequest()
 
 void AgentClientSocket::SendCounterListRequest(bool isMachine)
 {
-	PRINT("[AgentSocket] SendProcessListRequest\n");
+	if (!isConnect) return;
+	
+	PRINT("[AgentClientSocket] SendProcessListRequest\n");
 	CPacket packet;
 	agent::csCounterListRequest msg;
 
@@ -335,6 +346,39 @@ void AgentClientSocket::SendCounterListRequest(bool isMachine)
 
 	packet.length = (short)msg.ByteSize();
 	packet.type = (short)agent::CounterListRequest;
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+void AgentClientSocket::SendCurrentProcessList(std::vector<ProcessInfo>& processList)
+{
+	if (!isConnect) return;
+
+	sort(processList.begin(), processList.end());
+
+	PRINT("[AgentClientSocket] SendCurrentProcessList\n");
+	CPacket packet;
+	agent::csCurrentProcessListSend msg;
+
+	std::string cur = "";
+	agent::CurrentProcess* curP = NULL;
+
+	for (ProcessInfo p : processList)
+	{
+		if (cur != p.name)
+		{
+			cur = p.name;
+			curP = msg.add_processinfo();
+
+			curP->set_processname(p.name);
+		}
+
+		if (curP) curP->add_processid(p.processID);
+	}
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::CurrentProcessListSend;
 	msg.SerializeToArray((void *)&packet.msg, packet.length);
 
 	Send((char *)&packet, packet.length + HEADER_SIZE);

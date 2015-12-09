@@ -22,6 +22,10 @@ public:
 	std::string name;
 	int processID;
 	int number;
+
+	bool operator<(const ProcessInfo &t) const {
+		return (name < t.name);
+	}
 };
 
 class ProcessInfo_Agent
