@@ -184,3 +184,49 @@ bool RedisManager::GetCounterList(int agentID, std::vector<std::string>& resultL
 	}
 	return true;
 }
+
+bool RedisManager::SaveCurrentProcessList(int agentID, CPacket* packet)
+{
+	agent::csCurrentProcessListSend msg;
+
+	std::string key = std::to_string(agentID) + ":CurrentProcessList";
+	RedisValue result;
+
+	result = redis.command("del", key);
+	if (!result.isOk())
+	{
+		ERROR_PRINT("[RedisManager] redis command del ERROR\n");
+		return false;
+	}
+
+
+	if (msg.ParseFromArray(packet->msg, packet->length))
+	{
+		PRINT("[AgentSocket] Current Process List Agent %d\n", agentID);
+		for (int i = 0; i < msg.processinfo_size(); i++)
+		{
+			agent::CurrentProcess pi = msg.processinfo(i);
+
+			PRINT("%s\n", pi.processname().c_str());
+
+			std::string value = "";
+			for (int j = 0; j < pi.processid_size(); j++)
+			{
+				int pid = pi.processid(j);
+				PRINT("%d ", pid);
+
+				value += std::to_string(pid)+" ";
+			}
+			PRINT("\n");
+
+			result = redis.command("hmset", key, pi.processname(), value);
+			if (!result.isOk())
+			{
+				ERROR_PRINT("[RedisManager] redis command hmset ERROR\n");
+				return false;
+			}
+		}
+	}
+
+	return true;
+}

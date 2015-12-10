@@ -12,6 +12,8 @@ public:
 	int GetAgentID(int hostIP);
 	bool GetProcessList(int agentID, std::vector<std::string>& result);
 	bool GetCounterList(int agentID, std::vector<std::string>& result, bool isMachine);
+	
+	bool SaveCurrentProcessList(int agentID, CPacket* packet);
 
 private:
 	std::string redisIP;

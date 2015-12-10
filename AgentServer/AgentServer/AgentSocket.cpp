@@ -170,23 +170,10 @@ void AgentSocket::PacketHandling(CPacket *packet)
 		}
 		case agent::CurrentProcessListSend:
 		{
-		    agent::csCurrentProcessListSend msg;
 			PRINT("[AgentSocket] CurrentProcessListSend received\n");
-			if (msg.ParseFromArray(packet->msg, packet->length))
+			if (agentApp->redisManager.SaveCurrentProcessList(agentID, packet))
 			{
-				PRINT("[AgentSocket] Current Process List Agent %d\n", agentID);
-				for (int i = 0; i < msg.processinfo_size(); i++)
-				{
-					agent::CurrentProcess pi = msg.processinfo(i);
-					
-					PRINT("%s\n", pi.processname().c_str());
-					for (int j = 0; j < pi.processid_size(); j++)
-					{
-						int pid = pi.processid(j);
-						PRINT("%d ", pid);
-					}
-					PRINT("\n");
-				}
+				PRINT("[AgentSocket] Update process list %d\n", agentID);
 			}
 			break;
 		}
