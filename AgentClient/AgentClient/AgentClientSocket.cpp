@@ -253,11 +253,20 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 					for (int i = 0; i < msg.countername_size(); i++)
 					{
 						PRINT("%s\n", msg.countername(i).c_str());
-						query.AddCounter(msg.countername(i));
+						query.AddCounter(msg.countername(i), false);
 					}
+					SendCounterListRequest(true);
 				}
-
-				query.Record(1, 1);
+				else
+				{
+					PRINT("[AgentClientSocket] MachineCounterList : %d\n", msg.countername_size());
+					for (int i = 0; i < msg.countername_size(); i++)
+					{
+						PRINT("%s\n", msg.countername(i).c_str());
+						query.AddCounter(msg.countername(i), true);
+					}
+					query.Record(1, 1);
+				}
 			}
 			break;
 		}

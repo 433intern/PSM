@@ -34,19 +34,33 @@ void Query::Init()
 	helper.Init();
 }
 
-bool Query::AddCounter(std::string counter)
+bool Query::AddCounter(std::string counter, bool isMachine)
 {
-	for (std::string pc : counterList)
+	if (isMachine)
 	{
-		if (pc == counter) return false;
+		for (std::string pc : machineCounterList)
+		{
+			if (pc == counter) return false;
+		}
+		machineCounterList.push_back(counter);
+		return true;
 	}
-	counterList.push_back(counter);
-	return true;
+	else
+	{
+		for (std::string pc : counterList)
+		{
+			if (pc == counter) return false;
+		}
+		counterList.push_back(counter);
+		return true;
+	}
+	
 }
 
-bool Query::DeleteCounter(std::string counter)
+bool Query::DeleteCounter(std::string counter, bool isMachine)
 {
-	counterList.remove(counter);
+	if (isMachine) machineCounterList.remove(counter);
+	else counterList.remove(counter);
 	return true;
 }
 

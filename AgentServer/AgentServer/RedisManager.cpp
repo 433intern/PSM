@@ -28,6 +28,10 @@ void RedisManager::Init()
 	defaultCounterList.push_back("% Processor Time");
 	defaultCounterList.push_back("Working Set - Private");
 
+	defaultMachineCounterList.push_back("\\Processor(_Total)\\% Processor Time");
+	defaultMachineCounterList.push_back("\\Memory\\Page Faults/sec");
+	defaultMachineCounterList.push_back("\\Memory\\Available KBytes");
+
 	PRINT("[RedisManager] RedisManager Initialize complete!\n");
 }
 
