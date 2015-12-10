@@ -7,6 +7,13 @@ public:
 	double value;
 };
 
+class MachineCounterEntry
+{
+public:
+	PDH_HCOUNTER counter;
+	std::vector<Log> logs;
+};
+
 class ProcessCounterEntry
 {
 public:

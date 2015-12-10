@@ -14,9 +14,10 @@ enum agentType
 	
 
 	CurrentProcessListSend = 6;
-	TotalProcessesStateSend = 7;
+
 	HealthCheck = 8;
 	HealthAck = 9;
+	
 	ProcessCommandRequest = 10;
 	ProcessCommandResponse = 11;
 	CounterCommandRequest = 12;

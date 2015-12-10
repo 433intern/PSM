@@ -70,7 +70,7 @@ void Helper::UpdateProcessList()
 	}
 	
 	
-	agentClientApp->agentClient->socket->SendCurrentProcessList(processList);
+	if (agentClientApp) agentClientApp->agentClient->socket->SendCurrentProcessList(processList);
 	PRINT("[Helper] UpdateProcessList Done\n");
 }
 

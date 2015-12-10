@@ -265,7 +265,8 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 						PRINT("%s\n", msg.countername(i).c_str());
 						query.AddCounter(msg.countername(i), true);
 					}
-					query.Record(1, 1);
+					query.Record(1, 1, false);
+					query.Record(1, 1, true);
 				}
 			}
 			break;

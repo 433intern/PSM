@@ -10,7 +10,9 @@ Query::Query()
 Query::~Query()
 {
 	for (ProcessCounterEntry* p : processLogList) entryPoolManager->Free(p);
+	for (MachineCounterEntry* p : machineLogList) mentryPoolManager->Free(p);
 	delete entryPoolManager;
+	delete mentryPoolManager;
 }
 
 void Query::Init()
@@ -19,6 +21,14 @@ void Query::Init()
 	if (!entryPoolManager)
 	{
 		ERROR_PRINT("[Query] MemPooler<ProcessCounterEntry> error\n");
+		/* error handling */
+		return;
+	}
+
+	mentryPoolManager = new MemPooler<MachineCounterEntry>(1000);
+	if (!mentryPoolManager)
+	{
+		ERROR_PRINT("[Query] MemPooler<MachineCounterEntry> error\n");
 		/* error handling */
 		return;
 	}
@@ -109,55 +119,85 @@ bool Query::IsCheckProcess(std::string processName)
 	return false;
 }
 
-void Query::ClearLogList()
+void Query::ClearLogList(bool isMachine)
 {
-	for (ProcessCounterEntry* p : processLogList)
+	if (isMachine)
 	{
-		p->logs.clear();
-		if (!entryPoolManager->Free(p)) PRINT("[Query] Free Error!\n");
+		for (MachineCounterEntry* p : machineLogList)
+		{
+			p->logs.clear();
+			if (!mentryPoolManager->Free(p)) PRINT("[Query] Free Error!\n");
+		}
+		machineLogList.clear();
 	}
-
-	processLogList.clear();
+	else
+	{
+		for (ProcessCounterEntry* p : processLogList)
+		{
+			p->logs.clear();
+			if (!entryPoolManager->Free(p)) PRINT("[Query] Free Error!\n");
+		}
+		processLogList.clear();
+	}
 }
 
-bool Query::InitCounterInfo(PDH_HQUERY& query)
+bool Query::InitCounterInfo(PDH_HQUERY& query, bool isMachine)
 {
 	PDH_STATUS status;
-	ClearLogList();
-	helper.UpdateProcessList();
+	ClearLogList(isMachine);
 
 	PRINT("[Query] Update Counter Infos...\n");
 
-	int i = 0;
-
-	for (ProcessInfo p : helper.processList)
+	if (!isMachine)
 	{
-		if (!IsCheckProcess(p.name)) continue;
+		helper.UpdateProcessList();
+		int i = 0;
 
-		for (std::string counterName : counterList)
+		for (ProcessInfo p : helper.processList)
 		{
-			ProcessCounterEntry* pce = entryPoolManager->Alloc();
-			assert(pce);
+			if (!IsCheckProcess(p.name)) continue;
 
-			if (p.number == 0) counterName = "\\Process(" + p.name + ")\\" + counterName;
-			else counterName = "\\Process(" + p.name + "#" + std::to_string(p.number) + ")\\" + counterName;
+			for (std::string counterName : counterList)
+			{
+				ProcessCounterEntry* pce = entryPoolManager->Alloc();
+				assert(pce);
 
-			status = PdhAddCounter(query, counterName.c_str(), 0, &pce->counter);
-			
-			
+				if (p.number == 0) counterName = "\\Process(" + p.name + ")\\" + counterName;
+				else counterName = "\\Process(" + p.name + "#" + std::to_string(p.number) + ")\\" + counterName;
+
+				status = PdhAddCounter(query, counterName.c_str(), 0, &pce->counter);
+
+
+				if (status != ERROR_SUCCESS)
+				{
+					return false;
+				}
+
+				pce->processName = p.name;
+				pce->processID = p.processID;
+				pce->logs.clear();
+				processLogList.push_back(pce);
+
+			}
+		}
+	}
+	else
+	{
+		for (std::string counterName : machineCounterList)
+		{
+			MachineCounterEntry* mce = mentryPoolManager->Alloc();
+			assert(mce);
+
+			status = PdhAddCounter(query, counterName.c_str(), 0, &mce->counter);
+
 			if (status != ERROR_SUCCESS)
 			{
 				return false;
 			}
-			
-			pce->processName = p.name;
-			pce->processID = p.processID;
-
-			processLogList.push_back(pce);
-
+			mce->logs.clear();
+			machineLogList.push_back(mce);
 		}
 	}
-
 	PRINT("[Query] Done!\n");
 
 	return true;
@@ -179,9 +219,9 @@ char* Query::GetCurTime()
 	return s;
 }
 
-bool Query::Record(int recordTime, int interval)
+bool Query::Record(int recordTime, int interval, bool isMachine)
 {
-	
+	PDH_HQUERY query;
 	PDH_STATUS status;
 
 	status = PdhOpenQuery(NULL, 0, &query);
@@ -192,9 +232,9 @@ bool Query::Record(int recordTime, int interval)
 		return false;
 	}
 
-	if (!InitCounterInfo(query)){
+	if (!InitCounterInfo(query, isMachine)){
 		PRINT("[Query] PdhAddCounter Error!\n");
-		ClearLogList();
+		ClearLogList(isMachine);
 		return false;
 	}
 
@@ -225,25 +265,56 @@ bool Query::Record(int recordTime, int interval)
 
 		if (WaitResult == WAIT_OBJECT_0)
 		{
-			for (ProcessCounterEntry* it : processLogList)
+			if (!isMachine)
 			{
-				status = PdhGetFormattedCounterValue(it->counter, PDH_FMT_DOUBLE, &CounterType, &DisplayValue);
-				if (status != ERROR_SUCCESS)
+				for (ProcessCounterEntry* it : processLogList)
 				{
-					PRINT("[Query] PdhGetFormattedCounterValue Error!\n");
-					return false;
+					status = PdhGetFormattedCounterValue(it->counter, PDH_FMT_DOUBLE, &CounterType, &DisplayValue);
+					if (status != ERROR_SUCCESS)
+					{
+						PRINT("[Query] PdhGetFormattedCounterValue Error!\n");
+						return false;
+					}
+
+					Log log;
+					log.timestamp = std::string(GetCurTime());
+					log.time = time;
+					log.value = DisplayValue.doubleValue;
+					it->logs.push_back(log);
+
+					PRINT("[%s] %s[%d] : %f\n", GetCurTime(), it->processName.c_str(), it->processID, log.value);
 				}
+			}
+			else
+			{
+				for (MachineCounterEntry* it : machineLogList)
+				{
+					status = PdhGetFormattedCounterValue(it->counter, PDH_FMT_DOUBLE, &CounterType, &DisplayValue);
+					if (status != ERROR_SUCCESS)
+					{
+						PRINT("[Query] PdhGetFormattedCounterValue Error!\n");
+						return false;
+					}
 
-				Log log;
-				log.timestamp = std::string(GetCurTime());
-				log.time = time;
-				log.value = DisplayValue.doubleValue;
-				it->logs.push_back(log);
+					Log log;
+					log.timestamp = std::string(GetCurTime());
+					log.time = time;
+					log.value = DisplayValue.doubleValue;
+					it->logs.push_back(log);
 
-				PRINT("[%s] %s[%d] : %f\n", GetCurTime(), it->processName.c_str(), it->processID, log.value/1024);
+					PRINT("[%s] Total_ : %f\n", GetCurTime(), log.value);
+				}
 			}
 		}
 		time++;
+	}
+
+	status =  PdhCloseQuery(query);
+
+	if (ERROR_SUCCESS != status)
+	{
+		PRINT("[Query] PdhCloseQuery Error!\n");
+		return false;
 	}
 	
 	return true;

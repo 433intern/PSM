@@ -6,23 +6,25 @@ private:
 	HANDLE event_;
 	Helper helper;
 	MemPooler<ProcessCounterEntry> *entryPoolManager;
-
-	PDH_HQUERY query;
+	MemPooler<MachineCounterEntry> *mentryPoolManager;
 
 public:
 	std::list<ProcessInfo_Agent> checkProcessList;
 	std::list<std::string> counterList;
-	std::list<std::string> machineCounterList;
 	std::vector<ProcessCounterEntry*> processLogList;
+
+	std::list<std::string> machineCounterList;
+	std::vector<MachineCounterEntry*> machineLogList;
+
 
 	Query();
 	~Query();
 
 	void Init();
-	bool Record(int recordTime, int interval);
-	bool InitCounterInfo(PDH_HQUERY& query);
+	bool Record(int recordTime, int interval, bool isMachine);
+	bool InitCounterInfo(PDH_HQUERY& query, bool isMachine);
 	bool IsCheckProcess(std::string processName);
-	void ClearLogList();
+	void ClearLogList(bool isMachine);
 
 	bool AddCounter(std::string counter, bool isMachine);
 	bool DeleteCounter(std::string counter, bool isMachine);

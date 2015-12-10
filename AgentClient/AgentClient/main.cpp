@@ -9,21 +9,25 @@ int _tmain(int argc, _TCHAR* argv[])
 		return 0;
 	}
 
-	/*Query q;
+	Query q;
 	q.Init();
 	
 	ProcessInfo_Agent p;
-	p.isOn = true;
 	p.name = "chrome";
 	q.checkProcessList.push_back(p);
 
-	p.isOn = true;
 	p.name = "devenv";
 	q.checkProcessList.push_back(p);
 
 	q.counterList.push_back("% Processor Time");
 	q.counterList.push_back("Working Set - Private");
-	q.Record(50, 1);*/
+
+	q.machineCounterList.push_back("\\Processor(_Total)\\% Processor Time");
+	q.machineCounterList.push_back("\\Memory\\Available KBytes");
+
+	q.Record(1, 1, true);
+	q.Record(1, 1, false);
+	
 
 	agentClientApp = new AgentClientApp(inet_addr(argv[1]), atoi(argv[2]));
 	agentClientApp->Init();
