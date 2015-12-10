@@ -343,7 +343,7 @@ bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
 						log.value = DisplayValue.doubleValue;
 						it->logs.push_back(log);
 
-						PRINT("[%s] %s[%d] : %f\n", GetCurTime(), it->processName.c_str(), it->processID, log.value);
+						PRINT("[%s] %s[%d] %s: %f\n", GetCurTime(), it->processName.c_str(), it->processID, it->counterName.c_str(), log.value);
 					}
 				}
 				else
@@ -363,7 +363,7 @@ bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
 						log.value = DisplayValue.doubleValue;
 						it->logs.push_back(log);
 
-						PRINT("[%s] Total_ : %f\n", GetCurTime(), log.value);
+						PRINT("[%s] Total_ %s: %f\n", GetCurTime(), it->counterName.c_str(), log.value);
 					}
 				}
 			}

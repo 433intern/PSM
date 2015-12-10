@@ -322,7 +322,7 @@ bool RedisManager::SaveProcessInfo(int agentID, CPacket* packet)
 
 			if (pi.logs_size() > 0)
 			{
-				agent::Log temp = pi.logs(0);
+				/*agent::Log temp = pi.logs(0);
 				std::string curDate = GetCurrentDate(temp.timestamp());
 				std::string curKey = prefix + curDate;
 
@@ -337,32 +337,33 @@ bool RedisManager::SaveProcessInfo(int agentID, CPacket* packet)
 				{
 					std::string t = result.toString();
 					curValue = std::stod(split(t, ' ')[1]);
-				}
+				}*/
 
 				for (int j = 0; j < pi.logs_size(); j++)
 				{
 					agent::Log l = pi.logs(j);
+					std::string curDate = GetCurrentDate(l.timestamp());
+					std::string key = prefix + curDate;
+					double value = l.value();
 
-					if (GetCurrentDate(l.timestamp()) != curDate)
+					/*if (GetCurrentDate(l.timestamp()) != curDate)
 					{
-						std::string curDate = GetCurrentDate(temp.timestamp());
+						std::string curDate = GetCurrentDate(l.timestamp());
 						std::string curKey = prefix + curDate;
 						curValue = -1;
 					}
-
-					double value = l.value();
-
 					if (value == curValue)
 					{
 						continue;
 					}
-					curValue = value;
+					curValue = value;*/
+
 					if (counterName == "Memory") value /= 1024;
 
 					std::string v = GetCurrTime(l.timestamp()) + " " + std::to_string(value);
 					
 
-					result = redis.command("lpush", curKey, v);
+					result = redis.command("lpush", key, v);
 					if (!result.isOk())
 					{
 						ERROR_PRINT("[RedisManager] redis command lpush ERROR\n");
@@ -377,7 +378,40 @@ bool RedisManager::SaveProcessInfo(int agentID, CPacket* packet)
 	return true;
 }
 
-bool SaveMachineInfo(int agentID, CPacket* packet)
+bool RedisManager::SaveMachineInfo(int agentID, CPacket* packet)
 {
+	agent::csTotalMachineInfoSend msg;
+	std::string	sID = std::to_string(agentID);
+
+	RedisValue result;
+
+	if (msg.ParseFromArray(packet->msg, packet->length))
+	{
+		for (int i = 0; i < msg.info_size(); i++)
+		{
+			agent::MachineInfos mi = msg.info(i);
+
+			std::string counterName = CounterNameToNewName(mi.countername());
+			std::string prefix = sID + ":" + counterName + ":Total:";
+
+			if (mi.logs_size() > 0)
+			{
+				for (int j = 0; j < mi.logs_size(); j++)
+				{
+					agent::Log l = mi.logs(j);
+					std::string curDate = GetCurrentDate(l.timestamp());
+					std::string key = prefix + curDate;
+					double value = l.value();
+					std::string v = GetCurrTime(l.timestamp()) + " " + std::to_string(value);
+					result = redis.command("lpush", key, v);
+					if (!result.isOk())
+					{
+						ERROR_PRINT("[RedisManager] redis command lpush ERROR\n");
+						return false;
+					}
+				}
+			}
+		}
+	}
 	return true;
 }

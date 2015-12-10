@@ -191,6 +191,7 @@ void AgentSocket::PacketHandling(CPacket *packet)
 		case agent::AgentReady:
 		{
 			PRINT("[AgentSocket] AgentReady received\n");
+			SendStartRecord(true, -1, 10, 1, 0);
 			SendStartRecord(false, -1, 10, 1, 0);
 			break;
 		}
@@ -206,6 +207,10 @@ void AgentSocket::PacketHandling(CPacket *packet)
 		case agent::MachineInfoSend:
 		{
 			PRINT("[AgentSocket] MachineInfoSend received\n");
+			if (!agentApp->redisManager.SaveMachineInfo(agentID, packet))
+			{
+
+			}
 			break;
 		}
 
