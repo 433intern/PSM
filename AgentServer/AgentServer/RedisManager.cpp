@@ -22,8 +22,8 @@ void RedisManager::Init()
 		return;
 	}
 
-	defaultProcessList.push_back("chrome");
-	defaultProcessList.push_back("devenv");
+	defaultProcessList.push_back("Melon");
+	defaultProcessList.push_back("KakaoTalk");
 
 	defaultCounterList.push_back("% Processor Time");
 	defaultCounterList.push_back("Working Set - Private");
@@ -211,17 +211,16 @@ bool RedisManager::SaveCurrentProcessList(int agentID, CPacket* packet)
 		{
 			agent::CurrentProcess pi = msg.processinfo(i);
 
-			PRINT("%s\n", pi.processname().c_str());
+			//PRINT("%s\n", pi.processname().c_str());
 
 			std::string value = "";
 			for (int j = 0; j < pi.processid_size(); j++)
 			{
 				int pid = pi.processid(j);
-				PRINT("%d ", pid);
+				//PRINT("%d ", pid);
 
 				value += std::to_string(pid)+" ";
 			}
-			PRINT("\n");
 
 			result = redis.command("hmset", key, pi.processname(), value);
 			if (!result.isOk())
@@ -232,5 +231,153 @@ bool RedisManager::SaveCurrentProcessList(int agentID, CPacket* packet)
 		}
 	}
 
+	return true;
+}
+
+std::string RedisManager::CounterNameToNewName(const std::string& counterName)
+{
+	if (counterName == "\\Processor(_Total)\\% Processor Time")
+	{
+		return std::string("TotalCpuTime");
+	}
+	else if (counterName == "\\Memory\\Page Faults/sec")
+	{
+		return std::string("PageFault");
+	}
+	else if (counterName == "\\Memory\\Available KBytes")
+	{
+		return std::string("Memory");
+	}
+	else if (counterName == "% Processor Time")
+	{
+		return std::string("CpuTime");
+	}
+	else if (counterName == "Working Set - Private")
+	{
+		return std::string("Memory");
+	}
+		
+	return std::string("etc");
+}
+
+std::string RedisManager::GetCurrentDate(long long int timestamp)
+{
+	struct tm t;
+
+	time_t timer = (time_t)timestamp;
+	localtime_s(&t, &timer);
+	static char s[20];
+
+	sprintf(s, "%04d-%02d-%02d", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday);
+
+	return std::string(s);
+}
+
+std::string RedisManager::GetCurrTime(long long int timestamp)
+{
+	struct tm t;
+
+	time_t timer = (time_t)timestamp;
+	localtime_s(&t, &timer);
+	static char s[20];
+
+	sprintf(s, "%02d:%02d:%02d", t.tm_hour, t.tm_min, t.tm_sec);
+
+	return std::string(s);
+}
+
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+	std::stringstream ss(s);
+	std::string item;
+	while (std::getline(ss, item, delim)) {
+		elems.push_back(item);
+	}
+	return elems;
+}
+
+
+std::vector<std::string> split(const std::string &s, char delim) {
+	std::vector<std::string> elems;
+	split(s, delim, elems);
+	return elems;
+}
+
+bool RedisManager::SaveProcessInfo(int agentID, CPacket* packet)
+{
+	agent::csTotalProcessInfoSend msg;
+
+	std::string	sID = std::to_string(agentID);
+
+	RedisValue result;
+
+	if (msg.ParseFromArray(packet->msg, packet->length))
+	{
+		for (int i = 0; i < msg.info_size(); i++)
+		{
+			agent::ProcessInfos pi = msg.info(i);
+			
+			std::string counterName = CounterNameToNewName(pi.countername());
+			std::string prefix = sID + ":" + counterName
+				+ ":" + pi.processname() + ":" + std::to_string(pi.processid()) + ":";
+
+			if (pi.logs_size() > 0)
+			{
+				agent::Log temp = pi.logs(0);
+				std::string curDate = GetCurrentDate(temp.timestamp());
+				std::string curKey = prefix + curDate;
+
+				result = redis.command("lindex", curKey, 0);
+				if (!result.isOk())
+				{
+					ERROR_PRINT("[RedisManager] redis command lindex ERROR\n");
+					return false;
+				}
+				double curValue = -1;
+				if (!result.isNull())
+				{
+					std::string t = result.toString();
+					curValue = std::stod(split(t, ' ')[1]);
+				}
+
+				for (int j = 0; j < pi.logs_size(); j++)
+				{
+					agent::Log l = pi.logs(j);
+
+					if (GetCurrentDate(l.timestamp()) != curDate)
+					{
+						std::string curDate = GetCurrentDate(temp.timestamp());
+						std::string curKey = prefix + curDate;
+						curValue = -1;
+					}
+
+					double value = l.value();
+
+					if (value == curValue)
+					{
+						continue;
+					}
+					curValue = value;
+					if (counterName == "Memory") value /= 1024;
+
+					std::string v = GetCurrTime(l.timestamp()) + " " + std::to_string(value);
+					
+
+					result = redis.command("lpush", curKey, v);
+					if (!result.isOk())
+					{
+						ERROR_PRINT("[RedisManager] redis command lpush ERROR\n");
+						return false;
+					}
+				}		
+			}
+
+			
+		}
+	}
+	return true;
+}
+
+bool SaveMachineInfo(int agentID, CPacket* packet)
+{
 	return true;
 }

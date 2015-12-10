@@ -76,9 +76,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Log_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Log_reflection_ = NULL;
-const ::google::protobuf::Descriptor* ProcessInfo_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  ProcessInfo_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ProcessInfos_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ProcessInfos_reflection_ = NULL;
@@ -399,27 +396,12 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Log));
-  ProcessInfo_descriptor_ = file->message_type(18);
-  static const int ProcessInfo_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfo, processname_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfo, processid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfo, logs_),
-  };
-  ProcessInfo_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      ProcessInfo_descriptor_,
-      ProcessInfo::default_instance_,
-      ProcessInfo_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfo, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfo, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ProcessInfo));
-  ProcessInfos_descriptor_ = file->message_type(19);
-  static const int ProcessInfos_offsets_[2] = {
+  ProcessInfos_descriptor_ = file->message_type(18);
+  static const int ProcessInfos_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfos, countername_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfos, msg_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfos, processname_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfos, processid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfos, logs_),
   };
   ProcessInfos_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -432,7 +414,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ProcessInfos));
-  csTotalProcessInfoSend_descriptor_ = file->message_type(20);
+  csTotalProcessInfoSend_descriptor_ = file->message_type(19);
   static const int csTotalProcessInfoSend_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csTotalProcessInfoSend, info_),
   };
@@ -447,7 +429,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csTotalProcessInfoSend));
-  MachineInfos_descriptor_ = file->message_type(21);
+  MachineInfos_descriptor_ = file->message_type(20);
   static const int MachineInfos_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MachineInfos, countername_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MachineInfos, logs_),
@@ -463,7 +445,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MachineInfos));
-  csTotalMachineInfoSend_descriptor_ = file->message_type(22);
+  csTotalMachineInfoSend_descriptor_ = file->message_type(21);
   static const int csTotalMachineInfoSend_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csTotalMachineInfoSend, info_),
   };
@@ -478,7 +460,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csTotalMachineInfoSend));
-  scProcessRestrictionRequest_descriptor_ = file->message_type(23);
+  scProcessRestrictionRequest_descriptor_ = file->message_type(22);
   static const int scProcessRestrictionRequest_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessRestrictionRequest, processid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessRestrictionRequest, type_),
@@ -496,7 +478,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(scProcessRestrictionRequest));
-  csProcessRestrictionResponse_descriptor_ = file->message_type(24);
+  csProcessRestrictionResponse_descriptor_ = file->message_type(23);
   static const int csProcessRestrictionResponse_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, processid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, type_),
@@ -515,7 +497,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csProcessRestrictionResponse));
   csProcessRestrictionResponse_Result_descriptor_ = csProcessRestrictionResponse_descriptor_->enum_type(0);
-  csRecordResponse_descriptor_ = file->message_type(25);
+  csRecordResponse_descriptor_ = file->message_type(24);
   static const int csRecordResponse_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csRecordResponse, ismachine_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csRecordResponse, result_),
@@ -586,8 +568,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Log_descriptor_, &Log::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ProcessInfo_descriptor_, &ProcessInfo::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ProcessInfos_descriptor_, &ProcessInfos::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     csTotalProcessInfoSend_descriptor_, &csTotalProcessInfoSend::default_instance());
@@ -642,8 +622,6 @@ void protobuf_ShutdownFile_AgentProtocol_2eproto() {
   delete scStopRecord_reflection_;
   delete Log::default_instance_;
   delete Log_reflection_;
-  delete ProcessInfo::default_instance_;
-  delete ProcessInfo_reflection_;
   delete ProcessInfos::default_instance_;
   delete ProcessInfos_reflection_;
   delete csTotalProcessInfoSend::default_instance_;
@@ -697,47 +675,46 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
     "talRecordTime\030\001 \002(\005\022\020\n\010interval\030\002 \002(\005\022\024\n"
     "\014responseTime\030\003 \002(\005\022\r\n\005delay\030\004 \001(\003\"!\n\014sc"
     "StopRecord\022\021\n\tisMachine\030\001 \002(\010\"\'\n\003Log\022\021\n\t"
-    "timeStamp\030\001 \002(\003\022\r\n\005value\030\002 \002(\001\"O\n\013Proces"
-    "sInfo\022\023\n\013processName\030\001 \002(\t\022\021\n\tprocessID\030"
-    "\002 \002(\005\022\030\n\004logs\030\003 \003(\0132\n.agent.Log\"D\n\014Proce"
-    "ssInfos\022\023\n\013counterName\030\001 \002(\t\022\037\n\003msg\030\002 \003("
-    "\0132\022.agent.ProcessInfo\";\n\026csTotalProcessI"
-    "nfoSend\022!\n\004info\030\001 \003(\0132\023.agent.ProcessInf"
-    "os\"=\n\014MachineInfos\022\023\n\013counterName\030\001 \002(\t\022"
-    "\030\n\004logs\030\002 \003(\0132\n.agent.Log\";\n\026csTotalMach"
-    "ineInfoSend\022!\n\004info\030\001 \003(\0132\023.agent.Machin"
-    "eInfos\"r\n\033scProcessRestrictionRequest\022\021\n"
-    "\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.agent.R"
-    "estriction\022\016\n\006value1\030\003 \002(\005\022\016\n\006value2\030\004 \001"
-    "(\005\"\307\001\n\034csProcessRestrictionResponse\022\021\n\tp"
-    "rocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.agent.Res"
-    "triction\022:\n\006result\030\003 \002(\0162*.agent.csProce"
-    "ssRestrictionResponse.Result\022\022\n\nfailReas"
-    "on\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007FAILU"
-    "RE\020\001\"\275\001\n\020csRecordResponse\022\021\n\tisMachine\030\005"
-    " \002(\010\022.\n\006result\030\003 \002(\0162\036.agent.csRecordRes"
-    "ponse.Result\022\022\n\nfailReason\030\004 \001(\t\"R\n\006Resu"
-    "lt\022\021\n\rSTART_SUCCESS\020\000\022\021\n\rSTART_FAILURE\020\001"
-    "\022\020\n\014STOP_SUCCESS\020\002\022\020\n\014STOP_FAILURE\020\003*\356\003\n"
-    "\tagentType\022\022\n\016AgentIDRequest\020\000\022\023\n\017AgentI"
-    "DResponse\020\001\022\026\n\022ProcessListRequest\020\002\022\027\n\023P"
-    "rocessListResponse\020\003\022\026\n\022CounterListReque"
-    "st\020\004\022\027\n\023CounterListResponse\020\005\022\032\n\026Current"
-    "ProcessListSend\020\006\022\017\n\013HealthCheck\020\010\022\r\n\tHe"
-    "althAck\020\t\022\031\n\025ProcessCommandRequest\020\n\022\032\n\026"
-    "ProcessCommandResponse\020\013\022\031\n\025CounterComma"
-    "ndRequest\020\014\022\032\n\026CounterCommandResponse\020\r\022"
-    "\035\n\031ProcessRestrictionRequest\020\016\022\036\n\032Proces"
-    "sRestrictionResponse\020\017\022\017\n\013StartRecord\020\020\022"
-    "\016\n\nStopRecord\020\021\022\023\n\017ProcessInfoSend\020\022\022\023\n\017"
-    "MachineInfoSend\020\025\022\016\n\nAgentReady\020\026\022\022\n\016Rec"
-    "ordResponse\020\027*`\n\022ProcessCommandType\022\t\n\005S"
-    "TART\020\000\022\013\n\007RESTART\020\001\022\010\n\004STOP\020\002\022\013\n\007ADDLIST"
-    "\020\003\022\016\n\nDELETELIST\020\004\022\013\n\007ALLSTOP\020\005*3\n\022Count"
-    "erCommandType\022\014\n\010CADDLIST\020\001\022\017\n\013CDELETELI"
-    "ST\020\002*V\n\013Restriction\022\023\n\017USER_TIME_LIMIT\020\000"
-    "\022\030\n\024MAX_WORKING_SET_SIZE\020\001\022\030\n\024MIN_WORKIN"
-    "G_SET_SIZE\020\002", 2812);
+    "timeStamp\030\001 \002(\003\022\r\n\005value\030\002 \002(\001\"e\n\014Proces"
+    "sInfos\022\023\n\013counterName\030\001 \002(\t\022\023\n\013processNa"
+    "me\030\002 \002(\t\022\021\n\tprocessID\030\003 \002(\005\022\030\n\004logs\030\004 \003("
+    "\0132\n.agent.Log\";\n\026csTotalProcessInfoSend\022"
+    "!\n\004info\030\001 \003(\0132\023.agent.ProcessInfos\"=\n\014Ma"
+    "chineInfos\022\023\n\013counterName\030\001 \002(\t\022\030\n\004logs\030"
+    "\002 \003(\0132\n.agent.Log\";\n\026csTotalMachineInfoS"
+    "end\022!\n\004info\030\001 \003(\0132\023.agent.MachineInfos\"r"
+    "\n\033scProcessRestrictionRequest\022\021\n\tprocess"
+    "ID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.agent.Restricti"
+    "on\022\016\n\006value1\030\003 \002(\005\022\016\n\006value2\030\004 \001(\005\"\307\001\n\034c"
+    "sProcessRestrictionResponse\022\021\n\tprocessID"
+    "\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.agent.Restriction"
+    "\022:\n\006result\030\003 \002(\0162*.agent.csProcessRestri"
+    "ctionResponse.Result\022\022\n\nfailReason\030\004 \001(\t"
+    "\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE\020\001\"\275\001\n"
+    "\020csRecordResponse\022\021\n\tisMachine\030\005 \002(\010\022.\n\006"
+    "result\030\003 \002(\0162\036.agent.csRecordResponse.Re"
+    "sult\022\022\n\nfailReason\030\004 \001(\t\"R\n\006Result\022\021\n\rST"
+    "ART_SUCCESS\020\000\022\021\n\rSTART_FAILURE\020\001\022\020\n\014STOP"
+    "_SUCCESS\020\002\022\020\n\014STOP_FAILURE\020\003*\356\003\n\tagentTy"
+    "pe\022\022\n\016AgentIDRequest\020\000\022\023\n\017AgentIDRespons"
+    "e\020\001\022\026\n\022ProcessListRequest\020\002\022\027\n\023ProcessLi"
+    "stResponse\020\003\022\026\n\022CounterListRequest\020\004\022\027\n\023"
+    "CounterListResponse\020\005\022\032\n\026CurrentProcessL"
+    "istSend\020\006\022\017\n\013HealthCheck\020\010\022\r\n\tHealthAck\020"
+    "\t\022\031\n\025ProcessCommandRequest\020\n\022\032\n\026ProcessC"
+    "ommandResponse\020\013\022\031\n\025CounterCommandReques"
+    "t\020\014\022\032\n\026CounterCommandResponse\020\r\022\035\n\031Proce"
+    "ssRestrictionRequest\020\016\022\036\n\032ProcessRestric"
+    "tionResponse\020\017\022\017\n\013StartRecord\020\020\022\016\n\nStopR"
+    "ecord\020\021\022\023\n\017ProcessInfoSend\020\022\022\023\n\017MachineI"
+    "nfoSend\020\025\022\016\n\nAgentReady\020\026\022\022\n\016RecordRespo"
+    "nse\020\027*`\n\022ProcessCommandType\022\t\n\005START\020\000\022\013"
+    "\n\007RESTART\020\001\022\010\n\004STOP\020\002\022\013\n\007ADDLIST\020\003\022\016\n\nDE"
+    "LETELIST\020\004\022\013\n\007ALLSTOP\020\005*3\n\022CounterComman"
+    "dType\022\014\n\010CADDLIST\020\001\022\017\n\013CDELETELIST\020\002*V\n\013"
+    "Restriction\022\023\n\017USER_TIME_LIMIT\020\000\022\030\n\024MAX_"
+    "WORKING_SET_SIZE\020\001\022\030\n\024MIN_WORKING_SET_SI"
+    "ZE\020\002", 2764);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "AgentProtocol.proto", &protobuf_RegisterTypes);
   csAgentIDRequest::default_instance_ = new csAgentIDRequest();
@@ -758,7 +735,6 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
   scStartRecord::default_instance_ = new scStartRecord();
   scStopRecord::default_instance_ = new scStopRecord();
   Log::default_instance_ = new Log();
-  ProcessInfo::default_instance_ = new ProcessInfo();
   ProcessInfos::default_instance_ = new ProcessInfos();
   csTotalProcessInfoSend::default_instance_ = new csTotalProcessInfoSend();
   MachineInfos::default_instance_ = new MachineInfos();
@@ -784,7 +760,6 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
   scStartRecord::default_instance_->InitAsDefaultInstance();
   scStopRecord::default_instance_->InitAsDefaultInstance();
   Log::default_instance_->InitAsDefaultInstance();
-  ProcessInfo::default_instance_->InitAsDefaultInstance();
   ProcessInfos::default_instance_->InitAsDefaultInstance();
   csTotalProcessInfoSend::default_instance_->InitAsDefaultInstance();
   MachineInfos::default_instance_->InitAsDefaultInstance();
@@ -5534,333 +5509,10 @@ void Log::Swap(Log* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int ProcessInfo::kProcessNameFieldNumber;
-const int ProcessInfo::kProcessIDFieldNumber;
-const int ProcessInfo::kLogsFieldNumber;
-#endif  // !_MSC_VER
-
-ProcessInfo::ProcessInfo()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.ProcessInfo)
-}
-
-void ProcessInfo::InitAsDefaultInstance() {
-}
-
-ProcessInfo::ProcessInfo(const ProcessInfo& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.ProcessInfo)
-}
-
-void ProcessInfo::SharedCtor() {
-  ::google::protobuf::internal::GetEmptyString();
-  _cached_size_ = 0;
-  processname_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  processid_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-ProcessInfo::~ProcessInfo() {
-  // @@protoc_insertion_point(destructor:agent.ProcessInfo)
-  SharedDtor();
-}
-
-void ProcessInfo::SharedDtor() {
-  if (processname_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete processname_;
-  }
-  if (this != default_instance_) {
-  }
-}
-
-void ProcessInfo::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* ProcessInfo::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return ProcessInfo_descriptor_;
-}
-
-const ProcessInfo& ProcessInfo::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-ProcessInfo* ProcessInfo::default_instance_ = NULL;
-
-ProcessInfo* ProcessInfo::New() const {
-  return new ProcessInfo;
-}
-
-void ProcessInfo::Clear() {
-  if (_has_bits_[0 / 32] & 3) {
-    if (has_processname()) {
-      if (processname_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        processname_->clear();
-      }
-    }
-    processid_ = 0;
-  }
-  logs_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool ProcessInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.ProcessInfo)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string processName = 1;
-      case 1: {
-        if (tag == 10) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_processname()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->processname().data(), this->processname().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "processname");
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(16)) goto parse_processID;
-        break;
-      }
-
-      // required int32 processID = 2;
-      case 2: {
-        if (tag == 16) {
-         parse_processID:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &processid_)));
-          set_has_processid();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(26)) goto parse_logs;
-        break;
-      }
-
-      // repeated .agent.Log logs = 3;
-      case 3: {
-        if (tag == 26) {
-         parse_logs:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_logs()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(26)) goto parse_logs;
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.ProcessInfo)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.ProcessInfo)
-  return false;
-#undef DO_
-}
-
-void ProcessInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.ProcessInfo)
-  // required string processName = 1;
-  if (has_processname()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->processname().data(), this->processname().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "processname");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->processname(), output);
-  }
-
-  // required int32 processID = 2;
-  if (has_processid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->processid(), output);
-  }
-
-  // repeated .agent.Log logs = 3;
-  for (int i = 0; i < this->logs_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->logs(i), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.ProcessInfo)
-}
-
-::google::protobuf::uint8* ProcessInfo::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.ProcessInfo)
-  // required string processName = 1;
-  if (has_processname()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->processname().data(), this->processname().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "processname");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->processname(), target);
-  }
-
-  // required int32 processID = 2;
-  if (has_processid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->processid(), target);
-  }
-
-  // repeated .agent.Log logs = 3;
-  for (int i = 0; i < this->logs_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        3, this->logs(i), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.ProcessInfo)
-  return target;
-}
-
-int ProcessInfo::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string processName = 1;
-    if (has_processname()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->processname());
-    }
-
-    // required int32 processID = 2;
-    if (has_processid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->processid());
-    }
-
-  }
-  // repeated .agent.Log logs = 3;
-  total_size += 1 * this->logs_size();
-  for (int i = 0; i < this->logs_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->logs(i));
-  }
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void ProcessInfo::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const ProcessInfo* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ProcessInfo*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void ProcessInfo::MergeFrom(const ProcessInfo& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  logs_.MergeFrom(from.logs_);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_processname()) {
-      set_processname(from.processname());
-    }
-    if (from.has_processid()) {
-      set_processid(from.processid());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void ProcessInfo::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void ProcessInfo::CopyFrom(const ProcessInfo& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool ProcessInfo::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
-
-  if (!::google::protobuf::internal::AllAreInitialized(this->logs())) return false;
-  return true;
-}
-
-void ProcessInfo::Swap(ProcessInfo* other) {
-  if (other != this) {
-    std::swap(processname_, other->processname_);
-    std::swap(processid_, other->processid_);
-    logs_.Swap(&other->logs_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata ProcessInfo::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = ProcessInfo_descriptor_;
-  metadata.reflection = ProcessInfo_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
 const int ProcessInfos::kCounterNameFieldNumber;
-const int ProcessInfos::kMsgFieldNumber;
+const int ProcessInfos::kProcessNameFieldNumber;
+const int ProcessInfos::kProcessIDFieldNumber;
+const int ProcessInfos::kLogsFieldNumber;
 #endif  // !_MSC_VER
 
 ProcessInfos::ProcessInfos()
@@ -5883,6 +5535,8 @@ void ProcessInfos::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   countername_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  processname_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  processid_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -5894,6 +5548,9 @@ ProcessInfos::~ProcessInfos() {
 void ProcessInfos::SharedDtor() {
   if (countername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete countername_;
+  }
+  if (processname_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete processname_;
   }
   if (this != default_instance_) {
   }
@@ -5921,12 +5578,20 @@ ProcessInfos* ProcessInfos::New() const {
 }
 
 void ProcessInfos::Clear() {
-  if (has_countername()) {
-    if (countername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-      countername_->clear();
+  if (_has_bits_[0 / 32] & 7) {
+    if (has_countername()) {
+      if (countername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        countername_->clear();
+      }
     }
+    if (has_processname()) {
+      if (processname_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        processname_->clear();
+      }
+    }
+    processid_ = 0;
   }
-  msg_.Clear();
+  logs_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -5953,20 +5618,52 @@ bool ProcessInfos::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_msg;
+        if (input->ExpectTag(18)) goto parse_processName;
         break;
       }
 
-      // repeated .agent.ProcessInfo msg = 2;
+      // required string processName = 2;
       case 2: {
         if (tag == 18) {
-         parse_msg:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_msg()));
+         parse_processName:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_processname()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->processname().data(), this->processname().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "processname");
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_msg;
+        if (input->ExpectTag(24)) goto parse_processID;
+        break;
+      }
+
+      // required int32 processID = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_processID:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &processid_)));
+          set_has_processid();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_logs;
+        break;
+      }
+
+      // repeated .agent.Log logs = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_logs:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_logs()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_logs;
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -6006,10 +5703,25 @@ void ProcessInfos::SerializeWithCachedSizes(
       1, this->countername(), output);
   }
 
-  // repeated .agent.ProcessInfo msg = 2;
-  for (int i = 0; i < this->msg_size(); i++) {
+  // required string processName = 2;
+  if (has_processname()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->processname().data(), this->processname().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "processname");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->processname(), output);
+  }
+
+  // required int32 processID = 3;
+  if (has_processid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->processid(), output);
+  }
+
+  // repeated .agent.Log logs = 4;
+  for (int i = 0; i < this->logs_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->msg(i), output);
+      4, this->logs(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -6033,11 +5745,27 @@ void ProcessInfos::SerializeWithCachedSizes(
         1, this->countername(), target);
   }
 
-  // repeated .agent.ProcessInfo msg = 2;
-  for (int i = 0; i < this->msg_size(); i++) {
+  // required string processName = 2;
+  if (has_processname()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->processname().data(), this->processname().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "processname");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->processname(), target);
+  }
+
+  // required int32 processID = 3;
+  if (has_processid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->processid(), target);
+  }
+
+  // repeated .agent.Log logs = 4;
+  for (int i = 0; i < this->logs_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        2, this->msg(i), target);
+        4, this->logs(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -6059,13 +5787,27 @@ int ProcessInfos::ByteSize() const {
           this->countername());
     }
 
+    // required string processName = 2;
+    if (has_processname()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->processname());
+    }
+
+    // required int32 processID = 3;
+    if (has_processid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->processid());
+    }
+
   }
-  // repeated .agent.ProcessInfo msg = 2;
-  total_size += 1 * this->msg_size();
-  for (int i = 0; i < this->msg_size(); i++) {
+  // repeated .agent.Log logs = 4;
+  total_size += 1 * this->logs_size();
+  for (int i = 0; i < this->logs_size(); i++) {
     total_size +=
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->msg(i));
+        this->logs(i));
   }
 
   if (!unknown_fields().empty()) {
@@ -6093,10 +5835,16 @@ void ProcessInfos::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ProcessInfos::MergeFrom(const ProcessInfos& from) {
   GOOGLE_CHECK_NE(&from, this);
-  msg_.MergeFrom(from.msg_);
+  logs_.MergeFrom(from.logs_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_countername()) {
       set_countername(from.countername());
+    }
+    if (from.has_processname()) {
+      set_processname(from.processname());
+    }
+    if (from.has_processid()) {
+      set_processid(from.processid());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -6115,16 +5863,18 @@ void ProcessInfos::CopyFrom(const ProcessInfos& from) {
 }
 
 bool ProcessInfos::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
-  if (!::google::protobuf::internal::AllAreInitialized(this->msg())) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(this->logs())) return false;
   return true;
 }
 
 void ProcessInfos::Swap(ProcessInfos* other) {
   if (other != this) {
     std::swap(countername_, other->countername_);
-    msg_.Swap(&other->msg_);
+    std::swap(processname_, other->processname_);
+    std::swap(processid_, other->processid_);
+    logs_.Swap(&other->logs_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

@@ -165,17 +165,12 @@ message Log
 	required double value = 2;
 }
 
-message ProcessInfo
-{
-	required string processName = 1;
-	required int32 processID = 2;
-	repeated Log logs = 3;
-}
-
 message ProcessInfos
 {
 	required string counterName = 1;
-	repeated ProcessInfo msg = 2;
+	required string processName = 2;
+	required int32 processID = 3;
+	repeated Log logs = 4;
 }
 
 message csTotalProcessInfoSend

@@ -53,7 +53,6 @@ class csCounterCommandResponse;
 class scStartRecord;
 class scStopRecord;
 class Log;
-class ProcessInfo;
 class ProcessInfos;
 class csTotalProcessInfoSend;
 class MachineInfos;
@@ -1870,113 +1869,6 @@ class Log : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ProcessInfo : public ::google::protobuf::Message {
- public:
-  ProcessInfo();
-  virtual ~ProcessInfo();
-
-  ProcessInfo(const ProcessInfo& from);
-
-  inline ProcessInfo& operator=(const ProcessInfo& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ProcessInfo& default_instance();
-
-  void Swap(ProcessInfo* other);
-
-  // implements Message ----------------------------------------------
-
-  ProcessInfo* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ProcessInfo& from);
-  void MergeFrom(const ProcessInfo& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required string processName = 1;
-  inline bool has_processname() const;
-  inline void clear_processname();
-  static const int kProcessNameFieldNumber = 1;
-  inline const ::std::string& processname() const;
-  inline void set_processname(const ::std::string& value);
-  inline void set_processname(const char* value);
-  inline void set_processname(const char* value, size_t size);
-  inline ::std::string* mutable_processname();
-  inline ::std::string* release_processname();
-  inline void set_allocated_processname(::std::string* processname);
-
-  // required int32 processID = 2;
-  inline bool has_processid() const;
-  inline void clear_processid();
-  static const int kProcessIDFieldNumber = 2;
-  inline ::google::protobuf::int32 processid() const;
-  inline void set_processid(::google::protobuf::int32 value);
-
-  // repeated .agent.Log logs = 3;
-  inline int logs_size() const;
-  inline void clear_logs();
-  static const int kLogsFieldNumber = 3;
-  inline const ::agent::Log& logs(int index) const;
-  inline ::agent::Log* mutable_logs(int index);
-  inline ::agent::Log* add_logs();
-  inline const ::google::protobuf::RepeatedPtrField< ::agent::Log >&
-      logs() const;
-  inline ::google::protobuf::RepeatedPtrField< ::agent::Log >*
-      mutable_logs();
-
-  // @@protoc_insertion_point(class_scope:agent.ProcessInfo)
- private:
-  inline void set_has_processname();
-  inline void clear_has_processname();
-  inline void set_has_processid();
-  inline void clear_has_processid();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
-  ::std::string* processname_;
-  ::google::protobuf::RepeatedPtrField< ::agent::Log > logs_;
-  ::google::protobuf::int32 processid_;
-  friend void  protobuf_AddDesc_AgentProtocol_2eproto();
-  friend void protobuf_AssignDesc_AgentProtocol_2eproto();
-  friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
-
-  void InitAsDefaultInstance();
-  static ProcessInfo* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class ProcessInfos : public ::google::protobuf::Message {
  public:
   ProcessInfos();
@@ -2042,29 +1934,54 @@ class ProcessInfos : public ::google::protobuf::Message {
   inline ::std::string* release_countername();
   inline void set_allocated_countername(::std::string* countername);
 
-  // repeated .agent.ProcessInfo msg = 2;
-  inline int msg_size() const;
-  inline void clear_msg();
-  static const int kMsgFieldNumber = 2;
-  inline const ::agent::ProcessInfo& msg(int index) const;
-  inline ::agent::ProcessInfo* mutable_msg(int index);
-  inline ::agent::ProcessInfo* add_msg();
-  inline const ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfo >&
-      msg() const;
-  inline ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfo >*
-      mutable_msg();
+  // required string processName = 2;
+  inline bool has_processname() const;
+  inline void clear_processname();
+  static const int kProcessNameFieldNumber = 2;
+  inline const ::std::string& processname() const;
+  inline void set_processname(const ::std::string& value);
+  inline void set_processname(const char* value);
+  inline void set_processname(const char* value, size_t size);
+  inline ::std::string* mutable_processname();
+  inline ::std::string* release_processname();
+  inline void set_allocated_processname(::std::string* processname);
+
+  // required int32 processID = 3;
+  inline bool has_processid() const;
+  inline void clear_processid();
+  static const int kProcessIDFieldNumber = 3;
+  inline ::google::protobuf::int32 processid() const;
+  inline void set_processid(::google::protobuf::int32 value);
+
+  // repeated .agent.Log logs = 4;
+  inline int logs_size() const;
+  inline void clear_logs();
+  static const int kLogsFieldNumber = 4;
+  inline const ::agent::Log& logs(int index) const;
+  inline ::agent::Log* mutable_logs(int index);
+  inline ::agent::Log* add_logs();
+  inline const ::google::protobuf::RepeatedPtrField< ::agent::Log >&
+      logs() const;
+  inline ::google::protobuf::RepeatedPtrField< ::agent::Log >*
+      mutable_logs();
 
   // @@protoc_insertion_point(class_scope:agent.ProcessInfos)
  private:
   inline void set_has_countername();
   inline void clear_has_countername();
+  inline void set_has_processname();
+  inline void clear_has_processname();
+  inline void set_has_processid();
+  inline void clear_has_processid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::std::string* countername_;
-  ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfo > msg_;
+  ::std::string* processname_;
+  ::google::protobuf::RepeatedPtrField< ::agent::Log > logs_;
+  ::google::protobuf::int32 processid_;
   friend void  protobuf_AddDesc_AgentProtocol_2eproto();
   friend void protobuf_AssignDesc_AgentProtocol_2eproto();
   friend void protobuf_ShutdownFile_AgentProtocol_2eproto();
@@ -3827,140 +3744,6 @@ inline void Log::set_value(double value) {
 
 // -------------------------------------------------------------------
 
-// ProcessInfo
-
-// required string processName = 1;
-inline bool ProcessInfo::has_processname() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ProcessInfo::set_has_processname() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ProcessInfo::clear_has_processname() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ProcessInfo::clear_processname() {
-  if (processname_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    processname_->clear();
-  }
-  clear_has_processname();
-}
-inline const ::std::string& ProcessInfo::processname() const {
-  // @@protoc_insertion_point(field_get:agent.ProcessInfo.processName)
-  return *processname_;
-}
-inline void ProcessInfo::set_processname(const ::std::string& value) {
-  set_has_processname();
-  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    processname_ = new ::std::string;
-  }
-  processname_->assign(value);
-  // @@protoc_insertion_point(field_set:agent.ProcessInfo.processName)
-}
-inline void ProcessInfo::set_processname(const char* value) {
-  set_has_processname();
-  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    processname_ = new ::std::string;
-  }
-  processname_->assign(value);
-  // @@protoc_insertion_point(field_set_char:agent.ProcessInfo.processName)
-}
-inline void ProcessInfo::set_processname(const char* value, size_t size) {
-  set_has_processname();
-  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    processname_ = new ::std::string;
-  }
-  processname_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:agent.ProcessInfo.processName)
-}
-inline ::std::string* ProcessInfo::mutable_processname() {
-  set_has_processname();
-  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    processname_ = new ::std::string;
-  }
-  // @@protoc_insertion_point(field_mutable:agent.ProcessInfo.processName)
-  return processname_;
-}
-inline ::std::string* ProcessInfo::release_processname() {
-  clear_has_processname();
-  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    return NULL;
-  } else {
-    ::std::string* temp = processname_;
-    processname_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    return temp;
-  }
-}
-inline void ProcessInfo::set_allocated_processname(::std::string* processname) {
-  if (processname_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete processname_;
-  }
-  if (processname) {
-    set_has_processname();
-    processname_ = processname;
-  } else {
-    clear_has_processname();
-    processname_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  }
-  // @@protoc_insertion_point(field_set_allocated:agent.ProcessInfo.processName)
-}
-
-// required int32 processID = 2;
-inline bool ProcessInfo::has_processid() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ProcessInfo::set_has_processid() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ProcessInfo::clear_has_processid() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void ProcessInfo::clear_processid() {
-  processid_ = 0;
-  clear_has_processid();
-}
-inline ::google::protobuf::int32 ProcessInfo::processid() const {
-  // @@protoc_insertion_point(field_get:agent.ProcessInfo.processID)
-  return processid_;
-}
-inline void ProcessInfo::set_processid(::google::protobuf::int32 value) {
-  set_has_processid();
-  processid_ = value;
-  // @@protoc_insertion_point(field_set:agent.ProcessInfo.processID)
-}
-
-// repeated .agent.Log logs = 3;
-inline int ProcessInfo::logs_size() const {
-  return logs_.size();
-}
-inline void ProcessInfo::clear_logs() {
-  logs_.Clear();
-}
-inline const ::agent::Log& ProcessInfo::logs(int index) const {
-  // @@protoc_insertion_point(field_get:agent.ProcessInfo.logs)
-  return logs_.Get(index);
-}
-inline ::agent::Log* ProcessInfo::mutable_logs(int index) {
-  // @@protoc_insertion_point(field_mutable:agent.ProcessInfo.logs)
-  return logs_.Mutable(index);
-}
-inline ::agent::Log* ProcessInfo::add_logs() {
-  // @@protoc_insertion_point(field_add:agent.ProcessInfo.logs)
-  return logs_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::agent::Log >&
-ProcessInfo::logs() const {
-  // @@protoc_insertion_point(field_list:agent.ProcessInfo.logs)
-  return logs_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::agent::Log >*
-ProcessInfo::mutable_logs() {
-  // @@protoc_insertion_point(field_mutable_list:agent.ProcessInfo.logs)
-  return &logs_;
-}
-
-// -------------------------------------------------------------------
-
 // ProcessInfos
 
 // required string counterName = 1;
@@ -4039,34 +3822,134 @@ inline void ProcessInfos::set_allocated_countername(::std::string* countername) 
   // @@protoc_insertion_point(field_set_allocated:agent.ProcessInfos.counterName)
 }
 
-// repeated .agent.ProcessInfo msg = 2;
-inline int ProcessInfos::msg_size() const {
-  return msg_.size();
+// required string processName = 2;
+inline bool ProcessInfos::has_processname() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ProcessInfos::clear_msg() {
-  msg_.Clear();
+inline void ProcessInfos::set_has_processname() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline const ::agent::ProcessInfo& ProcessInfos::msg(int index) const {
-  // @@protoc_insertion_point(field_get:agent.ProcessInfos.msg)
-  return msg_.Get(index);
+inline void ProcessInfos::clear_has_processname() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline ::agent::ProcessInfo* ProcessInfos::mutable_msg(int index) {
-  // @@protoc_insertion_point(field_mutable:agent.ProcessInfos.msg)
-  return msg_.Mutable(index);
+inline void ProcessInfos::clear_processname() {
+  if (processname_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    processname_->clear();
+  }
+  clear_has_processname();
 }
-inline ::agent::ProcessInfo* ProcessInfos::add_msg() {
-  // @@protoc_insertion_point(field_add:agent.ProcessInfos.msg)
-  return msg_.Add();
+inline const ::std::string& ProcessInfos::processname() const {
+  // @@protoc_insertion_point(field_get:agent.ProcessInfos.processName)
+  return *processname_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfo >&
-ProcessInfos::msg() const {
-  // @@protoc_insertion_point(field_list:agent.ProcessInfos.msg)
-  return msg_;
+inline void ProcessInfos::set_processname(const ::std::string& value) {
+  set_has_processname();
+  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    processname_ = new ::std::string;
+  }
+  processname_->assign(value);
+  // @@protoc_insertion_point(field_set:agent.ProcessInfos.processName)
 }
-inline ::google::protobuf::RepeatedPtrField< ::agent::ProcessInfo >*
-ProcessInfos::mutable_msg() {
-  // @@protoc_insertion_point(field_mutable_list:agent.ProcessInfos.msg)
-  return &msg_;
+inline void ProcessInfos::set_processname(const char* value) {
+  set_has_processname();
+  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    processname_ = new ::std::string;
+  }
+  processname_->assign(value);
+  // @@protoc_insertion_point(field_set_char:agent.ProcessInfos.processName)
+}
+inline void ProcessInfos::set_processname(const char* value, size_t size) {
+  set_has_processname();
+  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    processname_ = new ::std::string;
+  }
+  processname_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:agent.ProcessInfos.processName)
+}
+inline ::std::string* ProcessInfos::mutable_processname() {
+  set_has_processname();
+  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    processname_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:agent.ProcessInfos.processName)
+  return processname_;
+}
+inline ::std::string* ProcessInfos::release_processname() {
+  clear_has_processname();
+  if (processname_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = processname_;
+    processname_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void ProcessInfos::set_allocated_processname(::std::string* processname) {
+  if (processname_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete processname_;
+  }
+  if (processname) {
+    set_has_processname();
+    processname_ = processname;
+  } else {
+    clear_has_processname();
+    processname_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:agent.ProcessInfos.processName)
+}
+
+// required int32 processID = 3;
+inline bool ProcessInfos::has_processid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ProcessInfos::set_has_processid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ProcessInfos::clear_has_processid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ProcessInfos::clear_processid() {
+  processid_ = 0;
+  clear_has_processid();
+}
+inline ::google::protobuf::int32 ProcessInfos::processid() const {
+  // @@protoc_insertion_point(field_get:agent.ProcessInfos.processID)
+  return processid_;
+}
+inline void ProcessInfos::set_processid(::google::protobuf::int32 value) {
+  set_has_processid();
+  processid_ = value;
+  // @@protoc_insertion_point(field_set:agent.ProcessInfos.processID)
+}
+
+// repeated .agent.Log logs = 4;
+inline int ProcessInfos::logs_size() const {
+  return logs_.size();
+}
+inline void ProcessInfos::clear_logs() {
+  logs_.Clear();
+}
+inline const ::agent::Log& ProcessInfos::logs(int index) const {
+  // @@protoc_insertion_point(field_get:agent.ProcessInfos.logs)
+  return logs_.Get(index);
+}
+inline ::agent::Log* ProcessInfos::mutable_logs(int index) {
+  // @@protoc_insertion_point(field_mutable:agent.ProcessInfos.logs)
+  return logs_.Mutable(index);
+}
+inline ::agent::Log* ProcessInfos::add_logs() {
+  // @@protoc_insertion_point(field_add:agent.ProcessInfos.logs)
+  return logs_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::agent::Log >&
+ProcessInfos::logs() const {
+  // @@protoc_insertion_point(field_list:agent.ProcessInfos.logs)
+  return logs_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::agent::Log >*
+ProcessInfos::mutable_logs() {
+  // @@protoc_insertion_point(field_mutable_list:agent.ProcessInfos.logs)
+  return &logs_;
 }
 
 // -------------------------------------------------------------------

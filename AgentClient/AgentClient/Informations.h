@@ -2,14 +2,14 @@
 class Log
 {
 public:
-	DWORD time;
-	std::string timestamp;
+	long long int timestamp;
 	double value;
 };
 
 class MachineCounterEntry
 {
 public:
+	std::string counterName;
 	PDH_HCOUNTER counter;
 	std::vector<Log> logs;
 };
@@ -17,6 +17,7 @@ public:
 class ProcessCounterEntry
 {
 public:
+	std::string counterName;
 	std::string processName;
 	PDH_HCOUNTER counter;
 	int processID;

@@ -28,6 +28,9 @@ public:
 	void SendRecordResponse(bool isMachine, bool isStart, bool isSuccess, std::string& failMsg);
 	void SendAgentReady();
 
+	void SendProcessInfo();
+	void SendMachineInfo();
+
 private:
 	struct mswsock_s
 	{

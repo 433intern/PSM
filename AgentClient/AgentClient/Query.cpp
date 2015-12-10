@@ -2,6 +2,8 @@
 
 #include <time.h>
 
+extern AgentClientApp* agentClientApp;
+
 Query::Query()
 : isMachineRecordEnd(true), isProcessRecordEnd(true)
 {
@@ -163,12 +165,12 @@ bool Query::InitCounterInfo(PDH_HQUERY& query, bool isMachine)
 				ProcessCounterEntry* pce = entryPoolManager->Alloc();
 				assert(pce);
 
+				pce->counterName = counterName;
+
 				if (p.number == 0) counterName = "\\Process(" + p.name + ")\\" + counterName;
 				else counterName = "\\Process(" + p.name + "#" + std::to_string(p.number) + ")\\" + counterName;
 
 				status = PdhAddCounter(query, counterName.c_str(), 0, &pce->counter);
-
-
 				if (status != ERROR_SUCCESS)
 				{
 					return false;
@@ -195,6 +197,8 @@ bool Query::InitCounterInfo(PDH_HQUERY& query, bool isMachine)
 			{
 				return false;
 			}
+
+			mce->counterName = counterName;
 			mce->logs.clear();
 			machineLogList.push_back(mce);
 		}
@@ -274,9 +278,9 @@ bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
 	PRINT("[Query] Record Delay : %lld ...\n", delay);
 	std::this_thread::sleep_for(std::chrono::seconds(delay));
 
-	int time = 0;
+	int time_ = 0;
 
-	while ((totalTime > time) || (totalTime < 0)){
+	while ((totalTime > time_) || (totalTime < 0)){
 		if (isMachine && isMachineRecordEnd) break;
 		if (!isMachine && isProcessRecordEnd) break;
 
@@ -330,12 +334,12 @@ bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
 						if (status != ERROR_SUCCESS)
 						{
 							PRINT("[Query] PdhGetFormattedCounterValue Error!\n");
-							return false;
+							continue;
 						}
 
+						time_t timer = time(NULL);
 						Log log;
-						log.timestamp = std::string(GetCurTime());
-						log.time = time;
+						log.timestamp = (long long int) timer;
 						log.value = DisplayValue.doubleValue;
 						it->logs.push_back(log);
 
@@ -350,12 +354,12 @@ bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
 						if (status != ERROR_SUCCESS)
 						{
 							PRINT("[Query] PdhGetFormattedCounterValue Error!\n");
-							return false;
+							continue;
 						}
 
+						time_t timer = time(NULL);
 						Log log;
-						log.timestamp = std::string(GetCurTime());
-						log.time = time;
+						log.timestamp = (long long int) timer;
 						log.value = DisplayValue.doubleValue;
 						it->logs.push_back(log);
 
@@ -363,8 +367,8 @@ bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
 					}
 				}
 			}
-			time += interval;
-		} while (time % recordTime != 0);
+			time_ += interval;
+		} while (time_ % recordTime != 0);
 
 		status = PdhCloseQuery(query);
 
@@ -372,6 +376,11 @@ bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
 		{
 			PRINT("[Query] PdhCloseQuery Error!\n");
 			return false;
+		}
+
+		if (agentClientApp){
+			if (!isMachine) agentClientApp->agentClient->socket->SendProcessInfo();
+			else agentClientApp->agentClient->socket->SendMachineInfo();
 		}
 	}
 

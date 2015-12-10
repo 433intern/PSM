@@ -170,6 +170,11 @@ void AgentClientSocket::DisconnProcess(bool isError, Act* act, DWORD bytes_trans
 {
 	if (isError)
 	{
+		isConnect = false;
+
+		query.StopRecord(true);
+		query.StopRecord(false);
+
 		ERROR_PRINT("[AgentClientSocket] DisconnProcess : Error : %d\n", WSAGetLastError());
 		return;
 	}
@@ -312,6 +317,10 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 			PRINT("[AgentClientSocket] HealthCheck received\n");
 			SendHealthAck();
 			break;
+		default:
+			PRINT("[AgentClientSocket] Invalid Socket\n");
+			break;
+
 	}
 
 	if (!packetPoolManager->Free(packet)) ERROR_PRINT("[AgentClientSocket] free error!\n");
@@ -401,9 +410,6 @@ void AgentClientSocket::SendCounterListRequest(bool isMachine)
 void AgentClientSocket::SendCurrentProcessList(std::vector<ProcessInfo>& processList)
 {
 	if (!isConnect) return;
-
-	sort(processList.begin(), processList.end());
-
 	PRINT("[AgentClientSocket] SendCurrentProcessList\n");
 	CPacket packet;
 	agent::csCurrentProcessListSend msg;
@@ -483,3 +489,81 @@ void AgentClientSocket::SendAgentReady()
 
 	Send((char *)&packet, packet.length + HEADER_SIZE);
 }
+
+void AgentClientSocket::SendProcessInfo()
+{
+	if (!isConnect) return;
+
+	PRINT("[AgentClientSocket] SendProcessInfo\n");
+
+	CPacket packet;
+	agent::csTotalProcessInfoSend msg;
+
+	for (ProcessCounterEntry* pce : query.processLogList)
+	{
+		agent::ProcessInfos* pi = msg.add_info();
+		pi->set_countername(pce->counterName);
+		pi->set_processname(pce->processName);
+		pi->set_processid(pce->processID);
+
+		double curValue = -1;
+		int i = 0;
+		for (Log l : pce->logs)
+		{
+			i++;
+			if (curValue != l.value)
+			{
+				agent::Log* ll = pi->add_logs();
+				ll->set_timestamp(l.timestamp);
+				ll->set_value(l.value);
+
+				curValue = l.value;
+			}
+		}
+	}
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::ProcessInfoSend;
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+void AgentClientSocket::SendMachineInfo()
+{
+	if (!isConnect) return;
+
+	PRINT("[AgentClientSocket] SendMachineInfo\n");
+
+	CPacket packet;
+	agent::csTotalMachineInfoSend msg;
+
+	for (MachineCounterEntry* mce : query.machineLogList)
+	{
+		agent::MachineInfos* mi = msg.add_info();
+		mi->set_countername(mce->counterName);
+
+		double curValue = -1;
+		int i = 0;
+		for (Log l : mce->logs)
+		{
+			i++;
+			if (curValue != l.value)
+			{
+				agent::Log* ll = mi->add_logs();
+				ll->set_timestamp(l.timestamp);
+				ll->set_value(l.value);
+
+				curValue = l.value;
+			}
+		}
+	}
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::MachineInfoSend;
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+

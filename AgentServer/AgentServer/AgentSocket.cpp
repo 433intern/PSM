@@ -194,11 +194,30 @@ void AgentSocket::PacketHandling(CPacket *packet)
 			SendStartRecord(false, -1, 10, 1, 0);
 			break;
 		}
+		case agent::ProcessInfoSend:
+		{
+			PRINT("[AgentSocket] ProcessInfoSend received\n");
+			if (!agentApp->redisManager.SaveProcessInfo(agentID, packet))
+			{
+
+			}
+			break;
+		}
+		case agent::MachineInfoSend:
+		{
+			PRINT("[AgentSocket] MachineInfoSend received\n");
+			break;
+		}
+
 		case agent::HealthAck:
 #ifdef HEARTBEAT
 			PRINT("[AgentSocket] HealthAck received\n");
 #endif
 			healthCheck = true;
+			break;
+
+		default:
+			PRINT("[AgentSocket] Invalid Socket\n");
 			break;
 	}
 
