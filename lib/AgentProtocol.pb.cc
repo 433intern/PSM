@@ -67,12 +67,12 @@ const ::google::protobuf::Descriptor* csCounterCommandResponse_descriptor_ = NUL
 const ::google::protobuf::internal::GeneratedMessageReflection*
   csCounterCommandResponse_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* csCounterCommandResponse_Result_descriptor_ = NULL;
-const ::google::protobuf::Descriptor* scProcessStartRecord_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* scStartRecord_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  scProcessStartRecord_reflection_ = NULL;
-const ::google::protobuf::Descriptor* scProcessStopRecord_descriptor_ = NULL;
+  scStartRecord_reflection_ = NULL;
+const ::google::protobuf::Descriptor* scStopRecord_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  scProcessStopRecord_reflection_ = NULL;
+  scStopRecord_reflection_ = NULL;
 const ::google::protobuf::Descriptor* Log_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Log_reflection_ = NULL;
@@ -85,12 +85,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* csTotalProcessInfoSend_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   csTotalProcessInfoSend_reflection_ = NULL;
-const ::google::protobuf::Descriptor* scMachineStartRecord_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  scMachineStartRecord_reflection_ = NULL;
-const ::google::protobuf::Descriptor* scMachineStopRecord_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  scMachineStopRecord_reflection_ = NULL;
 const ::google::protobuf::Descriptor* MachineInfos_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   MachineInfos_reflection_ = NULL;
@@ -104,6 +98,10 @@ const ::google::protobuf::Descriptor* csProcessRestrictionResponse_descriptor_ =
 const ::google::protobuf::internal::GeneratedMessageReflection*
   csProcessRestrictionResponse_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* csProcessRestrictionResponse_Result_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* csRecordResponse_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  csRecordResponse_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* csRecordResponse_Result_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* agentType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ProcessCommandType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* CounterCommandType_descriptor_ = NULL;
@@ -351,38 +349,40 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csCounterCommandResponse));
   csCounterCommandResponse_Result_descriptor_ = csCounterCommandResponse_descriptor_->enum_type(0);
-  scProcessStartRecord_descriptor_ = file->message_type(15);
-  static const int scProcessStartRecord_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessStartRecord, totalrecordtime_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessStartRecord, interval_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessStartRecord, responsetime_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessStartRecord, delay_),
+  scStartRecord_descriptor_ = file->message_type(15);
+  static const int scStartRecord_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStartRecord, ismachine_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStartRecord, totalrecordtime_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStartRecord, interval_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStartRecord, responsetime_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStartRecord, delay_),
   };
-  scProcessStartRecord_reflection_ =
+  scStartRecord_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      scProcessStartRecord_descriptor_,
-      scProcessStartRecord::default_instance_,
-      scProcessStartRecord_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessStartRecord, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessStartRecord, _unknown_fields_),
+      scStartRecord_descriptor_,
+      scStartRecord::default_instance_,
+      scStartRecord_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStartRecord, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStartRecord, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(scProcessStartRecord));
-  scProcessStopRecord_descriptor_ = file->message_type(16);
-  static const int scProcessStopRecord_offsets_[1] = {
+      sizeof(scStartRecord));
+  scStopRecord_descriptor_ = file->message_type(16);
+  static const int scStopRecord_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStopRecord, ismachine_),
   };
-  scProcessStopRecord_reflection_ =
+  scStopRecord_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      scProcessStopRecord_descriptor_,
-      scProcessStopRecord::default_instance_,
-      scProcessStopRecord_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessStopRecord, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessStopRecord, _unknown_fields_),
+      scStopRecord_descriptor_,
+      scStopRecord::default_instance_,
+      scStopRecord_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStopRecord, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStopRecord, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(scProcessStopRecord));
+      sizeof(scStopRecord));
   Log_descriptor_ = file->message_type(17);
   static const int Log_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Log, timestamp_),
@@ -447,39 +447,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csTotalProcessInfoSend));
-  scMachineStartRecord_descriptor_ = file->message_type(21);
-  static const int scMachineStartRecord_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineStartRecord, totalrecordtime_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineStartRecord, interval_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineStartRecord, responsetime_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineStartRecord, delay_),
-  };
-  scMachineStartRecord_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      scMachineStartRecord_descriptor_,
-      scMachineStartRecord::default_instance_,
-      scMachineStartRecord_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineStartRecord, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineStartRecord, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(scMachineStartRecord));
-  scMachineStopRecord_descriptor_ = file->message_type(22);
-  static const int scMachineStopRecord_offsets_[1] = {
-  };
-  scMachineStopRecord_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      scMachineStopRecord_descriptor_,
-      scMachineStopRecord::default_instance_,
-      scMachineStopRecord_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineStopRecord, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scMachineStopRecord, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(scMachineStopRecord));
-  MachineInfos_descriptor_ = file->message_type(23);
+  MachineInfos_descriptor_ = file->message_type(21);
   static const int MachineInfos_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MachineInfos, countername_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MachineInfos, logs_),
@@ -495,7 +463,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MachineInfos));
-  csTotalMachineInfoSend_descriptor_ = file->message_type(24);
+  csTotalMachineInfoSend_descriptor_ = file->message_type(22);
   static const int csTotalMachineInfoSend_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csTotalMachineInfoSend, info_),
   };
@@ -510,7 +478,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csTotalMachineInfoSend));
-  scProcessRestrictionRequest_descriptor_ = file->message_type(25);
+  scProcessRestrictionRequest_descriptor_ = file->message_type(23);
   static const int scProcessRestrictionRequest_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessRestrictionRequest, processid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessRestrictionRequest, type_),
@@ -528,7 +496,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(scProcessRestrictionRequest));
-  csProcessRestrictionResponse_descriptor_ = file->message_type(26);
+  csProcessRestrictionResponse_descriptor_ = file->message_type(24);
   static const int csProcessRestrictionResponse_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, processid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, type_),
@@ -547,6 +515,24 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csProcessRestrictionResponse));
   csProcessRestrictionResponse_Result_descriptor_ = csProcessRestrictionResponse_descriptor_->enum_type(0);
+  csRecordResponse_descriptor_ = file->message_type(25);
+  static const int csRecordResponse_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csRecordResponse, ismachine_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csRecordResponse, result_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csRecordResponse, failreason_),
+  };
+  csRecordResponse_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      csRecordResponse_descriptor_,
+      csRecordResponse::default_instance_,
+      csRecordResponse_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csRecordResponse, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csRecordResponse, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(csRecordResponse));
+  csRecordResponse_Result_descriptor_ = csRecordResponse_descriptor_->enum_type(0);
   agentType_descriptor_ = file->enum_type(0);
   ProcessCommandType_descriptor_ = file->enum_type(1);
   CounterCommandType_descriptor_ = file->enum_type(2);
@@ -594,9 +580,9 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     csCounterCommandResponse_descriptor_, &csCounterCommandResponse::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    scProcessStartRecord_descriptor_, &scProcessStartRecord::default_instance());
+    scStartRecord_descriptor_, &scStartRecord::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    scProcessStopRecord_descriptor_, &scProcessStopRecord::default_instance());
+    scStopRecord_descriptor_, &scStopRecord::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Log_descriptor_, &Log::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -606,10 +592,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     csTotalProcessInfoSend_descriptor_, &csTotalProcessInfoSend::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    scMachineStartRecord_descriptor_, &scMachineStartRecord::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    scMachineStopRecord_descriptor_, &scMachineStopRecord::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     MachineInfos_descriptor_, &MachineInfos::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     csTotalMachineInfoSend_descriptor_, &csTotalMachineInfoSend::default_instance());
@@ -617,6 +599,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     scProcessRestrictionRequest_descriptor_, &scProcessRestrictionRequest::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     csProcessRestrictionResponse_descriptor_, &csProcessRestrictionResponse::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    csRecordResponse_descriptor_, &csRecordResponse::default_instance());
 }
 
 }  // namespace
@@ -652,10 +636,10 @@ void protobuf_ShutdownFile_AgentProtocol_2eproto() {
   delete scCounterCommandRequest_reflection_;
   delete csCounterCommandResponse::default_instance_;
   delete csCounterCommandResponse_reflection_;
-  delete scProcessStartRecord::default_instance_;
-  delete scProcessStartRecord_reflection_;
-  delete scProcessStopRecord::default_instance_;
-  delete scProcessStopRecord_reflection_;
+  delete scStartRecord::default_instance_;
+  delete scStartRecord_reflection_;
+  delete scStopRecord::default_instance_;
+  delete scStopRecord_reflection_;
   delete Log::default_instance_;
   delete Log_reflection_;
   delete ProcessInfo::default_instance_;
@@ -664,10 +648,6 @@ void protobuf_ShutdownFile_AgentProtocol_2eproto() {
   delete ProcessInfos_reflection_;
   delete csTotalProcessInfoSend::default_instance_;
   delete csTotalProcessInfoSend_reflection_;
-  delete scMachineStartRecord::default_instance_;
-  delete scMachineStartRecord_reflection_;
-  delete scMachineStopRecord::default_instance_;
-  delete scMachineStopRecord_reflection_;
   delete MachineInfos::default_instance_;
   delete MachineInfos_reflection_;
   delete csTotalMachineInfoSend::default_instance_;
@@ -676,6 +656,8 @@ void protobuf_ShutdownFile_AgentProtocol_2eproto() {
   delete scProcessRestrictionRequest_reflection_;
   delete csProcessRestrictionResponse::default_instance_;
   delete csProcessRestrictionResponse_reflection_;
+  delete csRecordResponse::default_instance_;
+  delete csRecordResponse_reflection_;
 }
 
 void protobuf_AddDesc_AgentProtocol_2eproto() {
@@ -710,51 +692,52 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
     "ponse\022\'\n\004type\030\001 \002(\0162\031.agent.CounterComma"
     "ndType\0226\n\006result\030\003 \002(\0162&.agent.csCounter"
     "CommandResponse.Result\022\022\n\nfailReason\030\004 \001"
-    "(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE\020\001\"f"
-    "\n\024scProcessStartRecord\022\027\n\017totalRecordTim"
-    "e\030\001 \002(\005\022\020\n\010interval\030\002 \002(\005\022\024\n\014responseTim"
-    "e\030\003 \002(\005\022\r\n\005delay\030\004 \001(\003\"\025\n\023scProcessStopR"
-    "ecord\"\'\n\003Log\022\021\n\ttimeStamp\030\001 \002(\003\022\r\n\005value"
-    "\030\002 \002(\001\"O\n\013ProcessInfo\022\023\n\013processName\030\001 \002"
-    "(\t\022\021\n\tprocessID\030\002 \002(\005\022\030\n\004logs\030\003 \003(\0132\n.ag"
-    "ent.Log\"D\n\014ProcessInfos\022\023\n\013counterName\030\001"
-    " \002(\t\022\037\n\003msg\030\002 \003(\0132\022.agent.ProcessInfo\";\n"
-    "\026csTotalProcessInfoSend\022!\n\004info\030\001 \003(\0132\023."
-    "agent.ProcessInfos\"f\n\024scMachineStartReco"
-    "rd\022\027\n\017totalRecordTime\030\001 \002(\005\022\020\n\010interval\030"
-    "\002 \002(\005\022\024\n\014responseTime\030\003 \002(\005\022\r\n\005delay\030\004 \001"
-    "(\003\"\025\n\023scMachineStopRecord\"=\n\014MachineInfo"
-    "s\022\023\n\013counterName\030\001 \002(\t\022\030\n\004logs\030\002 \003(\0132\n.a"
-    "gent.Log\";\n\026csTotalMachineInfoSend\022!\n\004in"
-    "fo\030\001 \003(\0132\023.agent.MachineInfos\"r\n\033scProce"
-    "ssRestrictionRequest\022\021\n\tprocessID\030\001 \002(\005\022"
-    " \n\004type\030\002 \002(\0162\022.agent.Restriction\022\016\n\006val"
-    "ue1\030\003 \002(\005\022\016\n\006value2\030\004 \001(\005\"\307\001\n\034csProcessR"
-    "estrictionResponse\022\021\n\tprocessID\030\001 \002(\005\022 \n"
-    "\004type\030\002 \002(\0162\022.agent.Restriction\022:\n\006resul"
-    "t\030\003 \002(\0162*.agent.csProcessRestrictionResp"
-    "onse.Result\022\022\n\nfailReason\030\004 \001(\t\"\"\n\006Resul"
-    "t\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE\020\001*\264\004\n\tagentTyp"
-    "e\022\022\n\016AgentIDRequest\020\000\022\023\n\017AgentIDResponse"
-    "\020\001\022\026\n\022ProcessListRequest\020\002\022\027\n\023ProcessLis"
-    "tResponse\020\003\022\026\n\022CounterListRequest\020\004\022\027\n\023C"
-    "ounterListResponse\020\005\022\032\n\026CurrentProcessLi"
-    "stSend\020\006\022\033\n\027TotalProcessesStateSend\020\007\022\017\n"
-    "\013HealthCheck\020\010\022\r\n\tHealthAck\020\t\022\031\n\025Process"
-    "CommandRequest\020\n\022\032\n\026ProcessCommandRespon"
-    "se\020\013\022\031\n\025CounterCommandRequest\020\014\022\032\n\026Count"
-    "erCommandResponse\020\r\022\035\n\031ProcessRestrictio"
-    "nRequest\020\016\022\036\n\032ProcessRestrictionResponse"
-    "\020\017\022\026\n\022ProcessStartRecord\020\020\022\025\n\021ProcessSto"
-    "pRecord\020\021\022\023\n\017ProcessInfoSend\020\022\022\026\n\022Machin"
-    "eStartRecord\020\023\022\025\n\021MachineStopRecord\020\024\022\023\n"
-    "\017MachineInfoSend\020\025\022\016\n\nAgentReady\020\026*`\n\022Pr"
-    "ocessCommandType\022\t\n\005START\020\000\022\013\n\007RESTART\020\001"
-    "\022\010\n\004STOP\020\002\022\013\n\007ADDLIST\020\003\022\016\n\nDELETELIST\020\004\022"
-    "\013\n\007ALLSTOP\020\005*3\n\022CounterCommandType\022\014\n\010CA"
-    "DDLIST\020\001\022\017\n\013CDELETELIST\020\002*V\n\013Restriction"
-    "\022\023\n\017USER_TIME_LIMIT\020\000\022\030\n\024MAX_WORKING_SET"
-    "_SIZE\020\001\022\030\n\024MIN_WORKING_SET_SIZE\020\002", 2793);
+    "(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE\020\001\"r"
+    "\n\rscStartRecord\022\021\n\tisMachine\030\005 \002(\010\022\027\n\017to"
+    "talRecordTime\030\001 \002(\005\022\020\n\010interval\030\002 \002(\005\022\024\n"
+    "\014responseTime\030\003 \002(\005\022\r\n\005delay\030\004 \001(\003\"!\n\014sc"
+    "StopRecord\022\021\n\tisMachine\030\001 \002(\010\"\'\n\003Log\022\021\n\t"
+    "timeStamp\030\001 \002(\003\022\r\n\005value\030\002 \002(\001\"O\n\013Proces"
+    "sInfo\022\023\n\013processName\030\001 \002(\t\022\021\n\tprocessID\030"
+    "\002 \002(\005\022\030\n\004logs\030\003 \003(\0132\n.agent.Log\"D\n\014Proce"
+    "ssInfos\022\023\n\013counterName\030\001 \002(\t\022\037\n\003msg\030\002 \003("
+    "\0132\022.agent.ProcessInfo\";\n\026csTotalProcessI"
+    "nfoSend\022!\n\004info\030\001 \003(\0132\023.agent.ProcessInf"
+    "os\"=\n\014MachineInfos\022\023\n\013counterName\030\001 \002(\t\022"
+    "\030\n\004logs\030\002 \003(\0132\n.agent.Log\";\n\026csTotalMach"
+    "ineInfoSend\022!\n\004info\030\001 \003(\0132\023.agent.Machin"
+    "eInfos\"r\n\033scProcessRestrictionRequest\022\021\n"
+    "\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.agent.R"
+    "estriction\022\016\n\006value1\030\003 \002(\005\022\016\n\006value2\030\004 \001"
+    "(\005\"\307\001\n\034csProcessRestrictionResponse\022\021\n\tp"
+    "rocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.agent.Res"
+    "triction\022:\n\006result\030\003 \002(\0162*.agent.csProce"
+    "ssRestrictionResponse.Result\022\022\n\nfailReas"
+    "on\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007FAILU"
+    "RE\020\001\"\275\001\n\020csRecordResponse\022\021\n\tisMachine\030\005"
+    " \002(\010\022.\n\006result\030\003 \002(\0162\036.agent.csRecordRes"
+    "ponse.Result\022\022\n\nfailReason\030\004 \001(\t\"R\n\006Resu"
+    "lt\022\021\n\rSTART_SUCCESS\020\000\022\021\n\rSTART_FAILURE\020\001"
+    "\022\020\n\014STOP_SUCCESS\020\002\022\020\n\014STOP_FAILURE\020\003*\356\003\n"
+    "\tagentType\022\022\n\016AgentIDRequest\020\000\022\023\n\017AgentI"
+    "DResponse\020\001\022\026\n\022ProcessListRequest\020\002\022\027\n\023P"
+    "rocessListResponse\020\003\022\026\n\022CounterListReque"
+    "st\020\004\022\027\n\023CounterListResponse\020\005\022\032\n\026Current"
+    "ProcessListSend\020\006\022\017\n\013HealthCheck\020\010\022\r\n\tHe"
+    "althAck\020\t\022\031\n\025ProcessCommandRequest\020\n\022\032\n\026"
+    "ProcessCommandResponse\020\013\022\031\n\025CounterComma"
+    "ndRequest\020\014\022\032\n\026CounterCommandResponse\020\r\022"
+    "\035\n\031ProcessRestrictionRequest\020\016\022\036\n\032Proces"
+    "sRestrictionResponse\020\017\022\017\n\013StartRecord\020\020\022"
+    "\016\n\nStopRecord\020\021\022\023\n\017ProcessInfoSend\020\022\022\023\n\017"
+    "MachineInfoSend\020\025\022\016\n\nAgentReady\020\026\022\022\n\016Rec"
+    "ordResponse\020\027*`\n\022ProcessCommandType\022\t\n\005S"
+    "TART\020\000\022\013\n\007RESTART\020\001\022\010\n\004STOP\020\002\022\013\n\007ADDLIST"
+    "\020\003\022\016\n\nDELETELIST\020\004\022\013\n\007ALLSTOP\020\005*3\n\022Count"
+    "erCommandType\022\014\n\010CADDLIST\020\001\022\017\n\013CDELETELI"
+    "ST\020\002*V\n\013Restriction\022\023\n\017USER_TIME_LIMIT\020\000"
+    "\022\030\n\024MAX_WORKING_SET_SIZE\020\001\022\030\n\024MIN_WORKIN"
+    "G_SET_SIZE\020\002", 2812);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "AgentProtocol.proto", &protobuf_RegisterTypes);
   csAgentIDRequest::default_instance_ = new csAgentIDRequest();
@@ -772,18 +755,17 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
   csProcessCommandResponse::default_instance_ = new csProcessCommandResponse();
   scCounterCommandRequest::default_instance_ = new scCounterCommandRequest();
   csCounterCommandResponse::default_instance_ = new csCounterCommandResponse();
-  scProcessStartRecord::default_instance_ = new scProcessStartRecord();
-  scProcessStopRecord::default_instance_ = new scProcessStopRecord();
+  scStartRecord::default_instance_ = new scStartRecord();
+  scStopRecord::default_instance_ = new scStopRecord();
   Log::default_instance_ = new Log();
   ProcessInfo::default_instance_ = new ProcessInfo();
   ProcessInfos::default_instance_ = new ProcessInfos();
   csTotalProcessInfoSend::default_instance_ = new csTotalProcessInfoSend();
-  scMachineStartRecord::default_instance_ = new scMachineStartRecord();
-  scMachineStopRecord::default_instance_ = new scMachineStopRecord();
   MachineInfos::default_instance_ = new MachineInfos();
   csTotalMachineInfoSend::default_instance_ = new csTotalMachineInfoSend();
   scProcessRestrictionRequest::default_instance_ = new scProcessRestrictionRequest();
   csProcessRestrictionResponse::default_instance_ = new csProcessRestrictionResponse();
+  csRecordResponse::default_instance_ = new csRecordResponse();
   csAgentIDRequest::default_instance_->InitAsDefaultInstance();
   scAgentIDResponse::default_instance_->InitAsDefaultInstance();
   csProcessListRequest::default_instance_->InitAsDefaultInstance();
@@ -799,18 +781,17 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
   csProcessCommandResponse::default_instance_->InitAsDefaultInstance();
   scCounterCommandRequest::default_instance_->InitAsDefaultInstance();
   csCounterCommandResponse::default_instance_->InitAsDefaultInstance();
-  scProcessStartRecord::default_instance_->InitAsDefaultInstance();
-  scProcessStopRecord::default_instance_->InitAsDefaultInstance();
+  scStartRecord::default_instance_->InitAsDefaultInstance();
+  scStopRecord::default_instance_->InitAsDefaultInstance();
   Log::default_instance_->InitAsDefaultInstance();
   ProcessInfo::default_instance_->InitAsDefaultInstance();
   ProcessInfos::default_instance_->InitAsDefaultInstance();
   csTotalProcessInfoSend::default_instance_->InitAsDefaultInstance();
-  scMachineStartRecord::default_instance_->InitAsDefaultInstance();
-  scMachineStopRecord::default_instance_->InitAsDefaultInstance();
   MachineInfos::default_instance_->InitAsDefaultInstance();
   csTotalMachineInfoSend::default_instance_->InitAsDefaultInstance();
   scProcessRestrictionRequest::default_instance_->InitAsDefaultInstance();
   csProcessRestrictionResponse::default_instance_->InitAsDefaultInstance();
+  csRecordResponse::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_AgentProtocol_2eproto);
 }
 
@@ -833,7 +814,6 @@ bool agentType_IsValid(int value) {
     case 4:
     case 5:
     case 6:
-    case 7:
     case 8:
     case 9:
     case 10:
@@ -845,10 +825,9 @@ bool agentType_IsValid(int value) {
     case 16:
     case 17:
     case 18:
-    case 19:
-    case 20:
     case 21:
     case 22:
+    case 23:
       return true;
     default:
       return false;
@@ -4672,30 +4651,32 @@ void csCounterCommandResponse::Swap(csCounterCommandResponse* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int scProcessStartRecord::kTotalRecordTimeFieldNumber;
-const int scProcessStartRecord::kIntervalFieldNumber;
-const int scProcessStartRecord::kResponseTimeFieldNumber;
-const int scProcessStartRecord::kDelayFieldNumber;
+const int scStartRecord::kIsMachineFieldNumber;
+const int scStartRecord::kTotalRecordTimeFieldNumber;
+const int scStartRecord::kIntervalFieldNumber;
+const int scStartRecord::kResponseTimeFieldNumber;
+const int scStartRecord::kDelayFieldNumber;
 #endif  // !_MSC_VER
 
-scProcessStartRecord::scProcessStartRecord()
+scStartRecord::scStartRecord()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.scProcessStartRecord)
+  // @@protoc_insertion_point(constructor:agent.scStartRecord)
 }
 
-void scProcessStartRecord::InitAsDefaultInstance() {
+void scStartRecord::InitAsDefaultInstance() {
 }
 
-scProcessStartRecord::scProcessStartRecord(const scProcessStartRecord& from)
+scStartRecord::scStartRecord(const scStartRecord& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.scProcessStartRecord)
+  // @@protoc_insertion_point(copy_constructor:agent.scStartRecord)
 }
 
-void scProcessStartRecord::SharedCtor() {
+void scStartRecord::SharedCtor() {
   _cached_size_ = 0;
+  ismachine_ = false;
   totalrecordtime_ = 0;
   interval_ = 0;
   responsetime_ = 0;
@@ -4703,40 +4684,40 @@ void scProcessStartRecord::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-scProcessStartRecord::~scProcessStartRecord() {
-  // @@protoc_insertion_point(destructor:agent.scProcessStartRecord)
+scStartRecord::~scStartRecord() {
+  // @@protoc_insertion_point(destructor:agent.scStartRecord)
   SharedDtor();
 }
 
-void scProcessStartRecord::SharedDtor() {
+void scStartRecord::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void scProcessStartRecord::SetCachedSize(int size) const {
+void scStartRecord::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* scProcessStartRecord::descriptor() {
+const ::google::protobuf::Descriptor* scStartRecord::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return scProcessStartRecord_descriptor_;
+  return scStartRecord_descriptor_;
 }
 
-const scProcessStartRecord& scProcessStartRecord::default_instance() {
+const scStartRecord& scStartRecord::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
   return *default_instance_;
 }
 
-scProcessStartRecord* scProcessStartRecord::default_instance_ = NULL;
+scStartRecord* scStartRecord::default_instance_ = NULL;
 
-scProcessStartRecord* scProcessStartRecord::New() const {
-  return new scProcessStartRecord;
+scStartRecord* scStartRecord::New() const {
+  return new scStartRecord;
 }
 
-void scProcessStartRecord::Clear() {
+void scStartRecord::Clear() {
 #define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<scProcessStartRecord*>(16)->f) - \
+  &reinterpret_cast<scStartRecord*>(16)->f) - \
    reinterpret_cast<char*>(16))
 
 #define ZR_(first, last) do {                              \
@@ -4745,7 +4726,9 @@ void scProcessStartRecord::Clear() {
     ::memset(&first, 0, n);                                \
   } while (0)
 
-  ZR_(totalrecordtime_, responsetime_);
+  if (_has_bits_[0 / 32] & 31) {
+    ZR_(ismachine_, delay_);
+  }
 
 #undef OFFSET_OF_FIELD_
 #undef ZR_
@@ -4754,11 +4737,11 @@ void scProcessStartRecord::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool scProcessStartRecord::MergePartialFromCodedStream(
+bool scStartRecord::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.scProcessStartRecord)
+  // @@protoc_insertion_point(parse_start:agent.scStartRecord)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -4819,6 +4802,21 @@ bool scProcessStartRecord::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(40)) goto parse_isMachine;
+        break;
+      }
+
+      // required bool isMachine = 5;
+      case 5: {
+        if (tag == 40) {
+         parse_isMachine:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &ismachine_)));
+          set_has_ismachine();
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -4837,17 +4835,17 @@ bool scProcessStartRecord::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:agent.scProcessStartRecord)
+  // @@protoc_insertion_point(parse_success:agent.scStartRecord)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:agent.scProcessStartRecord)
+  // @@protoc_insertion_point(parse_failure:agent.scStartRecord)
   return false;
 #undef DO_
 }
 
-void scProcessStartRecord::SerializeWithCachedSizes(
+void scStartRecord::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.scProcessStartRecord)
+  // @@protoc_insertion_point(serialize_start:agent.scStartRecord)
   // required int32 totalRecordTime = 1;
   if (has_totalrecordtime()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->totalrecordtime(), output);
@@ -4868,16 +4866,21 @@ void scProcessStartRecord::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->delay(), output);
   }
 
+  // required bool isMachine = 5;
+  if (has_ismachine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->ismachine(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:agent.scProcessStartRecord)
+  // @@protoc_insertion_point(serialize_end:agent.scStartRecord)
 }
 
-::google::protobuf::uint8* scProcessStartRecord::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* scStartRecord::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.scProcessStartRecord)
+  // @@protoc_insertion_point(serialize_to_array_start:agent.scStartRecord)
   // required int32 totalRecordTime = 1;
   if (has_totalrecordtime()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->totalrecordtime(), target);
@@ -4898,18 +4901,28 @@ void scProcessStartRecord::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(4, this->delay(), target);
   }
 
+  // required bool isMachine = 5;
+  if (has_ismachine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->ismachine(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.scProcessStartRecord)
+  // @@protoc_insertion_point(serialize_to_array_end:agent.scStartRecord)
   return target;
 }
 
-int scProcessStartRecord::ByteSize() const {
+int scStartRecord::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bool isMachine = 5;
+    if (has_ismachine()) {
+      total_size += 1 + 1;
+    }
+
     // required int32 totalRecordTime = 1;
     if (has_totalrecordtime()) {
       total_size += 1 +
@@ -4950,10 +4963,10 @@ int scProcessStartRecord::ByteSize() const {
   return total_size;
 }
 
-void scProcessStartRecord::MergeFrom(const ::google::protobuf::Message& from) {
+void scStartRecord::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const scProcessStartRecord* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const scProcessStartRecord*>(
+  const scStartRecord* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const scStartRecord*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -4962,9 +4975,12 @@ void scProcessStartRecord::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void scProcessStartRecord::MergeFrom(const scProcessStartRecord& from) {
+void scStartRecord::MergeFrom(const scStartRecord& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_ismachine()) {
+      set_ismachine(from.ismachine());
+    }
     if (from.has_totalrecordtime()) {
       set_totalrecordtime(from.totalrecordtime());
     }
@@ -4981,26 +4997,27 @@ void scProcessStartRecord::MergeFrom(const scProcessStartRecord& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void scProcessStartRecord::CopyFrom(const ::google::protobuf::Message& from) {
+void scStartRecord::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void scProcessStartRecord::CopyFrom(const scProcessStartRecord& from) {
+void scStartRecord::CopyFrom(const scStartRecord& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool scProcessStartRecord::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+bool scStartRecord::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
   return true;
 }
 
-void scProcessStartRecord::Swap(scProcessStartRecord* other) {
+void scStartRecord::Swap(scStartRecord* other) {
   if (other != this) {
+    std::swap(ismachine_, other->ismachine_);
     std::swap(totalrecordtime_, other->totalrecordtime_);
     std::swap(interval_, other->interval_);
     std::swap(responsetime_, other->responsetime_);
@@ -5011,11 +5028,11 @@ void scProcessStartRecord::Swap(scProcessStartRecord* other) {
   }
 }
 
-::google::protobuf::Metadata scProcessStartRecord::GetMetadata() const {
+::google::protobuf::Metadata scStartRecord::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = scProcessStartRecord_descriptor_;
-  metadata.reflection = scProcessStartRecord_reflection_;
+  metadata.descriptor = scStartRecord_descriptor_;
+  metadata.reflection = scStartRecord_reflection_;
   return metadata;
 }
 
@@ -5023,116 +5040,155 @@ void scProcessStartRecord::Swap(scProcessStartRecord* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int scStopRecord::kIsMachineFieldNumber;
 #endif  // !_MSC_VER
 
-scProcessStopRecord::scProcessStopRecord()
+scStopRecord::scStopRecord()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.scProcessStopRecord)
+  // @@protoc_insertion_point(constructor:agent.scStopRecord)
 }
 
-void scProcessStopRecord::InitAsDefaultInstance() {
+void scStopRecord::InitAsDefaultInstance() {
 }
 
-scProcessStopRecord::scProcessStopRecord(const scProcessStopRecord& from)
+scStopRecord::scStopRecord(const scStopRecord& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.scProcessStopRecord)
+  // @@protoc_insertion_point(copy_constructor:agent.scStopRecord)
 }
 
-void scProcessStopRecord::SharedCtor() {
+void scStopRecord::SharedCtor() {
   _cached_size_ = 0;
+  ismachine_ = false;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-scProcessStopRecord::~scProcessStopRecord() {
-  // @@protoc_insertion_point(destructor:agent.scProcessStopRecord)
+scStopRecord::~scStopRecord() {
+  // @@protoc_insertion_point(destructor:agent.scStopRecord)
   SharedDtor();
 }
 
-void scProcessStopRecord::SharedDtor() {
+void scStopRecord::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void scProcessStopRecord::SetCachedSize(int size) const {
+void scStopRecord::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* scProcessStopRecord::descriptor() {
+const ::google::protobuf::Descriptor* scStopRecord::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return scProcessStopRecord_descriptor_;
+  return scStopRecord_descriptor_;
 }
 
-const scProcessStopRecord& scProcessStopRecord::default_instance() {
+const scStopRecord& scStopRecord::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
   return *default_instance_;
 }
 
-scProcessStopRecord* scProcessStopRecord::default_instance_ = NULL;
+scStopRecord* scStopRecord::default_instance_ = NULL;
 
-scProcessStopRecord* scProcessStopRecord::New() const {
-  return new scProcessStopRecord;
+scStopRecord* scStopRecord::New() const {
+  return new scStopRecord;
 }
 
-void scProcessStopRecord::Clear() {
+void scStopRecord::Clear() {
+  ismachine_ = false;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool scProcessStopRecord::MergePartialFromCodedStream(
+bool scStopRecord::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.scProcessStopRecord)
+  // @@protoc_insertion_point(parse_start:agent.scStopRecord)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0 ||
-        ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      goto success;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bool isMachine = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &ismachine_)));
+          set_has_ismachine();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
     }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
   }
 success:
-  // @@protoc_insertion_point(parse_success:agent.scProcessStopRecord)
+  // @@protoc_insertion_point(parse_success:agent.scStopRecord)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:agent.scProcessStopRecord)
+  // @@protoc_insertion_point(parse_failure:agent.scStopRecord)
   return false;
 #undef DO_
 }
 
-void scProcessStopRecord::SerializeWithCachedSizes(
+void scStopRecord::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.scProcessStopRecord)
+  // @@protoc_insertion_point(serialize_start:agent.scStopRecord)
+  // required bool isMachine = 1;
+  if (has_ismachine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->ismachine(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:agent.scProcessStopRecord)
+  // @@protoc_insertion_point(serialize_end:agent.scStopRecord)
 }
 
-::google::protobuf::uint8* scProcessStopRecord::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* scStopRecord::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.scProcessStopRecord)
+  // @@protoc_insertion_point(serialize_to_array_start:agent.scStopRecord)
+  // required bool isMachine = 1;
+  if (has_ismachine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->ismachine(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.scProcessStopRecord)
+  // @@protoc_insertion_point(serialize_to_array_end:agent.scStopRecord)
   return target;
 }
 
-int scProcessStopRecord::ByteSize() const {
+int scStopRecord::ByteSize() const {
   int total_size = 0;
 
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bool isMachine = 1;
+    if (has_ismachine()) {
+      total_size += 1 + 1;
+    }
+
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -5144,10 +5200,10 @@ int scProcessStopRecord::ByteSize() const {
   return total_size;
 }
 
-void scProcessStopRecord::MergeFrom(const ::google::protobuf::Message& from) {
+void scStopRecord::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const scProcessStopRecord* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const scProcessStopRecord*>(
+  const scStopRecord* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const scStopRecord*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -5156,40 +5212,48 @@ void scProcessStopRecord::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void scProcessStopRecord::MergeFrom(const scProcessStopRecord& from) {
+void scStopRecord::MergeFrom(const scStopRecord& from) {
   GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_ismachine()) {
+      set_ismachine(from.ismachine());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void scProcessStopRecord::CopyFrom(const ::google::protobuf::Message& from) {
+void scStopRecord::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void scProcessStopRecord::CopyFrom(const scProcessStopRecord& from) {
+void scStopRecord::CopyFrom(const scStopRecord& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool scProcessStopRecord::IsInitialized() const {
+bool scStopRecord::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
-void scProcessStopRecord::Swap(scProcessStopRecord* other) {
+void scStopRecord::Swap(scStopRecord* other) {
   if (other != this) {
+    std::swap(ismachine_, other->ismachine_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata scProcessStopRecord::GetMetadata() const {
+::google::protobuf::Metadata scStopRecord::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = scProcessStopRecord_descriptor_;
-  metadata.reflection = scProcessStopRecord_reflection_;
+  metadata.descriptor = scStopRecord_descriptor_;
+  metadata.reflection = scStopRecord_reflection_;
   return metadata;
 }
 
@@ -6292,531 +6356,6 @@ void csTotalProcessInfoSend::Swap(csTotalProcessInfoSend* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = csTotalProcessInfoSend_descriptor_;
   metadata.reflection = csTotalProcessInfoSend_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int scMachineStartRecord::kTotalRecordTimeFieldNumber;
-const int scMachineStartRecord::kIntervalFieldNumber;
-const int scMachineStartRecord::kResponseTimeFieldNumber;
-const int scMachineStartRecord::kDelayFieldNumber;
-#endif  // !_MSC_VER
-
-scMachineStartRecord::scMachineStartRecord()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.scMachineStartRecord)
-}
-
-void scMachineStartRecord::InitAsDefaultInstance() {
-}
-
-scMachineStartRecord::scMachineStartRecord(const scMachineStartRecord& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.scMachineStartRecord)
-}
-
-void scMachineStartRecord::SharedCtor() {
-  _cached_size_ = 0;
-  totalrecordtime_ = 0;
-  interval_ = 0;
-  responsetime_ = 0;
-  delay_ = GOOGLE_LONGLONG(0);
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-scMachineStartRecord::~scMachineStartRecord() {
-  // @@protoc_insertion_point(destructor:agent.scMachineStartRecord)
-  SharedDtor();
-}
-
-void scMachineStartRecord::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void scMachineStartRecord::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* scMachineStartRecord::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return scMachineStartRecord_descriptor_;
-}
-
-const scMachineStartRecord& scMachineStartRecord::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-scMachineStartRecord* scMachineStartRecord::default_instance_ = NULL;
-
-scMachineStartRecord* scMachineStartRecord::New() const {
-  return new scMachineStartRecord;
-}
-
-void scMachineStartRecord::Clear() {
-#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<scMachineStartRecord*>(16)->f) - \
-   reinterpret_cast<char*>(16))
-
-#define ZR_(first, last) do {                              \
-    size_t f = OFFSET_OF_FIELD_(first);                    \
-    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
-    ::memset(&first, 0, n);                                \
-  } while (0)
-
-  ZR_(totalrecordtime_, responsetime_);
-
-#undef OFFSET_OF_FIELD_
-#undef ZR_
-
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool scMachineStartRecord::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.scMachineStartRecord)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 totalRecordTime = 1;
-      case 1: {
-        if (tag == 8) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &totalrecordtime_)));
-          set_has_totalrecordtime();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(16)) goto parse_interval;
-        break;
-      }
-
-      // required int32 interval = 2;
-      case 2: {
-        if (tag == 16) {
-         parse_interval:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &interval_)));
-          set_has_interval();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(24)) goto parse_responseTime;
-        break;
-      }
-
-      // required int32 responseTime = 3;
-      case 3: {
-        if (tag == 24) {
-         parse_responseTime:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &responsetime_)));
-          set_has_responsetime();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(32)) goto parse_delay;
-        break;
-      }
-
-      // optional int64 delay = 4;
-      case 4: {
-        if (tag == 32) {
-         parse_delay:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &delay_)));
-          set_has_delay();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.scMachineStartRecord)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.scMachineStartRecord)
-  return false;
-#undef DO_
-}
-
-void scMachineStartRecord::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.scMachineStartRecord)
-  // required int32 totalRecordTime = 1;
-  if (has_totalrecordtime()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->totalrecordtime(), output);
-  }
-
-  // required int32 interval = 2;
-  if (has_interval()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->interval(), output);
-  }
-
-  // required int32 responseTime = 3;
-  if (has_responsetime()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->responsetime(), output);
-  }
-
-  // optional int64 delay = 4;
-  if (has_delay()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->delay(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.scMachineStartRecord)
-}
-
-::google::protobuf::uint8* scMachineStartRecord::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.scMachineStartRecord)
-  // required int32 totalRecordTime = 1;
-  if (has_totalrecordtime()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->totalrecordtime(), target);
-  }
-
-  // required int32 interval = 2;
-  if (has_interval()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->interval(), target);
-  }
-
-  // required int32 responseTime = 3;
-  if (has_responsetime()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->responsetime(), target);
-  }
-
-  // optional int64 delay = 4;
-  if (has_delay()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(4, this->delay(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.scMachineStartRecord)
-  return target;
-}
-
-int scMachineStartRecord::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 totalRecordTime = 1;
-    if (has_totalrecordtime()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->totalrecordtime());
-    }
-
-    // required int32 interval = 2;
-    if (has_interval()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->interval());
-    }
-
-    // required int32 responseTime = 3;
-    if (has_responsetime()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->responsetime());
-    }
-
-    // optional int64 delay = 4;
-    if (has_delay()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
-          this->delay());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void scMachineStartRecord::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const scMachineStartRecord* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const scMachineStartRecord*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void scMachineStartRecord::MergeFrom(const scMachineStartRecord& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_totalrecordtime()) {
-      set_totalrecordtime(from.totalrecordtime());
-    }
-    if (from.has_interval()) {
-      set_interval(from.interval());
-    }
-    if (from.has_responsetime()) {
-      set_responsetime(from.responsetime());
-    }
-    if (from.has_delay()) {
-      set_delay(from.delay());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void scMachineStartRecord::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void scMachineStartRecord::CopyFrom(const scMachineStartRecord& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool scMachineStartRecord::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
-
-  return true;
-}
-
-void scMachineStartRecord::Swap(scMachineStartRecord* other) {
-  if (other != this) {
-    std::swap(totalrecordtime_, other->totalrecordtime_);
-    std::swap(interval_, other->interval_);
-    std::swap(responsetime_, other->responsetime_);
-    std::swap(delay_, other->delay_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata scMachineStartRecord::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = scMachineStartRecord_descriptor_;
-  metadata.reflection = scMachineStartRecord_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-#endif  // !_MSC_VER
-
-scMachineStopRecord::scMachineStopRecord()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.scMachineStopRecord)
-}
-
-void scMachineStopRecord::InitAsDefaultInstance() {
-}
-
-scMachineStopRecord::scMachineStopRecord(const scMachineStopRecord& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.scMachineStopRecord)
-}
-
-void scMachineStopRecord::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-scMachineStopRecord::~scMachineStopRecord() {
-  // @@protoc_insertion_point(destructor:agent.scMachineStopRecord)
-  SharedDtor();
-}
-
-void scMachineStopRecord::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void scMachineStopRecord::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* scMachineStopRecord::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return scMachineStopRecord_descriptor_;
-}
-
-const scMachineStopRecord& scMachineStopRecord::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-scMachineStopRecord* scMachineStopRecord::default_instance_ = NULL;
-
-scMachineStopRecord* scMachineStopRecord::New() const {
-  return new scMachineStopRecord;
-}
-
-void scMachineStopRecord::Clear() {
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool scMachineStopRecord::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.scMachineStopRecord)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0 ||
-        ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      goto success;
-    }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.scMachineStopRecord)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.scMachineStopRecord)
-  return false;
-#undef DO_
-}
-
-void scMachineStopRecord::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.scMachineStopRecord)
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.scMachineStopRecord)
-}
-
-::google::protobuf::uint8* scMachineStopRecord::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.scMachineStopRecord)
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.scMachineStopRecord)
-  return target;
-}
-
-int scMachineStopRecord::ByteSize() const {
-  int total_size = 0;
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void scMachineStopRecord::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const scMachineStopRecord* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const scMachineStopRecord*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void scMachineStopRecord::MergeFrom(const scMachineStopRecord& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void scMachineStopRecord::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void scMachineStopRecord::CopyFrom(const scMachineStopRecord& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool scMachineStopRecord::IsInitialized() const {
-
-  return true;
-}
-
-void scMachineStopRecord::Swap(scMachineStopRecord* other) {
-  if (other != this) {
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata scMachineStopRecord::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = scMachineStopRecord_descriptor_;
-  metadata.reflection = scMachineStopRecord_reflection_;
   return metadata;
 }
 
@@ -8087,6 +7626,372 @@ void csProcessRestrictionResponse::Swap(csProcessRestrictionResponse* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = csProcessRestrictionResponse_descriptor_;
   metadata.reflection = csProcessRestrictionResponse_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* csRecordResponse_Result_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return csRecordResponse_Result_descriptor_;
+}
+bool csRecordResponse_Result_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const csRecordResponse_Result csRecordResponse::START_SUCCESS;
+const csRecordResponse_Result csRecordResponse::START_FAILURE;
+const csRecordResponse_Result csRecordResponse::STOP_SUCCESS;
+const csRecordResponse_Result csRecordResponse::STOP_FAILURE;
+const csRecordResponse_Result csRecordResponse::Result_MIN;
+const csRecordResponse_Result csRecordResponse::Result_MAX;
+const int csRecordResponse::Result_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int csRecordResponse::kIsMachineFieldNumber;
+const int csRecordResponse::kResultFieldNumber;
+const int csRecordResponse::kFailReasonFieldNumber;
+#endif  // !_MSC_VER
+
+csRecordResponse::csRecordResponse()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:agent.csRecordResponse)
+}
+
+void csRecordResponse::InitAsDefaultInstance() {
+}
+
+csRecordResponse::csRecordResponse(const csRecordResponse& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:agent.csRecordResponse)
+}
+
+void csRecordResponse::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  ismachine_ = false;
+  result_ = 0;
+  failreason_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+csRecordResponse::~csRecordResponse() {
+  // @@protoc_insertion_point(destructor:agent.csRecordResponse)
+  SharedDtor();
+}
+
+void csRecordResponse::SharedDtor() {
+  if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete failreason_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void csRecordResponse::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* csRecordResponse::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return csRecordResponse_descriptor_;
+}
+
+const csRecordResponse& csRecordResponse::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
+  return *default_instance_;
+}
+
+csRecordResponse* csRecordResponse::default_instance_ = NULL;
+
+csRecordResponse* csRecordResponse::New() const {
+  return new csRecordResponse;
+}
+
+void csRecordResponse::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<csRecordResponse*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 7) {
+    ZR_(ismachine_, result_);
+    if (has_failreason()) {
+      if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        failreason_->clear();
+      }
+    }
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool csRecordResponse::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:agent.csRecordResponse)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .agent.csRecordResponse.Result result = 3;
+      case 3: {
+        if (tag == 24) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::agent::csRecordResponse_Result_IsValid(value)) {
+            set_result(static_cast< ::agent::csRecordResponse_Result >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(3, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_failReason;
+        break;
+      }
+
+      // optional string failReason = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_failReason:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_failreason()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->failreason().data(), this->failreason().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "failreason");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(40)) goto parse_isMachine;
+        break;
+      }
+
+      // required bool isMachine = 5;
+      case 5: {
+        if (tag == 40) {
+         parse_isMachine:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &ismachine_)));
+          set_has_ismachine();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:agent.csRecordResponse)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:agent.csRecordResponse)
+  return false;
+#undef DO_
+}
+
+void csRecordResponse::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:agent.csRecordResponse)
+  // required .agent.csRecordResponse.Result result = 3;
+  if (has_result()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      3, this->result(), output);
+  }
+
+  // optional string failReason = 4;
+  if (has_failreason()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->failreason().data(), this->failreason().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "failreason");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->failreason(), output);
+  }
+
+  // required bool isMachine = 5;
+  if (has_ismachine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->ismachine(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:agent.csRecordResponse)
+}
+
+::google::protobuf::uint8* csRecordResponse::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:agent.csRecordResponse)
+  // required .agent.csRecordResponse.Result result = 3;
+  if (has_result()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      3, this->result(), target);
+  }
+
+  // optional string failReason = 4;
+  if (has_failreason()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->failreason().data(), this->failreason().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "failreason");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->failreason(), target);
+  }
+
+  // required bool isMachine = 5;
+  if (has_ismachine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->ismachine(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:agent.csRecordResponse)
+  return target;
+}
+
+int csRecordResponse::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bool isMachine = 5;
+    if (has_ismachine()) {
+      total_size += 1 + 1;
+    }
+
+    // required .agent.csRecordResponse.Result result = 3;
+    if (has_result()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->result());
+    }
+
+    // optional string failReason = 4;
+    if (has_failreason()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->failreason());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void csRecordResponse::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const csRecordResponse* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const csRecordResponse*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void csRecordResponse::MergeFrom(const csRecordResponse& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_ismachine()) {
+      set_ismachine(from.ismachine());
+    }
+    if (from.has_result()) {
+      set_result(from.result());
+    }
+    if (from.has_failreason()) {
+      set_failreason(from.failreason());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void csRecordResponse::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void csRecordResponse::CopyFrom(const csRecordResponse& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool csRecordResponse::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void csRecordResponse::Swap(csRecordResponse* other) {
+  if (other != this) {
+    std::swap(ismachine_, other->ismachine_);
+    std::swap(result_, other->result_);
+    std::swap(failreason_, other->failreason_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata csRecordResponse::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = csRecordResponse_descriptor_;
+  metadata.reflection = csRecordResponse_reflection_;
   return metadata;
 }
 

@@ -25,6 +25,8 @@ public:
 	void SendAgentIDResponse(int agentID);
 	void SendProcessListResponse();
 	void SendCounterListResponse(bool isMachine);
+	void SendStartRecord(bool isMachine, int totalRecordTime, int responseTime, int interval, long long int delay);
+	void SendStopRecord(bool isMachine);
 
 	int FindAgentID(int hostip);
 
@@ -33,4 +35,6 @@ private:
 	MemPooler<CPacket> *packetPoolManager;
 	int position;
 	int remainBytes;
+
+	bool isReady;
 };

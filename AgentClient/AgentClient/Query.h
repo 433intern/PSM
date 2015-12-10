@@ -16,12 +16,24 @@ public:
 	std::list<std::string> machineCounterList;
 	std::vector<MachineCounterEntry*> machineLogList;
 
+	std::thread machineRecorder;
+	std::thread processRecorder;
+
+	bool isMachineRecordEnd;
+	bool isProcessRecordEnd;
+
 
 	Query();
 	~Query();
 
 	void Init();
-	bool Record(int recordTime, int interval, bool isMachine);
+	
+	bool StartRecord(bool isMachine, int totalTime, int recordTime, int interval,
+					long long int delay);
+	bool StopRecord(bool isMachine);
+
+	bool Record(bool isMachine, int totalTime, int recordTime, int interval,
+				long long int delay);
 	bool InitCounterInfo(PDH_HQUERY& query, bool isMachine);
 	bool IsCheckProcess(std::string processName);
 	void ClearLogList(bool isMachine);

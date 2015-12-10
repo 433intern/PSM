@@ -3,7 +3,7 @@
 extern AgentApp* agentApp;
 
 AgentSocket::AgentSocket()
-: agentID(-1), position(0), remainBytes(HEADER_SIZE), healthCheck(true)
+: agentID(-1), position(0), remainBytes(HEADER_SIZE), healthCheck(true), isReady(false)
 {
 	packetPoolManager = new MemPooler<CPacket>(10);
 	if (!packetPoolManager)
@@ -94,6 +94,7 @@ void AgentSocket::AcceptProcess(bool isError, Act* act, DWORD bytes_transferred)
 	healthCheck = true;
 	position = 0;
 	remainBytes = HEADER_SIZE;
+	isReady = false;
 
 	Recv(recvBuf_, HEADER_SIZE);
 }
@@ -175,6 +176,22 @@ void AgentSocket::PacketHandling(CPacket *packet)
 			{
 				PRINT("[AgentSocket] Update process list %d\n", agentID);
 			}
+			break;
+		}
+		case agent::RecordResponse:
+		{
+			PRINT("[AgentSocket] RecordResponse received\n");
+			agent::csRecordResponse msg;
+			if (msg.ParseFromArray(packet->msg, packet->length))
+			{
+				/* result msg print */
+			}
+			break;
+		}
+		case agent::AgentReady:
+		{
+			PRINT("[AgentSocket] AgentReady received\n");
+			SendStartRecord(false, -1, 10, 1, 0);
 			break;
 		}
 		case agent::HealthAck:
@@ -276,4 +293,40 @@ void AgentSocket::SendCounterListResponse(bool isMachine)
 	{
 		ERROR_PRINT("[AgentSocket] SendCounterListResponse ERROR\n");
 	}
+}
+
+void AgentSocket::SendStartRecord(bool isMachine, int totalRecordTime, int responseTime, int interval, long long int delay)
+{
+	PRINT("[AgentSocket] SendProcessStartRecord\n");
+	CPacket packet;
+	agent::scStartRecord msg;
+
+	msg.set_ismachine(isMachine);
+	msg.set_totalrecordtime(totalRecordTime);
+	msg.set_interval(interval);
+	msg.set_responsetime(responseTime);
+	msg.set_delay(delay);
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::StartRecord;
+	memset(packet.msg, 0, BUFSIZE);
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+void AgentSocket::SendStopRecord(bool isMachine)
+{
+	PRINT("[AgentSocket] SendProcessStopRecord\n");
+	CPacket packet;
+	agent::scStopRecord msg;
+
+	msg.set_ismachine(isMachine);
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::StopRecord;
+	memset(packet.msg, 0, BUFSIZE);
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
 }

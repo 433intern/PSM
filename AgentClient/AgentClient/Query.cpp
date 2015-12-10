@@ -3,6 +3,7 @@
 #include <time.h>
 
 Query::Query()
+: isMachineRecordEnd(true), isProcessRecordEnd(true)
 {
 
 }
@@ -219,103 +220,164 @@ char* Query::GetCurTime()
 	return s;
 }
 
-bool Query::Record(int recordTime, int interval, bool isMachine)
+bool Query::StartRecord(bool isMachine, int totalTime, int recordTime, int interval,
+	long long int delay)
 {
-	PDH_HQUERY query;
-	PDH_STATUS status;
-
-	status = PdhOpenQuery(NULL, 0, &query);
-
-	if (ERROR_SUCCESS != status)
+	if (isMachine && isMachineRecordEnd)
 	{
-		PRINT("[Query] PdhOpenQuery Error!\n");
-		return false;
+		isMachineRecordEnd = false;
+
+		machineRecorder = std::thread(&Query::Record, this, isMachine, totalTime, recordTime, interval, delay);
+		machineRecorder.detach();
+
+		return true;
+	}
+	if (!isMachine && isProcessRecordEnd)
+	{
+		isProcessRecordEnd = false;
+
+		processRecorder = std::thread(&Query::Record, this, isMachine, totalTime, recordTime, interval, delay);
+		processRecorder.detach();
+
+		return true;
 	}
 
-	if (!InitCounterInfo(query, isMachine)){
-		PRINT("[Query] PdhAddCounter Error!\n");
-		ClearLogList(isMachine);
-		return false;
+	return false;
+}
+
+bool Query::StopRecord(bool isMachine)
+{
+	if (isMachine)
+	{
+		if (isMachineRecordEnd) return false;
+		else
+		{
+			isMachineRecordEnd = true;
+			return true;
+		}
+	}
+	else
+	{
+		if (isProcessRecordEnd) return false;
+		else
+		{
+			isProcessRecordEnd = true;
+			return true;
+		}
 	}
 
-	
+}
+
+bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
+	long long int delay)
+{
+	PRINT("[Query] Record Delay : %lld ...\n", delay);
+	std::this_thread::sleep_for(std::chrono::seconds(delay));
+
 	int time = 0;
-	while (recordTime > time)
-	{
-		ULONG CounterType;
-		ULONG WaitResult;
-		PDH_FMT_COUNTERVALUE DisplayValue;
 
-		status = PdhCollectQueryData(query);
+	while ((totalTime > time) || (totalTime < 0)){
+		if (isMachine && isMachineRecordEnd) break;
+		if (!isMachine && isProcessRecordEnd) break;
 
-		if (status != ERROR_SUCCESS)
+		PDH_HQUERY query;
+		PDH_STATUS status;
+
+		status = PdhOpenQuery(NULL, 0, &query);
+
+		if (ERROR_SUCCESS != status)
 		{
-			PRINT("[Query] PdhCollectQueryData Error!\n");
+			PRINT("[Query] PdhOpenQuery Error!\n");
 			return false;
 		}
 
-		status = PdhCollectQueryDataEx(query, interval, event_);
-		if (status != ERROR_SUCCESS)
-		{
-			PRINT("[Query] PdhCollectQueryDataEx Error!\n");
+		if (!InitCounterInfo(query, isMachine)){
+			PRINT("[Query] PdhAddCounter Error!\n");
+			ClearLogList(isMachine);
 			return false;
 		}
 
-		WaitResult = WaitForSingleObject(event_, INFINITE);
-
-		if (WaitResult == WAIT_OBJECT_0)
+		do
 		{
-			if (!isMachine)
+			ULONG CounterType;
+			ULONG WaitResult;
+			PDH_FMT_COUNTERVALUE DisplayValue;
+
+			status = PdhCollectQueryData(query);
+
+			if (status != ERROR_SUCCESS)
 			{
-				for (ProcessCounterEntry* it : processLogList)
+				PRINT("[Query] PdhCollectQueryData Error!\n");
+				return false;
+			}
+
+			status = PdhCollectQueryDataEx(query, interval, event_);
+			if (status != ERROR_SUCCESS)
+			{
+				PRINT("[Query] PdhCollectQueryDataEx Error!\n");
+				return false;
+			}
+
+			WaitResult = WaitForSingleObject(event_, INFINITE);
+
+			if (WaitResult == WAIT_OBJECT_0)
+			{
+				if (!isMachine)
 				{
-					status = PdhGetFormattedCounterValue(it->counter, PDH_FMT_DOUBLE, &CounterType, &DisplayValue);
-					if (status != ERROR_SUCCESS)
+					for (ProcessCounterEntry* it : processLogList)
 					{
-						PRINT("[Query] PdhGetFormattedCounterValue Error!\n");
-						return false;
+						status = PdhGetFormattedCounterValue(it->counter, PDH_FMT_DOUBLE, &CounterType, &DisplayValue);
+						if (status != ERROR_SUCCESS)
+						{
+							PRINT("[Query] PdhGetFormattedCounterValue Error!\n");
+							return false;
+						}
+
+						Log log;
+						log.timestamp = std::string(GetCurTime());
+						log.time = time;
+						log.value = DisplayValue.doubleValue;
+						it->logs.push_back(log);
+
+						PRINT("[%s] %s[%d] : %f\n", GetCurTime(), it->processName.c_str(), it->processID, log.value);
 					}
+				}
+				else
+				{
+					for (MachineCounterEntry* it : machineLogList)
+					{
+						status = PdhGetFormattedCounterValue(it->counter, PDH_FMT_DOUBLE, &CounterType, &DisplayValue);
+						if (status != ERROR_SUCCESS)
+						{
+							PRINT("[Query] PdhGetFormattedCounterValue Error!\n");
+							return false;
+						}
 
-					Log log;
-					log.timestamp = std::string(GetCurTime());
-					log.time = time;
-					log.value = DisplayValue.doubleValue;
-					it->logs.push_back(log);
+						Log log;
+						log.timestamp = std::string(GetCurTime());
+						log.time = time;
+						log.value = DisplayValue.doubleValue;
+						it->logs.push_back(log);
 
-					PRINT("[%s] %s[%d] : %f\n", GetCurTime(), it->processName.c_str(), it->processID, log.value);
+						PRINT("[%s] Total_ : %f\n", GetCurTime(), log.value);
+					}
 				}
 			}
-			else
-			{
-				for (MachineCounterEntry* it : machineLogList)
-				{
-					status = PdhGetFormattedCounterValue(it->counter, PDH_FMT_DOUBLE, &CounterType, &DisplayValue);
-					if (status != ERROR_SUCCESS)
-					{
-						PRINT("[Query] PdhGetFormattedCounterValue Error!\n");
-						return false;
-					}
+			time += interval;
+		} while (time % recordTime != 0);
 
-					Log log;
-					log.timestamp = std::string(GetCurTime());
-					log.time = time;
-					log.value = DisplayValue.doubleValue;
-					it->logs.push_back(log);
+		status = PdhCloseQuery(query);
 
-					PRINT("[%s] Total_ : %f\n", GetCurTime(), log.value);
-				}
-			}
+		if (ERROR_SUCCESS != status)
+		{
+			PRINT("[Query] PdhCloseQuery Error!\n");
+			return false;
 		}
-		time++;
 	}
 
-	status =  PdhCloseQuery(query);
+	if (isMachine) isMachineRecordEnd = true;
+	else isProcessRecordEnd = true;
 
-	if (ERROR_SUCCESS != status)
-	{
-		PRINT("[Query] PdhCloseQuery Error!\n");
-		return false;
-	}
-	
+	PRINT("[Query] Record Done!\n");
 	return true;
 }

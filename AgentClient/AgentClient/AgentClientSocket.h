@@ -25,6 +25,8 @@ public:
 	void SendProcessListRequest();
 	void SendCounterListRequest(bool isMachine);
 	void SendCurrentProcessList(std::vector<ProcessInfo>& processList);
+	void SendRecordResponse(bool isMachine, bool isStart, bool isSuccess, std::string& failMsg);
+	void SendAgentReady();
 
 private:
 	struct mswsock_s

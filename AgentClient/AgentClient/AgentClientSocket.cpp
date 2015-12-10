@@ -265,8 +265,45 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 						PRINT("%s\n", msg.countername(i).c_str());
 						query.AddCounter(msg.countername(i), true);
 					}
-					query.Record(1, 1, false);
-					query.Record(1, 1, true);
+//					query.Record(1, 1, false);
+//					query.Record(1, 1, true);
+					SendAgentReady();
+				}
+			}
+			break;
+		}
+		case agent::StartRecord:
+		{
+			PRINT("[AgentClientSocket] StartRecord received\n");
+			agent::scStartRecord msg;
+			if (msg.ParseFromArray(packet->msg, packet->length))
+			{
+				if (!query.StartRecord(msg.ismachine(), msg.totalrecordtime(), msg.responsetime(), msg.interval(), msg.delay()))
+				{
+					ERROR_PRINT("[AgentClientSocket] record maybe already start! error!\n");
+					SendRecordResponse(msg.ismachine(), true, false, std::string("already start"));
+				}
+				else
+				{
+					SendRecordResponse(msg.ismachine(), true, true, std::string(""));
+				}
+			}
+			break;
+		}
+		case agent::StopRecord:
+		{
+			PRINT("[AgentClientSocket] StopRecord received\n");
+			agent::scStartRecord msg;
+			if (msg.ParseFromArray(packet->msg, packet->length))
+			{
+				if (!query.StopRecord(msg.ismachine()))
+				{
+					ERROR_PRINT("[AgentClientSocket] record maybe already stop! error!\n");
+					SendRecordResponse(msg.ismachine(), false, false, std::string(""));
+				}
+				else
+				{
+					SendRecordResponse(msg.ismachine(), false, true, std::string(""));
 				}
 			}
 			break;
@@ -389,6 +426,59 @@ void AgentClientSocket::SendCurrentProcessList(std::vector<ProcessInfo>& process
 
 	packet.length = (short)msg.ByteSize();
 	packet.type = (short)agent::CurrentProcessListSend;
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+void AgentClientSocket::SendRecordResponse(bool isMachine, bool isStart, bool isSuccess, std::string& failMsg)
+{
+	if (!isConnect) return;
+
+	PRINT("[AgentClientSocket] SendProcessRecordResponse\n");
+	CPacket packet;
+	agent::csRecordResponse msg;
+
+	if (isStart)
+	{
+		if (isSuccess) msg.set_result
+			(agent::csRecordResponse_Result::csRecordResponse_Result_START_SUCCESS);
+		else msg.set_result
+			(agent::csRecordResponse_Result::csRecordResponse_Result_START_FAILURE);
+	}
+	else
+	{
+		if (isSuccess) msg.set_result
+			(agent::csRecordResponse_Result::csRecordResponse_Result_STOP_SUCCESS);
+		else msg.set_result
+			(agent::csRecordResponse_Result::csRecordResponse_Result_STOP_FAILURE);
+	}
+
+	if (failMsg != "")
+	{
+		msg.set_failreason(failMsg);
+	}
+
+	msg.set_ismachine(isMachine);
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::RecordResponse;
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+void AgentClientSocket::SendAgentReady()
+{
+	if (!isConnect) return;
+
+	PRINT("[AgentClientSocket] SendAgentReady\n");
+
+	CPacket packet;
+	agent::csAgentReady msg;
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::AgentReady;
 	msg.SerializeToArray((void *)&packet.msg, packet.length);
 
 	Send((char *)&packet, packet.length + HEADER_SIZE);

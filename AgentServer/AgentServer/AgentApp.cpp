@@ -23,10 +23,7 @@ void AgentApp::Init()
 
 void AgentApp::Start()
 {
-
-	redisManager.GetAgentID(123123);
-
-
+	//redisManager.GetAgentID(123123);
 	std::thread logicThread(&LogicHandle::Process, &logicHandle);
 	agentServer->Start();
 

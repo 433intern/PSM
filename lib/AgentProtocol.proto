@@ -11,13 +11,11 @@ enum agentType
 	CounterListRequest = 4;
 	CounterListResponse = 5;
 
-	
-
 	CurrentProcessListSend = 6;
 
 	HealthCheck = 8;
 	HealthAck = 9;
-	
+
 	ProcessCommandRequest = 10;
 	ProcessCommandResponse = 11;
 	CounterCommandRequest = 12;
@@ -25,19 +23,15 @@ enum agentType
 	ProcessRestrictionRequest = 14;
 	ProcessRestrictionResponse = 15;
 
-	ProcessStartRecord = 16;
-	ProcessStopRecord = 17;
+	StartRecord = 16;
+	StopRecord = 17;
 
 	ProcessInfoSend = 18;
-
-	MachineStartRecord = 19;
-	MachineStopRecord = 20;
-
 	MachineInfoSend = 21;
 
 	AgentReady = 22;
 
-
+	RecordResponse = 23;
 }
 
 message csAgentIDRequest
@@ -151,17 +145,18 @@ message csCounterCommandResponse
 	optional string failReason = 4;
 }
 
-message scProcessStartRecord
+message scStartRecord
 {
+	required bool isMachine = 5;
 	required int32 totalRecordTime = 1;
 	required int32 interval = 2;
 	required int32 responseTime = 3;
 	optional int64 delay = 4;
 }
 
-message scProcessStopRecord
+message scStopRecord
 {
-
+	required bool isMachine = 1;
 }
 
 message Log
@@ -186,21 +181,6 @@ message ProcessInfos
 message csTotalProcessInfoSend
 {
 	repeated ProcessInfos info = 1;
-}
-
-
-
-message scMachineStartRecord
-{
-	required int32 totalRecordTime = 1;
-	required int32 interval = 2;
-	required int32 responseTime = 3;
-	optional int64 delay = 4;
-}
-
-message scMachineStopRecord
-{
-
 }
 
 message MachineInfos
@@ -245,3 +225,16 @@ message csProcessRestrictionResponse
 	optional string failReason = 4;
 }
 
+message csRecordResponse
+{
+	enum Result
+	{
+		START_SUCCESS = 0;
+		START_FAILURE = 1;
+		STOP_SUCCESS = 2;
+		STOP_FAILURE = 3;
+	}
+	required bool isMachine = 5;
+	required Result result = 3;
+	optional string failReason = 4;
+}
