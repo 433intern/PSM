@@ -17,6 +17,12 @@ public:
 	bool SaveProcessInfo(int agentID, CPacket* packet);
 	bool SaveMachineInfo(int agentID, CPacket* packet);
 
+	bool SetProcessName(int agentID, std::string& processName);
+	bool SetCounterName(int agentID, std::string& counterName, bool isMachine);
+
+	bool RemProcessName(int agentID, std::string& processName);
+	bool RemCounterName(int agentID, std::string& counterName, bool isMachine);
+
 	std::string CounterNameToNewName(const std::string& counterName);
 	std::string GetCurrentDate(long long int timestamp);
 	std::string GetCurrTime(long long int timestamp);

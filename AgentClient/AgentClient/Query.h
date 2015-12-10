@@ -8,6 +8,8 @@ private:
 	MemPooler<ProcessCounterEntry> *entryPoolManager;
 	MemPooler<MachineCounterEntry> *mentryPoolManager;
 
+	CRITICAL_SECTION listLock;
+
 public:
 	std::list<ProcessInfo_Agent> checkProcessList;
 	std::list<std::string> counterList;

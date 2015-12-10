@@ -20,6 +20,7 @@ enum agentType
 	ProcessCommandResponse = 11;
 	CounterCommandRequest = 12;
 	CounterCommandResponse = 13;
+
 	ProcessRestrictionRequest = 14;
 	ProcessRestrictionResponse = 15;
 

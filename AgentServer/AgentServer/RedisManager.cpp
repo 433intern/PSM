@@ -415,3 +415,63 @@ bool RedisManager::SaveMachineInfo(int agentID, CPacket* packet)
 	}
 	return true;
 }
+
+bool RedisManager::SetProcessName(int agentID, std::string& processName)
+{
+	std::string key = std::to_string(agentID) + ":ProcessList";
+
+	RedisValue result;
+	result = redis.command("sadd", key, processName);
+
+	if (result.isOk()){
+		if (result.toInt() == 0) return false;
+		else return true;
+	}
+	return false;
+}
+
+bool RedisManager::SetCounterName(int agentID, std::string& counterName, bool isMachine)
+{
+	std::string key;
+	if (!isMachine) key = std::to_string(agentID) + ":CounterList";
+	else key = std::to_string(agentID) + ":MachineCounterList";
+
+	RedisValue result;
+	result = redis.command("sadd", key, counterName);
+
+	if (result.isOk()){
+		if (result.toInt() == 0) return false;
+		else return true;
+	}
+	return false;
+}
+
+bool RedisManager::RemProcessName(int agentID, std::string& processName)
+{
+	std::string key = std::to_string(agentID) + ":ProcessList";
+
+	RedisValue result;
+	result = redis.command("srem", key, processName);
+
+	if (result.isOk()){
+		if (result.toInt() == 0) return false;
+		else return true;
+	}
+	return false;
+}
+
+bool RedisManager::RemCounterName(int agentID, std::string& counterName, bool isMachine)
+{
+	std::string key;
+	if (!isMachine) key = std::to_string(agentID) + ":CounterList";
+	else key = std::to_string(agentID) + ":MachineCounterList";
+
+	RedisValue result;
+	result = redis.command("srem", key, counterName);
+
+	if (result.isOk()){
+		if (result.toInt() == 0) return false;
+		else return true;
+	}
+	return false;
+}

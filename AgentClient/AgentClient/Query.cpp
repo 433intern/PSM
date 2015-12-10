@@ -7,7 +7,7 @@ extern AgentClientApp* agentClientApp;
 Query::Query()
 : isMachineRecordEnd(true), isProcessRecordEnd(true)
 {
-
+	InitializeCriticalSectionAndSpinCount(&listLock, 4000);
 }
 
 Query::~Query()
@@ -16,6 +16,8 @@ Query::~Query()
 	for (MachineCounterEntry* p : machineLogList) mentryPoolManager->Free(p);
 	delete entryPoolManager;
 	delete mentryPoolManager;
+
+	DeleteCriticalSection(&listLock);
 }
 
 void Query::Init()
@@ -49,22 +51,33 @@ void Query::Init()
 
 bool Query::AddCounter(std::string counter, bool isMachine)
 {
+	EnterCriticalSection(&listLock);
 	if (isMachine)
 	{
 		for (std::string pc : machineCounterList)
 		{
-			if (pc == counter) return false;
+			if (pc == counter){
+
+				LeaveCriticalSection(&listLock);
+				return false;
+			}
 		}
 		machineCounterList.push_back(counter);
+
+		LeaveCriticalSection(&listLock);
 		return true;
 	}
 	else
 	{
 		for (std::string pc : counterList)
 		{
-			if (pc == counter) return false;
+			if (pc == counter){
+				LeaveCriticalSection(&listLock);
+				return false;
+			}
 		}
 		counterList.push_back(counter);
+		LeaveCriticalSection(&listLock);
 		return true;
 	}
 	
@@ -72,18 +85,22 @@ bool Query::AddCounter(std::string counter, bool isMachine)
 
 bool Query::DeleteCounter(std::string counter, bool isMachine)
 {
+	EnterCriticalSection(&listLock);
 	if (isMachine) machineCounterList.remove(counter);
 	else counterList.remove(counter);
+	LeaveCriticalSection(&listLock);
 	return true;
 }
 
 
 bool Query::AddProcess(std::string processName)
 {
+	EnterCriticalSection(&listLock);
 	for (ProcessInfo_Agent checkProcess : checkProcessList)
 	{
 		if (processName == checkProcess.name)
 		{
+			LeaveCriticalSection(&listLock);
 			return false;
 		}
 	}
@@ -92,20 +109,24 @@ bool Query::AddProcess(std::string processName)
 	p.name = processName;
 	checkProcessList.push_back(p);
 
+	LeaveCriticalSection(&listLock);
 	return true;
 }
 
 bool Query::DeleteProcess(std::string processName)
 {
+	EnterCriticalSection(&listLock);
 	std::list<ProcessInfo_Agent>::iterator iter;
 	for (iter = checkProcessList.begin(); iter != checkProcessList.end(); iter++)
 	{
 		if (processName == (*iter).name)
 		{
 			checkProcessList.erase(iter);
+			LeaveCriticalSection(&listLock);
 			return true;
 		}
 	}
+	LeaveCriticalSection(&listLock);
 	return false;
 }
 
@@ -151,6 +172,7 @@ bool Query::InitCounterInfo(PDH_HQUERY& query, bool isMachine)
 
 	PRINT("[Query] Update Counter Infos...\n");
 
+	EnterCriticalSection(&listLock);
 	if (!isMachine)
 	{
 		helper.UpdateProcessList();
@@ -173,6 +195,7 @@ bool Query::InitCounterInfo(PDH_HQUERY& query, bool isMachine)
 				status = PdhAddCounter(query, counterName.c_str(), 0, &pce->counter);
 				if (status != ERROR_SUCCESS)
 				{
+					LeaveCriticalSection(&listLock);
 					return false;
 				}
 
@@ -180,7 +203,6 @@ bool Query::InitCounterInfo(PDH_HQUERY& query, bool isMachine)
 				pce->processID = p.processID;
 				pce->logs.clear();
 				processLogList.push_back(pce);
-
 			}
 		}
 	}
@@ -195,6 +217,7 @@ bool Query::InitCounterInfo(PDH_HQUERY& query, bool isMachine)
 
 			if (status != ERROR_SUCCESS)
 			{
+				LeaveCriticalSection(&listLock);
 				return false;
 			}
 
@@ -205,6 +228,7 @@ bool Query::InitCounterInfo(PDH_HQUERY& query, bool isMachine)
 	}
 	PRINT("[Query] Done!\n");
 
+	LeaveCriticalSection(&listLock);
 	return true;
 }
 char* Query::GetCurTime()

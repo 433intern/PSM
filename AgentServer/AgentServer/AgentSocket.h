@@ -27,8 +27,16 @@ public:
 	void SendCounterListResponse(bool isMachine);
 	void SendStartRecord(bool isMachine, int totalRecordTime, int responseTime, int interval, long long int delay);
 	void SendStopRecord(bool isMachine);
+	void SendProcessCommand(agent::ProcessCommandType type, std::string& processName);
+	void SendCounterCommand(agent::CounterCommandType type, std::string& counterName, bool isMachine);
 
 	int FindAgentID(int hostip);
+
+	bool AddProcessName(std::string& processName);
+	bool DeleteProcessName(std::string& processName);
+
+	bool AddCounterName(std::string& counterName, bool isMachine);
+	bool DeleteCounterName(std::string& counterName, bool isMachine);
 
 
 private:

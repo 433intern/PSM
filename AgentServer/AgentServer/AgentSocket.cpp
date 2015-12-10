@@ -229,6 +229,66 @@ void AgentSocket::PacketHandling(CPacket *packet)
 	if (!packetPoolManager->Free(packet)) ERROR_PRINT("[AgentSocket] free error!\n");
 }
 
+bool AgentSocket::AddProcessName(std::string& processName)
+{
+	if (agentApp->redisManager.SetProcessName(agentID, processName))
+	{
+		PRINT("[AgentSocket] AddProcessName Success\n");
+		SendProcessCommand(agent::ProcessCommandType::ADDLIST, processName);
+		return true;
+	}
+	else
+	{
+		PRINT("[AgentSocket] AddProcessName Failed : already in redis\n");
+		return false;
+	}
+}
+
+bool AgentSocket::DeleteProcessName(std::string& processName)
+{
+	if (agentApp->redisManager.RemProcessName(agentID, processName))
+	{
+		PRINT("[AgentSocket] DeleteProcessName Success\n");
+		SendProcessCommand(agent::ProcessCommandType::DELETELIST, processName);
+		return true;
+	}
+	else
+	{
+		PRINT("[AgentSocket] DeleteProcessName Failed\n");
+		return false;
+	}
+}
+
+bool AgentSocket::AddCounterName(std::string& counterName, bool isMachine)
+{
+	if (agentApp->redisManager.SetCounterName(agentID, counterName, isMachine))
+	{
+		PRINT("[AgentSocket] AddCounterName Success\n");
+		SendCounterCommand(agent::CounterCommandType::CADDLIST, counterName, isMachine);
+		return true;
+	}
+	else
+	{
+		PRINT("[AgentSocket] AddCounterName Failed : already in redis\n");
+		return false;
+	}
+}
+
+bool AgentSocket::DeleteCounterName(std::string& counterName, bool isMachine)
+{
+	if (agentApp->redisManager.RemCounterName(agentID, counterName, isMachine))
+	{
+		PRINT("[AgentSocket] DeleteCounterName Success\n");
+		SendCounterCommand(agent::CounterCommandType::CDELETELIST, counterName, isMachine);
+		return true;
+	}
+	else
+	{
+		PRINT("[AgentSocket] DeleteCounterName Failed : already in redis\n");
+		return false;
+	}
+}
+
 void AgentSocket::SendHealthCheck()
 {
 	PRINT("[AgentSocket] SendHealthCheck\n");
@@ -349,6 +409,41 @@ void AgentSocket::SendStopRecord(bool isMachine)
 
 	packet.length = (short)msg.ByteSize();
 	packet.type = (short)agent::StopRecord;
+	memset(packet.msg, 0, BUFSIZE);
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+void AgentSocket::SendProcessCommand(agent::ProcessCommandType type, std::string& processName)
+{
+	PRINT("[AgentSocket] SendProcessCommand\n");
+	CPacket packet;
+	agent::scProcessCommandRequest msg;
+
+	msg.set_type(type);
+	msg.set_processname(processName);
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::ProcessCommandRequest;
+	memset(packet.msg, 0, BUFSIZE);
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+void AgentSocket::SendCounterCommand(agent::CounterCommandType type, std::string& counterName, bool isMachine)
+{
+	PRINT("[AgentSocket] SendCounterCommand\n");
+	CPacket packet;
+	agent::scCounterCommandRequest msg;
+
+	msg.set_ismachine(isMachine);
+	msg.set_type(type);
+	msg.set_countername(counterName);
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)agent::CounterCommandRequest;
 	memset(packet.msg, 0, BUFSIZE);
 	msg.SerializeToArray((void *)&packet.msg, packet.length);
 

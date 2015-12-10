@@ -48,6 +48,37 @@ void AgentApp::Process()
 			End();
 			break;
 		}
+		
+		if (input.substr(0, 4) == "padd")
+		{
+			agentServer->GetAgentSocketByAgentID(0)
+				->AddProcessName(input.substr(5, input.size()));
+		}
+		else if (input.substr(0, 4) == "pdel")
+		{
+			agentServer->GetAgentSocketByAgentID(0)
+				->DeleteProcessName(input.substr(5, input.size()));
+		}
+		else if (input.substr(0, 4) == "cadd")
+		{
+			agentServer->GetAgentSocketByAgentID(0)
+				->AddCounterName(input.substr(5, input.size()), false);
+		}
+		else if (input.substr(0, 4) == "cdel")
+		{
+			agentServer->GetAgentSocketByAgentID(0)
+				->DeleteCounterName(input.substr(5, input.size()), false);
+		}
+		else if (input.substr(0, 4) == "mcadd")
+		{
+			agentServer->GetAgentSocketByAgentID(0)
+				->AddCounterName(input.substr(5, input.size()), true);
+		}
+		else if (input.substr(0, 4) == "mcdel")
+		{
+			agentServer->GetAgentSocketByAgentID(0)
+				->DeleteCounterName(input.substr(5, input.size()), true);
+		}
 	}
 }
 

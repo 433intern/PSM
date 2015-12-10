@@ -23,6 +23,7 @@ public:
 public:
 	void AddAgent(AgentSocket* agent);
 	void DeleteAgent(AgentSocket* agent);
+	AgentSocket* GetAgentSocketByAgentID(int AgentID);
 
 private:
 	WORD			port_;

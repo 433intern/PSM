@@ -77,6 +77,21 @@ void TcpAgentServer::DeleteAgent(AgentSocket* agent)
 	LeaveCriticalSection(&agentListLock);
 }
 
+AgentSocket* TcpAgentServer::GetAgentSocketByAgentID(int AgentID)
+{
+	EnterCriticalSection(&agentListLock);
+	for (AgentSocket* ag : agentList)
+	{
+		if (ag->agentID == AgentID)
+		{
+			LeaveCriticalSection(&agentListLock);
+			return ag;
+		}
+	}
+	LeaveCriticalSection(&agentListLock);
+	return NULL;
+}
+
 void TcpAgentServer::HeartbeatCheck()
 {
 	while (!agentApp->isEnd){

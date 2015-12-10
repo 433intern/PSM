@@ -313,6 +313,46 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 			}
 			break;
 		}
+		case agent::ProcessCommandRequest:
+		{
+			PRINT("[AgentClientSocket] ProcessCommandRequest received\n");
+			agent::scProcessCommandRequest msg;
+			if (msg.ParseFromArray(packet->msg, packet->length))
+			{
+				switch (msg.type())
+				{
+				case agent::ProcessCommandType::ADDLIST:
+					query.AddProcess(msg.processname());
+					break;
+				case agent::ProcessCommandType::DELETELIST:
+					query.DeleteProcess(msg.processname());
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		}
+		case agent::CounterCommandRequest:
+		{
+			PRINT("[AgentClientSocket] CounterCommandRequest received\n");
+			agent::scCounterCommandRequest msg;
+			if (msg.ParseFromArray(packet->msg, packet->length))
+			{
+				switch (msg.type())
+				{
+				case agent::CounterCommandType::CADDLIST:
+					query.AddCounter(msg.countername(), msg.ismachine());
+					break;
+				case agent::CounterCommandType::CDELETELIST:
+					query.DeleteCounter(msg.countername(), msg.ismachine());
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		}
 		case agent::HealthCheck:
 			PRINT("[AgentClientSocket] HealthCheck received\n");
 			SendHealthAck();
