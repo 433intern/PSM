@@ -124,7 +124,11 @@
                 {% for agent in agentList %}
                   <tr>
                     <td class="mdl-data-table__cell--non-numeric" style="color:{{ agent.color }}; font-weight: bold;">{{ agent.state }}</td>
-                    <td><a href="/server_detail/{{ agent.index }}">{{ agent.name }}</a></td>
+                    {% if agent.recording %}
+                    <td><a href="/server_detail/{{ agent.ip_int }}">{{ agent.name }}</a></td>
+                    {% else %}
+                    <td>{{ agent.name }}</td>
+                    {% endif %}
                     <td>{{agent.ip}}</td>
 
                     <td style="width: 20%;">
@@ -161,7 +165,7 @@
                     </td>
 
                     <td style="width: 30px;">
-                      <a href="/setting/{{ agent.index }}">자세히..</a>
+                      <a href="/setting/{{ agent.ip_int }}">자세히..</a>
                   </td>
                   </tr>
                 {% endfor %}

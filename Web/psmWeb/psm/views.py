@@ -9,20 +9,22 @@ import psm.redisJob
 
 
 def Index(request):
-    list = psm.redisJob.GetAgentListToView()
+    list = psm.redisJob.GetAgentListToView(None)
     return render(request, "server_main.html", {"agentList" : list})
 
 
 def Helloworld(request):
 
-    psm.redisJob.GetMachineValue_recentHourAVG(0, "TotalCpuTime", 10)
+    psm.redisJob.GetMachineValue_recentHourAVG(None, 0, "TotalCpuTime", 10)
     return render(request, "hello.html")
 
 
-def ServerMain(request, index):
-    if not index.isdigit():
+def ServerMain(request, hostip):
+    if not hostip.isdigit():
         response = render(request, "hello.html")
 
-    print(index)
-    print(type(index))
-    return render(request, "server_detail.html")
+    r = psm.redisJob.GetRedisClient()
+    agent = psm.redisJob.GetAgentInfo(r, hostip)
+    psm.redisJob.GetMachineCounterList(r, agent)
+
+    return render(request, "server_detail.html", {})

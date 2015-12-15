@@ -10,8 +10,8 @@ def GetRedisClient():
     r = redis.StrictRedis(host='localhost', port=6379, db=0)
     return r
 
-def GetCounterValue(key, date, startTime, endTime):
-    r = GetRedisClient()
+def GetCounterValue(r, key, date, startTime, endTime):
+    if r==None : r = GetRedisClient()
 
     datalist = r.lrange(key, 0, endTime-startTime)
 
@@ -39,8 +39,8 @@ def GetCounterValue(key, date, startTime, endTime):
     #print(result)
     return result
 
-def GetMachineValue_recentHourAVG(number, counter, responseTime):
-    interval = 20
+def GetMachineValue_recentHourAVG(r, number, counter, responseTime):
+    interval = 60
 
     endTime = psm.util.GetCurTime_int() - responseTime
     strTime = psm.util.timestampToString(endTime)
@@ -61,16 +61,16 @@ def GetMachineValue_recentHourAVG(number, counter, responseTime):
 
     if s_d == f_d:
         key = ":".join([ str(number) ,  counter, "Total", f_d])
-        list = GetCounterValue(key, f_d, startTime, endTime)
+        list = GetCounterValue(r, key, f_d, startTime, endTime)
     else:
         key = ":".join([ str(number) ,  counter, "Total", s_d])
 
         curTime = psm.util.GetCurTime(f_d, "00:00:00")
 
-        list = GetCounterValue(key, s_d, startTime, curTime)
+        list = GetCounterValue(r, key, s_d, startTime, curTime)
 
         key = ":".join([ str(number) ,  counter, "Total", f_d])
-        list.extend(GetCounterValue(key, f_d, curTime, endTime))
+        list.extend(GetCounterValue(r, key, f_d, curTime, endTime))
 
     result = 0
     if len(list)==0 : return 0
@@ -89,16 +89,44 @@ def GetMachineValue_recentHourAVG(number, counter, responseTime):
     result += list[len(list)-1][1]*time
     total+=time
 
-    return int(result/total)
+    return round(result/total, 2)
 
 
-def GetMachineCounterList(agentID):
-    r = GetRedisClient()
-    
+def GetMachineCounterList(r, agent):
+    if r==None : r = GetRedisClient()
+
+    key = str(agent['agentNumber']) + ":MachineCounterList"
+    result = r.smembers(key)
+
+    print(result)
+
+    counterList= []
+
+    for data in list(result):
+        jsonData = json.loads(data.decode("UTF-8"))
+        value = GetMachineValue_recentHourAVG \
+            (r, agent['agentNumber'], jsonData['name'], agent['responseTime'])
+
+        counterList.append( [jsonData['name'], value] )
+
+    return counterList
 
 
-def GetAgentListToView():
-    r = GetRedisClient()
+
+def GetAgentInfo(r, hostip):
+    if r==None : r = GetRedisClient()
+    result = r.hmget("AgentList", hostip)
+
+
+    agentInfo = {}
+
+    if len(result)==0 : return None
+
+    data = json.loads(result[0].decode("UTF-8"))
+    return data
+
+def GetAgentListToView(r):
+    if r==None : r = GetRedisClient()
     result = r.hgetall("AgentList")
 
     list = []
@@ -123,7 +151,7 @@ def GetAgentListToView():
 
                 resultAgent['recording'] = True
                 resultAgent['cpu'] = GetMachineValue_recentHourAVG \
-                    (agent['agentNumber'], "TotalCpuTime", agent['responseTime'])
+                    (r, agent['agentNumber'], "CPUTime", agent['responseTime'])
 
                 resultAgent['memory'] = 100
                 resultAgent['disk'] = 100
@@ -148,9 +176,10 @@ def GetAgentListToView():
         resultAgent['state'] = state
         resultAgent['color'] = color
         resultAgent['name'] = agent['agentName']
-        temp = int(k.decode("UTF-8"))
-        resultAgent['ip'] = psm.util.int2ip(temp)
+        ipvalue = k.decode("UTF-8")
+        resultAgent['ip'] = psm.util.int2ip(int(ipvalue))
         resultAgent['index'] = agent['agentNumber']
+        resultAgent['ip_int'] = ipvalue
 
         list.append(resultAgent)
     return list
