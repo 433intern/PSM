@@ -8,6 +8,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	//long long int a = (long long int) timer;
 	//printf("time : %lld\n", a);
 
+	//std::this_thread::sleep_for(std::chrono::seconds(1));
+
+	//timer = time(NULL); // 현재 시각을 초 단위로 얻기
+	//a = (long long int) timer;
+	//printf("time : %lld\n", a);
+
 	if (argc != 3){
 		printf("error command\n");
 		return 0;

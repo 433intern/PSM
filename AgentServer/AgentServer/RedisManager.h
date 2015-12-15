@@ -9,7 +9,17 @@ public:
 	~RedisManager();
 
 	void Init();
+
+	bool InitAgent(int hostIP);
 	int GetAgentID(int hostIP);
+	
+	Json::Value GetAgentJVByHostIP(int hostIP);
+
+	bool ChangeAgentState_isOn(int hostIP, bool value);
+	bool ChangeAgentState_startRecording(int hostIP, int totalRecordTime,
+									int responseTime, int interval, long long int delay);
+	bool ChangeAgentState_stopRecording(int hostIP);
+
 	bool GetProcessList(int agentID, std::vector<std::string>& result);
 	bool GetCounterList(int agentID, std::vector<std::string>& result, bool isMachine);
 	

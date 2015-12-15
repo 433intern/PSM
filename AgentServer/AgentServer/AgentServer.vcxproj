@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Yumas\433\ProcessManager\git\PSM\lib\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Yumas\433\ProcessManager\git\PSM\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Yumas\433\ProcessManager\git\PSM\jsonLib\include;C:\Users\Yumas\433\ProcessManager\git\PSM\lib\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Yumas\433\ProcessManager\git\PSM\jsonLib;C:\Users\Yumas\433\ProcessManager\git\PSM\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -51,7 +51,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;json_vc71_libmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Yumas\433\ProcessManager\redis\boost_1_59_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

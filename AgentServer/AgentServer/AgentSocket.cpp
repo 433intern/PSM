@@ -3,7 +3,7 @@
 extern AgentApp* agentApp;
 
 AgentSocket::AgentSocket()
-: agentID(-1), position(0), remainBytes(HEADER_SIZE), healthCheck(true), isReady(false)
+: agentID(-1), hostIP(-1), position(0), remainBytes(HEADER_SIZE), healthCheck(true), isReady(false)
 {
 	packetPoolManager = new MemPooler<CPacket>(10);
 	if (!packetPoolManager)
@@ -96,6 +96,9 @@ void AgentSocket::AcceptProcess(bool isError, Act* act, DWORD bytes_transferred)
 	remainBytes = HEADER_SIZE;
 	isReady = false;
 
+	agentID = -1;
+	hostIP = -1;
+
 	Recv(recvBuf_, HEADER_SIZE);
 }
 
@@ -108,6 +111,9 @@ void AgentSocket::DisconnProcess(bool isError, Act* act, DWORD bytes_transferred
 	}
 
 	PRINT("[AgentSocket] disconnect success, %d\n", this->socket_);
+
+	agentApp->redisManager.ChangeAgentState_isOn(hostIP, false);
+	agentApp->redisManager.ChangeAgentState_stopRecording(hostIP);
 	agentApp->agentServer->DeleteAgent(this);
 }
 
@@ -147,8 +153,10 @@ void AgentSocket::PacketHandling(CPacket *packet)
 			agent::csAgentIDRequest msg;
 			if (msg.ParseFromArray(packet->msg, packet->length))
 			{
+				hostIP = msg.hostip();
+				agentApp->redisManager.InitAgent(msg.hostip());
 				this->agentID = FindAgentID(msg.hostip());
-				PRINT("[AgentSocket] hostID : %d\n", msg.hostip());
+				PRINT("[AgentSocket] hostID : %d AgentID : %d\n", msg.hostip(), agentID);
 				SendAgentIDResponse(agentID);
 			}
 			break;
@@ -191,8 +199,10 @@ void AgentSocket::PacketHandling(CPacket *packet)
 		case agent::AgentReady:
 		{
 			PRINT("[AgentSocket] AgentReady received\n");
-			SendStartRecord(true, -1, 2, 1, 0);
-			SendStartRecord(false, -1, 2, 1, 0);
+
+			agentApp->redisManager.ChangeAgentState_startRecording(hostIP, -1, 10, 1, 0);
+			SendStartRecord(true, -1, 10, 1, 0);
+			SendStartRecord(false, -1, 10, 1, 0);
 			break;
 		}
 		case agent::ProcessInfoSend:

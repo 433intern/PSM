@@ -8,6 +8,8 @@ public:
 
 public:
 	int agentID;
+	int hostIP;
+
 	bool healthCheck;
 
 	bool ValidPacket(CPacket *packet);

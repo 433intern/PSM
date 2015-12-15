@@ -35,6 +35,135 @@ void RedisManager::Init()
 	PRINT("[RedisManager] RedisManager Initialize complete!\n");
 }
 
+Json::Value StrToJson(std::string& jsonStr)
+{
+	Json::Value root = NULL;
+	Json::Reader reader;
+	bool parsingSuccessful = reader.parse(jsonStr, root);
+	if (!parsingSuccessful)
+	{
+		ERROR_PRINT("Failed to parse configuration\n");
+		return NULL;
+	}
+
+	return root;
+}
+
+std::string JsonToStr(Json::Value& value)
+{
+	Json::StyledWriter writer;
+	return writer.write(value);
+}
+
+Json::Value RedisManager::GetAgentJVByHostIP(int hostIP)
+{
+	RedisValue result = NULL;
+	result = redis.command("HMGET", "AgentList", std::to_string(hostIP));
+	if (result.isOk())
+	{
+		std::vector<RedisValue> v = result.toArray();
+		if (!v[0].isNull())
+		{
+			Json::Value jv = StrToJson(v[0].toString());
+			return jv;
+		}
+	}
+	return NULL;
+}
+
+bool RedisManager::InitAgent(int hostIP)
+{
+	RedisValue result;
+
+	Json::Value jvv = GetAgentJVByHostIP(hostIP);
+	if (jvv!=NULL){
+		jvv["isOn"] = true;
+		std::string resultStr = JsonToStr(jvv);
+
+		redis.command("HMSET", "AgentList", std::to_string(hostIP), resultStr);
+		return true;
+	}
+
+	result = redis.command("HLEN", "AgentList");
+	int agentID;
+	if (result.isOk())
+	{
+		agentID = result.toInt();
+	}
+	else
+	{
+		ERROR_PRINT("[RedisManager] redis command HLEN ERROR\n");
+		return false;
+	}
+
+	Json::Value jv;
+	jv["agentName"] = std::string("Agent") + std::to_string(agentID);
+	jv["agentNumber"] = agentID;
+	jv["isOn"] = true;
+	jv["isRecording"] = false;
+	jv["startTime"] = std::string("00/00/00 00:00:00");
+	jv["endTime"] = std::string("00/00/00 00:00:00");
+	jv["responseTime"] = 0;
+	std::string strJv = JsonToStr(jv);
+
+	result = redis.command("HMSET", "AgentList", std::to_string(hostIP), strJv);
+
+	if (!result.isOk())
+	{
+		ERROR_PRINT("[RedisManager] redis command HMSET ERROR\n");
+		return false;
+	}
+
+	return true;
+}
+
+bool RedisManager::ChangeAgentState_isOn(int hostIP, bool value)
+{
+	Json::Value jv = GetAgentJVByHostIP(hostIP);
+	if (jv != NULL){
+		jv["isOn"] = value;
+		std::string resultStr = JsonToStr(jv);
+		redis.command("HMSET", "AgentList", std::to_string(hostIP), resultStr);
+		return true;
+	}
+	return false;
+}
+
+bool RedisManager::ChangeAgentState_startRecording(int hostIP, int totalRecordTime,
+	int responseTime, int interval, long long int delay)
+{
+	Json::Value jv = GetAgentJVByHostIP(hostIP);
+	if (jv != NULL){
+		jv["isRecording"] = true;
+
+		long long int timestamp = time(NULL) + delay;
+		jv["startTime"] = GetCurrentDate(timestamp) + " " + GetCurrTime(timestamp);
+		if (totalRecordTime > 0) jv["endTime"] = GetCurrentDate(timestamp + totalRecordTime) + " " + GetCurrTime(timestamp + totalRecordTime);
+		else jv["endTime"] = "INFINITE";
+		jv["responseTime"] = responseTime;
+		std::string resultStr = JsonToStr(jv);
+		redis.command("HMSET", "AgentList", std::to_string(hostIP), resultStr);
+		return true;
+	}
+	return false;
+}
+
+bool RedisManager::ChangeAgentState_stopRecording(int hostIP)
+{
+	Json::Value jv = GetAgentJVByHostIP(hostIP);
+	if (jv != NULL){
+		jv["isRecording"] = false;
+		jv["startTime"] = std::string("00/00/00 00:00:00");
+		jv["endTime"] = std::string("00/00/00 00:00:00");
+		jv["responseTime"] = 0;
+		std::string resultStr = JsonToStr(jv);
+		redis.command("HMSET", "AgentList", std::to_string(hostIP), resultStr);
+		return true;
+	}
+	return false;
+}
+
+
 int RedisManager::GetAgentID(int hostIP)
 {
 	RedisValue result;
@@ -44,33 +173,12 @@ int RedisManager::GetAgentID(int hostIP)
 		std::vector<RedisValue> v = result.toArray();
 		if (!v[0].isNull())
 		{ 
-			int agentID = atoi(v[0].toString().c_str());
-			return agentID;
+			Json::Value jv = StrToJson(v[0].toString());
+			return jv["agentNumber"].asInt();
 		}
 	}
 
-	result = redis.command("HLEN", "AgentList");
-	int agentID;
-	
-	if (result.isOk())
-	{
-		agentID = result.toInt();
-	}
-	else
-	{
-		ERROR_PRINT("[RedisManager] redis command HLEN ERROR\n");
-		return -1;
-	}
-
-	result = redis.command("HMSET", "AgentList", std::to_string(hostIP), std::to_string(agentID));
-
-	if (!result.isOk())
-	{
-		ERROR_PRINT("[RedisManager] redis command HMSET ERROR\n");
-		return -1;
-	}
-
-	return agentID;
+	return -1;
 }
 
 bool RedisManager::GetProcessList(int agentID, std::vector<std::string>& resultList)
