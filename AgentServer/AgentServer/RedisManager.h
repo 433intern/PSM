@@ -28,10 +28,10 @@ public:
 	bool SaveMachineInfo(int agentID, CPacket* packet);
 
 	bool SetProcessName(int agentID, std::string& processName);
-	bool SetCounterName(int agentID, std::string& counterName, bool isMachine);
+	bool SetCounterName(int agentID, std::string& counterName, bool isMachine, std::string& result);
 
 	bool RemProcessName(int agentID, std::string& processName);
-	bool RemCounterName(int agentID, std::string& counterName, bool isMachine);
+	bool RemCounterName(int agentID, std::string& counterName, bool isMachine, std::string& result);
 
 	std::string CounterNameToNewName(const std::string& counterName);
 	std::string GetCurrentDate(long long int timestamp);
@@ -47,4 +47,6 @@ private:
 	std::vector<std::string> defaultProcessList;
 	std::vector<std::string> defaultCounterList;
 	std::vector<std::string> defaultMachineCounterList;
+
+	std::unordered_map<std::string, std::string> counterNameMap;
 };

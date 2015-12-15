@@ -20,4 +20,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^helloworld/', 'psm.views.Helloworld'),
+    url(r'^index/', 'psm.views.Index'),
+    url(r'^server_detail/([^/]+)/', 'psm.views.ServerMain')
 ]

@@ -11,30 +11,6 @@ RedisManager::~RedisManager()
 
 }
 
-void RedisManager::Init()
-{
-	boost::asio::ip::address address = boost::asio::ip::address::from_string(redisIP);
-	std::string errmsg;
-
-	if (!redis.connect(address, port, errmsg))
-	{
-		ERROR_PRINT("Can't connect to redis: %d\n", errmsg);
-		return;
-	}
-
-	defaultProcessList.push_back("Melon");
-	defaultProcessList.push_back("KakaoTalk");
-
-	defaultCounterList.push_back("% Processor Time");
-	defaultCounterList.push_back("Working Set - Private");
-
-	defaultMachineCounterList.push_back("\\Processor(_Total)\\% Processor Time");
-	defaultMachineCounterList.push_back("\\Memory\\Page Faults/sec");
-	defaultMachineCounterList.push_back("\\Memory\\Available KBytes");
-
-	PRINT("[RedisManager] RedisManager Initialize complete!\n");
-}
-
 Json::Value StrToJson(std::string& jsonStr)
 {
 	Json::Value root = NULL;
@@ -55,6 +31,46 @@ std::string JsonToStr(Json::Value& value)
 	return writer.write(value);
 }
 
+
+void RedisManager::Init()
+{
+	boost::asio::ip::address address = boost::asio::ip::address::from_string(redisIP);
+	std::string errmsg;
+
+	if (!redis.connect(address, port, errmsg))
+	{
+		ERROR_PRINT("Can't connect to redis: %d\n", errmsg);
+		return;
+	}
+
+	defaultProcessList.push_back("Melon");
+	defaultProcessList.push_back("KakaoTalk");
+
+	Json::Value jv;
+	jv["name"] = "CPUTime";
+	jv["counter"] = "% Processor Time";
+	counterNameMap.insert(std::pair<std::string, std::string>("% Processor Time", "CPUTime"));
+	defaultCounterList.push_back(JsonToStr(jv));
+
+	jv["name"] = "Memory";
+	jv["counter"] = "Working Set - Private";
+	counterNameMap.insert(std::pair<std::string, std::string>("Working Set - Private", "Memory"));
+	defaultCounterList.push_back(JsonToStr(jv));
+
+	jv["name"] = "CPUTime";
+	jv["counter"] = "\\Processor(_Total)\\% Processor Time";
+	counterNameMap.insert(std::pair<std::string, std::string>("\\Processor(_Total)\\% Processor Time", "CPUTime"));
+	defaultMachineCounterList.push_back(JsonToStr(jv));
+
+	jv["name"] = "Memory";
+	jv["counter"] = "\\Memory\\Available KBytes";
+	counterNameMap.insert(std::pair<std::string, std::string>("\\Memory\\Available KBytes", "Memory"));
+	defaultMachineCounterList.push_back(JsonToStr(jv));
+
+	PRINT("[RedisManager] RedisManager Initialize complete!\n");
+}
+
+
 Json::Value RedisManager::GetAgentJVByHostIP(int hostIP)
 {
 	RedisValue result = NULL;
@@ -62,6 +78,7 @@ Json::Value RedisManager::GetAgentJVByHostIP(int hostIP)
 	if (result.isOk())
 	{
 		std::vector<RedisValue> v = result.toArray();
+		if (v.size() == 0) return NULL;
 		if (!v[0].isNull())
 		{
 			Json::Value jv = StrToJson(v[0].toString());
@@ -249,7 +266,8 @@ bool RedisManager::GetCounterList(int agentID, std::vector<std::string>& resultL
 			for (RedisValue value : v)
 			{
 				PRINT("%s\n", value.toString().c_str());
-				resultList.push_back(value.toString());
+				Json::Value jv = StrToJson(value.toString());
+				resultList.push_back(jv["counter"].asString());
 			}
 			PRINT("\n");
 		}
@@ -260,6 +278,8 @@ bool RedisManager::GetCounterList(int agentID, std::vector<std::string>& resultL
 				for (std::string s : defaultCounterList)
 				{
 					result = redis.command("sadd", key, s);
+
+					Json::Value jv = StrToJson(s);
 					if (!result.isOk())
 					{
 						ERROR_PRINT("[RedisManager] redis command sadd ERROR\n");
@@ -267,7 +287,7 @@ bool RedisManager::GetCounterList(int agentID, std::vector<std::string>& resultL
 					}
 					else
 					{
-						resultList.push_back(s);
+						resultList.push_back(jv["counter"].asString());
 					}
 				}
 			}
@@ -276,6 +296,7 @@ bool RedisManager::GetCounterList(int agentID, std::vector<std::string>& resultL
 				for (std::string s : defaultMachineCounterList)
 				{
 					result = redis.command("sadd", key, s);
+					Json::Value jv = StrToJson(s);
 					if (!result.isOk())
 					{
 						ERROR_PRINT("[RedisManager] redis command sadd ERROR\n");
@@ -283,7 +304,7 @@ bool RedisManager::GetCounterList(int agentID, std::vector<std::string>& resultL
 					}
 					else
 					{
-						resultList.push_back(s);
+						resultList.push_back(jv["counter"].asString());
 					}
 				}
 			}
@@ -344,7 +365,7 @@ bool RedisManager::SaveCurrentProcessList(int agentID, CPacket* packet)
 
 std::string RedisManager::CounterNameToNewName(const std::string& counterName)
 {
-	if (counterName == "\\Processor(_Total)\\% Processor Time")
+	/*if (counterName == "\\Processor(_Total)\\% Processor Time")
 	{
 		return std::string("TotalCpuTime");
 	}
@@ -365,7 +386,11 @@ std::string RedisManager::CounterNameToNewName(const std::string& counterName)
 		return std::string("Memory");
 	}
 		
-	return std::string("etc");
+	return std::string("etc");*/
+
+	auto iter = counterNameMap.find(counterName);
+	if (iter == counterNameMap.end()) return std::string("etc");
+	else return iter->second;
 }
 
 std::string RedisManager::GetCurrentDate(long long int timestamp)
@@ -538,18 +563,24 @@ bool RedisManager::SetProcessName(int agentID, std::string& processName)
 	return false;
 }
 
-bool RedisManager::SetCounterName(int agentID, std::string& counterName, bool isMachine)
+bool RedisManager::SetCounterName(int agentID, std::string& counterName, bool isMachine, std::string& result)
 {
 	std::string key;
 	if (!isMachine) key = std::to_string(agentID) + ":CounterList";
 	else key = std::to_string(agentID) + ":MachineCounterList";
 
-	RedisValue result;
-	result = redis.command("sadd", key, counterName);
+	RedisValue res;
+	res = redis.command("sadd", key, counterName);
 
-	if (result.isOk()){
-		if (result.toInt() == 0) return false;
-		else return true;
+	if (res.isOk()){
+		if (res.toInt() == 0) return false;
+		else{
+			Json::Value jv = StrToJson(counterName);
+			if (jv == NULL) return false;
+
+			result = jv["counter"].asString();
+			return true;
+		}
 	}
 	return false;
 }
@@ -568,18 +599,24 @@ bool RedisManager::RemProcessName(int agentID, std::string& processName)
 	return false;
 }
 
-bool RedisManager::RemCounterName(int agentID, std::string& counterName, bool isMachine)
+bool RedisManager::RemCounterName(int agentID, std::string& counterName, bool isMachine, std::string& result)
 {
 	std::string key;
 	if (!isMachine) key = std::to_string(agentID) + ":CounterList";
 	else key = std::to_string(agentID) + ":MachineCounterList";
 
-	RedisValue result;
-	result = redis.command("srem", key, counterName);
+	RedisValue res;
+	res = redis.command("srem", key, counterName);
 
-	if (result.isOk()){
-		if (result.toInt() == 0) return false;
-		else return true;
+	if (res.isOk()){
+		if (res.toInt() == 0) return false;
+		else{
+			Json::Value jv = StrToJson(counterName);
+			if (jv == NULL) return false;
+
+			result = jv["counter"].asString();
+			return true;
+		}
 	}
 	return false;
 }

@@ -50,16 +50,18 @@
     }
 
     .progress {
-          position: relative;
-      }
+      position: relative;
+    }
 
-      .progress span {
-          position: absolute;
-          display: block;
-          width: 100%;
-          color: black;
-       }
+    .progress span {
+      position: absolute;
+      display: block;
+      width: 100%;
+      color: black;
+    }
     </style>
+
+
 
   </head>
   <body>
@@ -109,7 +111,7 @@
             <table class="mdl-data-table mdl-js-data-table full-width">
               <thead>
                 <tr>
-                  <th class="mdl-data-table__cell--non-numeric">상태</th>
+                  <th class="mdl-data-table__cell--non-numeric">상태(레코드)</th>
                   <th>이름</th>
                   <th>IP주소</th>
                   <th>CPU(%)</th>
@@ -119,7 +121,52 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                {% for agent in agentList %}
+                  <tr>
+                    <td class="mdl-data-table__cell--non-numeric" style="color:{{ agent.color }}; font-weight: bold;">{{ agent.state }}</td>
+                    <td><a href="/server_detail/{{ agent.index }}">{{ agent.name }}</a></td>
+                    <td>{{agent.ip}}</td>
+
+                    <td style="width: 20%;">
+                      {% if agent.recording %}
+                      <div class="progress" style="margin-bottom: 0px;">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ agent.cpu }}"
+                              aria-valuemin="0" aria-valuemax="100" style="width:{{ agent.cpu }}%">
+                                <span>{{ agent.cpu }}%</span>
+                        </div>
+                      </div>
+                      {% endif %}
+                    </td>
+
+                    <td style="width: 20%;">
+                      {% if agent.recording %}
+                      <div class="progress" style="margin-bottom: 0px;">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ agent.memory }}"
+                              aria-valuemin="0" aria-valuemax="100" style="width:{{ agent.memory }}%">
+                                <span>{{ agent.memory }}%</span>
+                        </div>
+                      </div>
+                      {% endif %}
+                    </td>
+
+                    <td style="width: 20%;">
+                      {% if agent.recording %}
+                      <div class="progress" style="margin-bottom: 0px;">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ agent.disk }}"
+                              aria-valuemin="0" aria-valuemax="100" style="width:{{ agent.disk }}%">
+                                <span>{{ agent.disk }}%</span>
+                        </div>
+                      </div>
+                      {% endif %}
+                    </td>
+
+                    <td style="width: 30px;">
+                      <a href="/setting/{{ agent.index }}">자세히..</a>
+                  </td>
+                  </tr>
+                {% endfor %}
+
+                <!--<tr>
                   <td class="mdl-data-table__cell--non-numeric" style="color:red; font-weight: bold;">위험</td>
                   <td><a href="server_detail.html">에이전트1</a></td>
                   <td>100.100.100.100</td>
@@ -127,7 +174,7 @@
                     <div class="progress" style="margin-bottom: 0px;">
                       <div class="progress-bar" role="progressbar" aria-valuenow="70"
                             aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                              <span>70%</span>
+                              70%
                       </div>
                     </div>
                   </td>
@@ -150,7 +197,7 @@
                   <td style="width: 30px;">
                       <a href="server_detail2.html">자세히..</a>
                   </td>
-                </tr>
+                </tr>-->
               </tbody>
             </table>
           </div>

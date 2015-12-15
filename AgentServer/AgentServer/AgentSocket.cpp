@@ -271,10 +271,12 @@ bool AgentSocket::DeleteProcessName(std::string& processName)
 
 bool AgentSocket::AddCounterName(std::string& counterName, bool isMachine)
 {
-	if (agentApp->redisManager.SetCounterName(agentID, counterName, isMachine))
+
+	std::string result;
+	if (agentApp->redisManager.SetCounterName(agentID, counterName, isMachine, result))
 	{
 		PRINT("[AgentSocket] AddCounterName Success\n");
-		SendCounterCommand(agent::CounterCommandType::CADDLIST, counterName, isMachine);
+		SendCounterCommand(agent::CounterCommandType::CADDLIST, result, isMachine);
 		return true;
 	}
 	else
@@ -286,10 +288,11 @@ bool AgentSocket::AddCounterName(std::string& counterName, bool isMachine)
 
 bool AgentSocket::DeleteCounterName(std::string& counterName, bool isMachine)
 {
-	if (agentApp->redisManager.RemCounterName(agentID, counterName, isMachine))
+	std::string result;
+	if (agentApp->redisManager.RemCounterName(agentID, counterName, isMachine, result))
 	{
 		PRINT("[AgentSocket] DeleteCounterName Success\n");
-		SendCounterCommand(agent::CounterCommandType::CDELETELIST, counterName, isMachine);
+		SendCounterCommand(agent::CounterCommandType::CDELETELIST, result, isMachine);
 		return true;
 	}
 	else

@@ -14,6 +14,8 @@
 #include <thread>
 #include <queue>
 #include <stdio.h>
+#include <hash_map>
+#include <unordered_map>
 
 #include <json/json.h>
 
