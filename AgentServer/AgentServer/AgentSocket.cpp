@@ -191,8 +191,8 @@ void AgentSocket::PacketHandling(CPacket *packet)
 		case agent::AgentReady:
 		{
 			PRINT("[AgentSocket] AgentReady received\n");
-			SendStartRecord(true, -1, 10, 1, 0);
-			SendStartRecord(false, -1, 10, 1, 0);
+			SendStartRecord(true, -1, 2, 1, 0);
+			SendStartRecord(false, -1, 2, 1, 0);
 			break;
 		}
 		case agent::ProcessInfoSend:

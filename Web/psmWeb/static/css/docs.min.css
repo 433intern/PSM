@@ -1,0 +1,18 @@
+.absolute-center {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    height: 30%;
+    padding: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+    display: block;
+}
+.content-wrapper {
+    float:left;
+}
