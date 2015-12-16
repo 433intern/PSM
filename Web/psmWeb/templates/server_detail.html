@@ -93,29 +93,23 @@
           <div class="mdl-grid">
             <div class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--3-col" style="height:100%">
               <div class="mdl-card__title mdl-card--expand mdl-color--grey-500" >
-                <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">머신상태보기 - {{ agentName }}</h2>
+                <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">머신상태보기 - {{ agent.agentName }}</h2>
               </div>
               <div>
                 <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable full-width">
                   <thead>
                     <tr>
                       <th class="mdl-data-table__cell--non-numeric">이름</th>
-                      <th>최근 1시간 값</th>
+                      <th>최근 값</th>
                     </tr>
                   </thead>
                   <tbody>
+                    {% for c in mcl %}
                     <tr>
-                      <td class="mdl-data-table__cell--non-numeric">CPU</td>
-                      <td>1000</td>
+                      <td class="mdl-data-table__cell--non-numeric">{{ c.0 }}</td>
+                      <td>{{ c.1 }}</td>
                     </tr>
-                    <tr>
-                      <td class="mdl-data-table__cell--non-numeric">RAM</td>
-                      <td>1000</td>
-                    </tr>
-                    <tr>
-                      <td class="mdl-data-table__cell--non-numeric">NETWORK</td>
-                      <td>1000</td>
-                    </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
                 <!-- 상태 submit 버튼 -->
@@ -139,69 +133,29 @@
                     </tr>
                   </thead>
                   <tbody>
+                    {% for p in checkl %}
                     <tr>
-                      <td class="mdl-data-table__cell--non-numeric" style="color:red; font-weight: bold;">위험</td>
-                      <td><a href="" data-toggle="modal" data-target="#myModal">chrome</a></td>
+                      <td class="mdl-data-table__cell--non-numeric" style="color:{{ p.color }}">{{ p.state }}</td>
+                      <td><a href="" data-toggle="modal" data-target="#myModal">{{ p.name }}</a></td>
                       <td style="width: 25%;">
                         <div class="progress" style="margin-bottom: 0px;">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                              aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                                70%
+                          <div class="progress-bar" role="progressbar" aria-valuenow="{{ p.cpuValue }}"
+                              aria-valuemin="0" aria-valuemax="100" style="width:{{ p.cpuValue }}%">
+                                <span>{{ p.cpuValue }}%</span>
                           </div>
                         </div>
                       </td>
                       <td style="width: 25%;">
                         <div class="progress" style="margin-bottom: 0px;">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                                  70%
+                          <div class="progress-bar" role="progressbar" aria-valuenow="{{ p.memoryValue }}"
+                                aria-valuemin="0" aria-valuemax="100" style="width:{{ p.memoryValue }}%">
+                                  <span>{{ p.memoryValue }}%</span>
                           </div>
                         </div>
                       </td>
                       <td><a href="">X</a></td>
                     </tr>
-                    <tr>
-                      <td class="mdl-data-table__cell--non-numeric" style="color:red; font-weight: bold;">위험</td>
-                      <td><a href="">chrome</a></td>
-                      <td style="width: 25%;">
-                        <div class="progress" style="margin-bottom: 0px;">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                              aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                                70%
-                          </div>
-                        </div>
-                      </td>
-                      <td style="width: 25%;">
-                        <div class="progress" style="margin-bottom: 0px;">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                                  70%
-                          </div>
-                        </div>
-                      </td>
-                      <td><a href="">X</a></td>
-                    </tr>
-                    <tr>
-                      <td class="mdl-data-table__cell--non-numeric" style="color:red; font-weight: bold;">위험</td>
-                      <td><a href="">chrome</a></td>
-                      <td style="width: 25%;">
-                        <div class="progress" style="margin-bottom: 0px;">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                              aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                                70%
-                          </div>
-                        </div>
-                      </td>
-                      <td style="width: 25%;">
-                        <div class="progress" style="margin-bottom: 0px;">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                                  70%
-                          </div>
-                        </div>
-                      </td>
-                      <td><a href="">X</a></td>
-                    </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
 

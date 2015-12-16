@@ -10,7 +10,7 @@ public:
 
 	void Init();
 
-	bool InitAgent(int hostIP);
+	bool InitAgent(int hostIP, double ramSize);
 	int GetAgentID(int hostIP);
 	
 	Json::Value GetAgentJVByHostIP(int hostIP);

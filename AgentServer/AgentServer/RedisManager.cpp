@@ -49,21 +49,25 @@ void RedisManager::Init()
 	Json::Value jv;
 	jv["name"] = "CPUTime";
 	jv["counter"] = "% Processor Time";
+	jv["unit"] = "%";
 	counterNameMap.insert(std::pair<std::string, std::string>("% Processor Time", "CPUTime"));
 	defaultCounterList.push_back(JsonToStr(jv));
 
 	jv["name"] = "Memory";
 	jv["counter"] = "Working Set - Private";
+	jv["unit"] = "kB";
 	counterNameMap.insert(std::pair<std::string, std::string>("Working Set - Private", "Memory"));
 	defaultCounterList.push_back(JsonToStr(jv));
 
 	jv["name"] = "CPUTime";
 	jv["counter"] = "\\Processor(_Total)\\% Processor Time";
+	jv["unit"] = "%";
 	counterNameMap.insert(std::pair<std::string, std::string>("\\Processor(_Total)\\% Processor Time", "CPUTime"));
 	defaultMachineCounterList.push_back(JsonToStr(jv));
 
 	jv["name"] = "Memory";
 	jv["counter"] = "\\Memory\\Available KBytes";
+	jv["unit"] = "kB";
 	counterNameMap.insert(std::pair<std::string, std::string>("\\Memory\\Available KBytes", "Memory"));
 	defaultMachineCounterList.push_back(JsonToStr(jv));
 
@@ -88,7 +92,7 @@ Json::Value RedisManager::GetAgentJVByHostIP(int hostIP)
 	return NULL;
 }
 
-bool RedisManager::InitAgent(int hostIP)
+bool RedisManager::InitAgent(int hostIP, double ramSize)
 {
 	RedisValue result;
 
@@ -121,6 +125,7 @@ bool RedisManager::InitAgent(int hostIP)
 	jv["startTime"] = std::string("00/00/00 00:00:00");
 	jv["endTime"] = std::string("00/00/00 00:00:00");
 	jv["responseTime"] = 0;
+	jv["ramSize"] = ramSize;
 	std::string strJv = JsonToStr(jv);
 
 	result = redis.command("HMSET", "AgentList", std::to_string(hostIP), strJv);
@@ -324,8 +329,17 @@ bool RedisManager::SaveCurrentProcessList(int agentID, CPacket* packet)
 
 	std::string key = std::to_string(agentID) + ":CurrentProcessList";
 	RedisValue result;
+	
+	/* deal as transaction */
+	result = redis.command("multi");
+	if (!result.isOk())
+	{
+		ERROR_PRINT("[RedisManager] redis command multi ERROR\n");
+		return false;
+	}
 
 	result = redis.command("del", key);
+
 	if (!result.isOk())
 	{
 		ERROR_PRINT("[RedisManager] redis command del ERROR\n");
@@ -358,6 +372,13 @@ bool RedisManager::SaveCurrentProcessList(int agentID, CPacket* packet)
 				return false;
 			}
 		}
+	}
+
+	result = redis.command("exec");
+	if (!result.isOk())
+	{
+		ERROR_PRINT("[RedisManager] redis command exec ERROR\n");
+		return false;
 	}
 
 	return true;

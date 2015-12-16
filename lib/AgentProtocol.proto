@@ -38,6 +38,7 @@ enum agentType
 message csAgentIDRequest
 {
 	required int32 hostIP = 1;
+	required double ramSize = 2;
 }
 
 message scAgentIDResponse

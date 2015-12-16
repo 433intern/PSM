@@ -14,9 +14,6 @@ def GetCounterValue(r, key, date, startTime, endTime):
     if r==None : r = GetRedisClient()
 
     datalist = r.lrange(key, 0, endTime-startTime)
-
-    i= -1 * r.llen(key)
-
     result = []
 
     for l in datalist:
@@ -35,50 +32,39 @@ def GetCounterValue(r, key, date, startTime, endTime):
         if startTime > curTime: break;
 
     result.reverse()
-
     #print(result)
     return result
 
-def GetMachineValue_recentHourAVG(r, number, counter, responseTime):
-    interval = 60
-
-    endTime = psm.util.GetCurTime_int() - responseTime
+def GetValueList(r, prevKey, responseTime, interval, curTime):
+    endTime = curTime - responseTime
     strTime = psm.util.timestampToString(endTime)
-
     temp = strTime.split(" ")
     f_d = temp[0]
-    f_t = temp[1]
-
     startTime = endTime - interval
     strTime = psm.util.timestampToString(startTime)
-
     temp = strTime.split(" ")
     s_d = temp[0]
-    s_t = temp[1]
-
-
-    list = []
 
     if s_d == f_d:
-        key = ":".join([ str(number) ,  counter, "Total", f_d])
+        key = prevKey + ":" + f_d
         list = GetCounterValue(r, key, f_d, startTime, endTime)
     else:
-        key = ":".join([ str(number) ,  counter, "Total", s_d])
-
+        key = prevKey + ":" + s_d
         curTime = psm.util.GetCurTime(f_d, "00:00:00")
-
         list = GetCounterValue(r, key, s_d, startTime, curTime)
-
-        key = ":".join([ str(number) ,  counter, "Total", f_d])
+        key = prevKey + ":" + f_d
         list.extend(GetCounterValue(r, key, f_d, curTime, endTime))
 
+    return list
+
+def GetRecentValue(r, prevKey, responseTime, interval):
+    curTime = psm.util.GetCurTime_int()
+    endTime = curTime - responseTime
+    list = GetValueList(r, prevKey, responseTime, interval, curTime)
     result = 0
     if len(list)==0 : return 0
 
-    startData = list[0]
     total = 0
-
-
     for i in range(len(list)-1):
         time = list[i+1][0] - list[i][0]
         result += list[i][1]*time
@@ -92,22 +78,101 @@ def GetMachineValue_recentHourAVG(r, number, counter, responseTime):
     return round(result/total, 2)
 
 
+
+def GetMachineValue_recent(r, number, counter, responseTime, interval):
+    prevKey = ":".join([ str(number) ,  counter, "Total"])
+    return GetRecentValue(r, prevKey, responseTime, interval)
+
+def GetProcessValue_recent(r, number, counter, processName, pid, responseTime, interval):
+    prevKey = ":".join([ str(number), counter, processName, str(pid)])
+    return GetRecentValue(r, prevKey, responseTime, interval)
+
+def GetProcessPIDs(cpl, name):
+    for data in cpl:
+        if data[0]==name : return data[1]
+    return []
+
+def GetCheckProcessList(r, agent, curProcessList):
+    if r==None : r = GetRedisClient()
+
+    key = str(agent['agentNumber']) + ":ProcessList"
+    result = r.smembers(key)
+
+    plist = []
+    for data in list(result):
+        name = data.decode("UTF-8")
+        pids = GetProcessPIDs(curProcessList, name)
+        cpuValue = 0
+        memoryValue = 0
+
+        elem = {}
+        for pid in pids:
+            cpuValue += GetProcessValue_recent(r, agent['agentNumber'],
+                            "CPUTime", name, pid, agent['responseTime'], 60)
+            memoryValue += GetProcessValue_recent(r, agent['agentNumber'],
+                            "Memory", name, pid, agent['responseTime'], 60)
+        elem['name'] = name
+        elem['cpuValue'] = cpuValue
+        elem['memoryValue'] = round(memoryValue / (agent['ramSize'] / 1024) * 100, 2)
+
+        if len(pids)==0:
+            elem['state'] = "Stop"
+            elem['color'] = "red"
+        else:
+            elem['state'] = "Run"
+            elem['color'] = "green"
+
+        plist.append(elem)
+    return plist
+
+
+
+
+def GetCurrentProcessList(r, agent):
+    if r==None : r = GetRedisClient()
+
+    key = str(agent['agentNumber']) + ":CurrentProcessList"
+    result = r.hgetall(key)
+
+    list = []
+
+    for k, v in result.items():
+        pids = (v.decode("UTF-8")).split(" ")
+        pids.pop()
+        list.append((k.decode("UTF-8"), pids))
+
+    return list
+
+
+
+def GetProcessCounterList(r, agent):
+    if r==None : r = GetRedisClient()
+
+    key = str(agent['agentNumber']) + ":CounterList"
+    result = r.smembers(key)
+
+    counterList = []
+
+    for data in list(result):
+        jsonData = json.loads(data.decode("UTF-8"))
+        counterList.append(jsonData)
+
+    return counterList
+
 def GetMachineCounterList(r, agent):
     if r==None : r = GetRedisClient()
 
     key = str(agent['agentNumber']) + ":MachineCounterList"
     result = r.smembers(key)
 
-    print(result)
-
     counterList= []
 
     for data in list(result):
         jsonData = json.loads(data.decode("UTF-8"))
-        value = GetMachineValue_recentHourAVG \
-            (r, agent['agentNumber'], jsonData['name'], agent['responseTime'])
+        value = GetMachineValue_recent \
+            (r, agent['agentNumber'], jsonData['name'], agent['responseTime'], 60)
 
-        counterList.append( [jsonData['name'], value] )
+        counterList.append( [jsonData['name'], str(value) + jsonData['unit']] )
 
     return counterList
 
@@ -150,12 +215,13 @@ def GetAgentListToView(r):
                 color = "green"
 
                 resultAgent['recording'] = True
-                resultAgent['cpu'] = GetMachineValue_recentHourAVG \
-                    (r, agent['agentNumber'], "CPUTime", agent['responseTime'])
+                resultAgent['cpu'] = GetMachineValue_recent \
+                    (r, agent['agentNumber'], "CPUTime", agent['responseTime'], 60)
 
-                resultAgent['memory'] = 100
+                mv =  GetMachineValue_recent \
+                    (r, agent['agentNumber'], "Memory", agent['responseTime'], 60)
+                resultAgent['memory'] = 100 - round(mv / (agent['ramSize'] / 1024) * 100, 2)
                 resultAgent['disk'] = 100
-
 
             else:
                 state += "(Ready)"

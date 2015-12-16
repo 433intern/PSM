@@ -114,8 +114,9 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       "AgentProtocol.proto");
   GOOGLE_CHECK(file != NULL);
   csAgentIDRequest_descriptor_ = file->message_type(0);
-  static const int csAgentIDRequest_offsets_[1] = {
+  static const int csAgentIDRequest_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csAgentIDRequest, hostip_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csAgentIDRequest, ramsize_),
   };
   csAgentIDRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -645,76 +646,76 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023AgentProtocol.proto\022\005agent\"\"\n\020csAgentI"
-    "DRequest\022\016\n\006hostIP\030\001 \002(\005\"$\n\021scAgentIDRes"
-    "ponse\022\017\n\007agentID\030\001 \002(\005\"\026\n\024csProcessListR"
-    "equest\",\n\025scProcessListResponse\022\023\n\013proce"
-    "ssName\030\001 \003(\t\")\n\024csCounterListRequest\022\021\n\t"
-    "isMachine\030\001 \002(\010\"\?\n\025scCounterListResponse"
-    "\022\021\n\tisMachine\030\001 \002(\010\022\023\n\013counterName\030\002 \003(\t"
-    "\"\016\n\014csAgentReady\"8\n\016CurrentProcess\022\023\n\013pr"
-    "ocessName\030\001 \002(\t\022\021\n\tprocessID\030\002 \003(\005\"F\n\030cs"
-    "CurrentProcessListSend\022*\n\013processInfo\030\001 "
-    "\003(\0132\025.agent.CurrentProcess\"\017\n\rscHealthCh"
-    "eck\"\r\n\013csHealthAck\"W\n\027scProcessCommandRe"
-    "quest\022\'\n\004type\030\001 \002(\0162\031.agent.ProcessComma"
-    "ndType\022\023\n\013processName\030\002 \002(\t\"\306\001\n\030csProces"
-    "sCommandResponse\022\'\n\004type\030\001 \002(\0162\031.agent.P"
-    "rocessCommandType\022\021\n\tprocessID\030\002 \003(\005\0226\n\006"
-    "result\030\003 \002(\0162&.agent.csProcessCommandRes"
-    "ponse.Result\022\022\n\nfailReason\030\004 \001(\t\"\"\n\006Resu"
-    "lt\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE\020\001\"j\n\027scCounte"
-    "rCommandRequest\022\'\n\004type\030\001 \002(\0162\031.agent.Co"
-    "unterCommandType\022\023\n\013CounterName\030\002 \002(\t\022\021\n"
-    "\tisMachine\030\003 \002(\010\"\263\001\n\030csCounterCommandRes"
-    "ponse\022\'\n\004type\030\001 \002(\0162\031.agent.CounterComma"
-    "ndType\0226\n\006result\030\003 \002(\0162&.agent.csCounter"
-    "CommandResponse.Result\022\022\n\nfailReason\030\004 \001"
-    "(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE\020\001\"r"
-    "\n\rscStartRecord\022\021\n\tisMachine\030\005 \002(\010\022\027\n\017to"
-    "talRecordTime\030\001 \002(\005\022\020\n\010interval\030\002 \002(\005\022\024\n"
-    "\014responseTime\030\003 \002(\005\022\r\n\005delay\030\004 \001(\003\"!\n\014sc"
-    "StopRecord\022\021\n\tisMachine\030\001 \002(\010\"\'\n\003Log\022\021\n\t"
-    "timeStamp\030\001 \002(\003\022\r\n\005value\030\002 \002(\001\"e\n\014Proces"
-    "sInfos\022\023\n\013counterName\030\001 \002(\t\022\023\n\013processNa"
-    "me\030\002 \002(\t\022\021\n\tprocessID\030\003 \002(\005\022\030\n\004logs\030\004 \003("
-    "\0132\n.agent.Log\";\n\026csTotalProcessInfoSend\022"
-    "!\n\004info\030\001 \003(\0132\023.agent.ProcessInfos\"=\n\014Ma"
-    "chineInfos\022\023\n\013counterName\030\001 \002(\t\022\030\n\004logs\030"
-    "\002 \003(\0132\n.agent.Log\";\n\026csTotalMachineInfoS"
-    "end\022!\n\004info\030\001 \003(\0132\023.agent.MachineInfos\"r"
-    "\n\033scProcessRestrictionRequest\022\021\n\tprocess"
-    "ID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.agent.Restricti"
-    "on\022\016\n\006value1\030\003 \002(\005\022\016\n\006value2\030\004 \001(\005\"\307\001\n\034c"
-    "sProcessRestrictionResponse\022\021\n\tprocessID"
-    "\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.agent.Restriction"
-    "\022:\n\006result\030\003 \002(\0162*.agent.csProcessRestri"
-    "ctionResponse.Result\022\022\n\nfailReason\030\004 \001(\t"
-    "\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE\020\001\"\275\001\n"
-    "\020csRecordResponse\022\021\n\tisMachine\030\005 \002(\010\022.\n\006"
-    "result\030\003 \002(\0162\036.agent.csRecordResponse.Re"
-    "sult\022\022\n\nfailReason\030\004 \001(\t\"R\n\006Result\022\021\n\rST"
-    "ART_SUCCESS\020\000\022\021\n\rSTART_FAILURE\020\001\022\020\n\014STOP"
-    "_SUCCESS\020\002\022\020\n\014STOP_FAILURE\020\003*\356\003\n\tagentTy"
-    "pe\022\022\n\016AgentIDRequest\020\000\022\023\n\017AgentIDRespons"
-    "e\020\001\022\026\n\022ProcessListRequest\020\002\022\027\n\023ProcessLi"
-    "stResponse\020\003\022\026\n\022CounterListRequest\020\004\022\027\n\023"
-    "CounterListResponse\020\005\022\032\n\026CurrentProcessL"
-    "istSend\020\006\022\017\n\013HealthCheck\020\010\022\r\n\tHealthAck\020"
-    "\t\022\031\n\025ProcessCommandRequest\020\n\022\032\n\026ProcessC"
-    "ommandResponse\020\013\022\031\n\025CounterCommandReques"
-    "t\020\014\022\032\n\026CounterCommandResponse\020\r\022\035\n\031Proce"
-    "ssRestrictionRequest\020\016\022\036\n\032ProcessRestric"
-    "tionResponse\020\017\022\017\n\013StartRecord\020\020\022\016\n\nStopR"
-    "ecord\020\021\022\023\n\017ProcessInfoSend\020\022\022\023\n\017MachineI"
-    "nfoSend\020\025\022\016\n\nAgentReady\020\026\022\022\n\016RecordRespo"
-    "nse\020\027*`\n\022ProcessCommandType\022\t\n\005START\020\000\022\013"
-    "\n\007RESTART\020\001\022\010\n\004STOP\020\002\022\013\n\007ADDLIST\020\003\022\016\n\nDE"
-    "LETELIST\020\004\022\013\n\007ALLSTOP\020\005*3\n\022CounterComman"
-    "dType\022\014\n\010CADDLIST\020\001\022\017\n\013CDELETELIST\020\002*V\n\013"
-    "Restriction\022\023\n\017USER_TIME_LIMIT\020\000\022\030\n\024MAX_"
-    "WORKING_SET_SIZE\020\001\022\030\n\024MIN_WORKING_SET_SI"
-    "ZE\020\002", 2764);
+    "\n\023AgentProtocol.proto\022\005agent\"3\n\020csAgentI"
+    "DRequest\022\016\n\006hostIP\030\001 \002(\005\022\017\n\007ramSize\030\002 \002("
+    "\001\"$\n\021scAgentIDResponse\022\017\n\007agentID\030\001 \002(\005\""
+    "\026\n\024csProcessListRequest\",\n\025scProcessList"
+    "Response\022\023\n\013processName\030\001 \003(\t\")\n\024csCount"
+    "erListRequest\022\021\n\tisMachine\030\001 \002(\010\"\?\n\025scCo"
+    "unterListResponse\022\021\n\tisMachine\030\001 \002(\010\022\023\n\013"
+    "counterName\030\002 \003(\t\"\016\n\014csAgentReady\"8\n\016Cur"
+    "rentProcess\022\023\n\013processName\030\001 \002(\t\022\021\n\tproc"
+    "essID\030\002 \003(\005\"F\n\030csCurrentProcessListSend\022"
+    "*\n\013processInfo\030\001 \003(\0132\025.agent.CurrentProc"
+    "ess\"\017\n\rscHealthCheck\"\r\n\013csHealthAck\"W\n\027s"
+    "cProcessCommandRequest\022\'\n\004type\030\001 \002(\0162\031.a"
+    "gent.ProcessCommandType\022\023\n\013processName\030\002"
+    " \002(\t\"\306\001\n\030csProcessCommandResponse\022\'\n\004typ"
+    "e\030\001 \002(\0162\031.agent.ProcessCommandType\022\021\n\tpr"
+    "ocessID\030\002 \003(\005\0226\n\006result\030\003 \002(\0162&.agent.cs"
+    "ProcessCommandResponse.Result\022\022\n\nfailRea"
+    "son\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007FAIL"
+    "URE\020\001\"j\n\027scCounterCommandRequest\022\'\n\004type"
+    "\030\001 \002(\0162\031.agent.CounterCommandType\022\023\n\013Cou"
+    "nterName\030\002 \002(\t\022\021\n\tisMachine\030\003 \002(\010\"\263\001\n\030cs"
+    "CounterCommandResponse\022\'\n\004type\030\001 \002(\0162\031.a"
+    "gent.CounterCommandType\0226\n\006result\030\003 \002(\0162"
+    "&.agent.csCounterCommandResponse.Result\022"
+    "\022\n\nfailReason\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS"
+    "\020\000\022\013\n\007FAILURE\020\001\"r\n\rscStartRecord\022\021\n\tisMa"
+    "chine\030\005 \002(\010\022\027\n\017totalRecordTime\030\001 \002(\005\022\020\n\010"
+    "interval\030\002 \002(\005\022\024\n\014responseTime\030\003 \002(\005\022\r\n\005"
+    "delay\030\004 \001(\003\"!\n\014scStopRecord\022\021\n\tisMachine"
+    "\030\001 \002(\010\"\'\n\003Log\022\021\n\ttimeStamp\030\001 \002(\003\022\r\n\005valu"
+    "e\030\002 \002(\001\"e\n\014ProcessInfos\022\023\n\013counterName\030\001"
+    " \002(\t\022\023\n\013processName\030\002 \002(\t\022\021\n\tprocessID\030\003"
+    " \002(\005\022\030\n\004logs\030\004 \003(\0132\n.agent.Log\";\n\026csTota"
+    "lProcessInfoSend\022!\n\004info\030\001 \003(\0132\023.agent.P"
+    "rocessInfos\"=\n\014MachineInfos\022\023\n\013counterNa"
+    "me\030\001 \002(\t\022\030\n\004logs\030\002 \003(\0132\n.agent.Log\";\n\026cs"
+    "TotalMachineInfoSend\022!\n\004info\030\001 \003(\0132\023.age"
+    "nt.MachineInfos\"r\n\033scProcessRestrictionR"
+    "equest\022\021\n\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162"
+    "\022.agent.Restriction\022\016\n\006value1\030\003 \002(\005\022\016\n\006v"
+    "alue2\030\004 \001(\005\"\307\001\n\034csProcessRestrictionResp"
+    "onse\022\021\n\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022."
+    "agent.Restriction\022:\n\006result\030\003 \002(\0162*.agen"
+    "t.csProcessRestrictionResponse.Result\022\022\n"
+    "\nfailReason\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000"
+    "\022\013\n\007FAILURE\020\001\"\275\001\n\020csRecordResponse\022\021\n\tis"
+    "Machine\030\005 \002(\010\022.\n\006result\030\003 \002(\0162\036.agent.cs"
+    "RecordResponse.Result\022\022\n\nfailReason\030\004 \001("
+    "\t\"R\n\006Result\022\021\n\rSTART_SUCCESS\020\000\022\021\n\rSTART_"
+    "FAILURE\020\001\022\020\n\014STOP_SUCCESS\020\002\022\020\n\014STOP_FAIL"
+    "URE\020\003*\356\003\n\tagentType\022\022\n\016AgentIDRequest\020\000\022"
+    "\023\n\017AgentIDResponse\020\001\022\026\n\022ProcessListReque"
+    "st\020\002\022\027\n\023ProcessListResponse\020\003\022\026\n\022Counter"
+    "ListRequest\020\004\022\027\n\023CounterListResponse\020\005\022\032"
+    "\n\026CurrentProcessListSend\020\006\022\017\n\013HealthChec"
+    "k\020\010\022\r\n\tHealthAck\020\t\022\031\n\025ProcessCommandRequ"
+    "est\020\n\022\032\n\026ProcessCommandResponse\020\013\022\031\n\025Cou"
+    "nterCommandRequest\020\014\022\032\n\026CounterCommandRe"
+    "sponse\020\r\022\035\n\031ProcessRestrictionRequest\020\016\022"
+    "\036\n\032ProcessRestrictionResponse\020\017\022\017\n\013Start"
+    "Record\020\020\022\016\n\nStopRecord\020\021\022\023\n\017ProcessInfoS"
+    "end\020\022\022\023\n\017MachineInfoSend\020\025\022\016\n\nAgentReady"
+    "\020\026\022\022\n\016RecordResponse\020\027*`\n\022ProcessCommand"
+    "Type\022\t\n\005START\020\000\022\013\n\007RESTART\020\001\022\010\n\004STOP\020\002\022\013"
+    "\n\007ADDLIST\020\003\022\016\n\nDELETELIST\020\004\022\013\n\007ALLSTOP\020\005"
+    "*3\n\022CounterCommandType\022\014\n\010CADDLIST\020\001\022\017\n\013"
+    "CDELETELIST\020\002*V\n\013Restriction\022\023\n\017USER_TIM"
+    "E_LIMIT\020\000\022\030\n\024MAX_WORKING_SET_SIZE\020\001\022\030\n\024M"
+    "IN_WORKING_SET_SIZE\020\002", 2781);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "AgentProtocol.proto", &protobuf_RegisterTypes);
   csAgentIDRequest::default_instance_ = new csAgentIDRequest();
@@ -861,6 +862,7 @@ bool Restriction_IsValid(int value) {
 
 #ifndef _MSC_VER
 const int csAgentIDRequest::kHostIPFieldNumber;
+const int csAgentIDRequest::kRamSizeFieldNumber;
 #endif  // !_MSC_VER
 
 csAgentIDRequest::csAgentIDRequest()
@@ -882,6 +884,7 @@ csAgentIDRequest::csAgentIDRequest(const csAgentIDRequest& from)
 void csAgentIDRequest::SharedCtor() {
   _cached_size_ = 0;
   hostip_ = 0;
+  ramsize_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -917,7 +920,21 @@ csAgentIDRequest* csAgentIDRequest::New() const {
 }
 
 void csAgentIDRequest::Clear() {
-  hostip_ = 0;
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<csAgentIDRequest*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  ZR_(ramsize_, hostip_);
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -939,6 +956,21 @@ bool csAgentIDRequest::MergePartialFromCodedStream(
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &hostip_)));
           set_has_hostip();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(17)) goto parse_ramSize;
+        break;
+      }
+
+      // required double ramSize = 2;
+      case 2: {
+        if (tag == 17) {
+         parse_ramSize:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &ramsize_)));
+          set_has_ramsize();
         } else {
           goto handle_unusual;
         }
@@ -976,6 +1008,11 @@ void csAgentIDRequest::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->hostip(), output);
   }
 
+  // required double ramSize = 2;
+  if (has_ramsize()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->ramsize(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -989,6 +1026,11 @@ void csAgentIDRequest::SerializeWithCachedSizes(
   // required int32 hostIP = 1;
   if (has_hostip()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->hostip(), target);
+  }
+
+  // required double ramSize = 2;
+  if (has_ramsize()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->ramsize(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1008,6 +1050,11 @@ int csAgentIDRequest::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->hostip());
+    }
+
+    // required double ramSize = 2;
+    if (has_ramsize()) {
+      total_size += 1 + 8;
     }
 
   }
@@ -1040,6 +1087,9 @@ void csAgentIDRequest::MergeFrom(const csAgentIDRequest& from) {
     if (from.has_hostip()) {
       set_hostip(from.hostip());
     }
+    if (from.has_ramsize()) {
+      set_ramsize(from.ramsize());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -1057,7 +1107,7 @@ void csAgentIDRequest::CopyFrom(const csAgentIDRequest& from) {
 }
 
 bool csAgentIDRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
@@ -1065,6 +1115,7 @@ bool csAgentIDRequest::IsInitialized() const {
 void csAgentIDRequest::Swap(csAgentIDRequest* other) {
   if (other != this) {
     std::swap(hostip_, other->hostip_);
+    std::swap(ramsize_, other->ramsize_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

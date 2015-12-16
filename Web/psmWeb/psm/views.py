@@ -15,7 +15,7 @@ def Index(request):
 
 def Helloworld(request):
 
-    psm.redisJob.GetMachineValue_recentHourAVG(None, 0, "TotalCpuTime", 10)
+    psm.redisJob.GetMachineValue_recent(None, 0, "TotalCpuTime", 10, 60)
     return render(request, "hello.html")
 
 
@@ -25,6 +25,13 @@ def ServerMain(request, hostip):
 
     r = psm.redisJob.GetRedisClient()
     agent = psm.redisJob.GetAgentInfo(r, hostip)
-    psm.redisJob.GetMachineCounterList(r, agent)
+    cpList = psm.redisJob.GetCurrentProcessList(r, agent)
 
-    return render(request, "server_detail.html", {})
+    mList = psm.redisJob.GetMachineCounterList(r, agent)
+    pList = psm.redisJob.GetProcessCounterList(r, agent)
+
+    checkList = psm.redisJob.GetCheckProcessList(r, agent, cpList)
+
+    psm.redisJob.GetCurrentProcessList(r, agent)
+    return render(request, "server_detail.html",
+                  {"agent" : agent, "mcl" : mList, "pcl" : pList, "cpl" : cpList, "checkl" : checkList})

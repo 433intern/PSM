@@ -401,6 +401,7 @@ void AgentClientSocket::SendAgentIDRequest()
 		tempAddr = temp->S_un.S_addr;
 
 		msg.set_hostip(tempAddr);
+		msg.set_ramsize(agentClientApp->ramSize);
 
 		packet.length = (short)msg.ByteSize();
 		packet.type = (short)agent::AgentIDRequest;

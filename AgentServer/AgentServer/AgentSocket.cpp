@@ -154,7 +154,7 @@ void AgentSocket::PacketHandling(CPacket *packet)
 			if (msg.ParseFromArray(packet->msg, packet->length))
 			{
 				hostIP = msg.hostip();
-				agentApp->redisManager.InitAgent(msg.hostip());
+				agentApp->redisManager.InitAgent(msg.hostip(), msg.ramsize());
 				this->agentID = FindAgentID(msg.hostip());
 				PRINT("[AgentSocket] hostID : %d AgentID : %d\n", msg.hostip(), agentID);
 				SendAgentIDResponse(agentID);

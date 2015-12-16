@@ -2,7 +2,7 @@
 
 
 AgentClientApp::AgentClientApp(unsigned int ip, WORD connectPort)
-:isEnd(false), connectPort(connectPort), ip(ip), agentID(-1)
+:isEnd(false), connectPort(connectPort), ip(ip), agentID(-1), ramSize(0)
 {
 }
 
@@ -13,6 +13,14 @@ AgentClientApp::~AgentClientApp()
 
 void AgentClientApp::Init()
 {
+	MEMORYSTATUSEX statex;
+
+	statex.dwLength = sizeof (statex); // I misunderstand that
+
+	GlobalMemoryStatusEx(&statex);
+
+	ramSize = (double)statex.ullTotalPhys;
+
 	SYSTEM_INFO si;
 	GetSystemInfo(&si);
 	int nCPUs = (int)si.dwNumberOfProcessors;

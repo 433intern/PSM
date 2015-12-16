@@ -8,6 +8,8 @@ public:
 	unsigned int ip;
 	WORD connectPort;
 
+	double ramSize;
+
 	LogicHandle logicHandle;
 	TcpAgentClient* agentClient;
 

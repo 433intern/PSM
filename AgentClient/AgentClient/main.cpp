@@ -2,6 +2,7 @@
 
 AgentClientApp* agentClientApp;
 
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	//time_t timer = time(NULL); // 현재 시각을 초 단위로 얻기
