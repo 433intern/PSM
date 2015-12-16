@@ -19,6 +19,24 @@ function StrToJson(str){
     return data
 }
 
+open = function(verb, url, data, target) {
+  var form = document.createElement("form");
+  form.action = url;
+  form.method = verb;
+  form.target = target || "_self";
+  if (data) {
+    form.innerHTML = $("#csrf").attr('value');
+    for (var key in data) {
+      var input = document.createElement("textarea");
+      input.name = key;
+      input.value = typeof data[key] === "object" ? JSON.stringify(data[key]) : data[key];
+      form.appendChild(input);
+    }
+  }
+  form.style.display = 'none';
+  document.body.appendChild(form);
+  form.submit();
+};
 
 $(function() {
   var cpl = $("#cpl").attr('value');
@@ -52,10 +70,25 @@ $(function() {
   }
 
   var checkList = StrToJsonArray($("#checkl").attr('value'));
-  var token = $("#token").attr('value')
+  var token = $("#token").attr('value');
 
-
+  var mcl = StrToJsonArray($("#mcl").attr('value'));
+  console.log(mcl);
   
+  var mbutton = $("#machineCheckButton").click(function(){
+    resultCounterList = []
+    for (var i=0; i<mcl.length; i++){
+      if ($("#mcheckbox_" + mcl[i][0]).is(":checked"))
+      {
+        resultCounterList.push(mcl[i][0])
+      }
+    }
+
+    open('POST', '/../mchart/', {mcl : resultCounterList, token : token}, 'newwin');
+
+    console.log(resultCounterList);
+
+  });
 
   for (var i=0; i<checkList.length; i++){
     var processName = String(checkList[i]['name']);

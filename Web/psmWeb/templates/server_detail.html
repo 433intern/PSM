@@ -98,16 +98,18 @@
                 <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">머신상태보기 - {{ agent.agentName }}</h2>
               </div>
               <div>
-                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable full-width">
+                <table class="mdl-data-table mdl-js-data-table full-width">
                   <thead>
                     <tr>
+                      <th></th>
                       <th class="mdl-data-table__cell--non-numeric">이름</th>
                       <th>최근 값</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="machineCheckList">
                     {% for c in mcl %}
                     <tr>
+                      <td><input type="checkbox" class="mdl-checkbox__input"/ id="mcheckbox_{{ c.0 }}"></td>
                       <td class="mdl-data-table__cell--non-numeric">{{ c.0 }}</td>
                       <td>{{ c.1 }}</td>
                     </tr>
@@ -115,7 +117,7 @@
                   </tbody>
                 </table>
                 <!-- 상태 submit 버튼 -->
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect full-width">상태 보기</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect full-width" id="machineCheckButton">상태 보기</button>
               </div>
             </div>
 
@@ -271,8 +273,10 @@
     <input type="hidden" id="cpl" name="variable" value="{{ cpl }}">
     <input type="hidden" id="checkl" name="variable" value="{{ checkl }}">
     <input type="hidden" id="token" name="variable" value="{{ token }}">
+    <input type="hidden" id="mcl" name="variable" value="{{ mcl }}">
+    <input type="hidden" id="csrf" name="variable" value="{% csrf_token %}">
 
-    <script type="text/javascript" src="../../static/js/sample.js">
+    <script type="text/javascript" src="../../static/js/psm.js">
     </script>
 
   </body>

@@ -56,3 +56,14 @@ def ProcessDetail(request, token, name):
     jv["token"] = token
 
     return HttpResponse(json.dumps(jv))
+
+def MachineChart(request):
+    if request.method != 'POST':
+        return render(request, "hello.html")
+
+    mcl = request.POST.get('mcl')
+    token = request.POST.get('token')
+
+
+
+    return render(request, "chart.html")
