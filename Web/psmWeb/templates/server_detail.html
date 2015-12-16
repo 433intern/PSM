@@ -50,6 +50,8 @@
     }
     </style>
 
+    <!-- <script language="javascript" type="text/javascript" src="../../static/js/sample.js"></script> -->
+
   </head>
   <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -62,7 +64,7 @@
           <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
             <i class="material-icons">more_vert</i>
           </button>
-          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right">
             <li class="mdl-menu__item">About</li>
             <li class="mdl-menu__item">Contact</li>
             <li class="mdl-menu__item">Legal information</li>
@@ -138,7 +140,7 @@
                       <td class="mdl-data-table__cell--non-numeric" style="color:{{ p.color }}">{{ p.state }}</td>
                       <td>
                         {% if p.state == "Run" %}
-                        <a href="" data-toggle="modal" data-target="#myModal">{{ p.name }}</a>
+                        <a id = "modal{{ p.name }}" style="cursor:pointer">{{ p.name }}</a>
                         {% else %}
                         {{ p.name }}
                         {% endif %}
@@ -174,31 +176,19 @@
               </div>
             </div>
 
-            <div class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--3-col" style="height:100%">
+            <div class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--3-col" style="height:100%;">
               <div class="mdl-card__title mdl-card--expand mdl-color--teal-300" >
                 <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">실행 중인 프로세스</h2>
               </div>
-              <div>
+              <div style="height:600px; overflow:auto;">
                 <table class="mdl-data-table mdl-js-data-table full-width">
                   <thead>
                     <tr>
                       <th class="mdl-data-table__cell--non-numeric">이름</th>
-                      <th class="mdl-data-table__cell--non-numeric">pid</th>
+                      <th class="mdl-data-table__cell--non-numeric">갯수</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="mdl-data-table__cell--non-numeric">chrome</td>
-                      <td class="mdl-data-table__cell--non-numeric">1111</td>
-                    </tr>
-                    <tr>
-                      <td class="mdl-data-table__cell--non-numeric">KakaoTalk</td>
-                      <td class="mdl-data-table__cell--non-numeric">2222</td>
-                    </tr>
-                    <tr>
-                      <td class="mdl-data-table__cell--non-numeric">chrome#2</td>
-                      <td class="mdl-data-table__cell--non-numeric">3333</td>
-                    </tr>
+                  <tbody id="processList">
                   </tbody>
                 </table>
               </div>
@@ -217,14 +207,14 @@
             <div class="modal-body" style="padding:0px">
                 <div class="mdl-shadow--2dp mdl-color--white">
                 <div class="mdl-card__title mdl-card--expand mdl-color--grey-500" >
-                  <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">프로세스상태보기 - Chrome</h2>
+                  <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;" id="myModalTitle">프로세스상태보기 - Chrome</h2>
                 </div>
                 <div>
                   <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable full-width">
                     <thead>
                       <tr>
                         <th class="mdl-data-table__cell--non-numeric">이름</th>
-                        <th>최근 1시간 값</th>
+                        <th>최근 값</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -271,7 +261,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><input class="full-width" input type="text" placeholder="name"></td>
+                      <td><input class="full-width" type="text" placeholder="name"></td>
                     </tr>
                   </tbody>
                 </table>
@@ -288,6 +278,12 @@
     <script src="../../static/dashboard/js/material.min.js"></script>
 
 
+    <input type="hidden" id="cpl" name="variable" value="{{ cpl }}">
+    <input type="hidden" id="checkl" name="variable" value="{{ checkl }}">
+    <input type="hidden" id="agent" name="variable" value="{{ agent }}">
+
+    <script type="text/javascript" src="../../static/js/sample.js">
+    </script>
 
   </body>
 </html>

@@ -67,6 +67,9 @@ def GetRecentValue(r, prevKey, responseTime, interval):
     total = 0
     for i in range(len(list)-1):
         time = list[i+1][0] - list[i][0]
+
+        if time > responseTime : time = responseTime
+
         result += list[i][1]*time
 
         total+= time
@@ -92,7 +95,7 @@ def GetProcessValue_recent(r, number, counter, processName, pid, responseTime, i
 
 def GetProcessPIDs(cpl, name):
     for data in cpl:
-        if data[0]==name : return data[1]
+        if data['name']==name : return data['pids']
     return []
 
 def GetCheckProcessList(r, agent, curProcessList):
@@ -140,9 +143,13 @@ def GetCurrentProcessList(r, agent):
     list = []
 
     for k, v in result.items():
+        data = {}
         pids = (v.decode("UTF-8")).split(" ")
         pids.pop()
-        list.append((k.decode("UTF-8"), pids))
+
+        data["pids"] = pids
+        data["name"] = k.decode("UTF-8")
+        list.append(data)
 
     return list
 

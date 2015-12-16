@@ -35,3 +35,4 @@ def ServerMain(request, hostip):
     psm.redisJob.GetCurrentProcessList(r, agent)
     return render(request, "server_detail.html",
                   {"agent" : agent, "mcl" : mList, "pcl" : pList, "cpl" : cpList, "checkl" : checkList})
+
