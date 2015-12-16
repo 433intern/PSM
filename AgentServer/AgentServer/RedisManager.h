@@ -10,15 +10,15 @@ public:
 
 	void Init();
 
-	bool InitAgent(int hostIP, double ramSize);
-	int GetAgentID(int hostIP);
+	bool InitAgent(int token, int hostIP, double ramSize);
+	int GetAgentID(int token);
 	
-	Json::Value GetAgentJVByHostIP(int hostIP);
+	Json::Value GetAgentJVByToken(int token);
 
-	bool ChangeAgentState_isOn(int hostIP, bool value);
-	bool ChangeAgentState_startRecording(int hostIP, int totalRecordTime,
+	bool ChangeAgentState_isOn(int token, bool value);
+	bool ChangeAgentState_startRecording(int token, int totalRecordTime,
 									int responseTime, int interval, long long int delay);
-	bool ChangeAgentState_stopRecording(int hostIP);
+	bool ChangeAgentState_stopRecording(int token);
 
 	bool GetProcessList(int agentID, std::vector<std::string>& result);
 	bool GetCounterList(int agentID, std::vector<std::string>& result, bool isMachine);

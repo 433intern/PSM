@@ -210,26 +210,16 @@
                   <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;" id="myModalTitle">프로세스상태보기 - Chrome</h2>
                 </div>
                 <div>
-                  <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable full-width">
+                  <table class="mdl-data-table mdl-js-data-table full-width" id="myModalTable">
                     <thead>
                       <tr>
+                        <th>
+                        </th>
                         <th class="mdl-data-table__cell--non-numeric">이름</th>
                         <th>최근 값</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">CPU</td>
-                        <td>1000</td>
-                      </tr>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">RAM</td>
-                        <td>1000</td>
-                      </tr>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">NETWORK</td>
-                        <td>1000</td>
-                      </tr>
+                    <tbody id="myModalTbody">
                     </tbody>
                   </table>
                   <!-- 상태 submit 버튼 -->
@@ -280,7 +270,7 @@
 
     <input type="hidden" id="cpl" name="variable" value="{{ cpl }}">
     <input type="hidden" id="checkl" name="variable" value="{{ checkl }}">
-    <input type="hidden" id="agent" name="variable" value="{{ agent }}">
+    <input type="hidden" id="token" name="variable" value="{{ token }}">
 
     <script type="text/javascript" src="../../static/js/sample.js">
     </script>

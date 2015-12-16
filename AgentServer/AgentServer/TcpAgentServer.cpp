@@ -92,6 +92,23 @@ AgentSocket* TcpAgentServer::GetAgentSocketByAgentID(int AgentID)
 	return NULL;
 }
 
+AgentSocket* TcpAgentServer::GetAgentSocketByToken(int token)
+{
+	EnterCriticalSection(&agentListLock);
+	for (AgentSocket* ag : agentList)
+	{
+		if (ag->token == token)
+		{
+			LeaveCriticalSection(&agentListLock);
+			return ag;
+		}
+	}
+	LeaveCriticalSection(&agentListLock);
+	return NULL;
+}
+
+
+
 void TcpAgentServer::HeartbeatCheck()
 {
 	while (!agentApp->isEnd){

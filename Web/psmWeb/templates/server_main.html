@@ -125,7 +125,7 @@
                   <tr>
                     <td class="mdl-data-table__cell--non-numeric" style="color:{{ agent.color }}; font-weight: bold;">{{ agent.state }}</td>
                     {% if agent.recording %}
-                    <td><a href="/server_detail/{{ agent.ip_int }}">{{ agent.name }}</a></td>
+                    <td><a href="/server_detail/{{ agent.token }}">{{ agent.name }}</a></td>
                     {% else %}
                     <td>{{ agent.name }}</td>
                     {% endif %}

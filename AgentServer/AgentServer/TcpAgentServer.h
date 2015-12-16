@@ -24,6 +24,7 @@ public:
 	void AddAgent(AgentSocket* agent);
 	void DeleteAgent(AgentSocket* agent);
 	AgentSocket* GetAgentSocketByAgentID(int AgentID);
+	AgentSocket* GetAgentSocketByToken(int token);
 
 private:
 	WORD			port_;

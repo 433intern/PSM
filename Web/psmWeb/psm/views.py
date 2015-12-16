@@ -14,25 +14,45 @@ def Index(request):
 
 
 def Helloworld(request):
+    psm.redisJob.GetProcessKeys(None, "9:CPUTime:KakaoTalk")
+    return HttpResponse("hh")
+    #psm.redisJob.GetMachineValue_recent(None, 0, "TotalCpuTime", 10, 60)
+    #return render(request, "hello.html")
 
-    psm.redisJob.GetMachineValue_recent(None, 0, "TotalCpuTime", 10, 60)
-    return render(request, "hello.html")
 
-
-def ServerMain(request, hostip):
-    if not hostip.isdigit():
+def ServerDetail(request, token):
+    if not token.isdigit():
         response = render(request, "hello.html")
 
     r = psm.redisJob.GetRedisClient()
-    agent = psm.redisJob.GetAgentInfo(r, hostip)
+    agent = psm.redisJob.GetAgentInfo(r, token)
     cpList = psm.redisJob.GetCurrentProcessList(r, agent)
 
     mList = psm.redisJob.GetMachineCounterList(r, agent)
-    pList = psm.redisJob.GetProcessCounterList(r, agent)
 
     checkList = psm.redisJob.GetCheckProcessList(r, agent, cpList)
 
     psm.redisJob.GetCurrentProcessList(r, agent)
     return render(request, "server_detail.html",
-                  {"agent" : agent, "mcl" : mList, "pcl" : pList, "cpl" : cpList, "checkl" : checkList})
+                  {"token" : token, "agent" : agent, "mcl" : mList, "cpl" : cpList, "checkl" : checkList})
 
+
+def ProcessDetail(request, token, name):
+    if not token.isdigit() or not name.isalpha():
+        response = render(request, "hello.html")
+
+    print(token)
+    print(name)
+
+    r = psm.redisJob.GetRedisClient()
+    agent = psm.redisJob.GetAgentInfo(r, token)
+    pList = psm.redisJob.GetProcessCounterList(r, agent, name)
+
+    jv = {}
+    print(pList)
+
+    jv["pList"] = pList
+    jv["process"] = name
+    jv["token"] = token
+
+    return HttpResponse(json.dumps(jv))

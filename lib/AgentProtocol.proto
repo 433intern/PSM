@@ -37,13 +37,15 @@ enum agentType
 
 message csAgentIDRequest
 {
-	required int32 hostIP = 1;
-	required double ramSize = 2;
+	required int32 token = 1;
+	required int32 hostIP = 2;
+	required double ramSize = 3;
 }
 
 message scAgentIDResponse
 {
 	required int32 agentID = 1;
+	required bool alreadyRunning = 2;
 }
 
 message csProcessListRequest

@@ -221,10 +221,15 @@ void AgentClientSocket::PacketHandling(CPacket *packet)
 			agent::scAgentIDResponse msg;
 			if (msg.ParseFromArray(packet->msg, packet->length))
 			{
-				PRINT("[AgentClientSocket] AgentID : %d\n", msg.agentid());
-				agentClientApp->agentID = msg.agentid();
-
-				SendProcessListRequest();
+				if (msg.alreadyrunning()){
+					PRINT("[AgentClientSocket] already running!! disconnect!\n", msg.agentid());
+					Disconnect();
+				}
+				else{
+					PRINT("[AgentClientSocket] AgentID : %d\n", msg.agentid());
+					agentClientApp->agentID = msg.agentid();
+					SendProcessListRequest();
+				}
 			}
 			
 			break;
@@ -400,6 +405,7 @@ void AgentClientSocket::SendAgentIDRequest()
 		struct in_addr* temp = (struct in_addr*)hostinfo->h_addr_list[0];
 		tempAddr = temp->S_un.S_addr;
 
+		msg.set_token(tempAddr);
 		msg.set_hostip(tempAddr);
 		msg.set_ramsize(agentClientApp->ramSize);
 

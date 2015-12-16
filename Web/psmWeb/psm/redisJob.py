@@ -10,7 +10,7 @@ def GetRedisClient():
     r = redis.StrictRedis(host='localhost', port=6379, db=0)
     return r
 
-def GetCounterValue(r, key, date, startTime, endTime):
+def GetCounterValue(r, key, startTime, endTime):
     if r==None : r = GetRedisClient()
 
     datalist = r.lrange(key, 0, endTime-startTime)
@@ -24,7 +24,7 @@ def GetCounterValue(r, key, date, startTime, endTime):
         time = temp[0]
         value = temp[1]
 
-        curTime = psm.util.GetCurTime(date, time)
+        curTime = int(time)
 
         if startTime <= curTime and endTime > curTime:
             result.append((curTime, float(value)))
@@ -35,32 +35,18 @@ def GetCounterValue(r, key, date, startTime, endTime):
     #print(result)
     return result
 
-def GetValueList(r, prevKey, responseTime, interval, curTime):
+def GetValueList(r, key, responseTime, interval, curTime):
     endTime = curTime - responseTime
-    strTime = psm.util.timestampToString(endTime)
-    temp = strTime.split(" ")
-    f_d = temp[0]
     startTime = endTime - interval
-    strTime = psm.util.timestampToString(startTime)
-    temp = strTime.split(" ")
-    s_d = temp[0]
 
-    if s_d == f_d:
-        key = prevKey + ":" + f_d
-        list = GetCounterValue(r, key, f_d, startTime, endTime)
-    else:
-        key = prevKey + ":" + s_d
-        curTime = psm.util.GetCurTime(f_d, "00:00:00")
-        list = GetCounterValue(r, key, s_d, startTime, curTime)
-        key = prevKey + ":" + f_d
-        list.extend(GetCounterValue(r, key, f_d, curTime, endTime))
+    list = GetCounterValue(r, key, startTime, endTime)
 
     return list
 
-def GetRecentValue(r, prevKey, responseTime, interval):
+def GetRecentValue(r, key, responseTime, interval):
     curTime = psm.util.GetCurTime_int()
     endTime = curTime - responseTime
-    list = GetValueList(r, prevKey, responseTime, interval, curTime)
+    list = GetValueList(r, key, responseTime, interval, curTime)
     result = 0
     if len(list)==0 : return 0
 
@@ -83,15 +69,52 @@ def GetRecentValue(r, prevKey, responseTime, interval):
 
     return round(result/total, 2)
 
+def GetProcessKeys(r, prevkey):
+    if r==None : r = GetRedisClient()
+    keys = []
+    for data in r.keys(prevkey + ":*"):
+        keys.append(data.decode("UTF-8"))
 
+    print(keys)
+
+    return keys
+
+"""def GetRecentValueTotal(r, prevKey, responseTime, interval):
+    curTime = psm.util.GetCurTime_int()
+    endTime = curTime - responseTime
+    startTime = endTime - interval
+
+    strTime = psm.util.timestampToString(startTime)
+    temp = strTime.split(" ")
+    s_d = temp[0]
+
+    #curTime = psm.util.timestampToString(s_d, "00:00:00")
+
+    prevkeys = []
+
+    time = psm.util.GetCurTime(s_d, "00:00:00")
+    delta = 3600 * 24
+
+    while time < endTime:
+        date = psm.util.timestampToString(time).split(" ")[0]
+        l = r.keys(prevKey + ":*:" + date)
+
+
+        key = prevKey + ":" + s_d
+        list.extend(GetCounterValue(r, key, s_d, startTime, curTime))
+        startTime = curTime
+        s_d = psm.util.timestampToString(curTime).split(" ")[0]
+
+        time+=delta"""
 
 def GetMachineValue_recent(r, number, counter, responseTime, interval):
-    prevKey = ":".join([ str(number) ,  counter, "Total"])
-    return GetRecentValue(r, prevKey, responseTime, interval)
+    key = ":".join([ str(number) ,  counter, "Total"])
+    return GetRecentValue(r, key, responseTime, interval)
 
 def GetProcessValue_recent(r, number, counter, processName, pid, responseTime, interval):
-    prevKey = ":".join([ str(number), counter, processName, str(pid)])
-    return GetRecentValue(r, prevKey, responseTime, interval)
+    key = ":".join([ str(number), counter, processName, str(pid)])
+    return GetRecentValue(r, key, responseTime, interval)
+
 
 def GetProcessPIDs(cpl, name):
     for data in cpl:
@@ -155,7 +178,7 @@ def GetCurrentProcessList(r, agent):
 
 
 
-def GetProcessCounterList(r, agent):
+def GetProcessCounterList(r, agent, name):
     if r==None : r = GetRedisClient()
 
     key = str(agent['agentNumber']) + ":CounterList"
@@ -165,7 +188,13 @@ def GetProcessCounterList(r, agent):
 
     for data in list(result):
         jsonData = json.loads(data.decode("UTF-8"))
-        counterList.append(jsonData)
+
+        keys = GetProcessKeys(r, str(agent['agentNumber'])+":"+jsonData['name']+":"+name)
+        value = 0
+        for key in keys:
+            value += GetRecentValue \
+                (r, key, agent['responseTime'], 60)
+        counterList.append([jsonData['name'], str(value) + jsonData['unit']])
 
     return counterList
 
@@ -188,15 +217,10 @@ def GetMachineCounterList(r, agent):
 
 
 
-def GetAgentInfo(r, hostip):
+def GetAgentInfo(r, token):
     if r==None : r = GetRedisClient()
-    result = r.hmget("AgentList", hostip)
-
-
-    agentInfo = {}
-
+    result = r.hmget("AgentList", token)
     if len(result)==0 : return None
-
     data = json.loads(result[0].decode("UTF-8"))
     return data
 
@@ -252,10 +276,10 @@ def GetAgentListToView(r):
         resultAgent['state'] = state
         resultAgent['color'] = color
         resultAgent['name'] = agent['agentName']
-        ipvalue = k.decode("UTF-8")
+        ipvalue = agent['hostIP']
         resultAgent['ip'] = psm.util.int2ip(int(ipvalue))
         resultAgent['index'] = agent['agentNumber']
-        resultAgent['ip_int'] = ipvalue
+        resultAgent['token'] = k.decode("UTF-8")
 
         list.append(resultAgent)
     return list

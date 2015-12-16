@@ -9,6 +9,7 @@ public:
 public:
 	int agentID;
 	int hostIP;
+	int token;
 
 	bool healthCheck;
 
@@ -24,7 +25,7 @@ public:
 
 public:
 	void SendHealthCheck();
-	void SendAgentIDResponse(int agentID);
+	void SendAgentIDResponse(int agentID, bool alreadyRunning);
 	void SendProcessListResponse();
 	void SendCounterListResponse(bool isMachine);
 	void SendStartRecord(bool isMachine, int totalRecordTime, int responseTime, int interval, long long int delay);

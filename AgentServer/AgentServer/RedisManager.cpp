@@ -75,10 +75,10 @@ void RedisManager::Init()
 }
 
 
-Json::Value RedisManager::GetAgentJVByHostIP(int hostIP)
+Json::Value RedisManager::GetAgentJVByToken(int token)
 {
 	RedisValue result = NULL;
-	result = redis.command("HMGET", "AgentList", std::to_string(hostIP));
+	result = redis.command("HMGET", "AgentList", std::to_string(token));
 	if (result.isOk())
 	{
 		std::vector<RedisValue> v = result.toArray();
@@ -92,16 +92,16 @@ Json::Value RedisManager::GetAgentJVByHostIP(int hostIP)
 	return NULL;
 }
 
-bool RedisManager::InitAgent(int hostIP, double ramSize)
+bool RedisManager::InitAgent(int token, int hostIP, double ramSize)
 {
 	RedisValue result;
 
-	Json::Value jvv = GetAgentJVByHostIP(hostIP);
+	Json::Value jvv = GetAgentJVByToken(token);
 	if (jvv!=NULL){
 		jvv["isOn"] = true;
 		std::string resultStr = JsonToStr(jvv);
 
-		redis.command("HMSET", "AgentList", std::to_string(hostIP), resultStr);
+		redis.command("HMSET", "AgentList", std::to_string(token), resultStr);
 		return true;
 	}
 
@@ -118,6 +118,7 @@ bool RedisManager::InitAgent(int hostIP, double ramSize)
 	}
 
 	Json::Value jv;
+	jv["hostIP"] = hostIP;
 	jv["agentName"] = std::string("Agent") + std::to_string(agentID);
 	jv["agentNumber"] = agentID;
 	jv["isOn"] = true;
@@ -128,7 +129,7 @@ bool RedisManager::InitAgent(int hostIP, double ramSize)
 	jv["ramSize"] = ramSize;
 	std::string strJv = JsonToStr(jv);
 
-	result = redis.command("HMSET", "AgentList", std::to_string(hostIP), strJv);
+	result = redis.command("HMSET", "AgentList", std::to_string(token), strJv);
 
 	if (!result.isOk())
 	{
@@ -139,22 +140,22 @@ bool RedisManager::InitAgent(int hostIP, double ramSize)
 	return true;
 }
 
-bool RedisManager::ChangeAgentState_isOn(int hostIP, bool value)
+bool RedisManager::ChangeAgentState_isOn(int token, bool value)
 {
-	Json::Value jv = GetAgentJVByHostIP(hostIP);
+	Json::Value jv = GetAgentJVByToken(token);
 	if (jv != NULL){
 		jv["isOn"] = value;
 		std::string resultStr = JsonToStr(jv);
-		redis.command("HMSET", "AgentList", std::to_string(hostIP), resultStr);
+		redis.command("HMSET", "AgentList", std::to_string(token), resultStr);
 		return true;
 	}
 	return false;
 }
 
-bool RedisManager::ChangeAgentState_startRecording(int hostIP, int totalRecordTime,
+bool RedisManager::ChangeAgentState_startRecording(int token, int totalRecordTime,
 	int responseTime, int interval, long long int delay)
 {
-	Json::Value jv = GetAgentJVByHostIP(hostIP);
+	Json::Value jv = GetAgentJVByToken(token);
 	if (jv != NULL){
 		jv["isRecording"] = true;
 
@@ -164,32 +165,32 @@ bool RedisManager::ChangeAgentState_startRecording(int hostIP, int totalRecordTi
 		else jv["endTime"] = "INFINITE";
 		jv["responseTime"] = responseTime;
 		std::string resultStr = JsonToStr(jv);
-		redis.command("HMSET", "AgentList", std::to_string(hostIP), resultStr);
+		redis.command("HMSET", "AgentList", std::to_string(token), resultStr);
 		return true;
 	}
 	return false;
 }
 
-bool RedisManager::ChangeAgentState_stopRecording(int hostIP)
+bool RedisManager::ChangeAgentState_stopRecording(int token)
 {
-	Json::Value jv = GetAgentJVByHostIP(hostIP);
+	Json::Value jv = GetAgentJVByToken(token);
 	if (jv != NULL){
 		jv["isRecording"] = false;
 		jv["startTime"] = std::string("00/00/00 00:00:00");
 		jv["endTime"] = std::string("00/00/00 00:00:00");
 		jv["responseTime"] = 0;
 		std::string resultStr = JsonToStr(jv);
-		redis.command("HMSET", "AgentList", std::to_string(hostIP), resultStr);
+		redis.command("HMSET", "AgentList", std::to_string(token), resultStr);
 		return true;
 	}
 	return false;
 }
 
 
-int RedisManager::GetAgentID(int hostIP)
+int RedisManager::GetAgentID(int token)
 {
 	RedisValue result;
-	result = redis.command("HMGET", "AgentList", std::to_string(hostIP));
+	result = redis.command("HMGET", "AgentList", std::to_string(token));
 	if (result.isOk())
 	{
 		std::vector<RedisValue> v = result.toArray();
@@ -471,8 +472,8 @@ bool RedisManager::SaveProcessInfo(int agentID, CPacket* packet)
 			agent::ProcessInfos pi = msg.info(i);
 			
 			std::string counterName = CounterNameToNewName(pi.countername());
-			std::string prefix = sID + ":" + counterName
-				+ ":" + pi.processname() + ":" + std::to_string(pi.processid()) + ":";
+			std::string key = sID + ":" + counterName
+				+ ":" + pi.processname() + ":" + std::to_string(pi.processid());
 
 			if (pi.logs_size() > 0)
 			{
@@ -496,8 +497,7 @@ bool RedisManager::SaveProcessInfo(int agentID, CPacket* packet)
 				for (int j = 0; j < pi.logs_size(); j++)
 				{
 					agent::Log l = pi.logs(j);
-					std::string curDate = GetCurrentDate(l.timestamp());
-					std::string key = prefix + curDate;
+					//std::string curDate = GetCurrentDate(l.timestamp());
 					double value = l.value();
 
 					/*if (GetCurrentDate(l.timestamp()) != curDate)
@@ -514,7 +514,7 @@ bool RedisManager::SaveProcessInfo(int agentID, CPacket* packet)
 
 					if (counterName == "Memory") value /= 1024;
 
-					std::string v = GetCurrTime(l.timestamp()) + " " + std::to_string(value);
+					std::string v = std::to_string(l.timestamp()) + " " + std::to_string(value);
 					
 
 					result = redis.command("lpush", key, v);
@@ -546,17 +546,17 @@ bool RedisManager::SaveMachineInfo(int agentID, CPacket* packet)
 			agent::MachineInfos mi = msg.info(i);
 
 			std::string counterName = CounterNameToNewName(mi.countername());
-			std::string prefix = sID + ":" + counterName + ":Total:";
+			std::string key = sID + ":" + counterName + ":Total";
 
 			if (mi.logs_size() > 0)
 			{
 				for (int j = 0; j < mi.logs_size(); j++)
 				{
 					agent::Log l = mi.logs(j);
-					std::string curDate = GetCurrentDate(l.timestamp());
-					std::string key = prefix + curDate;
+					//std::string curDate = GetCurrentDate(l.timestamp());
+					//std::string key = prefix + curDate;
 					double value = l.value();
-					std::string v = GetCurrTime(l.timestamp()) + " " + std::to_string(value);
+					std::string v = std::to_string(l.timestamp()) + " " + std::to_string(value);
 					result = redis.command("lpush", key, v);
 					if (!result.isOk())
 					{

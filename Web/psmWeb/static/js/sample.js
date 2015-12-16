@@ -6,7 +6,6 @@ function unescapeHtml(string) {
 
 function StrToJsonArray(cpl) {
   cpl = cpl.replace(/'/gi, "\"");
-  console.log(cpl);
   data = JSON.parse(cpl);
 
   return data
@@ -23,10 +22,8 @@ function StrToJson(str){
 
 $(function() {
   var cpl = $("#cpl").attr('value');
-  console.log(cpl)
 
   list = StrToJsonArray(cpl);
-  console.log(list)
 
   list.sort(function(a, b){
     return String(a['name']) > String(b['name'])
@@ -55,19 +52,75 @@ $(function() {
   }
 
   var checkList = StrToJsonArray($("#checkl").attr('value'));
+  var token = $("#token").attr('value')
 
-  console.log(checkList);
 
-  var agent = StrToJson($("#agent").attr('value'));
-  console.log(agent)
+  
 
   for (var i=0; i<checkList.length; i++){
     var processName = String(checkList[i]['name']);
     var modalButton = $('a#modal' + String(checkList[i]['name']));
-    modalButton.click({name : processName}, function(param){
-        $('#myModal #myModalTitle').text("프로세스상태보기 - " + param.data.name);
-        $('#myModal').modal('toggle'); 
-    });
+    modalButton.click({name : processName, token : token}, function(param){  
+        function onDataReceived(data) {
 
+            $('#myModal #myModalTitle').text("프로세스상태보기 - "+String(data.process));
+            
+
+            var modalbody = $('#myModal #myModalTbody');
+            var emodalbody = modalbody.get();
+            modalbody.html('');
+            var modalTable = $('#myModal #myModalTable');
+
+            for (var i=0; i<data.pList.length; i++){
+              var cName = data.pList[i][0];
+              var cValue = data.pList[i][1];
+
+              var eelem = document.createElement('tr');
+              var celem = $(eelem);
+
+              var cName_td = $(document.createElement('td'));
+              var cValue_td = $(document.createElement('td'));
+
+              cName_td.text(cName);
+              cName_td.addClass('mdl-data-table__cell--non-numeric');
+              cValue_td.text(cValue);
+
+              eelem.innerHTML ='<td><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect \
+              mdl-data-table__select"><input type="checkbox" class="mdl-checkbox__input"/></label></td>';
+              celem.append(cName_td);
+              celem.append(cValue_td);
+              modalbody.append(celem);
+            }
+
+            $('#myModal').modal('toggle');       
+        }
+
+/*        $.ajax({
+            'url' : '/../process_detail/'+param.data.token+'/'+param.data.name,
+            'method' : 'get',
+            'dataType' : "json",
+            'data' : {
+                'title' : "프로세스상태보기 - " + param.data.name,
+            },
+            'success' : onDataReceived
+        });
+
+        for (var i=0; i<list.length; i++){
+          if (list[i]['name'] == param.data.name){
+            pids = list[i]['pids'];
+            break;
+          }
+        }
+
+        console.log(pids)*/
+
+        $.ajax({
+            'url' : '/../process_detail/'+param.data.token+'/'+param.data.name,
+            'method' : 'get',
+            'dataType' : "json",
+            'success' : onDataReceived
+        });
+        
+    });
   }
 });
