@@ -72,6 +72,9 @@ def GetRecentValue(r, prevKey, responseTime, interval):
         total+= time
 
     time = endTime - list[len(list)-1][0]
+
+    if time > responseTime : time = responseTime
+
     result += list[len(list)-1][1]*time
     total+=time
 

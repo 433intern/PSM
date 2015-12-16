@@ -136,22 +136,32 @@
                     {% for p in checkl %}
                     <tr>
                       <td class="mdl-data-table__cell--non-numeric" style="color:{{ p.color }}">{{ p.state }}</td>
-                      <td><a href="" data-toggle="modal" data-target="#myModal">{{ p.name }}</a></td>
+                      <td>
+                        {% if p.state == "Run" %}
+                        <a href="" data-toggle="modal" data-target="#myModal">{{ p.name }}</a>
+                        {% else %}
+                        {{ p.name }}
+                        {% endif %}
+                        </td>
                       <td style="width: 25%;">
+                        {% if p.state == "Run" %}
                         <div class="progress" style="margin-bottom: 0px;">
                           <div class="progress-bar" role="progressbar" aria-valuenow="{{ p.cpuValue }}"
                               aria-valuemin="0" aria-valuemax="100" style="width:{{ p.cpuValue }}%">
                                 <span>{{ p.cpuValue }}%</span>
                           </div>
                         </div>
+                        {% endif %}
                       </td>
                       <td style="width: 25%;">
+                        {% if p.state == "Run" %}
                         <div class="progress" style="margin-bottom: 0px;">
                           <div class="progress-bar" role="progressbar" aria-valuenow="{{ p.memoryValue }}"
                                 aria-valuemin="0" aria-valuemax="100" style="width:{{ p.memoryValue }}%">
                                   <span>{{ p.memoryValue }}%</span>
                           </div>
                         </div>
+                        {% endif %}
                       </td>
                       <td><a href="">X</a></td>
                     </tr>
