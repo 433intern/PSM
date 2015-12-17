@@ -1,3 +1,4 @@
+
 function unescapeHtml(string) {
   return $("<div/>").html(string).text()
 }
@@ -22,7 +23,12 @@ function prefill(num, value) {
   return Array.apply(null, Array(+num)).map(function (d,i) { return value })
 }
 
-datas = []
+var datas = []
+var jsonData;
+
+function DataReceived( data ){
+  jsonData = data;
+}
 
 $(function() {
   var n=180;
@@ -34,13 +40,15 @@ $(function() {
   console.log(mcl);
   console.log(agent);
 
-  for (var i=0; i<mcl.length; i++){
+  for (var i=0; i<mcl.length; i++)
+  {
     var o = new Object;
-    o['name'] = mcl[i];
-    o['data'] = prefill(n, 0);
+    o.name = mcl[i];
+    o.data = [];
 
     datas.push(o);
   }
+
   console.log(datas);
 
   function RequestData()
@@ -55,30 +63,82 @@ $(function() {
           'curTime' : curTime,
           'agentNumber' : agent.agentNumber,
           'responseTime' : agent.responseTime,
-          'interval' : n*2,
+          'interval' : n+agent.responseTime,
           'mcl[]' : mcl,
         },
         dataType : "json",
-        success: function( data ){
-          console.log(data)
-            // do something
-        }
+        success: DataReceived
+          
       });
   }
   RequestData();
-  setInterval(RequestData, agent.responseTime*1000);
+  var ajaxInterval = 5;
+  setInterval(RequestData, ajaxInterval*1000);
 
-  var d1 = [];
-  for (var i = 0; i < 14; i += 0.5) {
-    d1.push([i, Math.sin(i)]);
+  
+  function DrawChart() {
+
+    if (jsonData==null) return;
+    if (jsonData.length == 0) return;
+
+    var err= 2*agent.responseTime+ajaxInterval+1;
+    var curTime = parseInt(new Date().getTime() / 1000);
+    var endTime = curTime-err;
+    var startTime = endTime-n;
+
+    startTime += 9;
+    endTime += 9;
+
+    for (var i=0; i<jsonData.length; i++)
+    {
+      name = datas[i].name;
+      curData = datas[i].data;
+
+      for (var j=curData.length-1; j>=0; j--)
+      {
+          if (startTime > (curData[j][0]/1000)) break;
+      }
+
+      curData = curData.slice(j+1);
+
+      var cur = 0;
+      var time= startTime;
+      if (curData.length > 0){
+          time = (curData[curData.length-1][0])/1000+1;
+          cur = curData[curData.length-1][1];
+      } 
+      var j = 0;
+
+      while (jsonData[i].data[j][0] < time){
+        j++;
+        if (j>=jsonData[i].data.length){
+            break;
+        }
+      }
+      //console.log(jsonData[i].data[j][0]);
+
+      while (j < jsonData[i].data.length && jsonData[i].data[j][0] < endTime)
+      {
+        for (var k=time; k<jsonData[i].data[j][0]; k+=1)
+        {
+          if (k-time > agent.responseTime) curData.push([k*1000, 0]);
+          else curData.push([k*1000,cur]);
+        }
+        time = jsonData[i].data[j][0];
+        cur = jsonData[i].data[j][1];
+        j++;
+      }
+
+      for (var k=time; k<endTime; k+=1)
+      {
+        curData.push([k*1000,cur]);
+        if (k-time > agent.responseTime) curData.push([k*1000, 0]);  
+      }
+
+      datas[i].data = curData;
+
+      $.plot("#placeholder"+name, [curData], { xaxis: { mode: "time", } });
+    }
   }
-
-  var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
-
-  // A null signifies separate line segments
-
-  var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
-
-  $.plot("#placeholderMemory", [ d1, d2, d3 ]);
-
+  setInterval(DrawChart, 1000);
 });
