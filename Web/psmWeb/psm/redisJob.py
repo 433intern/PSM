@@ -17,7 +17,7 @@ def GetCounterValue(r, key, startTime, endTime):
     result = []
 
     for l in datalist:
-        data = l.decode("utf-8")
+        data = l#.decode("utf-8")
 
         temp = data.split(" ")
 
@@ -100,7 +100,7 @@ def GetProcessKeys(r, prevkey):
     if r==None : r = GetRedisClient()
     keys = []
     for data in r.keys(prevkey + ":*"):
-        keys.append(data.decode("UTF-8"))
+        keys.append(data)#.decode("UTF-8"))
 
     print(keys)
 
@@ -156,7 +156,7 @@ def GetCheckProcessList(r, agent, curProcessList):
 
     plist = []
     for data in list(result):
-        name = data.decode("UTF-8")
+        name = str(data)#.decode("UTF-8"))
         pids = GetProcessPIDs(curProcessList, name)
         cpuValue = 0
         memoryValue = 0
@@ -194,11 +194,11 @@ def GetCurrentProcessList(r, agent):
 
     for k, v in result.items():
         data = {}
-        pids = (v.decode("UTF-8")).split(" ")
+        pids = v.split(" ")
         pids.pop()
 
         data["pids"] = pids
-        data["name"] = k.decode("UTF-8")
+        data["name"] = str(k)#.decode("UTF-8"))
         list.append(data)
 
     return list
@@ -214,14 +214,14 @@ def GetProcessCounterList(r, agent, name):
     counterList = []
 
     for data in list(result):
-        jsonData = json.loads(data.decode("UTF-8"))
+        jsonData = json.loads(data)#.decode("UTF-8"))
 
         keys = GetProcessKeys(r, str(agent['agentNumber'])+":"+jsonData['name']+":"+name)
         value = 0
         for key in keys:
             value += GetRecentValue \
                 (r, key, agent['responseTime'], 60)
-        counterList.append([jsonData['name'], str(value) + jsonData['unit']])
+        counterList.append([str(jsonData['name']), str(str(value) + jsonData['unit'])])
 
     return counterList
 
@@ -234,11 +234,11 @@ def GetMachineCounterList(r, agent):
     counterList= []
 
     for data in list(result):
-        jsonData = json.loads(data.decode("UTF-8"))
+        jsonData = json.loads(data)
         value = GetMachineValue_recent \
             (r, agent['agentNumber'], jsonData['name'], agent['responseTime'], 60)
 
-        counterList.append( [jsonData['name'], str(value) + jsonData['unit']] )
+        counterList.append( [str(jsonData['name']), str(str(value) + jsonData['unit'])] )
 
     return counterList
 
@@ -248,7 +248,7 @@ def GetAgentInfo(r, token):
     if r==None : r = GetRedisClient()
     result = r.hmget("AgentList", token)
     if len(result)==0 : return None
-    data = json.loads(result[0].decode("UTF-8"))
+    data = json.loads(result[0])#.decode("UTF-8"))
     return data
 
 def GetAgentListToView(r):
@@ -258,7 +258,7 @@ def GetAgentListToView(r):
     list = []
 
     for k, v in result.items():
-        agent = json.loads(v.decode("UTF-8"))
+        agent = json.loads(v)#.decode("UTF-8"))
         resultAgent = {}
 
         state=""
@@ -281,9 +281,9 @@ def GetAgentListToView(r):
 
                 mv =  GetMachineValue_recent \
                     (r, agent['agentNumber'], "Memory", agent['responseTime'], 60)
-                resultAgent['memory'] = 100 - round(mv / (agent['ramSize'] / 1024) * 100, 2)
-                resultAgent['disk'] = GetMachineValue_recent \
-                    (r, agent['agentNumber'], "Disk", agent['responseTime'], 60)
+                resultAgent['memory'] = round(100 - (mv / (agent['ramSize'] / 1024) * 100), 2)
+                resultAgent['disk'] = round(GetMachineValue_recent \
+                    (r, agent['agentNumber'], "Disk", agent['responseTime'], 60), 2)
 
             else:
                 state += "(Ready)"
@@ -307,7 +307,7 @@ def GetAgentListToView(r):
         ipvalue = agent['hostIP']
         resultAgent['ip'] = psm.util.int2ip(int(ipvalue))
         resultAgent['index'] = agent['agentNumber']
-        resultAgent['token'] = k.decode("UTF-8")
+        resultAgent['token'] = k#.decode("UTF-8")
 
         list.append(resultAgent)
     return list

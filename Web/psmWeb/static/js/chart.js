@@ -35,6 +35,8 @@ $(function() {
 
   var mclStr = $("#mcl").attr('value');
   var mcl = StrToJsonArray(mclStr);
+
+  console.log($("#agent").attr('value'));
   var agent = StrToJson($("#agent").attr('value'));
 
   console.log(mcl);

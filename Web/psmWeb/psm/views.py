@@ -89,13 +89,16 @@ def MachineChart(request):
         return HttpResponse("no url! error page")
 
     mcl = json.loads(request.POST.get('mcl'))
+    mcl = map(lambda x: str(x), mcl)
     token = request.POST.get('token')
 
     r = psm.redisJob.GetRedisClient()
     agent = psm.redisJob.GetAgentInfo(r, token)
-    print(agent)
 
-    return render(request, "chart.html", {"token" : token, "agent" : agent, "mcl" : mcl})
+    print(request.POST.get('mcl'))
+    print(mcl)
+
+    return render(request, "chart.html", {"agentName" : agent['agentName'], "token" : token, "agent" : json.dumps(agent), "mcl" : mcl})
 
 def PRedis(request):
     if request.method != 'POST':
@@ -135,6 +138,7 @@ def ProcessChart(request):
         return render(request, "hello.html")
 
     pcl = json.loads(request.POST.get('pcl'))
+    pcl = map(lambda x: str(x), pcl)
     token = request.POST.get('token')
     name = request.POST.get('name')
 
@@ -142,4 +146,4 @@ def ProcessChart(request):
     agent = psm.redisJob.GetAgentInfo(r, token)
     print(agent)
 
-    return render(request, "chart_p.html", {"name" : name, "token" : token, "agent" : agent, "pcl" : pcl})
+    return render(request, "chart_p.html", {"agentName" : agent['agentName'], "name" : name, "token" : token, "agent" : json.dumps(agent), "pcl" : pcl})

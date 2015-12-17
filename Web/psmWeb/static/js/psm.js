@@ -41,6 +41,8 @@ open = function(verb, url, data, target) {
 $(function() {
   var cpl = $("#cpl").attr('value');
 
+  console.log(cpl);
+
   list = StrToJsonArray(cpl);
 
   list.sort(function(a, b){
@@ -72,6 +74,8 @@ $(function() {
   var checkList = StrToJsonArray($("#checkl").attr('value'));
   var token = $("#token").attr('value');
 
+
+    console.log($("#mcl").attr('value'));
   var mcl = StrToJsonArray($("#mcl").attr('value'));
   console.log(mcl);
   
