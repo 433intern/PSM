@@ -25,7 +25,7 @@
     <link rel="shortcut icon" href="../static/dashboard/css/images/favicon.png">
 
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../static/jquery.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
 
     <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
@@ -50,6 +50,10 @@
     }
     </style>
 
+
+    <link href="../examples.css" rel="stylesheet" type="text/css">
+    <script language="javascript" type="text/javascript" src="../static/flot/jquery.flot.js"></script>
+
   </head>
   <body>
     <div>
@@ -71,10 +75,39 @@
       </header>
 
       <main style="padding:30px">
+        <div id="header">
+          <h2>Basic Usage</h2>
+        </div>
+
+        <div id="content">
+
+          <div class="demo-container">
+            <div id="placeholder" class="demo-placeholder"></div>
+          </div>
+
+          <p>You don't have to do much to get an attractive plot.  Create a placeholder, make sure it has dimensions (so Flot knows at what size to draw the plot), then call the plot function with your data.</p>
+
+          <p>The axes are automatically scaled.</p>
+
+        </div>
 
       </main>
     </div>
     <script src="../static/dashboard/js/material.min.js"></script>
 
+    {% csrf_token %}
+    
+    <!--<script>
+      $.ajax({
+          url : url,
+          type: "POST",
+          data : {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
+          dataType : "json",
+          success: function( data ){
+            console.log(data)
+              // do something
+          }
+      });
+    </script>-->
   </body>
 </html>

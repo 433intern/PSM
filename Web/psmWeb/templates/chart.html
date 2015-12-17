@@ -25,7 +25,7 @@
     <link rel="shortcut icon" href="../static/dashboard/css/images/favicon.png">
 
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../static/jquery.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
 
     <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
@@ -50,13 +50,16 @@
     }
     </style>
 
+    <link href="../static/flot/examples.css" rel="stylesheet" type="text/css">
+    <script language="javascript" type="text/javascript" src="../static/flot/jquery.flot.js"></script>
+
   </head>
   <body>
     <div>
 
       <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600" style="margin-bottom:10px">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title" style="font-weight:bold">Agent1_실시간차트</span>
+          <span class="mdl-layout-title" style="font-weight:bold">{{ agent.agentName}}_실시간차트</span>
           <div class="mdl-layout-spacer"></div>
           
           <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
@@ -71,10 +74,27 @@
       </header>
 
       <main style="padding:30px">
-
+        {% for mc in mcl %}
+        <div style="padding:10px; padding-bottom:0px; float:left;">
+          <div class="mdl-card__title mdl-card--expand mdl-color--teal-300" >
+              <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">{{ mc }}</h2>
+          </div>
+          <div class="demo-container" style="margin-bottom: 0px; margin-top: 0px;">
+            <div id="placeholder{{ mc }}" class="demo-placeholder"></div>
+          </div>
+        </div>
+        {% endfor %}
       </main>
     </div>
     <script src="../static/dashboard/js/material.min.js"></script>
+
+ {% csrf_token %}
+
+  <input type="hidden" id="agent" name="variable" value="{{ agent }}">
+  <input type="hidden" id="mcl" name="variable" value="{{ mcl }}">
+
+  <script language="javascript" type="text/javascript" src="../static/js/chart.js"></script>
+
 
   </body>
 </html>

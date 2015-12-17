@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^helloworld/', 'psm.views.Helloworld'),
     url(r'^index/', 'psm.views.Index'),
     url(r'^mchart/', 'psm.views.MachineChart'),
+    url(r'^mredis/', 'psm.views.MRedis'),
 
     url(r'^server_detail/([^/]+)/', 'psm.views.ServerDetail'),
     url(r'^process_detail/([^/]+)/([^/]+)/', 'psm.views.ProcessDetail')
