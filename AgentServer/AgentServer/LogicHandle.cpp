@@ -37,8 +37,15 @@ void LogicHandle::Process()
 
 		if (packet != nullptr)
 		{
-			AgentSocket *socket = static_cast<AgentSocket *>(packet->owner);
-			socket->PacketHandling(packet);
+			if (packet->ownert == CPacket::ownerType::AGENT){
+				AgentSocket *socket = static_cast<AgentSocket *>(packet->owner);
+				socket->PacketHandling(packet);
+			}
+			else if (packet->ownert == CPacket::ownerType::WEBCOMMAND){
+				WebCommandSocket* socket = static_cast<WebCommandSocket *>(packet->owner);
+				socket->PacketHandling(packet);
+			}
+			
 		}
 	}
 }

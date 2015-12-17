@@ -7,8 +7,6 @@ public:
 	~WebCommandSocket();
 
 public:
-	int token;
-
 	bool healthCheck;
 
 	bool ValidPacket(CPacket *packet);
@@ -23,6 +21,7 @@ public:
 
 public:
 	void SendHealthCheck();
+	void SendProcessCommandResponse(int token, psmweb::ProcessCommandType type, bool success, std::string reason);
 
 private:
 	MemPooler<CPacket> *packetPoolManager;

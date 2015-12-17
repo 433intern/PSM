@@ -31,6 +31,9 @@ public:
 	void SendProcessInfo();
 	void SendMachineInfo();
 
+
+	bool isConnect;
+
 private:
 	struct mswsock_s
 	{
@@ -41,7 +44,7 @@ private:
 
 private:
 	MemPooler<CPacket> *packetPoolManager;
-	bool isConnect;
+	
 	int position;
 	int remainBytes;
 	Query query;

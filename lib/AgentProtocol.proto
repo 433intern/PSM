@@ -17,9 +17,7 @@ enum agentType
 	HealthAck = 9;
 
 	ProcessCommandRequest = 10;
-	ProcessCommandResponse = 11;
 	CounterCommandRequest = 12;
-	CounterCommandResponse = 13;
 
 	ProcessRestrictionRequest = 14;
 	ProcessRestrictionResponse = 15;
@@ -107,21 +105,6 @@ message scProcessCommandRequest
 	required string processName = 2;
 }
 
-message csProcessCommandResponse
-{
-	required ProcessCommandType type = 1;
-	repeated int32 processID = 2;
-
-	enum Result
-	{
-		SUCCESS = 0;
-		FAILURE = 1;
-	}
-
-	required Result result = 3;
-	optional string failReason = 4;
-}
-
 enum CounterCommandType
 {
 	CADDLIST = 1;
@@ -133,20 +116,6 @@ message scCounterCommandRequest
 	required CounterCommandType type = 1;
 	required string CounterName = 2;
 	required bool isMachine = 3;
-}
-
-message csCounterCommandResponse
-{
-	required CounterCommandType type = 1;
-
-	enum Result
-	{
-		SUCCESS = 0;
-		FAILURE = 1;
-	}
-
-	required Result result = 3;
-	optional string failReason = 4;
 }
 
 message scStartRecord

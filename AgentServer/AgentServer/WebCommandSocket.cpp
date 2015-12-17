@@ -3,7 +3,7 @@
 extern AgentApp* agentApp;
 
 WebCommandSocket::WebCommandSocket()
-: token(-1), position(0), remainBytes(HEADER_SIZE), healthCheck(true)
+: position(0), remainBytes(HEADER_SIZE), healthCheck(true)
 {
 	packetPoolManager = new MemPooler<CPacket>(10);
 	if (!packetPoolManager)
@@ -64,6 +64,7 @@ void WebCommandSocket::RecvProcess(bool isError, Act* act, DWORD bytes_transferr
 			CPacket* msg = packetPoolManager->Alloc();
 
 			memcpy(msg, buf, HEADER_SIZE + length);
+			msg->ownert = CPacket::ownerType::WEBCOMMAND;
 			msg->owner = this;
 			/* packet Handling */
 			agentApp->logicHandle.EnqueueOper(msg);
@@ -94,7 +95,6 @@ void WebCommandSocket::AcceptProcess(bool isError, Act* act, DWORD bytes_transfe
 	healthCheck = true;
 	position = 0;
 	remainBytes = HEADER_SIZE;
-	token = -1;
 
 	Recv(recvBuf_, HEADER_SIZE);
 }
@@ -137,6 +137,35 @@ void WebCommandSocket::PacketHandling(CPacket *packet)
 
 	switch (packet->type)
 	{
+	case psmweb::HealthAck:
+		PRINT("[WebCommandSocket] HealthAck\n");
+		this->healthCheck = true;
+		break;
+	case psmweb::ProcessCommandRequest:
+	{
+		PRINT("[WebCommandSocket] ProcessCommandRequest\n");
+		psmweb::wsProcessCommandRequest msg;
+		
+		if (msg.ParseFromArray(packet->msg, packet->length)){
+			AgentSocket* socket = agentApp->agentServer->GetAgentSocketByToken(msg.token());
+			std::string name(msg.processname());
+			if (socket != NULL){
+				if (msg.type() == psmweb::ADDLIST){
+					SendProcessCommandResponse(msg.token(), msg.type(), \
+						socket->AddProcessName(name), "");
+				}
+				else if (msg.type() == psmweb::DELETELIST){
+					SendProcessCommandResponse(msg.token(), msg.type(), \
+						socket->DeleteProcessName(name), "");
+				}
+			}
+		}
+		else{
+			ERROR_PRINT("[WebCommandSocket] ProcessCommandRequest error\n");
+		}
+		break;
+	}
+
 	default:
 		PRINT("[WebCommandSocket] Invalid Socket\n");
 		break;
@@ -153,6 +182,26 @@ void WebCommandSocket::SendHealthCheck()
 
 	packet.length = (short)msg.ByteSize();
 	packet.type = (short)psmweb::HealthCheck;
+	memset(packet.msg, 0, BUFSIZE);
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+void WebCommandSocket::SendProcessCommandResponse(int token, psmweb::ProcessCommandType type, bool success, std::string reason)
+{
+	PRINT("[WebCommandSocket] SendProcessCommandResponse\n");
+	CPacket packet;
+	psmweb::swProcessCommandResponse msg;
+
+	msg.set_token(token);
+	msg.set_type(type);
+	if (reason.size() > 0) msg.set_failreason(reason);
+	if (success) msg.set_result(psmweb::Result::SUCCESS);
+	else msg.set_result(psmweb::Result::FAILURE);
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)psmweb::ProcessCommandResponse;
 	memset(packet.msg, 0, BUFSIZE);
 	msg.SerializeToArray((void *)&packet.msg, packet.length);
 

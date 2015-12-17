@@ -20,8 +20,6 @@ public:
 	void AddSocket(WebCommandSocket* socket);
 	void DeleteSocket(WebCommandSocket* socket);
 
-	WebCommandSocket* GetSocketByID(int id);
-
 public:
 	std::thread heartbeatThread;
 	void HeartbeatCheck();

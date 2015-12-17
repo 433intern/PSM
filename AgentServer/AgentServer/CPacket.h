@@ -10,5 +10,10 @@ struct CPacket
 
 	byte msg[BUFSIZE];
 
+	enum ownerType{
+		AGENT,
+		WEBCOMMAND,
+	};
 	TcpSocket* owner;
+	ownerType ownert;
 };

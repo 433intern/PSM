@@ -71,21 +71,6 @@ void TcpWebCommandServer::DeleteSocket(WebCommandSocket* socket)
 	LeaveCriticalSection(&listLock);
 }
 
-WebCommandSocket* TcpWebCommandServer::GetSocketByID(int id)
-{
-	EnterCriticalSection(&listLock);
-	for (WebCommandSocket* socket : webCommandList)
-	{
-		if (socket->token == id)
-		{
-			LeaveCriticalSection(&listLock);
-			return socket;
-		}
-	}
-	LeaveCriticalSection(&listLock);
-	return NULL;
-}
-
 void TcpWebCommandServer::HeartbeatCheck()
 {
 	while (!agentApp->isEnd){

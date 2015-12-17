@@ -52,7 +52,7 @@ void AgentApp::Process()
 			break;
 		}
 		
-		if (input.substr(0, 4) == "padd")
+		/*if (input.substr(0, 4) == "padd")
 		{
 			agentServer->GetAgentSocketByAgentID(0)
 				->AddProcessName(input.substr(5, input.size()));
@@ -81,7 +81,7 @@ void AgentApp::Process()
 		{
 			agentServer->GetAgentSocketByAgentID(0)
 				->DeleteCounterName(input.substr(5, input.size()), true);
-		}
+		}*/
 	}
 }
 

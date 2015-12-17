@@ -27,17 +27,16 @@ message wsProcessCommandRequest
 	required string processName = 3;
 }
 
+enum Result
+{
+	SUCCESS = 0;
+	FAILURE = 1;
+}
+
 message swProcessCommandResponse
 {
 	required int32 token = 1;
 	required ProcessCommandType type = 2;
-
-	enum Result
-	{
-		SUCCESS = 0;
-		FAILURE = 1;
-	}
-
 	required Result result = 3;
 	optional string failReason = 4;
 }

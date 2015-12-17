@@ -406,6 +406,8 @@ bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
 			if (!isMachine) agentClientApp->agentClient->socket->SendProcessInfo();
 			else agentClientApp->agentClient->socket->SendMachineInfo();
 		}
+
+		if (!agentClientApp->agentClient->socket->isConnect) break;
 	}
 
 	if (isMachine) isMachineRecordEnd = true;

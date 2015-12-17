@@ -64,6 +64,7 @@ void AgentSocket::RecvProcess(bool isError, Act* act, DWORD bytes_transferred)
 			CPacket* msg = packetPoolManager->Alloc();
 
 			memcpy(msg, buf, HEADER_SIZE + length);
+			msg->ownert = CPacket::ownerType::AGENT;
 			msg->owner = this;
 			/* packet Handling */
 			agentApp->logicHandle.EnqueueOper(msg);

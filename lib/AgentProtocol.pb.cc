@@ -56,17 +56,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* scProcessCommandRequest_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   scProcessCommandRequest_reflection_ = NULL;
-const ::google::protobuf::Descriptor* csProcessCommandResponse_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  csProcessCommandResponse_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* csProcessCommandResponse_Result_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* scCounterCommandRequest_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   scCounterCommandRequest_reflection_ = NULL;
-const ::google::protobuf::Descriptor* csCounterCommandResponse_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  csCounterCommandResponse_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* csCounterCommandResponse_Result_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* scStartRecord_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   scStartRecord_reflection_ = NULL;
@@ -295,26 +287,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(scProcessCommandRequest));
-  csProcessCommandResponse_descriptor_ = file->message_type(12);
-  static const int csProcessCommandResponse_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessCommandResponse, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessCommandResponse, processid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessCommandResponse, result_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessCommandResponse, failreason_),
-  };
-  csProcessCommandResponse_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      csProcessCommandResponse_descriptor_,
-      csProcessCommandResponse::default_instance_,
-      csProcessCommandResponse_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessCommandResponse, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessCommandResponse, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(csProcessCommandResponse));
-  csProcessCommandResponse_Result_descriptor_ = csProcessCommandResponse_descriptor_->enum_type(0);
-  scCounterCommandRequest_descriptor_ = file->message_type(13);
+  scCounterCommandRequest_descriptor_ = file->message_type(12);
   static const int scCounterCommandRequest_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scCounterCommandRequest, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scCounterCommandRequest, countername_),
@@ -331,25 +304,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(scCounterCommandRequest));
-  csCounterCommandResponse_descriptor_ = file->message_type(14);
-  static const int csCounterCommandResponse_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csCounterCommandResponse, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csCounterCommandResponse, result_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csCounterCommandResponse, failreason_),
-  };
-  csCounterCommandResponse_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      csCounterCommandResponse_descriptor_,
-      csCounterCommandResponse::default_instance_,
-      csCounterCommandResponse_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csCounterCommandResponse, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csCounterCommandResponse, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(csCounterCommandResponse));
-  csCounterCommandResponse_Result_descriptor_ = csCounterCommandResponse_descriptor_->enum_type(0);
-  scStartRecord_descriptor_ = file->message_type(15);
+  scStartRecord_descriptor_ = file->message_type(13);
   static const int scStartRecord_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStartRecord, ismachine_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStartRecord, totalrecordtime_),
@@ -368,7 +323,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(scStartRecord));
-  scStopRecord_descriptor_ = file->message_type(16);
+  scStopRecord_descriptor_ = file->message_type(14);
   static const int scStopRecord_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scStopRecord, ismachine_),
   };
@@ -383,7 +338,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(scStopRecord));
-  Log_descriptor_ = file->message_type(17);
+  Log_descriptor_ = file->message_type(15);
   static const int Log_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Log, timestamp_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Log, value_),
@@ -399,7 +354,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Log));
-  ProcessInfos_descriptor_ = file->message_type(18);
+  ProcessInfos_descriptor_ = file->message_type(16);
   static const int ProcessInfos_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfos, countername_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessInfos, processname_),
@@ -417,7 +372,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ProcessInfos));
-  csTotalProcessInfoSend_descriptor_ = file->message_type(19);
+  csTotalProcessInfoSend_descriptor_ = file->message_type(17);
   static const int csTotalProcessInfoSend_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csTotalProcessInfoSend, info_),
   };
@@ -432,7 +387,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csTotalProcessInfoSend));
-  MachineInfos_descriptor_ = file->message_type(20);
+  MachineInfos_descriptor_ = file->message_type(18);
   static const int MachineInfos_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MachineInfos, countername_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MachineInfos, logs_),
@@ -448,7 +403,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MachineInfos));
-  csTotalMachineInfoSend_descriptor_ = file->message_type(21);
+  csTotalMachineInfoSend_descriptor_ = file->message_type(19);
   static const int csTotalMachineInfoSend_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csTotalMachineInfoSend, info_),
   };
@@ -463,7 +418,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csTotalMachineInfoSend));
-  scProcessRestrictionRequest_descriptor_ = file->message_type(22);
+  scProcessRestrictionRequest_descriptor_ = file->message_type(20);
   static const int scProcessRestrictionRequest_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessRestrictionRequest, processid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(scProcessRestrictionRequest, type_),
@@ -481,7 +436,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(scProcessRestrictionRequest));
-  csProcessRestrictionResponse_descriptor_ = file->message_type(23);
+  csProcessRestrictionResponse_descriptor_ = file->message_type(21);
   static const int csProcessRestrictionResponse_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, processid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csProcessRestrictionResponse, type_),
@@ -500,7 +455,7 @@ void protobuf_AssignDesc_AgentProtocol_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(csProcessRestrictionResponse));
   csProcessRestrictionResponse_Result_descriptor_ = csProcessRestrictionResponse_descriptor_->enum_type(0);
-  csRecordResponse_descriptor_ = file->message_type(24);
+  csRecordResponse_descriptor_ = file->message_type(22);
   static const int csRecordResponse_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csRecordResponse, ismachine_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(csRecordResponse, result_),
@@ -559,11 +514,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     scProcessCommandRequest_descriptor_, &scProcessCommandRequest::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    csProcessCommandResponse_descriptor_, &csProcessCommandResponse::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     scCounterCommandRequest_descriptor_, &scCounterCommandRequest::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    csCounterCommandResponse_descriptor_, &csCounterCommandResponse::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     scStartRecord_descriptor_, &scStartRecord::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -613,12 +564,8 @@ void protobuf_ShutdownFile_AgentProtocol_2eproto() {
   delete csHealthAck_reflection_;
   delete scProcessCommandRequest::default_instance_;
   delete scProcessCommandRequest_reflection_;
-  delete csProcessCommandResponse::default_instance_;
-  delete csProcessCommandResponse_reflection_;
   delete scCounterCommandRequest::default_instance_;
   delete scCounterCommandRequest_reflection_;
-  delete csCounterCommandResponse::default_instance_;
-  delete csCounterCommandResponse_reflection_;
   delete scStartRecord::default_instance_;
   delete scStartRecord_reflection_;
   delete scStopRecord::default_instance_;
@@ -663,62 +610,51 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
     "ss\"\017\n\rscHealthCheck\"\r\n\013csHealthAck\"W\n\027sc"
     "ProcessCommandRequest\022\'\n\004type\030\001 \002(\0162\031.ag"
     "ent.ProcessCommandType\022\023\n\013processName\030\002 "
-    "\002(\t\"\306\001\n\030csProcessCommandResponse\022\'\n\004type"
-    "\030\001 \002(\0162\031.agent.ProcessCommandType\022\021\n\tpro"
-    "cessID\030\002 \003(\005\0226\n\006result\030\003 \002(\0162&.agent.csP"
-    "rocessCommandResponse.Result\022\022\n\nfailReas"
-    "on\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022\013\n\007FAILU"
-    "RE\020\001\"j\n\027scCounterCommandRequest\022\'\n\004type\030"
-    "\001 \002(\0162\031.agent.CounterCommandType\022\023\n\013Coun"
-    "terName\030\002 \002(\t\022\021\n\tisMachine\030\003 \002(\010\"\263\001\n\030csC"
-    "ounterCommandResponse\022\'\n\004type\030\001 \002(\0162\031.ag"
-    "ent.CounterCommandType\0226\n\006result\030\003 \002(\0162&"
-    ".agent.csCounterCommandResponse.Result\022\022"
-    "\n\nfailReason\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020"
-    "\000\022\013\n\007FAILURE\020\001\"r\n\rscStartRecord\022\021\n\tisMac"
-    "hine\030\005 \002(\010\022\027\n\017totalRecordTime\030\001 \002(\005\022\020\n\010i"
-    "nterval\030\002 \002(\005\022\024\n\014responseTime\030\003 \002(\005\022\r\n\005d"
-    "elay\030\004 \001(\003\"!\n\014scStopRecord\022\021\n\tisMachine\030"
-    "\001 \002(\010\"\'\n\003Log\022\021\n\ttimeStamp\030\001 \002(\003\022\r\n\005value"
-    "\030\002 \002(\001\"e\n\014ProcessInfos\022\023\n\013counterName\030\001 "
-    "\002(\t\022\023\n\013processName\030\002 \002(\t\022\021\n\tprocessID\030\003 "
-    "\002(\005\022\030\n\004logs\030\004 \003(\0132\n.agent.Log\";\n\026csTotal"
-    "ProcessInfoSend\022!\n\004info\030\001 \003(\0132\023.agent.Pr"
-    "ocessInfos\"=\n\014MachineInfos\022\023\n\013counterNam"
-    "e\030\001 \002(\t\022\030\n\004logs\030\002 \003(\0132\n.agent.Log\";\n\026csT"
-    "otalMachineInfoSend\022!\n\004info\030\001 \003(\0132\023.agen"
-    "t.MachineInfos\"r\n\033scProcessRestrictionRe"
-    "quest\022\021\n\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022"
-    ".agent.Restriction\022\016\n\006value1\030\003 \002(\005\022\016\n\006va"
-    "lue2\030\004 \001(\005\"\307\001\n\034csProcessRestrictionRespo"
-    "nse\022\021\n\tprocessID\030\001 \002(\005\022 \n\004type\030\002 \002(\0162\022.a"
-    "gent.Restriction\022:\n\006result\030\003 \002(\0162*.agent"
-    ".csProcessRestrictionResponse.Result\022\022\n\n"
-    "failReason\030\004 \001(\t\"\"\n\006Result\022\013\n\007SUCCESS\020\000\022"
-    "\013\n\007FAILURE\020\001\"\275\001\n\020csRecordResponse\022\021\n\tisM"
-    "achine\030\005 \002(\010\022.\n\006result\030\003 \002(\0162\036.agent.csR"
-    "ecordResponse.Result\022\022\n\nfailReason\030\004 \001(\t"
-    "\"R\n\006Result\022\021\n\rSTART_SUCCESS\020\000\022\021\n\rSTART_F"
-    "AILURE\020\001\022\020\n\014STOP_SUCCESS\020\002\022\020\n\014STOP_FAILU"
-    "RE\020\003*\356\003\n\tagentType\022\022\n\016AgentIDRequest\020\000\022\023"
-    "\n\017AgentIDResponse\020\001\022\026\n\022ProcessListReques"
-    "t\020\002\022\027\n\023ProcessListResponse\020\003\022\026\n\022CounterL"
-    "istRequest\020\004\022\027\n\023CounterListResponse\020\005\022\032\n"
-    "\026CurrentProcessListSend\020\006\022\017\n\013HealthCheck"
-    "\020\010\022\r\n\tHealthAck\020\t\022\031\n\025ProcessCommandReque"
-    "st\020\n\022\032\n\026ProcessCommandResponse\020\013\022\031\n\025Coun"
-    "terCommandRequest\020\014\022\032\n\026CounterCommandRes"
-    "ponse\020\r\022\035\n\031ProcessRestrictionRequest\020\016\022\036"
-    "\n\032ProcessRestrictionResponse\020\017\022\017\n\013StartR"
-    "ecord\020\020\022\016\n\nStopRecord\020\021\022\023\n\017ProcessInfoSe"
-    "nd\020\022\022\023\n\017MachineInfoSend\020\025\022\016\n\nAgentReady\020"
-    "\026\022\022\n\016RecordResponse\020\027*`\n\022ProcessCommandT"
-    "ype\022\t\n\005START\020\000\022\013\n\007RESTART\020\001\022\010\n\004STOP\020\002\022\013\n"
-    "\007ADDLIST\020\003\022\016\n\nDELETELIST\020\004\022\013\n\007ALLSTOP\020\005*"
-    "3\n\022CounterCommandType\022\014\n\010CADDLIST\020\001\022\017\n\013C"
-    "DELETELIST\020\002*V\n\013Restriction\022\023\n\017USER_TIME"
-    "_LIMIT\020\000\022\030\n\024MAX_WORKING_SET_SIZE\020\001\022\030\n\024MI"
-    "N_WORKING_SET_SIZE\020\002", 2820);
+    "\002(\t\"j\n\027scCounterCommandRequest\022\'\n\004type\030\001"
+    " \002(\0162\031.agent.CounterCommandType\022\023\n\013Count"
+    "erName\030\002 \002(\t\022\021\n\tisMachine\030\003 \002(\010\"r\n\rscSta"
+    "rtRecord\022\021\n\tisMachine\030\005 \002(\010\022\027\n\017totalReco"
+    "rdTime\030\001 \002(\005\022\020\n\010interval\030\002 \002(\005\022\024\n\014respon"
+    "seTime\030\003 \002(\005\022\r\n\005delay\030\004 \001(\003\"!\n\014scStopRec"
+    "ord\022\021\n\tisMachine\030\001 \002(\010\"\'\n\003Log\022\021\n\ttimeSta"
+    "mp\030\001 \002(\003\022\r\n\005value\030\002 \002(\001\"e\n\014ProcessInfos\022"
+    "\023\n\013counterName\030\001 \002(\t\022\023\n\013processName\030\002 \002("
+    "\t\022\021\n\tprocessID\030\003 \002(\005\022\030\n\004logs\030\004 \003(\0132\n.age"
+    "nt.Log\";\n\026csTotalProcessInfoSend\022!\n\004info"
+    "\030\001 \003(\0132\023.agent.ProcessInfos\"=\n\014MachineIn"
+    "fos\022\023\n\013counterName\030\001 \002(\t\022\030\n\004logs\030\002 \003(\0132\n"
+    ".agent.Log\";\n\026csTotalMachineInfoSend\022!\n\004"
+    "info\030\001 \003(\0132\023.agent.MachineInfos\"r\n\033scPro"
+    "cessRestrictionRequest\022\021\n\tprocessID\030\001 \002("
+    "\005\022 \n\004type\030\002 \002(\0162\022.agent.Restriction\022\016\n\006v"
+    "alue1\030\003 \002(\005\022\016\n\006value2\030\004 \001(\005\"\307\001\n\034csProces"
+    "sRestrictionResponse\022\021\n\tprocessID\030\001 \002(\005\022"
+    " \n\004type\030\002 \002(\0162\022.agent.Restriction\022:\n\006res"
+    "ult\030\003 \002(\0162*.agent.csProcessRestrictionRe"
+    "sponse.Result\022\022\n\nfailReason\030\004 \001(\t\"\"\n\006Res"
+    "ult\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE\020\001\"\275\001\n\020csReco"
+    "rdResponse\022\021\n\tisMachine\030\005 \002(\010\022.\n\006result\030"
+    "\003 \002(\0162\036.agent.csRecordResponse.Result\022\022\n"
+    "\nfailReason\030\004 \001(\t\"R\n\006Result\022\021\n\rSTART_SUC"
+    "CESS\020\000\022\021\n\rSTART_FAILURE\020\001\022\020\n\014STOP_SUCCES"
+    "S\020\002\022\020\n\014STOP_FAILURE\020\003*\266\003\n\tagentType\022\022\n\016A"
+    "gentIDRequest\020\000\022\023\n\017AgentIDResponse\020\001\022\026\n\022"
+    "ProcessListRequest\020\002\022\027\n\023ProcessListRespo"
+    "nse\020\003\022\026\n\022CounterListRequest\020\004\022\027\n\023Counter"
+    "ListResponse\020\005\022\032\n\026CurrentProcessListSend"
+    "\020\006\022\017\n\013HealthCheck\020\010\022\r\n\tHealthAck\020\t\022\031\n\025Pr"
+    "ocessCommandRequest\020\n\022\031\n\025CounterCommandR"
+    "equest\020\014\022\035\n\031ProcessRestrictionRequest\020\016\022"
+    "\036\n\032ProcessRestrictionResponse\020\017\022\017\n\013Start"
+    "Record\020\020\022\016\n\nStopRecord\020\021\022\023\n\017ProcessInfoS"
+    "end\020\022\022\023\n\017MachineInfoSend\020\025\022\016\n\nAgentReady"
+    "\020\026\022\022\n\016RecordResponse\020\027*`\n\022ProcessCommand"
+    "Type\022\t\n\005START\020\000\022\013\n\007RESTART\020\001\022\010\n\004STOP\020\002\022\013"
+    "\n\007ADDLIST\020\003\022\016\n\nDELETELIST\020\004\022\013\n\007ALLSTOP\020\005"
+    "*3\n\022CounterCommandType\022\014\n\010CADDLIST\020\001\022\017\n\013"
+    "CDELETELIST\020\002*V\n\013Restriction\022\023\n\017USER_TIM"
+    "E_LIMIT\020\000\022\030\n\024MAX_WORKING_SET_SIZE\020\001\022\030\n\024M"
+    "IN_WORKING_SET_SIZE\020\002", 2381);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "AgentProtocol.proto", &protobuf_RegisterTypes);
   csAgentIDRequest::default_instance_ = new csAgentIDRequest();
@@ -733,9 +669,7 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
   scHealthCheck::default_instance_ = new scHealthCheck();
   csHealthAck::default_instance_ = new csHealthAck();
   scProcessCommandRequest::default_instance_ = new scProcessCommandRequest();
-  csProcessCommandResponse::default_instance_ = new csProcessCommandResponse();
   scCounterCommandRequest::default_instance_ = new scCounterCommandRequest();
-  csCounterCommandResponse::default_instance_ = new csCounterCommandResponse();
   scStartRecord::default_instance_ = new scStartRecord();
   scStopRecord::default_instance_ = new scStopRecord();
   Log::default_instance_ = new Log();
@@ -758,9 +692,7 @@ void protobuf_AddDesc_AgentProtocol_2eproto() {
   scHealthCheck::default_instance_->InitAsDefaultInstance();
   csHealthAck::default_instance_->InitAsDefaultInstance();
   scProcessCommandRequest::default_instance_->InitAsDefaultInstance();
-  csProcessCommandResponse::default_instance_->InitAsDefaultInstance();
   scCounterCommandRequest::default_instance_->InitAsDefaultInstance();
-  csCounterCommandResponse::default_instance_->InitAsDefaultInstance();
   scStartRecord::default_instance_->InitAsDefaultInstance();
   scStopRecord::default_instance_->InitAsDefaultInstance();
   Log::default_instance_->InitAsDefaultInstance();
@@ -796,9 +728,7 @@ bool agentType_IsValid(int value) {
     case 8:
     case 9:
     case 10:
-    case 11:
     case 12:
-    case 13:
     case 14:
     case 15:
     case 16:
@@ -3667,421 +3597,6 @@ void scProcessCommandRequest::Swap(scProcessCommandRequest* other) {
 
 // ===================================================================
 
-const ::google::protobuf::EnumDescriptor* csProcessCommandResponse_Result_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return csProcessCommandResponse_Result_descriptor_;
-}
-bool csProcessCommandResponse_Result_IsValid(int value) {
-  switch(value) {
-    case 0:
-    case 1:
-      return true;
-    default:
-      return false;
-  }
-}
-
-#ifndef _MSC_VER
-const csProcessCommandResponse_Result csProcessCommandResponse::SUCCESS;
-const csProcessCommandResponse_Result csProcessCommandResponse::FAILURE;
-const csProcessCommandResponse_Result csProcessCommandResponse::Result_MIN;
-const csProcessCommandResponse_Result csProcessCommandResponse::Result_MAX;
-const int csProcessCommandResponse::Result_ARRAYSIZE;
-#endif  // _MSC_VER
-#ifndef _MSC_VER
-const int csProcessCommandResponse::kTypeFieldNumber;
-const int csProcessCommandResponse::kProcessIDFieldNumber;
-const int csProcessCommandResponse::kResultFieldNumber;
-const int csProcessCommandResponse::kFailReasonFieldNumber;
-#endif  // !_MSC_VER
-
-csProcessCommandResponse::csProcessCommandResponse()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.csProcessCommandResponse)
-}
-
-void csProcessCommandResponse::InitAsDefaultInstance() {
-}
-
-csProcessCommandResponse::csProcessCommandResponse(const csProcessCommandResponse& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.csProcessCommandResponse)
-}
-
-void csProcessCommandResponse::SharedCtor() {
-  ::google::protobuf::internal::GetEmptyString();
-  _cached_size_ = 0;
-  type_ = 0;
-  result_ = 0;
-  failreason_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-csProcessCommandResponse::~csProcessCommandResponse() {
-  // @@protoc_insertion_point(destructor:agent.csProcessCommandResponse)
-  SharedDtor();
-}
-
-void csProcessCommandResponse::SharedDtor() {
-  if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete failreason_;
-  }
-  if (this != default_instance_) {
-  }
-}
-
-void csProcessCommandResponse::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* csProcessCommandResponse::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return csProcessCommandResponse_descriptor_;
-}
-
-const csProcessCommandResponse& csProcessCommandResponse::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-csProcessCommandResponse* csProcessCommandResponse::default_instance_ = NULL;
-
-csProcessCommandResponse* csProcessCommandResponse::New() const {
-  return new csProcessCommandResponse;
-}
-
-void csProcessCommandResponse::Clear() {
-#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<csProcessCommandResponse*>(16)->f) - \
-   reinterpret_cast<char*>(16))
-
-#define ZR_(first, last) do {                              \
-    size_t f = OFFSET_OF_FIELD_(first);                    \
-    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
-    ::memset(&first, 0, n);                                \
-  } while (0)
-
-  if (_has_bits_[0 / 32] & 13) {
-    ZR_(type_, result_);
-    if (has_failreason()) {
-      if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        failreason_->clear();
-      }
-    }
-  }
-
-#undef OFFSET_OF_FIELD_
-#undef ZR_
-
-  processid_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool csProcessCommandResponse::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.csProcessCommandResponse)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .agent.ProcessCommandType type = 1;
-      case 1: {
-        if (tag == 8) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::agent::ProcessCommandType_IsValid(value)) {
-            set_type(static_cast< ::agent::ProcessCommandType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(16)) goto parse_processID;
-        break;
-      }
-
-      // repeated int32 processID = 2;
-      case 2: {
-        if (tag == 16) {
-         parse_processID:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 16, input, this->mutable_processid())));
-        } else if (tag == 18) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, this->mutable_processid())));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(16)) goto parse_processID;
-        if (input->ExpectTag(24)) goto parse_result;
-        break;
-      }
-
-      // required .agent.csProcessCommandResponse.Result result = 3;
-      case 3: {
-        if (tag == 24) {
-         parse_result:
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::agent::csProcessCommandResponse_Result_IsValid(value)) {
-            set_result(static_cast< ::agent::csProcessCommandResponse_Result >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(3, value);
-          }
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(34)) goto parse_failReason;
-        break;
-      }
-
-      // optional string failReason = 4;
-      case 4: {
-        if (tag == 34) {
-         parse_failReason:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_failreason()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->failreason().data(), this->failreason().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "failreason");
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.csProcessCommandResponse)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.csProcessCommandResponse)
-  return false;
-#undef DO_
-}
-
-void csProcessCommandResponse::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.csProcessCommandResponse)
-  // required .agent.ProcessCommandType type = 1;
-  if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->type(), output);
-  }
-
-  // repeated int32 processID = 2;
-  for (int i = 0; i < this->processid_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      2, this->processid(i), output);
-  }
-
-  // required .agent.csProcessCommandResponse.Result result = 3;
-  if (has_result()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      3, this->result(), output);
-  }
-
-  // optional string failReason = 4;
-  if (has_failreason()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->failreason().data(), this->failreason().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "failreason");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->failreason(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.csProcessCommandResponse)
-}
-
-::google::protobuf::uint8* csProcessCommandResponse::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.csProcessCommandResponse)
-  // required .agent.ProcessCommandType type = 1;
-  if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->type(), target);
-  }
-
-  // repeated int32 processID = 2;
-  for (int i = 0; i < this->processid_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(2, this->processid(i), target);
-  }
-
-  // required .agent.csProcessCommandResponse.Result result = 3;
-  if (has_result()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      3, this->result(), target);
-  }
-
-  // optional string failReason = 4;
-  if (has_failreason()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->failreason().data(), this->failreason().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "failreason");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->failreason(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.csProcessCommandResponse)
-  return target;
-}
-
-int csProcessCommandResponse::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .agent.ProcessCommandType type = 1;
-    if (has_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
-    }
-
-    // required .agent.csProcessCommandResponse.Result result = 3;
-    if (has_result()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->result());
-    }
-
-    // optional string failReason = 4;
-    if (has_failreason()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->failreason());
-    }
-
-  }
-  // repeated int32 processID = 2;
-  {
-    int data_size = 0;
-    for (int i = 0; i < this->processid_size(); i++) {
-      data_size += ::google::protobuf::internal::WireFormatLite::
-        Int32Size(this->processid(i));
-    }
-    total_size += 1 * this->processid_size() + data_size;
-  }
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void csProcessCommandResponse::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const csProcessCommandResponse* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const csProcessCommandResponse*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void csProcessCommandResponse::MergeFrom(const csProcessCommandResponse& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  processid_.MergeFrom(from.processid_);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_type()) {
-      set_type(from.type());
-    }
-    if (from.has_result()) {
-      set_result(from.result());
-    }
-    if (from.has_failreason()) {
-      set_failreason(from.failreason());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void csProcessCommandResponse::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void csProcessCommandResponse::CopyFrom(const csProcessCommandResponse& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool csProcessCommandResponse::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000005) != 0x00000005) return false;
-
-  return true;
-}
-
-void csProcessCommandResponse::Swap(csProcessCommandResponse* other) {
-  if (other != this) {
-    std::swap(type_, other->type_);
-    processid_.Swap(&other->processid_);
-    std::swap(result_, other->result_);
-    std::swap(failreason_, other->failreason_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata csProcessCommandResponse::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = csProcessCommandResponse_descriptor_;
-  metadata.reflection = csProcessCommandResponse_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
 #ifndef _MSC_VER
 const int scCounterCommandRequest::kTypeFieldNumber;
 const int scCounterCommandRequest::kCounterNameFieldNumber;
@@ -4404,363 +3919,6 @@ void scCounterCommandRequest::Swap(scCounterCommandRequest* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = scCounterCommandRequest_descriptor_;
   metadata.reflection = scCounterCommandRequest_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-const ::google::protobuf::EnumDescriptor* csCounterCommandResponse_Result_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return csCounterCommandResponse_Result_descriptor_;
-}
-bool csCounterCommandResponse_Result_IsValid(int value) {
-  switch(value) {
-    case 0:
-    case 1:
-      return true;
-    default:
-      return false;
-  }
-}
-
-#ifndef _MSC_VER
-const csCounterCommandResponse_Result csCounterCommandResponse::SUCCESS;
-const csCounterCommandResponse_Result csCounterCommandResponse::FAILURE;
-const csCounterCommandResponse_Result csCounterCommandResponse::Result_MIN;
-const csCounterCommandResponse_Result csCounterCommandResponse::Result_MAX;
-const int csCounterCommandResponse::Result_ARRAYSIZE;
-#endif  // _MSC_VER
-#ifndef _MSC_VER
-const int csCounterCommandResponse::kTypeFieldNumber;
-const int csCounterCommandResponse::kResultFieldNumber;
-const int csCounterCommandResponse::kFailReasonFieldNumber;
-#endif  // !_MSC_VER
-
-csCounterCommandResponse::csCounterCommandResponse()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:agent.csCounterCommandResponse)
-}
-
-void csCounterCommandResponse::InitAsDefaultInstance() {
-}
-
-csCounterCommandResponse::csCounterCommandResponse(const csCounterCommandResponse& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:agent.csCounterCommandResponse)
-}
-
-void csCounterCommandResponse::SharedCtor() {
-  ::google::protobuf::internal::GetEmptyString();
-  _cached_size_ = 0;
-  type_ = 1;
-  result_ = 0;
-  failreason_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-csCounterCommandResponse::~csCounterCommandResponse() {
-  // @@protoc_insertion_point(destructor:agent.csCounterCommandResponse)
-  SharedDtor();
-}
-
-void csCounterCommandResponse::SharedDtor() {
-  if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete failreason_;
-  }
-  if (this != default_instance_) {
-  }
-}
-
-void csCounterCommandResponse::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* csCounterCommandResponse::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return csCounterCommandResponse_descriptor_;
-}
-
-const csCounterCommandResponse& csCounterCommandResponse::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_AgentProtocol_2eproto();
-  return *default_instance_;
-}
-
-csCounterCommandResponse* csCounterCommandResponse::default_instance_ = NULL;
-
-csCounterCommandResponse* csCounterCommandResponse::New() const {
-  return new csCounterCommandResponse;
-}
-
-void csCounterCommandResponse::Clear() {
-  if (_has_bits_[0 / 32] & 7) {
-    type_ = 1;
-    result_ = 0;
-    if (has_failreason()) {
-      if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        failreason_->clear();
-      }
-    }
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool csCounterCommandResponse::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:agent.csCounterCommandResponse)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .agent.CounterCommandType type = 1;
-      case 1: {
-        if (tag == 8) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::agent::CounterCommandType_IsValid(value)) {
-            set_type(static_cast< ::agent::CounterCommandType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(24)) goto parse_result;
-        break;
-      }
-
-      // required .agent.csCounterCommandResponse.Result result = 3;
-      case 3: {
-        if (tag == 24) {
-         parse_result:
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::agent::csCounterCommandResponse_Result_IsValid(value)) {
-            set_result(static_cast< ::agent::csCounterCommandResponse_Result >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(3, value);
-          }
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(34)) goto parse_failReason;
-        break;
-      }
-
-      // optional string failReason = 4;
-      case 4: {
-        if (tag == 34) {
-         parse_failReason:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_failreason()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->failreason().data(), this->failreason().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "failreason");
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:agent.csCounterCommandResponse)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:agent.csCounterCommandResponse)
-  return false;
-#undef DO_
-}
-
-void csCounterCommandResponse::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:agent.csCounterCommandResponse)
-  // required .agent.CounterCommandType type = 1;
-  if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->type(), output);
-  }
-
-  // required .agent.csCounterCommandResponse.Result result = 3;
-  if (has_result()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      3, this->result(), output);
-  }
-
-  // optional string failReason = 4;
-  if (has_failreason()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->failreason().data(), this->failreason().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "failreason");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->failreason(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:agent.csCounterCommandResponse)
-}
-
-::google::protobuf::uint8* csCounterCommandResponse::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:agent.csCounterCommandResponse)
-  // required .agent.CounterCommandType type = 1;
-  if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->type(), target);
-  }
-
-  // required .agent.csCounterCommandResponse.Result result = 3;
-  if (has_result()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      3, this->result(), target);
-  }
-
-  // optional string failReason = 4;
-  if (has_failreason()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->failreason().data(), this->failreason().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "failreason");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->failreason(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:agent.csCounterCommandResponse)
-  return target;
-}
-
-int csCounterCommandResponse::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .agent.CounterCommandType type = 1;
-    if (has_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
-    }
-
-    // required .agent.csCounterCommandResponse.Result result = 3;
-    if (has_result()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->result());
-    }
-
-    // optional string failReason = 4;
-    if (has_failreason()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->failreason());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void csCounterCommandResponse::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const csCounterCommandResponse* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const csCounterCommandResponse*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void csCounterCommandResponse::MergeFrom(const csCounterCommandResponse& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_type()) {
-      set_type(from.type());
-    }
-    if (from.has_result()) {
-      set_result(from.result());
-    }
-    if (from.has_failreason()) {
-      set_failreason(from.failreason());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void csCounterCommandResponse::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void csCounterCommandResponse::CopyFrom(const csCounterCommandResponse& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool csCounterCommandResponse::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
-
-  return true;
-}
-
-void csCounterCommandResponse::Swap(csCounterCommandResponse* other) {
-  if (other != this) {
-    std::swap(type_, other->type_);
-    std::swap(result_, other->result_);
-    std::swap(failreason_, other->failreason_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata csCounterCommandResponse::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = csCounterCommandResponse_descriptor_;
-  metadata.reflection = csCounterCommandResponse_reflection_;
   return metadata;
 }
 
