@@ -39,7 +39,10 @@ def ProcessCommandResult(data):
     print(msg.result)
     print(msg.type)
 
-    return msg.result
+    if msg.result == psm.WebProtocol_pb2.SUCCESS:
+        return "success"
+    else:
+        return "fail"
 
 def ProcessCommandToAgentServer(token, processname, isadd):
     header_size = 4
@@ -49,7 +52,7 @@ def ProcessCommandToAgentServer(token, processname, isadd):
     if isadd : SendProcessCommandRequest(s, token, psm.WebProtocol_pb2.ADDLIST, processname)
     else : SendProcessCommandRequest(s, token, psm.WebProtocol_pb2.DELETELIST, processname)
 
-    result = False
+    result = ""
     while True:
         header = s.recv(header_size)
 

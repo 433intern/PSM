@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^pchart/', 'psm.views.ProcessChart'),
     url(r'^predis/', 'psm.views.PRedis'),
 
+    url(r'^addprocess/([^/]+)/([^/]+)/', 'psm.views.AddProcess'),
+
     url(r'^server_detail/([^/]+)/', 'psm.views.ServerDetail'),
     url(r'^process_detail/([^/]+)/([^/]+)/', 'psm.views.ProcessDetail'),
 

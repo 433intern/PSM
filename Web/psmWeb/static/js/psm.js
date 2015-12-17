@@ -93,6 +93,24 @@ $(function() {
 
   });
 
+  var addButton = $("#addProcess").click({token : token}, function(param){
+    var pname = $("#addProcessName").attr('value');
+
+    console.log(pname);
+
+    function onReceived(res) {
+      alert(res);
+      location.reload();
+    }
+
+    $.ajax({
+        'url' : '/../addprocess/'+param.data.token+'/'+pname,
+        'method' : 'get',
+        'dataType' : "text",
+        'success' : onReceived
+    });
+  });
+
   for (var i=0; i<checkList.length; i++){
     var processName = String(checkList[i]['name']);
     var modalButton = $('a#modal' + String(checkList[i]['name']));

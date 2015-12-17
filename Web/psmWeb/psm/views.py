@@ -5,6 +5,7 @@ import json
 
 import psm.util
 import psm.redisJob
+import psm.psmnet
 # Create your views here.
 
 
@@ -147,3 +148,11 @@ def ProcessChart(request):
     print(agent)
 
     return render(request, "chart_p.html", {"agentName" : agent['agentName'], "name" : name, "token" : token, "agent" : json.dumps(agent), "pcl" : pcl})
+
+def AddProcess(request, token, processName):
+    result = psm.psmnet.ProcessCommandToAgentServer(int(token), str(processName), True)
+    return HttpResponse(result)
+
+
+
+
