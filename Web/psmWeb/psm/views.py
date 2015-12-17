@@ -119,7 +119,7 @@ def PRedis(request):
 
         totaldata = []
         for key in keys:
-            data = psm.redisJob.GetValueList(r, key, responseTime, interval, curTime)
+            data = psm.redisJob.GetValueList_detail(r, key, responseTime, interval, curTime)
             totaldata = psm.util.CombineList(totaldata, data)
 
         jv = {}

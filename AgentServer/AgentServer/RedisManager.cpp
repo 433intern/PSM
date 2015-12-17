@@ -45,6 +45,7 @@ void RedisManager::Init()
 
 	defaultProcessList.push_back("Melon");
 	defaultProcessList.push_back("KakaoTalk");
+	defaultProcessList.push_back("notepad");
 
 	Json::Value jv;
 	jv["name"] = "CPUTime";
@@ -69,6 +70,12 @@ void RedisManager::Init()
 	jv["counter"] = "\\Memory\\Available KBytes";
 	jv["unit"] = "kB";
 	counterNameMap.insert(std::pair<std::string, std::string>("\\Memory\\Available KBytes", "Memory"));
+	defaultMachineCounterList.push_back(JsonToStr(jv));
+
+	jv["name"] = "Disk";
+	jv["counter"] = "\\LogicalDisk(_Total)\\% Free Space";
+	jv["unit"] = "%";
+	counterNameMap.insert(std::pair<std::string, std::string>("\\LogicalDisk(_Total)\\% Free Space", "Disk"));
 	defaultMachineCounterList.push_back(JsonToStr(jv));
 
 	PRINT("[RedisManager] RedisManager Initialize complete!\n");

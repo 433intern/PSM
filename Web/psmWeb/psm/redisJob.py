@@ -43,6 +43,33 @@ def GetValueList(r, key, responseTime, interval, curTime):
 
     return list
 
+def GetValueList_detail(r, key, responseTime, interval, curTime):
+    endTime = curTime - responseTime
+    startTime = endTime - interval
+    list = GetCounterValue(r, key, startTime, endTime)
+
+    result = []
+
+    if len(list)==0 : return result
+
+    for i in range(len(list)-1):
+        start_t = list[i][0]
+        end_t = list[i+1][0]
+        for time in range(start_t, end_t):
+            if time-start_t <= responseTime : result.append([time, list[i][1]])
+            else: result.append([time, 0])
+
+    start_t = list[len(list)-1][0]
+    for time in range(start_t, endTime):
+        if time-start_t <= responseTime : result.append([time, list[len(list)-1][1]])
+        else: result.append([time, 0])
+
+    return result
+
+
+
+
+
 def GetRecentValue(r, key, responseTime, interval):
     curTime = psm.util.GetCurTime_int()
     endTime = curTime - responseTime
@@ -255,7 +282,8 @@ def GetAgentListToView(r):
                 mv =  GetMachineValue_recent \
                     (r, agent['agentNumber'], "Memory", agent['responseTime'], 60)
                 resultAgent['memory'] = 100 - round(mv / (agent['ramSize'] / 1024) * 100, 2)
-                resultAgent['disk'] = 100
+                resultAgent['disk'] = GetMachineValue_recent \
+                    (r, agent['agentNumber'], "Disk", agent['responseTime'], 60)
 
             else:
                 state += "(Ready)"
