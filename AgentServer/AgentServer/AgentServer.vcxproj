@@ -86,6 +86,7 @@
     <ClInclude Include="..\..\iocpLib\TcpSocket.h" />
     <ClInclude Include="..\..\iocpLib\WinSockBase.h" />
     <ClInclude Include="..\..\lib\AgentProtocol.pb.h" />
+    <ClInclude Include="..\..\lib\WebProtocol.pb.h" />
     <ClInclude Include="..\..\redisLib\lib\config.h" />
     <ClInclude Include="..\..\redisLib\lib\redisasyncclient.h" />
     <ClInclude Include="..\..\redisLib\lib\redisbuffer.h" />
@@ -102,6 +103,8 @@
     <ClInclude Include="RedisManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TcpAgentServer.h" />
+    <ClInclude Include="TcpWebCommandServer.h" />
+    <ClInclude Include="WebCommandSocket.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\iocpLib\Acceptor.cpp" />
@@ -113,6 +116,7 @@
     <ClCompile Include="..\..\iocpLib\TcpListenSocket.cpp" />
     <ClCompile Include="..\..\iocpLib\TcpSocket.cpp" />
     <ClCompile Include="..\..\lib\AgentProtocol.pb.cc" />
+    <ClCompile Include="..\..\lib\WebProtocol.pb.cc" />
     <ClCompile Include="..\..\redisLib\lib\redisasyncclient.cpp" />
     <ClCompile Include="..\..\redisLib\lib\redisclientimpl.cpp" />
     <ClCompile Include="..\..\redisLib\lib\redisparser.cpp" />
@@ -124,6 +128,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RedisManager.cpp" />
     <ClCompile Include="TcpAgentServer.cpp" />
+    <ClCompile Include="TcpWebCommandServer.cpp" />
+    <ClCompile Include="WebCommandSocket.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

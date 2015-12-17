@@ -3,17 +3,9 @@
 extern AgentApp* agentApp;
 
 TcpAgentServer::TcpAgentServer(WORD Port, int ThreadPoolSize, int SocketPoolSize)
+:proactor_(NULL), acceptor_(NULL), receiver_(NULL), sender_(NULL), disconnector_(NULL),
+port_(Port), threadPoolSize_(ThreadPoolSize), socketPoolSize_(SocketPoolSize), redisManager(REDISIP, 6379)
 {
-	proactor_ = NULL;
-	acceptor_ = NULL;
-	receiver_ = NULL;
-	sender_ = NULL;
-	disconnector_ = NULL;
-
-	port_ = Port;
-	threadPoolSize_ = ThreadPoolSize;
-	socketPoolSize_ = SocketPoolSize;
-
 	InitializeCriticalSectionAndSpinCount(&agentListLock, 4000);
 }
 
@@ -30,6 +22,7 @@ TcpAgentServer::~TcpAgentServer()
 
 void TcpAgentServer::Start()
 {
+	redisManager.Init();
 	proactor_ = new Proactor;
 	acceptor_ = new Acceptor;
 	receiver_ = new Receiver;

@@ -1,0 +1,51 @@
+package psmweb;
+
+
+enum psmType
+{
+	ProcessCommandRequest = 0;
+	ProcessCommandResponse = 1;
+
+	HealthCheck = 8;
+	HealthAck = 9;
+}
+
+enum ProcessCommandType
+{
+	START = 0;
+	RESTART = 1;
+	STOP = 2;
+	ADDLIST = 3;
+	DELETELIST = 4;
+	ALLSTOP = 5;
+}
+
+message wsProcessCommandRequest
+{
+	required int32 token = 1;
+	required ProcessCommandType type = 2;
+	required string processName = 3;
+}
+
+message swProcessCommandResponse
+{
+	required int32 token = 1;
+	required ProcessCommandType type = 2;
+
+	enum Result
+	{
+		SUCCESS = 0;
+		FAILURE = 1;
+	}
+
+	required Result result = 3;
+	optional string failReason = 4;
+}
+
+message wsHealthCheck
+{
+}
+
+message swHealthAck
+{
+}

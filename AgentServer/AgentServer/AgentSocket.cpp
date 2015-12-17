@@ -113,8 +113,8 @@ void AgentSocket::DisconnProcess(bool isError, Act* act, DWORD bytes_transferred
 
 	PRINT("[AgentSocket] disconnect success, %d\n", this->socket_);
 
-	agentApp->redisManager.ChangeAgentState_isOn(token, false);
-	agentApp->redisManager.ChangeAgentState_stopRecording(token);
+	agentApp->agentServer->redisManager.ChangeAgentState_isOn(token, false);
+	agentApp->agentServer->redisManager.ChangeAgentState_stopRecording(token);
 	agentApp->agentServer->DeleteAgent(this);
 }
 
@@ -135,7 +135,7 @@ bool AgentSocket::ValidPacket(CPacket *packet)
 
 int AgentSocket::FindAgentID(int token)
 {
-	return agentApp->redisManager.GetAgentID(token);
+	return agentApp->agentServer->redisManager.GetAgentID(token);
 }
 
 void AgentSocket::PacketHandling(CPacket *packet)
@@ -162,7 +162,7 @@ void AgentSocket::PacketHandling(CPacket *packet)
 
 				token = msg.token();
 				hostIP = msg.hostip();
-				agentApp->redisManager.InitAgent(msg.token(), msg.hostip(), msg.ramsize());
+				agentApp->agentServer->redisManager.InitAgent(msg.token(), msg.hostip(), msg.ramsize());
 				this->agentID = FindAgentID(msg.token());
 				PRINT("[AgentSocket] hostID : %d AgentID : %d\n", msg.hostip(), agentID);
 				SendAgentIDResponse(agentID, false);
@@ -188,7 +188,7 @@ void AgentSocket::PacketHandling(CPacket *packet)
 		case agent::CurrentProcessListSend:
 		{
 			PRINT("[AgentSocket] CurrentProcessListSend received\n");
-			if (agentApp->redisManager.SaveCurrentProcessList(agentID, packet))
+			if (agentApp->agentServer->redisManager.SaveCurrentProcessList(agentID, packet))
 			{
 				PRINT("[AgentSocket] Update process list %d\n", agentID);
 			}
@@ -208,7 +208,7 @@ void AgentSocket::PacketHandling(CPacket *packet)
 		{
 			PRINT("[AgentSocket] AgentReady received\n");
 
-			agentApp->redisManager.ChangeAgentState_startRecording(token, -1, 10, 1, 0);
+			agentApp->agentServer->redisManager.ChangeAgentState_startRecording(token, -1, 10, 1, 0);
 			SendStartRecord(true, -1, 10, 1, 0);
 			SendStartRecord(false, -1, 10, 1, 0);
 			break;
@@ -216,7 +216,7 @@ void AgentSocket::PacketHandling(CPacket *packet)
 		case agent::ProcessInfoSend:
 		{
 			PRINT("[AgentSocket] ProcessInfoSend received\n");
-			if (!agentApp->redisManager.SaveProcessInfo(agentID, packet))
+			if (!agentApp->agentServer->redisManager.SaveProcessInfo(agentID, packet))
 			{
 
 			}
@@ -225,7 +225,7 @@ void AgentSocket::PacketHandling(CPacket *packet)
 		case agent::MachineInfoSend:
 		{
 			PRINT("[AgentSocket] MachineInfoSend received\n");
-			if (!agentApp->redisManager.SaveMachineInfo(agentID, packet))
+			if (!agentApp->agentServer->redisManager.SaveMachineInfo(agentID, packet))
 			{
 
 			}
@@ -249,7 +249,7 @@ void AgentSocket::PacketHandling(CPacket *packet)
 
 bool AgentSocket::AddProcessName(std::string& processName)
 {
-	if (agentApp->redisManager.SetProcessName(agentID, processName))
+	if (agentApp->agentServer->redisManager.SetProcessName(agentID, processName))
 	{
 		PRINT("[AgentSocket] AddProcessName Success\n");
 		SendProcessCommand(agent::ProcessCommandType::ADDLIST, processName);
@@ -264,7 +264,7 @@ bool AgentSocket::AddProcessName(std::string& processName)
 
 bool AgentSocket::DeleteProcessName(std::string& processName)
 {
-	if (agentApp->redisManager.RemProcessName(agentID, processName))
+	if (agentApp->agentServer->redisManager.RemProcessName(agentID, processName))
 	{
 		PRINT("[AgentSocket] DeleteProcessName Success\n");
 		SendProcessCommand(agent::ProcessCommandType::DELETELIST, processName);
@@ -281,7 +281,7 @@ bool AgentSocket::AddCounterName(std::string& counterName, bool isMachine)
 {
 
 	std::string result;
-	if (agentApp->redisManager.SetCounterName(agentID, counterName, isMachine, result))
+	if (agentApp->agentServer->redisManager.SetCounterName(agentID, counterName, isMachine, result))
 	{
 		PRINT("[AgentSocket] AddCounterName Success\n");
 		SendCounterCommand(agent::CounterCommandType::CADDLIST, result, isMachine);
@@ -297,7 +297,7 @@ bool AgentSocket::AddCounterName(std::string& counterName, bool isMachine)
 bool AgentSocket::DeleteCounterName(std::string& counterName, bool isMachine)
 {
 	std::string result;
-	if (agentApp->redisManager.RemCounterName(agentID, counterName, isMachine, result))
+	if (agentApp->agentServer->redisManager.RemCounterName(agentID, counterName, isMachine, result))
 	{
 		PRINT("[AgentSocket] DeleteCounterName Success\n");
 		SendCounterCommand(agent::CounterCommandType::CDELETELIST, result, isMachine);
@@ -349,7 +349,7 @@ void AgentSocket::SendProcessListResponse()
 
 	std::vector<std::string> processList;
 
-	if (agentApp->redisManager.GetProcessList(agentID, processList))
+	if (agentApp->agentServer->redisManager.GetProcessList(agentID, processList))
 	{
 		for (std::string process : processList)
 		{
@@ -380,7 +380,7 @@ void AgentSocket::SendCounterListResponse(bool isMachine)
 
 	std::vector<std::string> counterList;
 
-	if (agentApp->redisManager.GetCounterList(agentID, counterList, isMachine))
+	if (agentApp->agentServer->redisManager.GetCounterList(agentID, counterList, isMachine))
 	{
 		for (std::string counter : counterList)
 		{

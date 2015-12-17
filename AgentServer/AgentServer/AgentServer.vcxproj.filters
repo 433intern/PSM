@@ -20,6 +20,15 @@
     <Filter Include="redis">
       <UniqueIdentifier>{ff30cb24-871d-4919-a912-50b14610887b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="WebCommand">
+      <UniqueIdentifier>{6a25910a-e476-4286-ae79-14cb41d57821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WebCommand\소스 파일">
+      <UniqueIdentifier>{19adf72f-6a8b-4c34-9a0a-b0473ad3f6cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WebCommand\헤더 파일">
+      <UniqueIdentifier>{935c5a3d-5d55-48c1-871f-34b293616549}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -113,8 +122,17 @@
     <ClInclude Include="RedisManager.h">
       <Filter>Agent\헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="WebCommandSocket.h">
+      <Filter>WebCommand\소스 파일</Filter>
+    </ClInclude>
     <ClInclude Include="AgentApp.h">
       <Filter>Agent\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpWebCommandServer.h">
+      <Filter>WebCommand\소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\WebProtocol.pb.h">
+      <Filter>WebCommand\소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -123,9 +141,6 @@
       <Filter>Agent\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="AgentSocket.cpp">
-      <Filter>Agent\소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="AgentApp.cpp">
       <Filter>Agent\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="LogicHandle.cpp">
@@ -175,6 +190,18 @@
     </ClCompile>
     <ClCompile Include="RedisManager.cpp">
       <Filter>Agent\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentApp.cpp">
+      <Filter>Agent\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="WebCommandSocket.cpp">
+      <Filter>WebCommand\헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpWebCommandServer.cpp">
+      <Filter>WebCommand\헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\WebProtocol.pb.cc">
+      <Filter>WebCommand\헤더 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

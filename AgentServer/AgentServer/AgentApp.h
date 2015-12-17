@@ -5,9 +5,10 @@ class AgentApp
 public:
 	WORD listenPort;
 
-	RedisManager redisManager;
+	
 	LogicHandle logicHandle;
 	TcpAgentServer* agentServer;
+	TcpWebCommandServer* webCommandServer;
 
 	bool isEnd;
 	const int heartbeatTime;

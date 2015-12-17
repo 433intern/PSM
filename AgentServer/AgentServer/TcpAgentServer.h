@@ -19,6 +19,7 @@ public:
 public:
 	std::thread heartbeatThread;
 	void HeartbeatCheck();
+	RedisManager redisManager;
 
 public:
 	void AddAgent(AgentSocket* agent);
