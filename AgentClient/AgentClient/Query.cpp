@@ -5,7 +5,7 @@
 extern AgentClientApp* agentClientApp;
 
 Query::Query()
-: isMachineRecordEnd(true), isProcessRecordEnd(true)
+: isMachineRecordEnd(true), isProcessRecordEnd(true), cpuCounter("\\Processor(_Total)\\% Processor Time")
 {
 	InitializeCriticalSectionAndSpinCount(&listLock, 4000);
 }
@@ -178,6 +178,13 @@ bool Query::InitCounterInfo(PDH_HQUERY& query, bool isMachine)
 		helper.UpdateProcessList();
 		int i = 0;
 
+		status = PdhAddCounter(query, cpuCounter.c_str(), 0, &cpuCounterV);
+		if (status != ERROR_SUCCESS)
+		{
+			LeaveCriticalSection(&listLock);
+			return false;
+		}
+
 		for (ProcessInfo p : helper.processList)
 		{
 			if (!IsCheckProcess(p.name)) continue;
@@ -296,6 +303,15 @@ bool Query::StopRecord(bool isMachine)
 
 }
 
+bool hasEnding(std::string const &fullString, std::string const &ending) {
+	if (fullString.length() >= ending.length()) {
+		return (0 == fullString.compare(fullString.length() - ending.length(), ending.length(), ending));
+	}
+	else {
+		return false;
+	}
+}
+
 bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
 	long long int delay)
 {
@@ -352,6 +368,15 @@ bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
 			{
 				if (!isMachine)
 				{
+					PDH_FMT_COUNTERVALUE CpuValue;
+					status = PdhGetFormattedCounterValue(cpuCounterV, PDH_FMT_DOUBLE, &CounterType, &CpuValue);
+					if (status != ERROR_SUCCESS)
+					{
+						PRINT("[Query] PdhGetFormattedCounterValue Error!\n");
+						continue;
+					}
+
+
 					for (ProcessCounterEntry* it : processLogList)
 					{
 						status = PdhGetFormattedCounterValue(it->counter, PDH_FMT_DOUBLE, &CounterType, &DisplayValue);
@@ -365,6 +390,8 @@ bool Query::Record(bool isMachine, int totalTime, int recordTime, int interval,
 						Log log;
 						log.timestamp = (long long int) timer;
 						log.value = DisplayValue.doubleValue;
+
+						if (hasEnding(it->counterName, std::string("% Processor Time"))) log.value *= (CpuValue.doubleValue/100);
 						it->logs.push_back(log);
 
 						PRINT("[%s] %s[%d] %s: %f\n", GetCurTime(), it->processName.c_str(), it->processID, it->counterName.c_str(), log.value);

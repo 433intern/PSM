@@ -10,6 +10,10 @@ private:
 
 	CRITICAL_SECTION listLock;
 
+	PDH_HCOUNTER cpuCounterV;
+	std::string cpuCounter;
+
+
 public:
 	std::list<ProcessInfo_Agent> checkProcessList;
 	std::list<std::string> counterList;

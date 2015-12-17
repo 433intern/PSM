@@ -153,6 +153,11 @@ def AddProcess(request, token, processName):
     result = psm.psmnet.ProcessCommandToAgentServer(int(token), str(processName), True)
     return HttpResponse(result)
 
+def DeleteProcess(request, token, processName):
+    result = psm.psmnet.ProcessCommandToAgentServer(int(token), str(processName), False)
+    return HttpResponse(result)
+
+
 
 
 

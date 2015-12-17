@@ -113,6 +113,21 @@ $(function() {
 
   for (var i=0; i<checkList.length; i++){
     var processName = String(checkList[i]['name']);
+
+    var deleteButton = $('#deleteProcess'+processName).click({token : token, name : processName}, function(param){
+      function onReceived(res) {
+        alert(res);
+        location.reload();
+      }
+
+      $.ajax({
+          'url' : '/../deleteprocess/'+param.data.token+'/'+param.data.name,
+          'method' : 'get',
+          'dataType' : "text",
+          'success' : onReceived
+      });
+    });
+
     var modalButton = $('a#modal' + String(checkList[i]['name']));
     modalButton.click({name : processName, token : token}, function(param){  
         function onDataReceived(data) {

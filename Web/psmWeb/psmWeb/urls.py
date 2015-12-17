@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^predis/', 'psm.views.PRedis'),
 
     url(r'^addprocess/([^/]+)/([^/]+)/', 'psm.views.AddProcess'),
+    url(r'^deleteprocess/([^/]+)/([^/]+)/', 'psm.views.DeleteProcess'),
 
     url(r'^server_detail/([^/]+)/', 'psm.views.ServerDetail'),
     url(r'^process_detail/([^/]+)/([^/]+)/', 'psm.views.ProcessDetail'),
