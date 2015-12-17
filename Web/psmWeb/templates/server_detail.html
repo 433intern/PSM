@@ -81,8 +81,8 @@
           </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href="index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>대시보드</a>
-          <a class="mdl-navigation__link" href="server.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>서버목록</a>
+          <a class="mdl-navigation__link" href="/main/"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>대시보드</a>
+          <a class="mdl-navigation__link" href="/index/"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>서버목록</a>
           <div class="mdl-layout-spacer"></div>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span>made by gihoon</a>
         </nav>
@@ -109,7 +109,7 @@
                   <tbody id="machineCheckList">
                     {% for c in mcl %}
                     <tr>
-                      <td><input type="checkbox" class="mdl-checkbox__input"/ id="mcheckbox_{{ c.0 }}"></td>
+                      <td><input type="checkbox" class="mdl-checkbox__input" id="mcheckbox_{{ c.0 }}"/></td>
                       <td class="mdl-data-table__cell--non-numeric">{{ c.0 }}</td>
                       <td>{{ c.1 }}</td>
                     </tr>
@@ -202,7 +202,7 @@
 
       <!-- Modal -->
       <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog" style="width: 420px;">
 
           <!-- Modal content-->
           <div class="modal-content">
@@ -215,7 +215,7 @@
                   <table class="mdl-data-table mdl-js-data-table full-width" id="myModalTable">
                     <thead>
                       <tr>
-                        <th>
+                        <th style="width : 50px">
                         </th>
                         <th class="mdl-data-table__cell--non-numeric">이름</th>
                         <th>최근 값</th>
@@ -225,7 +225,7 @@
                     </tbody>
                   </table>
                   <!-- 상태 submit 버튼 -->
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect full-width">상태 보기</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect full-width" id="processCheckButton">상태 보기</button>
                 </div>
               </div>
             </div>
@@ -276,7 +276,7 @@
     <input type="hidden" id="mcl" name="variable" value="{{ mcl }}">
     <input type="hidden" id="csrf" name="variable" value="{% csrf_token %}">
 
-    <script type="text/javascript" src="../../static/js/sample.js">
+    <script type="text/javascript" src="../../static/js/psm.js">
     </script>
 
   </body>

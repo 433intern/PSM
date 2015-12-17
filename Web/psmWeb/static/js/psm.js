@@ -83,7 +83,6 @@ $(function() {
         resultCounterList.push(mcl[i][0])
       }
     }
-
     open('POST', '/../mchart/', {mcl : resultCounterList, token : token}, 'newwin');
 
     console.log(resultCounterList);
@@ -118,12 +117,24 @@ $(function() {
               cName_td.addClass('mdl-data-table__cell--non-numeric');
               cValue_td.text(cValue);
 
-              eelem.innerHTML ='<td><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect \
-              mdl-data-table__select"><input type="checkbox" class="mdl-checkbox__input"/></label></td>';
+              eelem.innerHTML ='<td><input id="pcheckbox_' + String(cName) + '" type="checkbox" class="mdl-checkbox__input"></td>';
               celem.append(cName_td);
               celem.append(cValue_td);
               modalbody.append(celem);
             }
+
+            var pbutton = $("#processCheckButton").click(function(){
+              resultCounterList = []
+              for (var i=0; i<data.pList.length; i++){
+                if ($("#pcheckbox_" + data.pList[i][0]).is(":checked"))
+                {
+                  resultCounterList.push(data.pList[i][0])
+                }
+              }
+              console.log(resultCounterList);
+              open('POST', '/../pchart/', {name : String(data.process), pcl : resultCounterList, token : token}, 'newwin');
+            });
+
 
             $('#myModal').modal('toggle');       
         }

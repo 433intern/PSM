@@ -17,8 +17,6 @@
     <meta name="apple-mobile-web-app-title" content="Material Design Lite">
     <link rel="apple-touch-icon-precomposed" href="../static/dashboard/css/images/ios-desktop.png">
 
-    <link rel="stylesheet" href="../static/dashboard/css/material-modal.min.css">
-    <script src="../static/dashboard/js/material-modal.min.js"></script> 
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="../static/dashboard/css/images/touch/ms-touch-icon-144x144-precomposed.png">
@@ -27,6 +25,8 @@
     <link rel="shortcut icon" href="../static/dashboard/css/images/favicon.png">
 
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
 
     <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
     <!--
@@ -50,13 +50,18 @@
     }
     </style>
 
+    <link href="../static/flot/examples.css" rel="stylesheet" type="text/css">
+    <script language="javascript" type="text/javascript" src="../static/flot/jquery.flot.js"></script>
+    <script language="javascript" type="text/javascript" src="../static/flot/jquery.flot.time.js"></script>
+
+
   </head>
   <body>
-    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <div>
 
-      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600" style="margin-bottom:10px">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">사용법</span>
+          <span class="mdl-layout-title" style="font-weight:bold">{{ agent.agentName}}_{{ name }}_실시간차트</span>
           <div class="mdl-layout-spacer"></div>
           
           <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
@@ -69,50 +74,30 @@
           </ul>
         </div>
       </header>
-      
 
-      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-        <header class="demo-drawer-header">
-          <div class="demo-avatar-dropdown">
-            <img src="../static/dashboard/css/images/user.jpg" class="demo-avatar">
-            <span class='title-margin'><b>PSM</b><br>Process System Monitoring</span>            
+      <main style="padding:30px">
+        {% for pc in pcl %}
+        <div style="padding:10px; padding-bottom:0px; float:left;">
+          <div class="mdl-card__title mdl-card--expand mdl-color--teal-300" >
+              <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">{{ pc }}</h2>
           </div>
-        </header>
-        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href="/main/"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>대시보드</a>
-          <a class="mdl-navigation__link" href="/index/"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>서버목록</a>
-          <div class="mdl-layout-spacer"></div>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span>made by gihoon</a>
-        </nav>
-      </div>
-
-      <!-- Wide card with share menu button -->
-      <!-- Square card -->
-
-      <main class="mdl-layout__content mdl-color--grey-100" style="padding:30px">
-      <div class="demo-card-square mdl-card mdl-shadow--2dp full-width">
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">윈도우즈 사용법</h2>
+          <div class="demo-container" style="margin-bottom: 0px; margin-top: 0px;">
+            <div id="placeholder{{ pc }}" class="demo-placeholder"></div>
+          </div>
         </div>
-        <div class="mdl-card__supporting-text" style="padding-top: 5px;">
-          블라블라블라<br><br>
-          ㅁㅇ하ㅓㅁ이하<br><br>
-          ㅁㅇ허ㅣㅁㅇㅎ<br><br>
-          블라블라블라<br><br>
-          ㅁㅇ하ㅓㅁ이하<br><br>
-          ㅁㅇ허ㅣㅁㅇㅎ<br>
-
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-            에이전트 다운로드
-          </button>
-        </div>
-      </div>
+        {% endfor %}
       </main>
-
     </div>
     <script src="../static/dashboard/js/material.min.js"></script>
+
+ {% csrf_token %}
+
+  <input type="hidden" id="agent" name="variable" value="{{ agent }}">
+  <input type="hidden" id="name" name="variable" value="{{ name }}">
+  <input type="hidden" id="pcl" name="variable" value="{{ pcl }}">
+
+  <script language="javascript" type="text/javascript" src="../static/js/chart_p.js"></script>
+
 
   </body>
 </html>

@@ -13,15 +13,17 @@ def Index(request):
     return render(request, "server_main.html", {"agentList" : list})
 
 def Helloworld(request):
-    psm.redisJob.GetProcessKeys(None, "9:CPUTime:KakaoTalk")
-    return HttpResponse("hh")
+    return HttpResponse("no url! error page")
     #psm.redisJob.GetMachineValue_recent(None, 0, "TotalCpuTime", 10, 60)
     #return render(request, "hello.html")
+
+def Main(request):
+    return render(request, "index.html")
 
 
 def ServerDetail(request, token):
     if not token.isdigit():
-        response = render(request, "hello.html")
+        response = HttpResponse("no url! error page")
 
     r = psm.redisJob.GetRedisClient()
     agent = psm.redisJob.GetAgentInfo(r, token)
@@ -57,8 +59,6 @@ def ProcessDetail(request, token, name):
     return HttpResponse(json.dumps(jv))
 
 def MRedis(request):
-
-
     if request.method != 'POST':
         jv = {}
         return HttpResponse(json.dumps(jv))
@@ -86,7 +86,7 @@ def MRedis(request):
 
 def MachineChart(request):
     if request.method != 'POST':
-        return render(request, "hello.html")
+        return HttpResponse("no url! error page")
 
     mcl = json.loads(request.POST.get('mcl'))
     token = request.POST.get('token')
@@ -96,3 +96,50 @@ def MachineChart(request):
     print(agent)
 
     return render(request, "chart.html", {"token" : token, "agent" : agent, "mcl" : mcl})
+
+def PRedis(request):
+    if request.method != 'POST':
+        jv = {}
+        return HttpResponse(json.dumps(jv))
+
+
+    curTime = int(request.POST.get('curTime'))
+    responseTime = int(request.POST.get('responseTime'))
+    interval = int(request.POST.get('interval'))
+    pcl = request.POST.getlist('pcl[]')
+    agentNumber = request.POST.get('agentNumber')
+    name = request.POST.get('name')
+
+    datas = []
+    r = psm.redisJob.GetRedisClient()
+
+    for counter in pcl:
+        prevkey = ":".join([ str(agentNumber) ,  counter,  name])
+        keys = psm.redisJob.GetProcessKeys(r, prevkey)
+
+        totaldata = []
+        for key in keys:
+            data = psm.redisJob.GetValueList(r, key, responseTime, interval, curTime)
+            totaldata = psm.util.CombineList(totaldata, data)
+
+        jv = {}
+        jv['counter'] = counter
+        jv['data'] = totaldata
+        datas.append(jv)
+
+    return HttpResponse(json.dumps(datas))
+
+
+def ProcessChart(request):
+    if request.method != 'POST':
+        return render(request, "hello.html")
+
+    pcl = json.loads(request.POST.get('pcl'))
+    token = request.POST.get('token')
+    name = request.POST.get('name')
+
+    r = psm.redisJob.GetRedisClient()
+    agent = psm.redisJob.GetAgentInfo(r, token)
+    print(agent)
+
+    return render(request, "chart_p.html", {"name" : name, "token" : token, "agent" : agent, "pcl" : pcl})

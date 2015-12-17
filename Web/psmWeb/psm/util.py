@@ -8,6 +8,21 @@ import socket
 
 # Create your views here.
 
+
+def CombineList(l1, l2):
+    D = {k: v for k, v in l1}
+
+    for key, value in l2:
+        if key in D:
+            D[key] += value
+        else:
+            D[key] = value
+    result = list(D.items())
+
+    result.sort()
+
+    return result
+
 def int2ip(addr):
     addr = int(socket.htonl(addr))
     return socket.inet_ntoa(struct.pack("!I", addr))

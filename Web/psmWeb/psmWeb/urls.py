@@ -20,10 +20,15 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^helloworld/', 'psm.views.Helloworld'),
+    url(r'^main/', 'psm.views.Main'),
     url(r'^index/', 'psm.views.Index'),
     url(r'^mchart/', 'psm.views.MachineChart'),
     url(r'^mredis/', 'psm.views.MRedis'),
 
+    url(r'^pchart/', 'psm.views.ProcessChart'),
+    url(r'^predis/', 'psm.views.PRedis'),
+
     url(r'^server_detail/([^/]+)/', 'psm.views.ServerDetail'),
-    url(r'^process_detail/([^/]+)/([^/]+)/', 'psm.views.ProcessDetail')
+    url(r'^process_detail/([^/]+)/([^/]+)/', 'psm.views.ProcessDetail'),
+
 ]
