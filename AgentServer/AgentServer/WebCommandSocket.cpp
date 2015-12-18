@@ -147,21 +147,71 @@ void WebCommandSocket::PacketHandling(CPacket *packet)
 		psmweb::wsProcessCommandRequest msg;
 		
 		if (msg.ParseFromArray(packet->msg, packet->length)){
-			AgentSocket* socket = agentApp->agentServer->GetAgentSocketByToken(msg.token());
 			std::string name(msg.processname());
-			if (socket != NULL){
-				if (msg.type() == psmweb::ADDLIST){
-					SendProcessCommandResponse(msg.token(), msg.type(), \
-						socket->AddProcessName(name), "");
-				}
-				else if (msg.type() == psmweb::DELETELIST){
-					SendProcessCommandResponse(msg.token(), msg.type(), \
-						socket->DeleteProcessName(name), "");
+			int agentID = agentApp->agentServer->redisManager.GetAgentID(msg.token());
+
+			bool result = false;
+			if (msg.type() == psmweb::ADDLIST){
+				if (agentApp->webCommandServer->redisManager.SetProcessName(agentID, name)){
+					AgentSocket* socket = agentApp->agentServer->GetAgentSocketByToken(msg.token());
+					if (socket != NULL){
+						socket->AddProcessName(name);
+					}
+					result = true;
 				}
 			}
+			else if (msg.type() == psmweb::DELETELIST){
+				if (agentApp->webCommandServer->redisManager.RemProcessName(agentID, name)){
+					AgentSocket* socket = agentApp->agentServer->GetAgentSocketByToken(msg.token());
+					if (socket != NULL){
+						socket->DeleteProcessName(name);
+					}
+					result = true;
+				}
+			}
+			SendProcessCommandResponse(msg.token(), msg.type(), result, "");
 		}
 		else{
 			ERROR_PRINT("[WebCommandSocket] ProcessCommandRequest error\n");
+		}
+		break;
+	}
+	case psmweb::CounterCommandRequest:
+	{
+		PRINT("[WebCommandSocket] CounterCommandRequest\n");
+		psmweb::wsCounterCommandRequest msg;
+
+		if (msg.ParseFromArray(packet->msg, packet->length)){
+			bool resultv = false;
+			int agentID = agentApp->agentServer->redisManager.GetAgentID(msg.token());
+			AgentSocket* socket = agentApp->agentServer->GetAgentSocketByToken(msg.token());
+
+			for (int i = 0; i < msg.countername_size(); i++)
+			{
+				std::string name(msg.countername(i));
+				if (msg.type() == psmweb::CADDLIST){
+					std::string result;
+					if (agentApp->webCommandServer->redisManager.SetCounterName(agentID, name, msg.ismachine(), result)){
+						if (socket != NULL){
+							socket->AddCounterName(result, msg.ismachine());
+						}
+						resultv = true;
+					}
+				}
+				else if (msg.type() == psmweb::CDELETELIST){
+					std::string result;
+					if (agentApp->webCommandServer->redisManager.RemCounterName(agentID, name, msg.ismachine(), result)){
+						if (socket != NULL){
+							socket->DeleteCounterName(result, msg.ismachine());
+						}
+						resultv = true;
+					}
+				}
+			}
+			SendCounterCommandResponse(msg.token(), msg.type(), resultv, "");
+		}
+		else{
+			ERROR_PRINT("[WebCommandSocket] CounterCommandRequest error\n");
 		}
 		break;
 	}
@@ -202,6 +252,26 @@ void WebCommandSocket::SendProcessCommandResponse(int token, psmweb::ProcessComm
 
 	packet.length = (short)msg.ByteSize();
 	packet.type = (short)psmweb::ProcessCommandResponse;
+	memset(packet.msg, 0, BUFSIZE);
+	msg.SerializeToArray((void *)&packet.msg, packet.length);
+
+	Send((char *)&packet, packet.length + HEADER_SIZE);
+}
+
+void WebCommandSocket::SendCounterCommandResponse(int token, psmweb::CounterCommandType type, bool success, std::string reason)
+{
+	PRINT("[WebCommandSocket] SendCounterCommandResponse\n");
+	CPacket packet;
+	psmweb::swCounterCommandResponse msg;
+
+	msg.set_token(token);
+	msg.set_type(type);
+	if (reason.size() > 0) msg.set_failreason(reason);
+	if (success) msg.set_result(psmweb::Result::SUCCESS);
+	else msg.set_result(psmweb::Result::FAILURE);
+
+	packet.length = (short)msg.ByteSize();
+	packet.type = (short)psmweb::CounterCommandResponse;
 	memset(packet.msg, 0, BUFSIZE);
 	msg.SerializeToArray((void *)&packet.msg, packet.length);
 

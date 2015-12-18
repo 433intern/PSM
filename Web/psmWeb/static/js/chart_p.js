@@ -138,7 +138,7 @@ $(function() {
 
       datas[i].data = curData;
 
-      $.plot("#placeholder"+name, [curData], { xaxis: { mode: "time", } });
+      $.plot("#placeholder"+name, [curData], { xaxis: { mode: "time", }, yaxis: { min: 0 } });
     }
   }
   setInterval(DrawChart, 1000);

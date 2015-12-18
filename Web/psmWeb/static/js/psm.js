@@ -160,7 +160,7 @@ $(function() {
               modalbody.append(celem);
             }
 
-            var pbutton = $("#processCheckButton").click(function(){
+            var pbutton = $("#processCheckButton").unbind().one('click', function(){
               resultCounterList = []
               for (var i=0; i<data.pList.length; i++){
                 if ($("#pcheckbox_" + data.pList[i][0]).is(":checked"))

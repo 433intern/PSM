@@ -158,7 +158,24 @@ def DeleteProcess(request, token, processName):
     return HttpResponse(result)
 
 def AddCounter(request):
-    return HttpResponse("hihi")
+    token = int(request.POST.get('token'))
+    ismachine = (request.POST.get('ismachine') == u'true')
+    cl = request.POST.getlist('cl[]')
+
+    print(ismachine)
+
+    result = psm.psmnet.CounterCommandToAgentServer(token, True, ismachine, cl)
+    return HttpResponse(result)
+
+def DeleteCounter(request):
+    token = int(request.POST.get('token'))
+    ismachine = (request.POST.get('ismachine') == u'true')
+    cl = request.POST.getlist('cl[]')
+
+    result = psm.psmnet.CounterCommandToAgentServer(token, False, ismachine, cl)
+
+    return HttpResponse(result)
+
 
 
 def Setting(request, token):

@@ -281,6 +281,9 @@ bool RedisManager::GetCounterList(int agentID, std::vector<std::string>& resultL
 				PRINT("%s\n", value.toString().c_str());
 				Json::Value jv = StrToJson(value.toString());
 				resultList.push_back(jv["counter"].asString());
+				counterNameMap.insert(std::pair<std::string, std::string> \
+					(jv["counter"].asString(), jv["name"].asString()));
+
 			}
 			PRINT("\n");
 		}
@@ -607,6 +610,9 @@ bool RedisManager::SetCounterName(int agentID, std::string& counterName, bool is
 			if (jv == NULL) return false;
 
 			result = jv["counter"].asString();
+
+			counterNameMap.insert(std::pair<std::string, std::string> \
+				(jv["counter"].asString(), jv["name"].asString()));
 			return true;
 		}
 	}
@@ -627,23 +633,37 @@ bool RedisManager::RemProcessName(int agentID, std::string& processName)
 	return false;
 }
 
-bool RedisManager::RemCounterName(int agentID, std::string& counterName, bool isMachine, std::string& result)
+bool RedisManager::RemCounterName(int agentID, std::string& counterName, bool isMachine, std::string& resultStr)
 {
 	std::string key;
 	if (!isMachine) key = std::to_string(agentID) + ":CounterList";
 	else key = std::to_string(agentID) + ":MachineCounterList";
 
-	RedisValue res;
-	res = redis.command("srem", key, counterName);
+	RedisValue result;
+	result = redis.command("smembers", key);
 
-	if (res.isOk()){
-		if (res.toInt() == 0) return false;
-		else{
-			Json::Value jv = StrToJson(counterName);
-			if (jv == NULL) return false;
+	if (result.isOk())
+	{
+		if (!result.isNull() && result.toArray().size() != 0)
+		{
+			std::vector<RedisValue> v = result.toArray();
+			for (RedisValue value : v)
+			{
+				Json::Value jv = StrToJson(value.toString());
+				if (jv["name"].asString() == counterName){
+					RedisValue res;
+					res = redis.command("srem", key, value.toString());
 
-			result = jv["counter"].asString();
-			return true;
+					if (res.isOk()){
+						if (res.toInt() == 0) return false;
+						else{
+							resultStr = jv["counter"].asString();
+							return true;
+						}
+					}
+					return false;
+				}
+			}
 		}
 	}
 	return false;

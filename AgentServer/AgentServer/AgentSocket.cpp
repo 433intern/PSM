@@ -248,67 +248,28 @@ void AgentSocket::PacketHandling(CPacket *packet)
 	if (!packetPoolManager->Free(packet)) ERROR_PRINT("[AgentSocket] free error!\n");
 }
 
-bool AgentSocket::AddProcessName(std::string& processName)
+void AgentSocket::AddProcessName(std::string& processName)
 {
-	if (agentApp->agentServer->redisManager.SetProcessName(agentID, processName))
-	{
-		PRINT("[AgentSocket] AddProcessName Success\n");
-		SendProcessCommand(agent::ProcessCommandType::ADDLIST, processName);
-		return true;
-	}
-	else
-	{
-		PRINT("[AgentSocket] AddProcessName Failed : already in redis\n");
-		return false;
-	}
+	PRINT("[AgentSocket] AddProcessName Success\n");
+	SendProcessCommand(agent::ProcessCommandType::ADDLIST, processName);
 }
 
-bool AgentSocket::DeleteProcessName(std::string& processName)
+void AgentSocket::DeleteProcessName(std::string& processName)
 {
-	if (agentApp->agentServer->redisManager.RemProcessName(agentID, processName))
-	{
-		PRINT("[AgentSocket] DeleteProcessName Success\n");
-		SendProcessCommand(agent::ProcessCommandType::DELETELIST, processName);
-		return true;
-	}
-	else
-	{
-		PRINT("[AgentSocket] DeleteProcessName Failed\n");
-		return false;
-	}
+	PRINT("[AgentSocket] DeleteProcessName Success\n");
+	SendProcessCommand(agent::ProcessCommandType::DELETELIST, processName);
 }
 
-bool AgentSocket::AddCounterName(std::string& counterName, bool isMachine)
+void AgentSocket::AddCounterName(std::string& counterName, bool isMachine)
 {
-
-	std::string result;
-	if (agentApp->agentServer->redisManager.SetCounterName(agentID, counterName, isMachine, result))
-	{
-		PRINT("[AgentSocket] AddCounterName Success\n");
-		SendCounterCommand(agent::CounterCommandType::CADDLIST, result, isMachine);
-		return true;
-	}
-	else
-	{
-		PRINT("[AgentSocket] AddCounterName Failed : already in redis\n");
-		return false;
-	}
+	PRINT("[AgentSocket] AddCounterName Success\n");
+	SendCounterCommand(agent::CounterCommandType::CADDLIST, counterName, isMachine);
 }
 
-bool AgentSocket::DeleteCounterName(std::string& counterName, bool isMachine)
+void AgentSocket::DeleteCounterName(std::string& counterName, bool isMachine)
 {
-	std::string result;
-	if (agentApp->agentServer->redisManager.RemCounterName(agentID, counterName, isMachine, result))
-	{
-		PRINT("[AgentSocket] DeleteCounterName Success\n");
-		SendCounterCommand(agent::CounterCommandType::CDELETELIST, result, isMachine);
-		return true;
-	}
-	else
-	{
-		PRINT("[AgentSocket] DeleteCounterName Failed : already in redis\n");
-		return false;
-	}
+	PRINT("[AgentSocket] DeleteCounterName Success\n");
+	SendCounterCommand(agent::CounterCommandType::CDELETELIST, counterName, isMachine);
 }
 
 void AgentSocket::SendHealthCheck()

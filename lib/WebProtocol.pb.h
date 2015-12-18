@@ -37,12 +37,16 @@ void protobuf_ShutdownFile_WebProtocol_2eproto();
 
 class wsProcessCommandRequest;
 class swProcessCommandResponse;
+class wsCounterCommandRequest;
+class swCounterCommandResponse;
 class wsHealthCheck;
 class swHealthAck;
 
 enum psmType {
   ProcessCommandRequest = 0,
   ProcessCommandResponse = 1,
+  CounterCommandRequest = 2,
+  CounterCommandResponse = 3,
   HealthCheck = 8,
   HealthAck = 9
 };
@@ -102,6 +106,25 @@ inline bool Result_Parse(
     const ::std::string& name, Result* value) {
   return ::google::protobuf::internal::ParseNamedEnum<Result>(
     Result_descriptor(), name, value);
+}
+enum CounterCommandType {
+  CADDLIST = 1,
+  CDELETELIST = 2
+};
+bool CounterCommandType_IsValid(int value);
+const CounterCommandType CounterCommandType_MIN = CADDLIST;
+const CounterCommandType CounterCommandType_MAX = CDELETELIST;
+const int CounterCommandType_ARRAYSIZE = CounterCommandType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* CounterCommandType_descriptor();
+inline const ::std::string& CounterCommandType_Name(CounterCommandType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    CounterCommandType_descriptor(), value);
+}
+inline bool CounterCommandType_Parse(
+    const ::std::string& name, CounterCommandType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<CounterCommandType>(
+    CounterCommandType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -320,6 +343,236 @@ class swProcessCommandResponse : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static swProcessCommandResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class wsCounterCommandRequest : public ::google::protobuf::Message {
+ public:
+  wsCounterCommandRequest();
+  virtual ~wsCounterCommandRequest();
+
+  wsCounterCommandRequest(const wsCounterCommandRequest& from);
+
+  inline wsCounterCommandRequest& operator=(const wsCounterCommandRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const wsCounterCommandRequest& default_instance();
+
+  void Swap(wsCounterCommandRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  wsCounterCommandRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const wsCounterCommandRequest& from);
+  void MergeFrom(const wsCounterCommandRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 token = 4;
+  inline bool has_token() const;
+  inline void clear_token();
+  static const int kTokenFieldNumber = 4;
+  inline ::google::protobuf::int32 token() const;
+  inline void set_token(::google::protobuf::int32 value);
+
+  // required .psmweb.CounterCommandType type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::psmweb::CounterCommandType type() const;
+  inline void set_type(::psmweb::CounterCommandType value);
+
+  // repeated string countername = 2;
+  inline int countername_size() const;
+  inline void clear_countername();
+  static const int kCounternameFieldNumber = 2;
+  inline const ::std::string& countername(int index) const;
+  inline ::std::string* mutable_countername(int index);
+  inline void set_countername(int index, const ::std::string& value);
+  inline void set_countername(int index, const char* value);
+  inline void set_countername(int index, const char* value, size_t size);
+  inline ::std::string* add_countername();
+  inline void add_countername(const ::std::string& value);
+  inline void add_countername(const char* value);
+  inline void add_countername(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& countername() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_countername();
+
+  // required bool ismachine = 3;
+  inline bool has_ismachine() const;
+  inline void clear_ismachine();
+  static const int kIsmachineFieldNumber = 3;
+  inline bool ismachine() const;
+  inline void set_ismachine(bool value);
+
+  // @@protoc_insertion_point(class_scope:psmweb.wsCounterCommandRequest)
+ private:
+  inline void set_has_token();
+  inline void clear_has_token();
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_ismachine();
+  inline void clear_has_ismachine();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 token_;
+  int type_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> countername_;
+  bool ismachine_;
+  friend void  protobuf_AddDesc_WebProtocol_2eproto();
+  friend void protobuf_AssignDesc_WebProtocol_2eproto();
+  friend void protobuf_ShutdownFile_WebProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static wsCounterCommandRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class swCounterCommandResponse : public ::google::protobuf::Message {
+ public:
+  swCounterCommandResponse();
+  virtual ~swCounterCommandResponse();
+
+  swCounterCommandResponse(const swCounterCommandResponse& from);
+
+  inline swCounterCommandResponse& operator=(const swCounterCommandResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const swCounterCommandResponse& default_instance();
+
+  void Swap(swCounterCommandResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  swCounterCommandResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const swCounterCommandResponse& from);
+  void MergeFrom(const swCounterCommandResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 token = 1;
+  inline bool has_token() const;
+  inline void clear_token();
+  static const int kTokenFieldNumber = 1;
+  inline ::google::protobuf::int32 token() const;
+  inline void set_token(::google::protobuf::int32 value);
+
+  // required .psmweb.CounterCommandType type = 2;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 2;
+  inline ::psmweb::CounterCommandType type() const;
+  inline void set_type(::psmweb::CounterCommandType value);
+
+  // required .psmweb.Result result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::psmweb::Result result() const;
+  inline void set_result(::psmweb::Result value);
+
+  // optional string failReason = 4;
+  inline bool has_failreason() const;
+  inline void clear_failreason();
+  static const int kFailReasonFieldNumber = 4;
+  inline const ::std::string& failreason() const;
+  inline void set_failreason(const ::std::string& value);
+  inline void set_failreason(const char* value);
+  inline void set_failreason(const char* value, size_t size);
+  inline ::std::string* mutable_failreason();
+  inline ::std::string* release_failreason();
+  inline void set_allocated_failreason(::std::string* failreason);
+
+  // @@protoc_insertion_point(class_scope:psmweb.swCounterCommandResponse)
+ private:
+  inline void set_has_token();
+  inline void clear_has_token();
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_result();
+  inline void clear_has_result();
+  inline void set_has_failreason();
+  inline void clear_has_failreason();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 token_;
+  int type_;
+  ::std::string* failreason_;
+  int result_;
+  friend void  protobuf_AddDesc_WebProtocol_2eproto();
+  friend void protobuf_AssignDesc_WebProtocol_2eproto();
+  friend void protobuf_ShutdownFile_WebProtocol_2eproto();
+
+  void InitAsDefaultInstance();
+  static swCounterCommandResponse* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -747,6 +1000,291 @@ inline void swProcessCommandResponse::set_allocated_failreason(::std::string* fa
 
 // -------------------------------------------------------------------
 
+// wsCounterCommandRequest
+
+// required int32 token = 4;
+inline bool wsCounterCommandRequest::has_token() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void wsCounterCommandRequest::set_has_token() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void wsCounterCommandRequest::clear_has_token() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void wsCounterCommandRequest::clear_token() {
+  token_ = 0;
+  clear_has_token();
+}
+inline ::google::protobuf::int32 wsCounterCommandRequest::token() const {
+  // @@protoc_insertion_point(field_get:psmweb.wsCounterCommandRequest.token)
+  return token_;
+}
+inline void wsCounterCommandRequest::set_token(::google::protobuf::int32 value) {
+  set_has_token();
+  token_ = value;
+  // @@protoc_insertion_point(field_set:psmweb.wsCounterCommandRequest.token)
+}
+
+// required .psmweb.CounterCommandType type = 1;
+inline bool wsCounterCommandRequest::has_type() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void wsCounterCommandRequest::set_has_type() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void wsCounterCommandRequest::clear_has_type() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void wsCounterCommandRequest::clear_type() {
+  type_ = 1;
+  clear_has_type();
+}
+inline ::psmweb::CounterCommandType wsCounterCommandRequest::type() const {
+  // @@protoc_insertion_point(field_get:psmweb.wsCounterCommandRequest.type)
+  return static_cast< ::psmweb::CounterCommandType >(type_);
+}
+inline void wsCounterCommandRequest::set_type(::psmweb::CounterCommandType value) {
+  assert(::psmweb::CounterCommandType_IsValid(value));
+  set_has_type();
+  type_ = value;
+  // @@protoc_insertion_point(field_set:psmweb.wsCounterCommandRequest.type)
+}
+
+// repeated string countername = 2;
+inline int wsCounterCommandRequest::countername_size() const {
+  return countername_.size();
+}
+inline void wsCounterCommandRequest::clear_countername() {
+  countername_.Clear();
+}
+inline const ::std::string& wsCounterCommandRequest::countername(int index) const {
+  // @@protoc_insertion_point(field_get:psmweb.wsCounterCommandRequest.countername)
+  return countername_.Get(index);
+}
+inline ::std::string* wsCounterCommandRequest::mutable_countername(int index) {
+  // @@protoc_insertion_point(field_mutable:psmweb.wsCounterCommandRequest.countername)
+  return countername_.Mutable(index);
+}
+inline void wsCounterCommandRequest::set_countername(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:psmweb.wsCounterCommandRequest.countername)
+  countername_.Mutable(index)->assign(value);
+}
+inline void wsCounterCommandRequest::set_countername(int index, const char* value) {
+  countername_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:psmweb.wsCounterCommandRequest.countername)
+}
+inline void wsCounterCommandRequest::set_countername(int index, const char* value, size_t size) {
+  countername_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:psmweb.wsCounterCommandRequest.countername)
+}
+inline ::std::string* wsCounterCommandRequest::add_countername() {
+  return countername_.Add();
+}
+inline void wsCounterCommandRequest::add_countername(const ::std::string& value) {
+  countername_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:psmweb.wsCounterCommandRequest.countername)
+}
+inline void wsCounterCommandRequest::add_countername(const char* value) {
+  countername_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:psmweb.wsCounterCommandRequest.countername)
+}
+inline void wsCounterCommandRequest::add_countername(const char* value, size_t size) {
+  countername_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:psmweb.wsCounterCommandRequest.countername)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+wsCounterCommandRequest::countername() const {
+  // @@protoc_insertion_point(field_list:psmweb.wsCounterCommandRequest.countername)
+  return countername_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+wsCounterCommandRequest::mutable_countername() {
+  // @@protoc_insertion_point(field_mutable_list:psmweb.wsCounterCommandRequest.countername)
+  return &countername_;
+}
+
+// required bool ismachine = 3;
+inline bool wsCounterCommandRequest::has_ismachine() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void wsCounterCommandRequest::set_has_ismachine() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void wsCounterCommandRequest::clear_has_ismachine() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void wsCounterCommandRequest::clear_ismachine() {
+  ismachine_ = false;
+  clear_has_ismachine();
+}
+inline bool wsCounterCommandRequest::ismachine() const {
+  // @@protoc_insertion_point(field_get:psmweb.wsCounterCommandRequest.ismachine)
+  return ismachine_;
+}
+inline void wsCounterCommandRequest::set_ismachine(bool value) {
+  set_has_ismachine();
+  ismachine_ = value;
+  // @@protoc_insertion_point(field_set:psmweb.wsCounterCommandRequest.ismachine)
+}
+
+// -------------------------------------------------------------------
+
+// swCounterCommandResponse
+
+// required int32 token = 1;
+inline bool swCounterCommandResponse::has_token() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void swCounterCommandResponse::set_has_token() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void swCounterCommandResponse::clear_has_token() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void swCounterCommandResponse::clear_token() {
+  token_ = 0;
+  clear_has_token();
+}
+inline ::google::protobuf::int32 swCounterCommandResponse::token() const {
+  // @@protoc_insertion_point(field_get:psmweb.swCounterCommandResponse.token)
+  return token_;
+}
+inline void swCounterCommandResponse::set_token(::google::protobuf::int32 value) {
+  set_has_token();
+  token_ = value;
+  // @@protoc_insertion_point(field_set:psmweb.swCounterCommandResponse.token)
+}
+
+// required .psmweb.CounterCommandType type = 2;
+inline bool swCounterCommandResponse::has_type() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void swCounterCommandResponse::set_has_type() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void swCounterCommandResponse::clear_has_type() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void swCounterCommandResponse::clear_type() {
+  type_ = 1;
+  clear_has_type();
+}
+inline ::psmweb::CounterCommandType swCounterCommandResponse::type() const {
+  // @@protoc_insertion_point(field_get:psmweb.swCounterCommandResponse.type)
+  return static_cast< ::psmweb::CounterCommandType >(type_);
+}
+inline void swCounterCommandResponse::set_type(::psmweb::CounterCommandType value) {
+  assert(::psmweb::CounterCommandType_IsValid(value));
+  set_has_type();
+  type_ = value;
+  // @@protoc_insertion_point(field_set:psmweb.swCounterCommandResponse.type)
+}
+
+// required .psmweb.Result result = 3;
+inline bool swCounterCommandResponse::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void swCounterCommandResponse::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void swCounterCommandResponse::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void swCounterCommandResponse::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::psmweb::Result swCounterCommandResponse::result() const {
+  // @@protoc_insertion_point(field_get:psmweb.swCounterCommandResponse.result)
+  return static_cast< ::psmweb::Result >(result_);
+}
+inline void swCounterCommandResponse::set_result(::psmweb::Result value) {
+  assert(::psmweb::Result_IsValid(value));
+  set_has_result();
+  result_ = value;
+  // @@protoc_insertion_point(field_set:psmweb.swCounterCommandResponse.result)
+}
+
+// optional string failReason = 4;
+inline bool swCounterCommandResponse::has_failreason() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void swCounterCommandResponse::set_has_failreason() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void swCounterCommandResponse::clear_has_failreason() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void swCounterCommandResponse::clear_failreason() {
+  if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    failreason_->clear();
+  }
+  clear_has_failreason();
+}
+inline const ::std::string& swCounterCommandResponse::failreason() const {
+  // @@protoc_insertion_point(field_get:psmweb.swCounterCommandResponse.failReason)
+  return *failreason_;
+}
+inline void swCounterCommandResponse::set_failreason(const ::std::string& value) {
+  set_has_failreason();
+  if (failreason_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    failreason_ = new ::std::string;
+  }
+  failreason_->assign(value);
+  // @@protoc_insertion_point(field_set:psmweb.swCounterCommandResponse.failReason)
+}
+inline void swCounterCommandResponse::set_failreason(const char* value) {
+  set_has_failreason();
+  if (failreason_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    failreason_ = new ::std::string;
+  }
+  failreason_->assign(value);
+  // @@protoc_insertion_point(field_set_char:psmweb.swCounterCommandResponse.failReason)
+}
+inline void swCounterCommandResponse::set_failreason(const char* value, size_t size) {
+  set_has_failreason();
+  if (failreason_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    failreason_ = new ::std::string;
+  }
+  failreason_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:psmweb.swCounterCommandResponse.failReason)
+}
+inline ::std::string* swCounterCommandResponse::mutable_failreason() {
+  set_has_failreason();
+  if (failreason_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    failreason_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:psmweb.swCounterCommandResponse.failReason)
+  return failreason_;
+}
+inline ::std::string* swCounterCommandResponse::release_failreason() {
+  clear_has_failreason();
+  if (failreason_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = failreason_;
+    failreason_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void swCounterCommandResponse::set_allocated_failreason(::std::string* failreason) {
+  if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete failreason_;
+  }
+  if (failreason) {
+    set_has_failreason();
+    failreason_ = failreason;
+  } else {
+    clear_has_failreason();
+    failreason_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:psmweb.swCounterCommandResponse.failReason)
+}
+
+// -------------------------------------------------------------------
+
 // wsHealthCheck
 
 // -------------------------------------------------------------------
@@ -776,6 +1314,11 @@ template <> struct is_proto_enum< ::psmweb::Result> : ::google::protobuf::intern
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::psmweb::Result>() {
   return ::psmweb::Result_descriptor();
+}
+template <> struct is_proto_enum< ::psmweb::CounterCommandType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::psmweb::CounterCommandType>() {
+  return ::psmweb::CounterCommandType_descriptor();
 }
 
 }  // namespace google

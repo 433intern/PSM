@@ -22,6 +22,7 @@ public:
 public:
 	void SendHealthCheck();
 	void SendProcessCommandResponse(int token, psmweb::ProcessCommandType type, bool success, std::string reason);
+	void SendCounterCommandResponse(int token, psmweb::CounterCommandType type, bool success, std::string reason);
 
 private:
 	MemPooler<CPacket> *packetPoolManager;

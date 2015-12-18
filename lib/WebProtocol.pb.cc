@@ -26,6 +26,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* swProcessCommandResponse_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   swProcessCommandResponse_reflection_ = NULL;
+const ::google::protobuf::Descriptor* wsCounterCommandRequest_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  wsCounterCommandRequest_reflection_ = NULL;
+const ::google::protobuf::Descriptor* swCounterCommandResponse_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  swCounterCommandResponse_reflection_ = NULL;
 const ::google::protobuf::Descriptor* wsHealthCheck_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   wsHealthCheck_reflection_ = NULL;
@@ -35,6 +41,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::EnumDescriptor* psmType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ProcessCommandType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* Result_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* CounterCommandType_descriptor_ = NULL;
 
 }  // namespace
 
@@ -80,7 +87,43 @@ void protobuf_AssignDesc_WebProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(swProcessCommandResponse));
-  wsHealthCheck_descriptor_ = file->message_type(2);
+  wsCounterCommandRequest_descriptor_ = file->message_type(2);
+  static const int wsCounterCommandRequest_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(wsCounterCommandRequest, token_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(wsCounterCommandRequest, type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(wsCounterCommandRequest, countername_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(wsCounterCommandRequest, ismachine_),
+  };
+  wsCounterCommandRequest_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      wsCounterCommandRequest_descriptor_,
+      wsCounterCommandRequest::default_instance_,
+      wsCounterCommandRequest_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(wsCounterCommandRequest, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(wsCounterCommandRequest, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(wsCounterCommandRequest));
+  swCounterCommandResponse_descriptor_ = file->message_type(3);
+  static const int swCounterCommandResponse_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(swCounterCommandResponse, token_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(swCounterCommandResponse, type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(swCounterCommandResponse, result_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(swCounterCommandResponse, failreason_),
+  };
+  swCounterCommandResponse_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      swCounterCommandResponse_descriptor_,
+      swCounterCommandResponse::default_instance_,
+      swCounterCommandResponse_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(swCounterCommandResponse, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(swCounterCommandResponse, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(swCounterCommandResponse));
+  wsHealthCheck_descriptor_ = file->message_type(4);
   static const int wsHealthCheck_offsets_[1] = {
   };
   wsHealthCheck_reflection_ =
@@ -94,7 +137,7 @@ void protobuf_AssignDesc_WebProtocol_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(wsHealthCheck));
-  swHealthAck_descriptor_ = file->message_type(3);
+  swHealthAck_descriptor_ = file->message_type(5);
   static const int swHealthAck_offsets_[1] = {
   };
   swHealthAck_reflection_ =
@@ -111,6 +154,7 @@ void protobuf_AssignDesc_WebProtocol_2eproto() {
   psmType_descriptor_ = file->enum_type(0);
   ProcessCommandType_descriptor_ = file->enum_type(1);
   Result_descriptor_ = file->enum_type(2);
+  CounterCommandType_descriptor_ = file->enum_type(3);
 }
 
 namespace {
@@ -128,6 +172,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     swProcessCommandResponse_descriptor_, &swProcessCommandResponse::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    wsCounterCommandRequest_descriptor_, &wsCounterCommandRequest::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    swCounterCommandResponse_descriptor_, &swCounterCommandResponse::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     wsHealthCheck_descriptor_, &wsHealthCheck::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     swHealthAck_descriptor_, &swHealthAck::default_instance());
@@ -140,6 +188,10 @@ void protobuf_ShutdownFile_WebProtocol_2eproto() {
   delete wsProcessCommandRequest_reflection_;
   delete swProcessCommandResponse::default_instance_;
   delete swProcessCommandResponse_reflection_;
+  delete wsCounterCommandRequest::default_instance_;
+  delete wsCounterCommandRequest_reflection_;
+  delete swCounterCommandResponse::default_instance_;
+  delete swCounterCommandResponse_reflection_;
   delete wsHealthCheck::default_instance_;
   delete wsHealthCheck_reflection_;
   delete swHealthAck::default_instance_;
@@ -159,22 +211,35 @@ void protobuf_AddDesc_WebProtocol_2eproto() {
     "ssName\030\003 \002(\t\"\207\001\n\030swProcessCommandRespons"
     "e\022\r\n\005token\030\001 \002(\005\022(\n\004type\030\002 \002(\0162\032.psmweb."
     "ProcessCommandType\022\036\n\006result\030\003 \002(\0162\016.psm"
-    "web.Result\022\022\n\nfailReason\030\004 \001(\t\"\017\n\rwsHeal"
-    "thCheck\"\r\n\013swHealthAck*`\n\007psmType\022\031\n\025Pro"
-    "cessCommandRequest\020\000\022\032\n\026ProcessCommandRe"
-    "sponse\020\001\022\017\n\013HealthCheck\020\010\022\r\n\tHealthAck\020\t"
-    "*`\n\022ProcessCommandType\022\t\n\005START\020\000\022\013\n\007RES"
-    "TART\020\001\022\010\n\004STOP\020\002\022\013\n\007ADDLIST\020\003\022\016\n\nDELETEL"
-    "IST\020\004\022\013\n\007ALLSTOP\020\005*\"\n\006Result\022\013\n\007SUCCESS\020"
-    "\000\022\013\n\007FAILURE\020\001", 534);
+    "web.Result\022\022\n\nfailReason\030\004 \001(\t\"z\n\027wsCoun"
+    "terCommandRequest\022\r\n\005token\030\004 \002(\005\022(\n\004type"
+    "\030\001 \002(\0162\032.psmweb.CounterCommandType\022\023\n\013co"
+    "untername\030\002 \003(\t\022\021\n\tismachine\030\003 \002(\010\"\207\001\n\030s"
+    "wCounterCommandResponse\022\r\n\005token\030\001 \002(\005\022("
+    "\n\004type\030\002 \002(\0162\032.psmweb.CounterCommandType"
+    "\022\036\n\006result\030\003 \002(\0162\016.psmweb.Result\022\022\n\nfail"
+    "Reason\030\004 \001(\t\"\017\n\rwsHealthCheck\"\r\n\013swHealt"
+    "hAck*\227\001\n\007psmType\022\031\n\025ProcessCommandReques"
+    "t\020\000\022\032\n\026ProcessCommandResponse\020\001\022\031\n\025Count"
+    "erCommandRequest\020\002\022\032\n\026CounterCommandResp"
+    "onse\020\003\022\017\n\013HealthCheck\020\010\022\r\n\tHealthAck\020\t*`"
+    "\n\022ProcessCommandType\022\t\n\005START\020\000\022\013\n\007RESTA"
+    "RT\020\001\022\010\n\004STOP\020\002\022\013\n\007ADDLIST\020\003\022\016\n\nDELETELIS"
+    "T\020\004\022\013\n\007ALLSTOP\020\005*\"\n\006Result\022\013\n\007SUCCESS\020\000\022"
+    "\013\n\007FAILURE\020\001*3\n\022CounterCommandType\022\014\n\010CA"
+    "DDLIST\020\001\022\017\n\013CDELETELIST\020\002", 905);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "WebProtocol.proto", &protobuf_RegisterTypes);
   wsProcessCommandRequest::default_instance_ = new wsProcessCommandRequest();
   swProcessCommandResponse::default_instance_ = new swProcessCommandResponse();
+  wsCounterCommandRequest::default_instance_ = new wsCounterCommandRequest();
+  swCounterCommandResponse::default_instance_ = new swCounterCommandResponse();
   wsHealthCheck::default_instance_ = new wsHealthCheck();
   swHealthAck::default_instance_ = new swHealthAck();
   wsProcessCommandRequest::default_instance_->InitAsDefaultInstance();
   swProcessCommandResponse::default_instance_->InitAsDefaultInstance();
+  wsCounterCommandRequest::default_instance_->InitAsDefaultInstance();
+  swCounterCommandResponse::default_instance_->InitAsDefaultInstance();
   wsHealthCheck::default_instance_->InitAsDefaultInstance();
   swHealthAck::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_WebProtocol_2eproto);
@@ -194,6 +259,8 @@ bool psmType_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
+    case 2:
+    case 3:
     case 8:
     case 9:
       return true;
@@ -228,6 +295,20 @@ bool Result_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* CounterCommandType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return CounterCommandType_descriptor_;
+}
+bool CounterCommandType_IsValid(int value) {
+  switch(value) {
+    case 1:
+    case 2:
       return true;
     default:
       return false;
@@ -962,6 +1043,739 @@ void swProcessCommandResponse::Swap(swProcessCommandResponse* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = swProcessCommandResponse_descriptor_;
   metadata.reflection = swProcessCommandResponse_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int wsCounterCommandRequest::kTokenFieldNumber;
+const int wsCounterCommandRequest::kTypeFieldNumber;
+const int wsCounterCommandRequest::kCounternameFieldNumber;
+const int wsCounterCommandRequest::kIsmachineFieldNumber;
+#endif  // !_MSC_VER
+
+wsCounterCommandRequest::wsCounterCommandRequest()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:psmweb.wsCounterCommandRequest)
+}
+
+void wsCounterCommandRequest::InitAsDefaultInstance() {
+}
+
+wsCounterCommandRequest::wsCounterCommandRequest(const wsCounterCommandRequest& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:psmweb.wsCounterCommandRequest)
+}
+
+void wsCounterCommandRequest::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  token_ = 0;
+  type_ = 1;
+  ismachine_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+wsCounterCommandRequest::~wsCounterCommandRequest() {
+  // @@protoc_insertion_point(destructor:psmweb.wsCounterCommandRequest)
+  SharedDtor();
+}
+
+void wsCounterCommandRequest::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void wsCounterCommandRequest::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* wsCounterCommandRequest::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return wsCounterCommandRequest_descriptor_;
+}
+
+const wsCounterCommandRequest& wsCounterCommandRequest::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_WebProtocol_2eproto();
+  return *default_instance_;
+}
+
+wsCounterCommandRequest* wsCounterCommandRequest::default_instance_ = NULL;
+
+wsCounterCommandRequest* wsCounterCommandRequest::New() const {
+  return new wsCounterCommandRequest;
+}
+
+void wsCounterCommandRequest::Clear() {
+  if (_has_bits_[0 / 32] & 11) {
+    token_ = 0;
+    type_ = 1;
+    ismachine_ = false;
+  }
+  countername_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool wsCounterCommandRequest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:psmweb.wsCounterCommandRequest)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .psmweb.CounterCommandType type = 1;
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::psmweb::CounterCommandType_IsValid(value)) {
+            set_type(static_cast< ::psmweb::CounterCommandType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_countername;
+        break;
+      }
+
+      // repeated string countername = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_countername:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_countername()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->countername(this->countername_size() - 1).data(),
+            this->countername(this->countername_size() - 1).length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "countername");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_countername;
+        if (input->ExpectTag(24)) goto parse_ismachine;
+        break;
+      }
+
+      // required bool ismachine = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_ismachine:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &ismachine_)));
+          set_has_ismachine();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_token;
+        break;
+      }
+
+      // required int32 token = 4;
+      case 4: {
+        if (tag == 32) {
+         parse_token:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &token_)));
+          set_has_token();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:psmweb.wsCounterCommandRequest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:psmweb.wsCounterCommandRequest)
+  return false;
+#undef DO_
+}
+
+void wsCounterCommandRequest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:psmweb.wsCounterCommandRequest)
+  // required .psmweb.CounterCommandType type = 1;
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->type(), output);
+  }
+
+  // repeated string countername = 2;
+  for (int i = 0; i < this->countername_size(); i++) {
+  ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    this->countername(i).data(), this->countername(i).length(),
+    ::google::protobuf::internal::WireFormat::SERIALIZE,
+    "countername");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->countername(i), output);
+  }
+
+  // required bool ismachine = 3;
+  if (has_ismachine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->ismachine(), output);
+  }
+
+  // required int32 token = 4;
+  if (has_token()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->token(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:psmweb.wsCounterCommandRequest)
+}
+
+::google::protobuf::uint8* wsCounterCommandRequest::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:psmweb.wsCounterCommandRequest)
+  // required .psmweb.CounterCommandType type = 1;
+  if (has_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->type(), target);
+  }
+
+  // repeated string countername = 2;
+  for (int i = 0; i < this->countername_size(); i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->countername(i).data(), this->countername(i).length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "countername");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(2, this->countername(i), target);
+  }
+
+  // required bool ismachine = 3;
+  if (has_ismachine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->ismachine(), target);
+  }
+
+  // required int32 token = 4;
+  if (has_token()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->token(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:psmweb.wsCounterCommandRequest)
+  return target;
+}
+
+int wsCounterCommandRequest::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 token = 4;
+    if (has_token()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->token());
+    }
+
+    // required .psmweb.CounterCommandType type = 1;
+    if (has_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
+    }
+
+    // required bool ismachine = 3;
+    if (has_ismachine()) {
+      total_size += 1 + 1;
+    }
+
+  }
+  // repeated string countername = 2;
+  total_size += 1 * this->countername_size();
+  for (int i = 0; i < this->countername_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->countername(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void wsCounterCommandRequest::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const wsCounterCommandRequest* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const wsCounterCommandRequest*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void wsCounterCommandRequest::MergeFrom(const wsCounterCommandRequest& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  countername_.MergeFrom(from.countername_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_token()) {
+      set_token(from.token());
+    }
+    if (from.has_type()) {
+      set_type(from.type());
+    }
+    if (from.has_ismachine()) {
+      set_ismachine(from.ismachine());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void wsCounterCommandRequest::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void wsCounterCommandRequest::CopyFrom(const wsCounterCommandRequest& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool wsCounterCommandRequest::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000000b) != 0x0000000b) return false;
+
+  return true;
+}
+
+void wsCounterCommandRequest::Swap(wsCounterCommandRequest* other) {
+  if (other != this) {
+    std::swap(token_, other->token_);
+    std::swap(type_, other->type_);
+    countername_.Swap(&other->countername_);
+    std::swap(ismachine_, other->ismachine_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata wsCounterCommandRequest::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = wsCounterCommandRequest_descriptor_;
+  metadata.reflection = wsCounterCommandRequest_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int swCounterCommandResponse::kTokenFieldNumber;
+const int swCounterCommandResponse::kTypeFieldNumber;
+const int swCounterCommandResponse::kResultFieldNumber;
+const int swCounterCommandResponse::kFailReasonFieldNumber;
+#endif  // !_MSC_VER
+
+swCounterCommandResponse::swCounterCommandResponse()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:psmweb.swCounterCommandResponse)
+}
+
+void swCounterCommandResponse::InitAsDefaultInstance() {
+}
+
+swCounterCommandResponse::swCounterCommandResponse(const swCounterCommandResponse& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:psmweb.swCounterCommandResponse)
+}
+
+void swCounterCommandResponse::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  token_ = 0;
+  type_ = 1;
+  result_ = 0;
+  failreason_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+swCounterCommandResponse::~swCounterCommandResponse() {
+  // @@protoc_insertion_point(destructor:psmweb.swCounterCommandResponse)
+  SharedDtor();
+}
+
+void swCounterCommandResponse::SharedDtor() {
+  if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete failreason_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void swCounterCommandResponse::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* swCounterCommandResponse::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return swCounterCommandResponse_descriptor_;
+}
+
+const swCounterCommandResponse& swCounterCommandResponse::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_WebProtocol_2eproto();
+  return *default_instance_;
+}
+
+swCounterCommandResponse* swCounterCommandResponse::default_instance_ = NULL;
+
+swCounterCommandResponse* swCounterCommandResponse::New() const {
+  return new swCounterCommandResponse;
+}
+
+void swCounterCommandResponse::Clear() {
+  if (_has_bits_[0 / 32] & 15) {
+    token_ = 0;
+    type_ = 1;
+    result_ = 0;
+    if (has_failreason()) {
+      if (failreason_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        failreason_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool swCounterCommandResponse::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:psmweb.swCounterCommandResponse)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 token = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &token_)));
+          set_has_token();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_type;
+        break;
+      }
+
+      // required .psmweb.CounterCommandType type = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_type:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::psmweb::CounterCommandType_IsValid(value)) {
+            set_type(static_cast< ::psmweb::CounterCommandType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(2, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_result;
+        break;
+      }
+
+      // required .psmweb.Result result = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_result:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::psmweb::Result_IsValid(value)) {
+            set_result(static_cast< ::psmweb::Result >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(3, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_failReason;
+        break;
+      }
+
+      // optional string failReason = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_failReason:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_failreason()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->failreason().data(), this->failreason().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "failreason");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:psmweb.swCounterCommandResponse)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:psmweb.swCounterCommandResponse)
+  return false;
+#undef DO_
+}
+
+void swCounterCommandResponse::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:psmweb.swCounterCommandResponse)
+  // required int32 token = 1;
+  if (has_token()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->token(), output);
+  }
+
+  // required .psmweb.CounterCommandType type = 2;
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->type(), output);
+  }
+
+  // required .psmweb.Result result = 3;
+  if (has_result()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      3, this->result(), output);
+  }
+
+  // optional string failReason = 4;
+  if (has_failreason()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->failreason().data(), this->failreason().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "failreason");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->failreason(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:psmweb.swCounterCommandResponse)
+}
+
+::google::protobuf::uint8* swCounterCommandResponse::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:psmweb.swCounterCommandResponse)
+  // required int32 token = 1;
+  if (has_token()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->token(), target);
+  }
+
+  // required .psmweb.CounterCommandType type = 2;
+  if (has_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->type(), target);
+  }
+
+  // required .psmweb.Result result = 3;
+  if (has_result()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      3, this->result(), target);
+  }
+
+  // optional string failReason = 4;
+  if (has_failreason()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->failreason().data(), this->failreason().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "failreason");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->failreason(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:psmweb.swCounterCommandResponse)
+  return target;
+}
+
+int swCounterCommandResponse::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 token = 1;
+    if (has_token()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->token());
+    }
+
+    // required .psmweb.CounterCommandType type = 2;
+    if (has_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
+    }
+
+    // required .psmweb.Result result = 3;
+    if (has_result()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->result());
+    }
+
+    // optional string failReason = 4;
+    if (has_failreason()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->failreason());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void swCounterCommandResponse::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const swCounterCommandResponse* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const swCounterCommandResponse*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void swCounterCommandResponse::MergeFrom(const swCounterCommandResponse& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_token()) {
+      set_token(from.token());
+    }
+    if (from.has_type()) {
+      set_type(from.type());
+    }
+    if (from.has_result()) {
+      set_result(from.result());
+    }
+    if (from.has_failreason()) {
+      set_failreason(from.failreason());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void swCounterCommandResponse::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void swCounterCommandResponse::CopyFrom(const swCounterCommandResponse& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool swCounterCommandResponse::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  return true;
+}
+
+void swCounterCommandResponse::Swap(swCounterCommandResponse* other) {
+  if (other != this) {
+    std::swap(token_, other->token_);
+    std::swap(type_, other->type_);
+    std::swap(result_, other->result_);
+    std::swap(failreason_, other->failreason_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata swCounterCommandResponse::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = swCounterCommandResponse_descriptor_;
+  metadata.reflection = swCounterCommandResponse_reflection_;
   return metadata;
 }
 

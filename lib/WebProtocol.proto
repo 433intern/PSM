@@ -54,8 +54,8 @@ message wsCounterCommandRequest
 {
 	required int32 token = 4;
 	required CounterCommandType type = 1;
-	repeated string CounterName = 2;
-	required bool isMachine = 3;
+	repeated string countername = 2;
+	required bool ismachine = 3;
 }
 
 

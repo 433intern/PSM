@@ -35,11 +35,11 @@ public:
 
 	int FindAgentID(int hostip);
 
-	bool AddProcessName(std::string& processName);
-	bool DeleteProcessName(std::string& processName);
+	void AddProcessName(std::string& processName);
+	void DeleteProcessName(std::string& processName);
 
-	bool AddCounterName(std::string& counterName, bool isMachine);
-	bool DeleteCounterName(std::string& counterName, bool isMachine);
+	void AddCounterName(std::string& counterName, bool isMachine);
+	void DeleteCounterName(std::string& counterName, bool isMachine);
 
 
 private:

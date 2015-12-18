@@ -36,5 +36,6 @@ urlpatterns = [
 
     url(r'^setting/([^/]+)/', 'psm.views.Setting'),
     url(r'^addcounter/', 'psm.views.AddCounter'),
+    url(r'^deletecounter/', 'psm.views.DeleteCounter'),
 
 ]

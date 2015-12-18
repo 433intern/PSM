@@ -76,5 +76,62 @@ def ProcessCommandToAgentServer(token, processname, isadd):
 
     return result
 
+def SendCounterCommandRequest(s, token, msgtype, ismachine, counterlist):
+    type = psm.WebProtocol_pb2.CounterCommandRequest
+
+    msg = psm.WebProtocol_pb2.wsCounterCommandRequest()
+    msg.token = token
+    msg.type = msgtype
+    msg.countername.extend(counterlist)
+    msg.ismachine = ismachine
+
+    smsg= msg.SerializeToString()
+    length = len(smsg)
+
+    data = struct.pack('hh'+str(length)+'s', length, type, smsg)
+
+    s.send(data)
+
+def CounterCommandResult(data):
+    msg = psm.WebProtocol_pb2.swCounterCommandResponse()
+    msg.ParseFromString(data)
+    print(int(msg.result))
+
+    if msg.result == psm.WebProtocol_pb2.SUCCESS:
+        return "success"
+    else:
+        return "fail"
+
+def CounterCommandToAgentServer(token, isadd, ismachine, counterlist):
+    header_size = 4
+
+    s = GetSocket()
+
+    if isadd : SendCounterCommandRequest(s, token, psm.WebProtocol_pb2.CADDLIST, ismachine, counterlist)
+    else : SendCounterCommandRequest(s, token, psm.WebProtocol_pb2.CDELETELIST, ismachine, counterlist)
+
+    result = ""
+    while True:
+        header = s.recv(header_size)
+
+        if len(header)==0 : break
+        length, type = struct.unpack('hh', header)
+
+
+        if length!=0 :
+            data = s.recv(length)
+
+            if type==psm.WebProtocol_pb2.HealthCheck:
+                print("Received healthcheck")
+                SendHealthAck(s)
+            elif type==psm.WebProtocol_pb2.CounterCommandResponse:
+                print("Received CounterCommandResponse")
+                result = CounterCommandResult(data)
+                break
+    s.close()
+
+    return result
+
+
 
 

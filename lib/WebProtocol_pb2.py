@@ -19,7 +19,7 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='WebProtocol.proto',
   package='psmweb',
-  serialized_pb=_b('\n\x11WebProtocol.proto\x12\x06psmweb\"g\n\x17wsProcessCommandRequest\x12\r\n\x05token\x18\x01 \x02(\x05\x12(\n\x04type\x18\x02 \x02(\x0e\x32\x1a.psmweb.ProcessCommandType\x12\x13\n\x0bprocessName\x18\x03 \x02(\t\"\x87\x01\n\x18swProcessCommandResponse\x12\r\n\x05token\x18\x01 \x02(\x05\x12(\n\x04type\x18\x02 \x02(\x0e\x32\x1a.psmweb.ProcessCommandType\x12\x1e\n\x06result\x18\x03 \x02(\x0e\x32\x0e.psmweb.Result\x12\x12\n\nfailReason\x18\x04 \x01(\t\"\x0f\n\rwsHealthCheck\"\r\n\x0bswHealthAck*`\n\x07psmType\x12\x19\n\x15ProcessCommandRequest\x10\x00\x12\x1a\n\x16ProcessCommandResponse\x10\x01\x12\x0f\n\x0bHealthCheck\x10\x08\x12\r\n\tHealthAck\x10\t*`\n\x12ProcessCommandType\x12\t\n\x05START\x10\x00\x12\x0b\n\x07RESTART\x10\x01\x12\x08\n\x04STOP\x10\x02\x12\x0b\n\x07\x41\x44\x44LIST\x10\x03\x12\x0e\n\nDELETELIST\x10\x04\x12\x0b\n\x07\x41LLSTOP\x10\x05*\"\n\x06Result\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01')
+  serialized_pb=_b('\n\x11WebProtocol.proto\x12\x06psmweb\"g\n\x17wsProcessCommandRequest\x12\r\n\x05token\x18\x01 \x02(\x05\x12(\n\x04type\x18\x02 \x02(\x0e\x32\x1a.psmweb.ProcessCommandType\x12\x13\n\x0bprocessName\x18\x03 \x02(\t\"\x87\x01\n\x18swProcessCommandResponse\x12\r\n\x05token\x18\x01 \x02(\x05\x12(\n\x04type\x18\x02 \x02(\x0e\x32\x1a.psmweb.ProcessCommandType\x12\x1e\n\x06result\x18\x03 \x02(\x0e\x32\x0e.psmweb.Result\x12\x12\n\nfailReason\x18\x04 \x01(\t\"z\n\x17wsCounterCommandRequest\x12\r\n\x05token\x18\x04 \x02(\x05\x12(\n\x04type\x18\x01 \x02(\x0e\x32\x1a.psmweb.CounterCommandType\x12\x13\n\x0b\x63ountername\x18\x02 \x03(\t\x12\x11\n\tismachine\x18\x03 \x02(\x08\"\x87\x01\n\x18swCounterCommandResponse\x12\r\n\x05token\x18\x01 \x02(\x05\x12(\n\x04type\x18\x02 \x02(\x0e\x32\x1a.psmweb.CounterCommandType\x12\x1e\n\x06result\x18\x03 \x02(\x0e\x32\x0e.psmweb.Result\x12\x12\n\nfailReason\x18\x04 \x01(\t\"\x0f\n\rwsHealthCheck\"\r\n\x0bswHealthAck*\x97\x01\n\x07psmType\x12\x19\n\x15ProcessCommandRequest\x10\x00\x12\x1a\n\x16ProcessCommandResponse\x10\x01\x12\x19\n\x15\x43ounterCommandRequest\x10\x02\x12\x1a\n\x16\x43ounterCommandResponse\x10\x03\x12\x0f\n\x0bHealthCheck\x10\x08\x12\r\n\tHealthAck\x10\t*`\n\x12ProcessCommandType\x12\t\n\x05START\x10\x00\x12\x0b\n\x07RESTART\x10\x01\x12\x08\n\x04STOP\x10\x02\x12\x0b\n\x07\x41\x44\x44LIST\x10\x03\x12\x0e\n\nDELETELIST\x10\x04\x12\x0b\n\x07\x41LLSTOP\x10\x05*\"\n\x06Result\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01*3\n\x12\x43ounterCommandType\x12\x0c\n\x08\x43\x41\x44\x44LIST\x10\x01\x12\x0f\n\x0b\x43\x44\x45LETELIST\x10\x02')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -38,18 +38,26 @@ _PSMTYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='HealthCheck', index=2, number=8,
+      name='CounterCommandRequest', index=2, number=2,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='HealthAck', index=3, number=9,
+      name='CounterCommandResponse', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HealthCheck', index=4, number=8,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HealthAck', index=5, number=9,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=304,
-  serialized_end=400,
+  serialized_start=567,
+  serialized_end=718,
 )
 _sym_db.RegisterEnumDescriptor(_PSMTYPE)
 
@@ -87,8 +95,8 @@ _PROCESSCOMMANDTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=402,
-  serialized_end=498,
+  serialized_start=720,
+  serialized_end=816,
 )
 _sym_db.RegisterEnumDescriptor(_PROCESSCOMMANDTYPE)
 
@@ -110,14 +118,39 @@ _RESULT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=500,
-  serialized_end=534,
+  serialized_start=818,
+  serialized_end=852,
 )
 _sym_db.RegisterEnumDescriptor(_RESULT)
 
 Result = enum_type_wrapper.EnumTypeWrapper(_RESULT)
+_COUNTERCOMMANDTYPE = _descriptor.EnumDescriptor(
+  name='CounterCommandType',
+  full_name='psmweb.CounterCommandType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='CADDLIST', index=0, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CDELETELIST', index=1, number=2,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=854,
+  serialized_end=905,
+)
+_sym_db.RegisterEnumDescriptor(_COUNTERCOMMANDTYPE)
+
+CounterCommandType = enum_type_wrapper.EnumTypeWrapper(_COUNTERCOMMANDTYPE)
 ProcessCommandRequest = 0
 ProcessCommandResponse = 1
+CounterCommandRequest = 2
+CounterCommandResponse = 3
 HealthCheck = 8
 HealthAck = 9
 START = 0
@@ -128,6 +161,8 @@ DELETELIST = 4
 ALLSTOP = 5
 SUCCESS = 0
 FAILURE = 1
+CADDLIST = 1
+CDELETELIST = 2
 
 
 
@@ -226,6 +261,108 @@ _SWPROCESSCOMMANDRESPONSE = _descriptor.Descriptor(
 )
 
 
+_WSCOUNTERCOMMANDREQUEST = _descriptor.Descriptor(
+  name='wsCounterCommandRequest',
+  full_name='psmweb.wsCounterCommandRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='token', full_name='psmweb.wsCounterCommandRequest.token', index=0,
+      number=4, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='psmweb.wsCounterCommandRequest.type', index=1,
+      number=1, type=14, cpp_type=8, label=2,
+      has_default_value=False, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='countername', full_name='psmweb.wsCounterCommandRequest.countername', index=2,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ismachine', full_name='psmweb.wsCounterCommandRequest.ismachine', index=3,
+      number=3, type=8, cpp_type=7, label=2,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=272,
+  serialized_end=394,
+)
+
+
+_SWCOUNTERCOMMANDRESPONSE = _descriptor.Descriptor(
+  name='swCounterCommandResponse',
+  full_name='psmweb.swCounterCommandResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='token', full_name='psmweb.swCounterCommandResponse.token', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='psmweb.swCounterCommandResponse.type', index=1,
+      number=2, type=14, cpp_type=8, label=2,
+      has_default_value=False, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='result', full_name='psmweb.swCounterCommandResponse.result', index=2,
+      number=3, type=14, cpp_type=8, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='failReason', full_name='psmweb.swCounterCommandResponse.failReason', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=397,
+  serialized_end=532,
+)
+
+
 _WSHEALTHCHECK = _descriptor.Descriptor(
   name='wsHealthCheck',
   full_name='psmweb.wsHealthCheck',
@@ -244,8 +381,8 @@ _WSHEALTHCHECK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=272,
-  serialized_end=287,
+  serialized_start=534,
+  serialized_end=549,
 )
 
 
@@ -267,20 +404,26 @@ _SWHEALTHACK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=289,
-  serialized_end=302,
+  serialized_start=551,
+  serialized_end=564,
 )
 
 _WSPROCESSCOMMANDREQUEST.fields_by_name['type'].enum_type = _PROCESSCOMMANDTYPE
 _SWPROCESSCOMMANDRESPONSE.fields_by_name['type'].enum_type = _PROCESSCOMMANDTYPE
 _SWPROCESSCOMMANDRESPONSE.fields_by_name['result'].enum_type = _RESULT
+_WSCOUNTERCOMMANDREQUEST.fields_by_name['type'].enum_type = _COUNTERCOMMANDTYPE
+_SWCOUNTERCOMMANDRESPONSE.fields_by_name['type'].enum_type = _COUNTERCOMMANDTYPE
+_SWCOUNTERCOMMANDRESPONSE.fields_by_name['result'].enum_type = _RESULT
 DESCRIPTOR.message_types_by_name['wsProcessCommandRequest'] = _WSPROCESSCOMMANDREQUEST
 DESCRIPTOR.message_types_by_name['swProcessCommandResponse'] = _SWPROCESSCOMMANDRESPONSE
+DESCRIPTOR.message_types_by_name['wsCounterCommandRequest'] = _WSCOUNTERCOMMANDREQUEST
+DESCRIPTOR.message_types_by_name['swCounterCommandResponse'] = _SWCOUNTERCOMMANDRESPONSE
 DESCRIPTOR.message_types_by_name['wsHealthCheck'] = _WSHEALTHCHECK
 DESCRIPTOR.message_types_by_name['swHealthAck'] = _SWHEALTHACK
 DESCRIPTOR.enum_types_by_name['psmType'] = _PSMTYPE
 DESCRIPTOR.enum_types_by_name['ProcessCommandType'] = _PROCESSCOMMANDTYPE
 DESCRIPTOR.enum_types_by_name['Result'] = _RESULT
+DESCRIPTOR.enum_types_by_name['CounterCommandType'] = _COUNTERCOMMANDTYPE
 
 wsProcessCommandRequest = _reflection.GeneratedProtocolMessageType('wsProcessCommandRequest', (_message.Message,), dict(
   DESCRIPTOR = _WSPROCESSCOMMANDREQUEST,
@@ -295,6 +438,20 @@ swProcessCommandResponse = _reflection.GeneratedProtocolMessageType('swProcessCo
   # @@protoc_insertion_point(class_scope:psmweb.swProcessCommandResponse)
   ))
 _sym_db.RegisterMessage(swProcessCommandResponse)
+
+wsCounterCommandRequest = _reflection.GeneratedProtocolMessageType('wsCounterCommandRequest', (_message.Message,), dict(
+  DESCRIPTOR = _WSCOUNTERCOMMANDREQUEST,
+  __module__ = 'WebProtocol_pb2'
+  # @@protoc_insertion_point(class_scope:psmweb.wsCounterCommandRequest)
+  ))
+_sym_db.RegisterMessage(wsCounterCommandRequest)
+
+swCounterCommandResponse = _reflection.GeneratedProtocolMessageType('swCounterCommandResponse', (_message.Message,), dict(
+  DESCRIPTOR = _SWCOUNTERCOMMANDRESPONSE,
+  __module__ = 'WebProtocol_pb2'
+  # @@protoc_insertion_point(class_scope:psmweb.swCounterCommandResponse)
+  ))
+_sym_db.RegisterMessage(swCounterCommandResponse)
 
 wsHealthCheck = _reflection.GeneratedProtocolMessageType('wsHealthCheck', (_message.Message,), dict(
   DESCRIPTOR = _WSHEALTHCHECK,
