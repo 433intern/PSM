@@ -34,4 +34,7 @@ urlpatterns = [
     url(r'^server_detail/([^/]+)/', 'psm.views.ServerDetail'),
     url(r'^process_detail/([^/]+)/([^/]+)/', 'psm.views.ProcessDetail'),
 
+    url(r'^setting/([^/]+)/', 'psm.views.Setting'),
+    url(r'^addcounter/', 'psm.views.AddCounter'),
+
 ]

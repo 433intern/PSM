@@ -30,7 +30,7 @@ def ServerDetail(request, token):
     agent = psm.redisJob.GetAgentInfo(r, token)
     cpList = psm.redisJob.GetCurrentProcessList(r, agent)
 
-    mList = psm.redisJob.GetMachineCounterList(r, agent)
+    mList = psm.redisJob.GetMachineCounterList(r, agent, True)
 
     checkList = psm.redisJob.GetCheckProcessList(r, agent, cpList)
 
@@ -48,7 +48,7 @@ def ProcessDetail(request, token, name):
 
     r = psm.redisJob.GetRedisClient()
     agent = psm.redisJob.GetAgentInfo(r, token)
-    pList = psm.redisJob.GetProcessCounterList(r, agent, name)
+    pList = psm.redisJob.GetProcessCounterList(r, agent, name, True)
 
     jv = {}
     print(pList)
@@ -156,6 +156,20 @@ def AddProcess(request, token, processName):
 def DeleteProcess(request, token, processName):
     result = psm.psmnet.ProcessCommandToAgentServer(int(token), str(processName), False)
     return HttpResponse(result)
+
+def AddCounter(request):
+    return HttpResponse("hihi")
+
+
+def Setting(request, token):
+    r = psm.redisJob.GetRedisClient()
+    agent = psm.redisJob.GetAgentInfo(r, token)
+    mcl = psm.redisJob.GetMachineCounterList(r, agent, False)
+    pcl = psm.redisJob.GetProcessCounterList(r, agent, "", False)
+    amcl = psm.redisJob.GetAddableCounterList(True, mcl)
+    apcl = psm.redisJob.GetAddableCounterList(False, pcl)
+
+    return render(request, "server_detail2.html", {"token" : token, "mcl" : mcl, "pcl" : pcl, "amcl" : amcl, "apcl" :apcl})
 
 
 

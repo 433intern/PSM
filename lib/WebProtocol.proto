@@ -6,6 +6,9 @@ enum psmType
 	ProcessCommandRequest = 0;
 	ProcessCommandResponse = 1;
 
+	CounterCommandRequest = 2;
+	CounterCommandResponse = 3;
+
 	HealthCheck = 8;
 	HealthAck = 9;
 }
@@ -37,6 +40,29 @@ message swProcessCommandResponse
 {
 	required int32 token = 1;
 	required ProcessCommandType type = 2;
+	required Result result = 3;
+	optional string failReason = 4;
+}
+
+enum CounterCommandType
+{
+	CADDLIST = 1;
+	CDELETELIST = 2;
+}
+
+message wsCounterCommandRequest
+{
+	required int32 token = 4;
+	required CounterCommandType type = 1;
+	repeated string CounterName = 2;
+	required bool isMachine = 3;
+}
+
+
+message swCounterCommandResponse
+{
+	required int32 token = 1;
+	required CounterCommandType type = 2;
 	required Result result = 3;
 	optional string failReason = 4;
 }

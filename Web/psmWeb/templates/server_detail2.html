@@ -9,24 +9,24 @@
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="../static/dashboard/css/images/android-desktop.png">
+    <link rel="icon" sizes="192x192" href="../../static/dashboard/css/images/android-desktop.png">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Material Design Lite">
-    <link rel="apple-touch-icon-precomposed" href="../static/dashboard/css/images/ios-desktop.png">
+    <link rel="apple-touch-icon-precomposed" href="../../static/dashboard/css/images/ios-desktop.png">
 
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="../static/dashboard/css/images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileImage" content="../../static/dashboard/css/images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
 
-    <link rel="shortcut icon" href="../static/dashboard/css/images/favicon.png">
+    <link rel="shortcut icon" href="../../static/dashboard/css/images/favicon.png">
 
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../static/jquery.min.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
 
     <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
     <!--
@@ -35,8 +35,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../static/dashboard/css/material.min.css">
-    <link rel="stylesheet" href="../static/dashboard/css/styles.css">
+    <link rel="stylesheet" href="../../static/dashboard/css/material.min.css">
+    <link rel="stylesheet" href="../../static/dashboard/css/styles.css">
 
     <style>
     .modal {
@@ -93,7 +93,7 @@
       <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50" >
         <header class="demo-drawer-header">
           <div class="demo-avatar-dropdown">
-            <img src="../static/dashboard/css/images/user.jpg" class="demo-avatar">
+            <img src="../../static/dashboard/css/images/user.jpg" class="demo-avatar">
             <span class='title-margin'><b>PSM</b><br>Process System Monitoring</span>            
           </div>
         </header>
@@ -110,6 +110,75 @@
 
       <main class="mdl-layout__content mdl-color--grey-100" style="padding:30px">
           <div class="mdl-grid">
+            <div class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--6-col" style="height:100%">
+              <div class="mdl-card__title mdl-card--expand mdl-color--teal-300" >
+                <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">카운터(머신)</h2>
+              </div>
+              <div>
+                <table class="mdl-data-table mdl-js-data-table full-width">
+                  <thead>
+                    <tr>
+                      <th >이름</th>
+                      <th >카운터</th>
+                      <th style="width:50px">삭제</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for c in mcl %}
+                    <tr>
+                      <td>{{ c.name }}</td>
+                      <td>{{ c.counter }}</td>
+                      {% if c.name == "CPUTime" or c.name == "Memory" or c.name == "Disk" %}
+                      <td></td>
+                      {% else %}
+                      <td><a href="">X</a></td>
+                      {% endif %}
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+                <!-- 상태 submit 버튼 -->
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect full-width" id="addmcounter">카운터 추가</button>
+              </div>
+            </div>
+
+            <div class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--6-col" style="height:100%">
+              <div class="mdl-card__title mdl-card--expand mdl-color--teal-300" >
+                <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">카운터(프로세스)</h2>
+              </div>
+              <div>
+                <table class="mdl-data-table mdl-js-data-table full-width">
+                  <thead>
+                    <tr>
+                      <th >이름</th>
+                      <th>카운터</th>
+                      <th style="width:50px">삭제</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for c in pcl %}
+                    <tr>
+                      <td>{{ c.name }}</td>
+                      <td>{{ c.counter }}</td>
+                      {% if c.name == "CPUTime" or c.name == "Memory" %}
+                      <td></td>
+                      {% else %}
+                      <td><a href="">X</a></td>
+                      {% endif %}
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+                <!-- 상태 submit 버튼 -->
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect full-width">카운터 추가</button>
+              </div>
+
+
+
+            </div>
+
             <div class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--6-col" style="height:100%">
               <div class="mdl-card__title mdl-card--expand mdl-color--grey-500" >
                 <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">서버 설정</h2>
@@ -162,118 +231,54 @@
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect full-width mdl-color--pink-300" style="font-size:15px; color:white ; font-weight: bold;">레코드 시작</button>
               </div>
             </div>
-
-            <div class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--3-col" style="height:100%">
-              <div class="mdl-card__title mdl-card--expand mdl-color--teal-300" >
-                <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">카운터(머신)</h2>
-              </div>
-              <div>
-                <table class="mdl-data-table mdl-js-data-table full-width">
-                  <thead>
-                    <tr>
-                      <th >이름</th>
-                      <th style="width:50px">삭제</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>CPU</td>
-                      <td><a href="">X</a></td>
-                    </tr>
-                    <tr>
-                      <td>MEMORY</td>
-                      <td><a href="">X</a></td>
-                    </tr>
-                    <tr>
-                      <td>DISK</td>
-                      <td><a href="">X</a></td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <!-- 상태 submit 버튼 -->
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect full-width">카운터 추가</button>
-              </div>
-            </div>
-
-            <div class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--3-col" style="height:100%">
-              <div class="mdl-card__title mdl-card--expand mdl-color--teal-300" >
-                <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">카운터(프로세스)</h2>
-              </div>
-              <div>
-                <table class="mdl-data-table mdl-js-data-table full-width">
-                  <thead>
-                    <tr>
-                      <th >이름</th>
-                      <th style="width:50px">삭제</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>CPU</td>
-                      <td><a href="">X</a></td>
-                    </tr>
-                    <tr>
-                      <td>MEMORY</td>
-                      <td><a href="">X</a></td>
-                    </tr>
-                    
-                  </tbody>
-                </table>
-
-                <!-- 상태 submit 버튼 -->
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect full-width">카운터 추가</button>
-              </div>
-            </div>
         </div>
       </main>
 
       <!-- Modal -->
       <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog" style="width: 600px;">
 
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-body" style="padding:0px">
-              <div class="mdl-shadow--2dp mdl-color--white">
-              <div class="mdl-card__title mdl-card--expand mdl-color--grey-500" >
-                <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">프로세스상태보기 - Chrome</h2>
-              </div>
-              <div>
-                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable full-width">
-                  <thead>
-                    <tr>
-                      <th class="mdl-data-table__cell--non-numeric">이름</th>
-                      <th>최근 1시간 값</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="mdl-data-table__cell--non-numeric">CPU</td>
-                      <td>1000</td>
-                    </tr>
-                    <tr>
-                      <td class="mdl-data-table__cell--non-numeric">RAM</td>
-                      <td>1000</td>
-                    </tr>
-                    <tr>
-                      <td class="mdl-data-table__cell--non-numeric">NETWORK</td>
-                      <td>1000</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <!-- 상태 submit 버튼 -->
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect full-width">상태 보기</button>
+                <div class="mdl-shadow--2dp mdl-color--white">
+                <div class="mdl-card__title mdl-card--expand mdl-color--grey-500" >
+                  <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">카운터추가(머신)</h2>
+                </div>
+                <div>
+                  <table class="mdl-data-table mdl-js-data-table full-width" id="myModalTable">
+                    <thead>
+                      <tr>
+                        <th style="width : 50px">
+                        </th>
+                        <th class="mdl-data-table__cell--non-numeric">이름</th>
+                        <th>카운터</th>
+                      </tr>
+                    </thead>
+                    <tbody id="myModalTbody">
+                    </tbody>
+                  </table>
+                  <!-- 상태 submit 버튼 -->
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect full-width" id="addcompleteButton">추가하기</button>
+                </div>
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
+    <script src="../../static/dashboard/js/material.min.js"></script>
 
-    </div>
-    <script src="../static/dashboard/js/material.min.js"></script>
+    <input type="hidden" id="mcl" name="variable" value="{{ mcl }}">
+    <input type="hidden" id="pcl" name="variable" value="{{ pcl }}">
+    <input type="hidden" id="amcl" name="variable" value="{{ amcl }}">
+    <input type="hidden" id="apcl" name="variable" value="{{ apcl }}">
+    <input type="hidden" id="token" name="variable" value="{{ token }}">
 
+    {% csrf_token %}
+
+    <script type="text/javascript" src="../../static/js/setting.js">
+    </script>
 
   </body>
 </html>

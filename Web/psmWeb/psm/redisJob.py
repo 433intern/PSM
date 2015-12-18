@@ -205,7 +205,40 @@ def GetCurrentProcessList(r, agent):
 
 
 
-def GetProcessCounterList(r, agent, name):
+def countersortcmp(x, y):
+    if x['name'] > y['name']:return 1
+    elif x['name'] < y['name']:return -1
+    else: return 0
+
+def DefaultCounterList(isMachine):
+    list = []
+    if (isMachine):
+        list.append({"name" : "PageFault", "counter" : "\\Memory\\Page Faults/sec","unit" : ""})
+        list.append({"name" : "SystemCall", "counter" : "\\System\\System Calls/sec","unit" : ""})
+        list.append({"name" : "ContextSwitches", "counter" : "\\System\\Context Switches/sec","unit" : ""})
+    else:
+        list.append({"name" : "ThreadCount", "counter" : "Thread Count","unit" : ""})
+
+    return list
+
+def GetAddableCounterList(isMachine, l):
+    result = []
+
+    dcl  = DefaultCounterList(isMachine)
+    for dc in dcl:
+        check = False
+        for data in l:
+            if dc['name']==data['name']:
+                check = True
+                break
+        if not check:
+            result.append(dc)
+
+    return result
+
+
+
+def GetProcessCounterList(r, agent, name, getValue):
     if r==None : r = GetRedisClient()
 
     key = str(agent['agentNumber']) + ":CounterList"
@@ -216,16 +249,23 @@ def GetProcessCounterList(r, agent, name):
     for data in list(result):
         jsonData = json.loads(data)#.decode("UTF-8"))
 
-        keys = GetProcessKeys(r, str(agent['agentNumber'])+":"+jsonData['name']+":"+name)
-        value = 0
-        for key in keys:
-            value += GetRecentValue \
-                (r, key, agent['responseTime'], 60)
-        counterList.append([str(jsonData['name']), str(str(value) + jsonData['unit'])])
+        if getValue:
+            keys = GetProcessKeys(r, str(agent['agentNumber'])+":"+jsonData['name']+":"+name)
+            value = 0
+            for key in keys:
+                value += GetRecentValue \
+                    (r, key, agent['responseTime'], 60)
+            counterList.append([str(jsonData['name']), str(str(value) + jsonData['unit'])])
+        else:
+            counterList.append({"name":str(jsonData['name']), "counter":str(jsonData['counter'])})
+
+
+    if not getValue : counterList.sort(countersortcmp)
+    else: counterList.sort()
 
     return counterList
 
-def GetMachineCounterList(r, agent):
+def GetMachineCounterList(r, agent, getValue):
     if r==None : r = GetRedisClient()
 
     key = str(agent['agentNumber']) + ":MachineCounterList"
@@ -235,10 +275,16 @@ def GetMachineCounterList(r, agent):
 
     for data in list(result):
         jsonData = json.loads(data)
-        value = GetMachineValue_recent \
-            (r, agent['agentNumber'], jsonData['name'], agent['responseTime'], 60)
+        if getValue:
+            value = GetMachineValue_recent \
+                (r, agent['agentNumber'], jsonData['name'], agent['responseTime'], 60)
 
-        counterList.append( [str(jsonData['name']), str(str(value) + jsonData['unit'])] )
+            counterList.append( [str(jsonData['name']), str(str(value) + jsonData['unit'])] )
+        else:
+            counterList.append({"name":str(jsonData['name']), "counter":str(jsonData['counter'])})
+
+    if not getValue : counterList.sort(countersortcmp)
+    else: counterList.sort()
 
     return counterList
 
@@ -282,7 +328,7 @@ def GetAgentListToView(r):
                 mv =  GetMachineValue_recent \
                     (r, agent['agentNumber'], "Memory", agent['responseTime'], 60)
                 resultAgent['memory'] = round(100 - (mv / (agent['ramSize'] / 1024) * 100), 2)
-                resultAgent['disk'] = round(GetMachineValue_recent \
+                resultAgent['disk'] = round(100 - GetMachineValue_recent \
                     (r, agent['agentNumber'], "Disk", agent['responseTime'], 60), 2)
 
             else:
