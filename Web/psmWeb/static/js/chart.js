@@ -47,8 +47,28 @@ $(function() {
     var o = new Object;
     o.name = mcl[i];
     o.data = [];
+    o.option = { xaxis: { mode: "time", }};
 
     datas.push(o);
+
+
+    var editfunc = function(param){
+      var i = param.data.index;
+      console.log(datas[i].name);
+      ymin = document.getElementById(datas[i].name+'_ymin').value;
+      ymax = document.getElementById(datas[i].name+'_ymax').value;
+
+      datas[i].option = { xaxis: { mode: "time", }, yaxis: {}};
+      if (ymin!=null && ymin!="")
+      {
+        datas[i].option.yaxis.min = Number(ymin);
+      } 
+      if (ymax!=null && ymax!=""){
+        datas[i].option.yaxis.max = Number(ymax);
+      } 
+    };
+    var editbutton = $('#' + o.name + '_editbutton').click({index : i}, editfunc);
+
   }
 
   console.log(datas);
@@ -77,7 +97,6 @@ $(function() {
   var ajaxInterval = 5;
   setInterval(RequestData, ajaxInterval*1000);
 
-  
   function DrawChart() {
 
     if (jsonData==null) return;
@@ -139,7 +158,7 @@ $(function() {
 
       datas[i].data = curData;
 
-      $.plot("#placeholder"+name, [curData], { xaxis: { mode: "time", }, yaxis: { min: 0 }});
+      $.plot("#placeholder"+name, [curData], datas[i].option);
     }
   }
   setInterval(DrawChart, 1000);

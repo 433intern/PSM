@@ -164,7 +164,7 @@
                       {% if c.name == "CPUTime" or c.name == "Memory" %}
                       <td></td>
                       {% else %}
-                      <td><a id="deletepc{{ c.name }}">X</a></td>
+                      <td><a id="deletepc{{ c.name }}" style="cursor:pointer">X</a></td>
                       {% endif %}
                     </tr>
                     {% endfor %}

@@ -77,13 +77,33 @@
 
       <main style="padding:30px">
         {% for mc in mcl %}
-        <div style="padding:10px; padding-bottom:0px; float:left;">
+        <div style="padding:10px; padding-bottom:20px; float:left;">
+
           <div class="mdl-card__title mdl-card--expand mdl-color--teal-300" >
-              <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold;">{{ mc }}</h2>
+            <h2 class="mdl-card__title-text font-white" style="font-size:20px; font-weight: bold; ">{{ mc }} </h2>
           </div>
           <div class="demo-container" style="margin-bottom: 0px; margin-top: 0px;">
             <div id="placeholder{{ mc }}" class="demo-placeholder"></div>
           </div>
+
+
+          <div class="mdl-card__title mdl-card--expand mdl-color--grey-200" style="
+    padding-top: 8px; padding-bottom: 8px;  text-align:right">
+            <div class="input-group" style="width: 200px; padding-right: 10px;">
+              <span class="input-group-addon" style="background-color:#5bc0de; color:white ;font-weight: bold;">Y-min</span>
+              <input type="text" class="form-control" aria-describedby="basic-addon1"
+              id="{{ mc }}_ymin">
+            </div>
+
+            <div class="input-group" style="width: 200px; padding-right: 10px;">
+              <span class="input-group-addon" style="background-color:#5bc0de; color:white ;font-weight: bold;">Y-max</span>
+              <input type="text" class="form-control" aria-describedby="basic-addon1"
+               id="{{ mc }}_ymax">
+            </div>
+
+            <div style="margin-left:auto; margin-right:0;"><button type="button" class="btn btn-info" id="{{ mc }}_editbutton" style="font-weight:bold;">Edit</button></div>
+
+            </div>
         </div>
         {% endfor %}
       </main>
