@@ -599,6 +599,11 @@ bool RedisManager::SetCounterName(int agentID, std::string& counterName, bool is
 	std::string key;
 	if (!isMachine) key = std::to_string(agentID) + ":CounterList";
 	else key = std::to_string(agentID) + ":MachineCounterList";
+	
+	Json::Value jv = StrToJson(counterName);
+	if (jv == NULL) return false;
+	counterNameMap.insert(std::pair<std::string, std::string> \
+		(jv["counter"].asString(), jv["name"].asString()));
 
 	RedisValue res;
 	res = redis.command("sadd", key, counterName);
@@ -606,13 +611,7 @@ bool RedisManager::SetCounterName(int agentID, std::string& counterName, bool is
 	if (res.isOk()){
 		if (res.toInt() == 0) return false;
 		else{
-			Json::Value jv = StrToJson(counterName);
-			if (jv == NULL) return false;
-
 			result = jv["counter"].asString();
-
-			counterNameMap.insert(std::pair<std::string, std::string> \
-				(jv["counter"].asString(), jv["name"].asString()));
 			return true;
 		}
 	}
