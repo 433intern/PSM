@@ -5,9 +5,11 @@ import time
 import datetime
 
 import psm.util
+from django_redis import get_redis_connection
+
 
 def GetRedisClient():
-    r = redis.StrictRedis(host='localhost', port=6379, db=0)
+    r = get_redis_connection("default")
     return r
 
 def GetCounterValue(r, key, startTime, endTime):
@@ -65,9 +67,6 @@ def GetValueList_detail(r, key, responseTime, interval, curTime):
         else: result.append([time, 0])
 
     return result
-
-
-
 
 
 def GetRecentValue(r, key, responseTime, interval):
