@@ -170,15 +170,14 @@ void AgentClientSocket::DisconnProcess(bool isError, Act* act, DWORD bytes_trans
 {
 	if (isError)
 	{
-		isConnect = false;
-
-		query.StopRecord(true);
-		query.StopRecord(false);
-
 		ERROR_PRINT("[AgentClientSocket] DisconnProcess : Error : %d\n", WSAGetLastError());
 		return;
 	}
 
+	isConnect = false;
+
+	query.StopRecord(true);
+	query.StopRecord(false);
 
 	PRINT("Disconnect Success\n");
 }
@@ -382,7 +381,7 @@ void AgentClientSocket::SendHealthAck()
 	packet.type = (short)agent::HealthAck;
 	msg.SerializeToArray((void *)&packet.msg, packet.length);
 
-	Send((char *)&packet, packet.length + HEADER_SIZE);
+	if (!Send((char *)&packet, packet.length + HEADER_SIZE)) Disconnect();
 }
 
 void AgentClientSocket::SendAgentIDRequest()

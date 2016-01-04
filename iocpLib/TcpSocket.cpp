@@ -51,7 +51,7 @@ void TcpSocket::InitAct(Proactor* proactor, Acceptor* acceptor, Disconnector* di
 	act_[ACT_CONNECT].Init(connector_, this);
 }
 
-void TcpSocket::Recv()
+bool TcpSocket::Recv()
 {
 	DWORD recvbytes = 0;
 	DWORD flags = 0;
@@ -67,11 +67,13 @@ void TcpSocket::Recv()
 		{
 			printf("WSARecv() Error!!! s(%d) err(%d)\n", socket_, error);
 			//Disconnect();
+			return false;
 		}
 	}
+	return true;
 }
 
-void TcpSocket::Recv(char* buf, int buflen)
+bool TcpSocket::Recv(char* buf, int buflen)
 {
 	//if (disconnectCall) return;
 
@@ -90,13 +92,16 @@ void TcpSocket::Recv(char* buf, int buflen)
 		{
 			printf("WSARecv() Error!!! s(%d) err(%d)\n", socket_, error);
 			//Disconnect();
+			return false;
 		}
 	}
+
+	return true;
 }
 
-void TcpSocket::Send(char* buf, int buflen)
+bool TcpSocket::Send(char* buf, int buflen)
 {
-	if (buflen == 0) return;
+	if (buflen == 0) return true;
 	DWORD sentbytes = 0;
 	wsaSendBuf.buf = buf;
 	wsaSendBuf.len = buflen;
@@ -111,8 +116,10 @@ void TcpSocket::Send(char* buf, int buflen)
 		{
 			printf("WSASend() Error!!! s(%d) err(%d)\n", socket_, error);
 			//Disconnect();
+			return false;
 		}
 	}
+	return true;
 }
 
 void TcpSocket::Reuse(int size)

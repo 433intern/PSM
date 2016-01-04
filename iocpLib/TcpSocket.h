@@ -13,9 +13,9 @@ public:
 		Connector* connector, Sender* sender, Receiver* receiver);
 
 public:
-	void Recv();
-	void Recv(char* buf, int buflen);
-	void Send(char* buf, int buflen);
+	bool Recv();
+	bool Recv(char* buf, int buflen);
+	bool Send(char* buf, int buflen);
 	void Reuse(int size);
 	void Disconnect();
 	void Connect();
